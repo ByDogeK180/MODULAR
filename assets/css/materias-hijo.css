@@ -9,61 +9,69 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
-/* ✅ Corrección: eliminamos flechas decorativas si existían */
-.hijo-card .card-header::before {
-  content: none !important;
-  background: none !important;
-}
-
-.hijo-card .card-header {
-  background: #fff8f1;
-  border-bottom: none;
-  border-radius: 1rem 1rem 0 0;
-  background-image: none !important;
-}
-
+/* Botón del encabezado del acordeón */
 .hijo-card .btn-link {
   text-decoration: none;
   font-weight: bold;
+  font-size: 1.1rem;
   color: #f57c00;
-  font-size: 1.3rem;
+  padding: 0.75rem 1rem;
+  background-color: transparent;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* CENTRADO horizontal */
   align-items: center;
+  text-align: center;
 }
 
+/* Efecto hover */
 .hijo-card .btn-link:hover {
   color: #e65100;
+  text-decoration: none;
 }
 
-.hijo-card .card-body {
-  background-color: #ffffff;
-  padding: 1rem 1.5rem;
-  border-radius: 0 0 1rem 1rem;
+/* Contenedor del ícono y nombre del hijo */
+.hijo-card .info-hijo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.materia-item {
-  border-bottom: 1px solid #f0f0f0;
-  padding: 10px 0;
+/* Estilo del ícono */
+.hijo-card .fa-child {
+  font-size: 1.4rem;
+  color: #eaa54a;
+  margin-top: 17px; /* 🔽 ajusta verticalmente hacia abajo */
 }
 
-.materia-item:last-child {
-  border-bottom: none;
+/* Estilo del nombre del hijo */
+.hijo-card .nombre-hijo {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.2;
+  margin-top:auto;
 }
 
-.materia-item h6 {
-  color: #1976d2;
-  margin-bottom: 0.25rem;
-}
-
-.toggle-icon {
+/* Ícono de flecha */
+.hijo-card .toggle-icon {
+  font-size: 1.1rem;
   transition: transform 0.3s ease;
 }
 
-.collapsed .toggle-icon {
+.hijo-card .collapsed .toggle-icon {
   transform: rotate(0deg);
 }
 
-.btn-link[aria-expanded="true"] .toggle-icon {
+.hijo-card .btn-link[aria-expanded="true"] .toggle-icon {
   transform: rotate(180deg);
+}
+
+/* Tarjeta de materia */
+.materia-card {
+  margin-bottom: 1rem;
+  border: 1px solid #eee;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  padding: 1rem;
 }

@@ -143,8 +143,7 @@
           <span><i class="fa fa-user fs-16"></i>Docentes</span>
         </a>
         <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-          <li> <a href="pages/profesores-tutor/profesores-estudiante.html">Mis Docentes</a> </li>
-          <li> <a href="pages/profesores-tutor/contacto-informacion.html">Contacto e informacion</a> </li>
+          <li> <a href="pages/profesores-tutor/profesores-estudiante.php">Mis Docentes</a> </li>
         </ul>
       </li>
       <!-- /Professors End--->  

@@ -146,7 +146,7 @@ require_once '../php/auth.php';
                     <span><i class="fa fa-graduation-cap fs-16"></i>Materias</span>
                 </a>
                 <ul id="courses" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-                    <li> <a href="./materias-hijo.php">Todas mis materias</a> </li>
+                    <li> <a href="../cursos-tutor/materias-hijo.php">Todas mis materias</a> </li>
                 </ul>
             </li>
             <!-- /Courses End--->
@@ -158,7 +158,7 @@ require_once '../php/auth.php';
                     <span><i class="fa fa-user fs-16"></i>Docentes</span>
                 </a>
                 <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-                    <li> <a href="../profesores-tutor/profesores-estudiante.php">Mis Docentes</a> </li>
+                    <li> <a href="pages/profesores-tutor/profesores-estudiante.php">Mis Docentes</a> </li>
                 </ul>
             </li>
             <!-- /Professors End--->
@@ -530,37 +530,20 @@ require_once '../php/auth.php';
 
         <!-- Body Content Wrapper -->
 
-        <div class="ms-content-wrapper">
-            <div class="row">
-                <div class="col-md-12">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb pl-0">
-                            <li class="breadcrumb-item"><a href="#"><i class="material-icons">home</i> Lobby</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Materias</li>
-                            <li class="breadcrumb-item active" aria-current="page">Todas las materias</li>
-                        </ol>
-                    </nav>
-                </div>
+        <div class="ms-panel">
+            <div class="ms-panel-header d-flex justify-content-between align-items-center">
+                <h6><i class="fa fa-user"></i> Profesores por hijo</h6>
+                <input type="search" id="busquedaProfesor" class="form-control w-50" placeholder="Buscar por profesor, materia, grado o ID...">
             </div>
-
-            <div class="row mb-4">
-                <div class="col-md-6">
-                    <input type="text" id="buscar-materia" class="form-control" placeholder="Buscar materia…">
-                </div>
-                <div class="col-md-6">
-                    <select id="filtrar-nivel" class="form-control">
-                        <option value="">Todos los niveles</option>
-                        <option value="primaria">Primaria</option>
-                        <option value="secundaria">Secundaria</option>
-                    </select>
-                </div>
+            <div class="ms-panel-body">
+                <div id="accordionProfesores"></div>
             </div>
+        </div>
 
 
-            <div class="accordion" id="accordionHijos"></div>
 
             <!-- Script al final del body -->
-            <script src="../scripts/cargarMateriasHijo.js"></script>
+            <script src="../scripts/cargarProfesoresHijos.js"></script>
 
 
     </main>
