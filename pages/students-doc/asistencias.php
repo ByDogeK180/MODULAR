@@ -119,7 +119,8 @@
             <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
               <li> <a href="studendoc.php">All Students</a> </li>
                <li> <a href="asistencias.php">Assistences</a> </li>
-                 <li> <a href="aboutstudent.html">About Students</a> </li>
+                 <li> <a href="scoredoc.php">About Students</a> </li>
+                 <li> <a href="formulario_incidentes.php">Reminders</a> </li>
             </ul>
         </li>
         <!-- /Proessors End--->
