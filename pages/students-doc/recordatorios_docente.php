@@ -130,7 +130,7 @@
                <li> <a href="asistencias.php">Assistences</a> </li>
                  <li> <a href="scoredoc.php">About Students</a> </li>
                   <li> <a href="formulario_incidentes.php">Reminders</a> </li>
-                    <li> <a href="recordatorios_docente.php">All Reminders  </a> </li>
+                    <li> <a href="pages/students-doc/formulario_incidentes.php">All Reminders  </a> </li>
             </ul>
         </li>
         <!-- /Proessors End--->
@@ -461,70 +461,26 @@
 
 
     <!-- Body Content Wrapper -->
-<!-- Body Content Wrapper -->
-<div class="container py-5" id="formulario-incidente">
-  <div class="row justify-content-center">
-    <div class="col-12 col-xl-10"> <!-- ancho ajustado -->
-      <div class="card p-4 shadow card-edu border-0">
-        
-        <!-- Cabecera -->
-        <div class="d-flex align-items-center mb-4">
-          <div class="edu-icon rounded-circle d-flex justify-content-center align-items-center me-3">
-            <i class="fas fa-clipboard-list fa-lg text-primary"></i>
-          </div>
-          <div>
-            <h3 class="mb-0 text-primary fw-bold">Registro de Incidente</h3>
-            <small class="text-muted">Formulario exclusivo para docentes</small>
-          </div>
-        </div>
+<div class="container py-5">
+  <div class="card shadow-lg border-0 p-4">
+    <h3 class="text-primary mb-4"><i class="fas fa-bell mr-2"></i> Mis Recordatorios / Avisos</h3>
 
-        <!-- Formulario -->
-        <form id="formIncidente">
-          <div class="mb-3">
-            <label for="estudiante" class="form-label text-dark">
-              <i class="fas fa-user-graduate me-1 text-secondary"></i> Estudiante:
-            </label>
-            <select id="estudiante" name="estudiante_id" class="form-select" required></select>
-          </div>
-
-          <div class="mb-3">
-            <label for="tipo" class="form-label text-dark">
-              <i class="fas fa-tags me-1 text-warning"></i> Tipo de incidente:
-            </label>
-            <select id="tipo" name="tipo" class="form-select" required>
-              <option value="">Seleccione tipo</option>
-              <option value="conducta">Conducta</option>
-              <option value="tarea">Tarea</option>
-              <option value="asistencia">Asistencia</option>
-              <option value="otro">Otro</option>
-            </select>
-          </div>
-
-          <div class="mb-3">
-            <label for="descripcion" class="form-label text-dark">
-              <i class="fas fa-align-left me-1 text-info"></i> Descripción:
-            </label>
-            <textarea id="descripcion" name="descripcion" class="form-control" rows="3" placeholder="Ej. No entregó la actividad..." required></textarea>
-          </div>
-
-          <div class="mb-4">
-            <label for="fecha" class="form-label text-dark">
-              <i class="fas fa-calendar-alt me-1 text-success"></i> Fecha del incidente:
-            </label>
-            <input type="date" id="fecha" name="fecha" class="form-control" required>
-          </div>
-
-          <button type="submit" class="btn btn-warning w-100 fw-bold shadow-sm">
-            <i class="fas fa-paper-plane me-1"></i> Enviar Incidente
-          </button>
-
-          <div id="mensaje" class="mt-4"></div>
-        </form>
-
-      </div>
+    <!-- Buscador y paginación -->
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+      <input type="text" id="buscador" class="form-control w-50 mb-2 mb-md-0" placeholder="Buscar por nombre, materia o descripción...">
+      <nav>
+        <ul class="pagination mb-0" id="paginacion"></ul>
+      </nav>
     </div>
+
+    <!-- Contenedor dinámico -->
+    <div id="contenedor-recordatorios" class="row"></div>
   </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../scripts/cargarIncidentesDocente.js"></script>
+
 
   </main>
 
@@ -1220,7 +1176,6 @@
   <script src="../../assets/js/data-tables.js"> </script>
   <!-- Settings -->
   <script src="../scripts/cargarAlumnosDocente.js"></script>
-  <script src="../scripts/validarIncidente.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 

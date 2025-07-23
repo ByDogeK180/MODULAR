@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const select = document.getElementById('estudiante');
+  if (!select) return; // ← evita el error si no existe el select
 
   fetch('../php/obtener_estudiantes_docente.php')
     .then(res => res.json())
