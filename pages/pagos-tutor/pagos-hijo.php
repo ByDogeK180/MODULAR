@@ -1,3 +1,9 @@
+<?php
+session_start();
+//echo '<pre>'; print_r($_SESSION); echo '</pre>';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,110 +100,109 @@
 
     <!-- Logo -->
     <div class="logo-sn ms-d-block-lg">
-      <a class="pl-0 ml-0 text-center" href="../../index.php"> <img src="../../assets/img/logo/weeducate-4.png" alt="logo">  </a>
+      <a class="pl-0 ml-0 text-center" href="../../Tutor.php"> <img src="../../assets/img/logo/weeducate-4.png" alt="logo">  </a>
     </div>
 
     <!-- Navigation -->
     <ul class="accordion ms-main-aside fs-14" id="side-nav-accordion">
         <!-- Dashboard -->
-        <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#dashboard" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="material-icons fs-16">dashboard</i>Dashboard </span>
-             </a>
-            <ul id="dashboard" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-              <li> <a href="../../index.php">Weeducate</a> </li>
-              
-            </ul>
-        </li>
-        <!-- /Dashboard -->
-        
-        <!--Proessors Start-->
-        <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#professor" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-user fs-16"></i>Professors</span>
-             </a>
-            <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-              <li> <a href="../professors/allprofessor.html">All Professors</a> </li>
-               <li> <a href="../professors/addprofessor.html">Add Professors</a> </li>
-                 <li> <a href="../professors/aboutprofessor.html">About Professors</a> </li>
-            </ul>
-        </li>
-        <!-- /Proessors End--->
-        
-         <!--Courses Start-->
-        <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#courses" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-graduation-cap fs-16"></i>Courses</span>
-             </a>
-            <ul id="courses" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-              <li> <a href="../courses/allcourses.html">All Courses</a> </li>
-               <li> <a href="../courses/addcourses.html">Add Courses</a> </li>
-                 <li> <a href="../courses/aboutcourses.html">About Courses</a> </li>
-            </ul>
-        </li>
-        <!-- /Courses End--->
-        
-        <!--Student Start-->
-        <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#student" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-users fs-16"></i>Student</span>
-             </a>
-            <ul id="student" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-              <li> <a href="../student/studentadd.html">Student Add</a> </li>
-               <li> <a href="../student/studenttable.html">Student Table</a> </li>
-                  </ul>
-        </li>
-        <!-- /Student End--->
-        
-        
-        <!--Staff Start-->
-        <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#staff" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-user-circle fs-16"></i>Staff</span>
-             </a>
-            <ul id="staff" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-              <li> <a href="../staff/addstaff.html">Add Staff</a> </li>
-               <li> <a href="../staff/staffprofile.html">Staff Proflie</a> </li>
-                 
-            </ul>
-        </li>
-        <!-- /Staff End--->
-        
-        
-        
-        <!--Fees Start-->
-        <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#fees" aria-expanded="false" aria-controls="dashboard">
-                <span><i class="fas fa-dollar-sign"></i>Fees</span>
-             </a>
-            <ul id="fees" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-              <li> <a href="../fees/feescollection.html">Fees Collection</a> </li>
-              <li> <a href="../fees/addfees.html">Add Fees</a> </li>
-              <li> <a href="../fees/feesrecepit.html">Fees Recepit</a> </li>
-               
-                 
-            </ul>
-        </li>
-        <!-- /Fees End--->
-        
-        <!--Holiday Start-->
-        <li class="menu-item">
-          <a href="../holidays/holiday.html">
-            <span><i class="fa fa-calendar fs-16"></i>Holidays</span>
-          </a>
-        </li>
-        <!-- /Holiday End--->
-        <!-- Charts -->
-        <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#charts" aria-expanded="false" aria-controls="charts">
-              <span><i class="material-icons fs-16">equalizer</i>Charts</span>
-            </a>
-            <ul id="charts" class="collapse" aria-labelledby="charts" data-parent="#side-nav-accordion">
-              <li> <a href="../charts/chartjs.html">Chart JS</a> </li>
-              <li> <a href="../charts/morris-charts.html">Morris Chart</a> </li>
-            </ul>
-        </li>
-        <!-- /Charts -->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#dashboard" aria-expanded="false"
+          aria-controls="dashboard">
+          <span><i class="material-icons fs-16">dashboard</i>Home </span>
+        </a>
+        <ul id="dashboard" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
+          <li> <a href="../../Tutor.php">SchoolCare</a> </li>
+
+        </ul>
+      </li>
+      <!-- /Dashboard -->
+
+      <!--Student Start-->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#student" aria-expanded="false"
+          aria-controls="dashboard">
+          <span><i class="fa fa-users fs-16"></i>Mi hijo</span>
+        </a>
+        <ul id="student" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
+          <li> <a href="pages/">Perfil</a></li>
+          <li> <a href="pages/">Calificaciones</a></li>
+          <li> <a href="pages/">Materias del Curso</a></li>
+        </ul>
+      </li>
+      <!-- /Student End--->
+
+      <!--Courses Start-->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#courses" aria-expanded="false"
+          aria-controls="dashboard">
+          <span><i class="fa fa-graduation-cap fs-16"></i>Materias</span>
+        </a>
+        <ul id="courses" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
+          <li> <a href="../cursos-tutor/materias-hijo.php">Todas mis materias</a> </li>
+        </ul>
+      </li>
+      <!-- /Courses End--->
+
+      <!--Professors Start-->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#professor" aria-expanded="false"
+          aria-controls="dashboard">
+          <span><i class="fa fa-user fs-16"></i>Docentes</span>
+        </a>
+        <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
+          <li> <a href="../profesores-tutor/profesores-estudiante.php">Mis Docentes</a> </li>
+        </ul>
+      </li>
+      <!-- /Professors End--->  
+
+      <!--Holiday Start-->
+      <li class="menu-item">
+        <a href="pages/holidays/holiday.html">
+          <span><i class="fa fa-calendar fs-16"></i>Calendario Escolar</span>
+        </a>
+      </li>
+      <!-- /Holiday End--->
+
+      <!--Fees Start-->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#fees" aria-expanded="false"
+          aria-controls="dashboard">
+          <span><i class="fas fa-dollar-sign"></i>Pagos Escolares</span>
+        </a>
+        <ul id="fees" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
+          <li> <a href="./pagos-hijo.php">Orden de pago</a></li>
+        </ul>
+      </li>
+      <!-- /Feess End--->
+
+      <li class="menu-item">
+        <a href="pages/widgets.html">
+          <span><i class="material-icons fs-16">widgets</i>Widgets</span>
+        </a>
+      </li>
+      <!-- Basic UI Elements -->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#basic-elements" aria-expanded="false"
+          aria-controls="basic-elements">
+          <span><i class="material-icons fs-16">filter_list</i>Estadisticas</span>
+        </a>
+        <ul id="basic-elements" class="collapse" aria-labelledby="basic-elements" data-parent="#side-nav-accordion">
+          <li> <a href="pages/ui-basic/accordions.html">Accordions</a> </li>
+          <li> <a href="pages/ui-basic/alerts.html">Alerts</a> </li>
+          <li> <a href="pages/ui-basic/buttons.html">Buttons</a> </li>
+          <li> <a href="pages/ui-basic/breadcrumbs.html">Breadcrumbs</a> </li>
+          <li> <a href="pages/ui-basic/badges.html">Badges</a> </li>
+          <li> <a href="pages/ui-basic/cards.html">Cards</a> </li>
+          <li> <a href="pages/ui-basic/progress-bars.html">Progress Bars</a> </li>
+          <li> <a href="pages/ui-basic/preloaders.html">Pre-loaders</a> </li>
+          <li> <a href="pages/ui-basic/pagination.html">Pagination</a> </li>
+          <li> <a href="pages/ui-basic/tabs.html">Tabs</a> </li>
+
+          <li> <a href="pages/ui-basic/typography.html">Typography</a> </li>
+        </ul>
+      </li>
+      <!-- /Basic UI Elements -->
 
     </ul>
 
@@ -463,7 +468,9 @@
           <a href="#"  id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img class="ms-user-img ms-img-round float-right" src="../../assets/img/we-educate/new-student-5.jpg" alt="people"> </a>
           <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
             <li class="dropdown-menu-header">
-              <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Welcome, Anny Farisha</span></h6>
+            <h6 class="dropdown-header ms-inline m-0">
+                                <span class="text-disabled">Bienvenido, <?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellido']; ?></span>
+            </h6>
             </li>
             <li class="dropdown-divider"></li>
             <li class="ms-dropdown-list">
@@ -497,7 +504,7 @@
   <div class="container-fluid px-5 py-4"> <!-- Margen horizontal y vertical ampliado -->
     <div class="card shadow-sm">
       <div class="card-body">
-    <table id="tabla-fees" class="table table-striped thead-primary w-100">
+    <table id="tabla-pagos-hijo" class="table table-striped thead-primary w-100">
 <thead>
   <tr>
     <th>ID</th>
@@ -1252,34 +1259,29 @@
 
 
 <!-- Script personalizado para cargar pagos -->
-<script src="../../pages/scripts/feescollection.js"></script>
+<script src="../../pages/scripts/pago-hijo.js"></script>
 
 
 <!-- Modal Cambiar Estado -->
-<div class="modal fade" id="modalActualizarEstado" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade" id="modalConfirmarPago" tabindex="-1" role="dialog" aria-labelledby="modalPagoLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="modalLabel">Actualizar Estado de Pago</h5>
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title">Confirmar Pago</h5>
         <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <input type="hidden" id="modal-pago-id">
-        <div class="form-group">
-          <label for="modal-estado">Estado</label>
-          <select class="form-control" id="modal-estado">
-            <option value="pagado">Pagado</option>
-            <option value="pendiente">Pendiente</option>
-          </select>
-        </div>
+        <p>¿Deseas confirmar el pago del adeudo escolar?</p>
+        <input type="hidden" id="pago-id-confirmar">
       </div>
       <div class="modal-footer">
-        <button id="btnGuardarEstado" class="btn btn-success">Guardar Cambios</button>
+        <button id="btnConfirmarPago" class="btn btn-success">Confirmar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
       </div>
     </div>
   </div>
 </div>
+
 
 </body>
 

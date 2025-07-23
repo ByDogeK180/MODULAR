@@ -34,21 +34,32 @@ document.addEventListener("DOMContentLoaded", function () {
         tbody.appendChild(fila);
       });
 
+      // 💡 Configuración avanzada para soporte responsivo con filtros
       const tabla = $("#tabla-fees").DataTable({
         pageLength: 50,
         orderCellsTop: true,
         fixedHeader: true,
+        responsive: {
+          details: {
+            type: 'column',
+            target: 'tr'
+          }
+        },
         language: {
           url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
-        }
-      });
+        },
+        initComplete: function () {
+          const api = this.api();
 
-      $('#tabla-fees thead tr:eq(1) th').each(function (i) {
-        const input = $(this).find("input, select");
-        if (input.length) {
-          input.on('keyup change', function () {
-            if (tabla.column(i).search() !== this.value) {
-              tabla.column(i).search(this.value).draw();
+          // Agrega eventos a los filtros en la fila .filters
+          api.columns().eq(0).each(function (colIdx) {
+            const cell = $('.filters th').eq(colIdx);
+            const input = cell.find('input, select');
+
+            if (input.length) {
+              input.on('keyup change', function () {
+                api.column(colIdx).search(this.value).draw();
+              });
             }
           });
         }
@@ -58,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("Error al cargar fees:", error);
     });
 
+  // Evento para mostrar el modal
   document.addEventListener("click", function (e) {
     if (e.target.classList.contains("actualizar-btn")) {
       const pagoId = e.target.dataset.id;
@@ -70,6 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // Guardar cambios desde el modal
   const btnGuardar = document.getElementById("btnGuardarEstado");
   if (btnGuardar) {
     btnGuardar.addEventListener("click", () => {

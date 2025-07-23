@@ -163,8 +163,7 @@
           <span><i class="fas fa-dollar-sign"></i>Pagos Escolares</span>
         </a>
         <ul id="fees" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-          <li> <a href="pages/#">Orden de pago</a></li>
-          <li> <a href="pages/#">Historial de pagos</a></li>
+          <li> <a href="./pages/pagos-tutor/pagos-hijo.php">Orden de pago</a></li>
         </ul>
       </li>
       <!-- /Feess End--->
