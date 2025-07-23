@@ -1,0 +1,45 @@
+#formulario-incidente {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+#formulario-incidente .card-edu {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  min-height: 650px; /* Más altura */
+  padding: 2.5rem 3rem; /* Espaciado interno */
+}
+
+@media (min-width: 1200px) {
+  #formulario-incidente .card-edu {
+    max-width: 1000px; /* Control del ancho máximo en pantallas grandes */
+  }
+}
+
+#formulario-incidente .edu-icon {
+  width: 56px;
+  height: 56px;
+  background-color: #fff;
+  border: 2px solid #e0e0e0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-size: 1.2rem;
+}
+
+#formulario-incidente .btn-warning {
+  background-color: #FFB703;
+  color: #000;
+}
+
+#formulario-incidente .btn-warning:hover {
+  background-color: #F29F05;
+  color: #fff;
+}
+
+#formulario-incidente h3 {
+  font-weight: 600;
+}
+
+#formulario-incidente label i {
+  margin-right: 4px;
+}
