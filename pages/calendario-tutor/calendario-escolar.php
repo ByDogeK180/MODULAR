@@ -7,7 +7,6 @@
 require_once '../php/auth.php';
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,25 +17,30 @@ require_once '../php/auth.php';
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Weeducate</title>
     <!-- Iconic Fonts -->
+    <link href=" https://fullcalendar.io/">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="../../vendors/iconic-fonts/font-awesome/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../vendors/iconic-fonts/flat-icons/flaticon.css">
-    <link rel="stylesheet" href="../../assets/css/materias-hijo.css">
 
-
-
-    <!-- FontAwesme -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="../../assets/css/datatables.min.css">
     <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- jQuery UI -->
     <link href="../../assets/css/jquery-ui.min.css" rel="stylesheet">
     <!-- Page Specific CSS (Slick Slider.css) -->
     <link href="../../assets/css/slick.css" rel="stylesheet">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/weicon/weicon.ico">
     <!-- Weeducate styles -->
     <link href="../../assets/css/style.css" rel="stylesheet">
     <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/weicon/weicon.ico">
+
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+    <link href="../../assets/css/calendarioEscolar-tutor.css" rel="stylesheet">
+
+
+
 
 </head>
 
@@ -158,14 +162,14 @@ require_once '../php/auth.php';
                     <span><i class="fa fa-user fs-16"></i>Docentes</span>
                 </a>
                 <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-                    <li> <a href="pages/profesores-tutor/profesores-estudiante.php">Mis Docentes</a> </li>
+                    <li> <a href="../profesores-tutor/profesores-estudiante.php">Mis Docentes</a> </li>
                 </ul>
             </li>
             <!-- /Professors End--->
 
             <!--Holiday Start-->
             <li class="menu-item">
-                <a href="../calendario-tutor/calendario-escolar.php">
+                <a href="./calendario-escolar.php">
                     <span><i class="fa fa-calendar fs-16"></i>Calendario Escolar</span>
                 </a>
             </li>
@@ -370,7 +374,7 @@ require_once '../php/auth.php';
             </div>
 
             <div class="logo-sn logo-sm ms-d-block-sm">
-                <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="index.php"><img
+                <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="../../index.php"><img
                         src="../../assets/img/logo/weeducate-4.png" alt="logo"> </a>
             </div>
 
@@ -396,7 +400,7 @@ require_once '../php/auth.php';
                         <li class="ms-scrollable ms-dropdown-list">
                             <a class="media p-2" href="#">
                                 <div class="ms-chat-status ms-status-offline ms-chat-img mr-2 align-self-center">
-                                    <img src="../../assets/img/we-educate/new-student-4.jpg" class="ms-img-round"
+                                    <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round"
                                         alt="people">
                                 </div>
                                 <div class="media-body">
@@ -407,7 +411,7 @@ require_once '../php/auth.php';
                             </a>
                             <a class="media p-2" href="#">
                                 <div class="ms-chat-status ms-status-online ms-chat-img mr-2 align-self-center">
-                                    <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round"
+                                    <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round"
                                         alt="people">
                                 </div>
                                 <div class="media-body">
@@ -418,7 +422,7 @@ require_once '../php/auth.php';
                             </a>
                             <a class="media p-2" href="#">
                                 <div class="ms-chat-status ms-status-offline ms-chat-img mr-2 align-self-center">
-                                    <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round"
+                                    <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round"
                                         alt="people">
                                 </div>
                                 <div class="media-body">
@@ -491,7 +495,8 @@ require_once '../php/auth.php';
                     <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
                         <li class="dropdown-menu-header">
                             <h6 class="dropdown-header ms-inline m-0">
-                                <span class="text-disabled">Bienvenido, <?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellido']; ?></span>
+                                <span class="text-disabled">Bienvenido,
+                                    <?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellido']; ?></span>
                             </h6>
                         </li>
                         <li class="dropdown-divider"></li>
@@ -530,21 +535,125 @@ require_once '../php/auth.php';
 
         <!-- Body Content Wrapper -->
 
-        <div class="ms-panel">
-            <div class="ms-panel-header d-flex justify-content-between align-items-center">
-                <h6><i class="fa fa-user"></i> Profesores por hijo</h6>
-                <input type="search" id="busquedaProfesor" class="form-control w-50" placeholder="Buscar por profesor, materia, grado o ID...">
+        <!-- Body Content Wrapper -->
+        <div class="ms-content-wrapper">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb pl-0">
+                            <li class="breadcrumb-item"><a href="../../index.php"><i class="material-icons">home</i>
+                                    Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Calendario</li>
+
+                        </ol>
+                    </nav>
+                </div>
             </div>
-            <div class="ms-panel-body">
-                <div id="accordionProfesores"></div>
+
+            <div class="col-xl-12">
+                <div class="ms-panel">
+                    <div class="ms-panel-header">
+                        <h6>Calendario Escolar Anual</h6>
+                    </div>
+                    <div class="ms-panel-body">
+                        <div id="calendario-festivos" class="pt-3"></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- calendar editar notas modal -->
+
+        <div class="modal fade" id="notaModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar nota</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="modalFecha">
+                    <textarea id="notaTexto" class="form-control" rows="4" placeholder="Escribe tu nota aquí..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button id="eliminarNota" class="btn btn-danger">Eliminar</button>
+                    <button id="guardarNota" class="btn btn-primary">Guardar</button>
+                </div>
+                </div>
+            </div>
+            </div>
+
+        <!-- calendar modal -->
+        <div id="modal-view-event" class="modal modal-top fade calendar-modal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h4 class="modal-title"><span class="event-icon"></span><span class="event-title"></span></h4>
+                        <div class="event-body"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-view-event-add" class="modal modal-top fade calendar-modal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <form id="add-event">
+                        <div class="modal-body">
+                            <h4>Add Event Detail</h4>
+                            <div class="form-group">
+                                <label>Event name</label>
+                                <input type="text" class="form-control" name="ename">
+                            </div>
+                            <div class="form-group">
+                                <label>Event Date</label>
+                                <input type='text' class="datetimepicker form-control" name="edate">
+                            </div>
+                            <div class="form-group">
+                                <label>Event Description</label>
+                                <textarea class="form-control" name="edesc"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Event Color</label>
+                                <select class="form-control" name="ecolor">
+                                    <option value="fc-bg-default">fc-bg-default</option>
+                                    <option value="fc-bg-blue">fc-bg-blue</option>
+                                    <option value="fc-bg-lightgreen">fc-bg-lightgreen</option>
+                                    <option value="fc-bg-pinkred">fc-bg-pinkred</option>
+                                    <option value="fc-bg-deepskyblue">fc-bg-deepskyblue</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Event Icon</label>
+                                <select class="form-control" name="eicon">
+                                    <option value="circle">circle</option>
+                                    <option value="cog">cog</option>
+                                    <option value="group">group</option>
+                                    <option value="suitcase">suitcase</option>
+                                    <option value="calendar">calendar</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
 
 
 
-            <!-- Script al final del body -->
-            <script src="../scripts/cargarProfesoresHijos.js"></script>
+        <div>
 
+        </div>
 
     </main>
 
@@ -679,7 +788,7 @@ require_once '../php/auth.php';
                                             <div
                                                 class="ms-chat-status ms-status-away ms-has-new-msg ms-chat-img mr-3 align-self-center">
                                                 <span class="msg-count">3</span>
-                                                <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round"
+                                                <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round"
                                                     alt="people">
                                             </div>
                                             <div class="media-body ms-chat-user-info mt-1">
@@ -692,7 +801,7 @@ require_once '../php/auth.php';
                                         <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
                                             <div
                                                 class="ms-chat-status ms-status-online ms-chat-img mr-3 align-self-center">
-                                                <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round"
+                                                <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round"
                                                     alt="people">
                                             </div>
                                             <div class="media-body ms-chat-user-info mt-1">
@@ -705,7 +814,7 @@ require_once '../php/auth.php';
                                         <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
                                             <div
                                                 class="ms-chat-status ms-status-offline ms-chat-img mr-3 align-self-center">
-                                                <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round"
+                                                <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round"
                                                     alt="people">
                                             </div>
                                             <div class="media-body ms-chat-user-info mt-1">
@@ -718,7 +827,7 @@ require_once '../php/auth.php';
                                         <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
                                             <div
                                                 class="ms-chat-status ms-status-busy ms-chat-img mr-3 align-self-center">
-                                                <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round"
+                                                <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round"
                                                     alt="people">
                                             </div>
                                             <div class="media-body ms-chat-user-info mt-1">
@@ -731,7 +840,7 @@ require_once '../php/auth.php';
                                         <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
                                             <div
                                                 class="ms-chat-status ms-status-online ms-chat-img mr-3 align-self-center">
-                                                <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round"
+                                                <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round"
                                                     alt="people">
                                             </div>
                                             <div class="media-body ms-chat-user-info mt-1">
@@ -747,7 +856,7 @@ require_once '../php/auth.php';
                                     <ul class="ms-scrollable ms-quickbar-container">
                                         <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                                             <div class="ms-chat-img mr-3 align-self-center">
-                                                <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round"
+                                                <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round"
                                                     alt="people">
                                             </div>
                                             <div class="media-body ms-chat-user-info mt-1">
@@ -756,11 +865,11 @@ require_once '../php/auth.php';
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu
                                                     turpis. Nunc</p>
                                                 <ul class="ms-group-members clearfix mt-3 mb-0">
+                                                    <li> <img src="../../assets/img/we-educate/topper-1.jpg"
+                                                            alt="member"> </li>
+                                                    <li> <img src="../../assets/img/we-educate/topper-2.jpg"
+                                                            alt="member"> </li>
                                                     <li> <img src="../../assets/img/we-educate/topper-3.jpg"
-                                                            alt="member"> </li>
-                                                    <li> <img src="../../assets/img/we-educate/topper-4.jpg"
-                                                            alt="member"> </li>
-                                                    <li> <img src="../../assets/img/we-educate/topper-5.jpg"
                                                             alt="member"> </li>
                                                     <li class="ms-group-count"> + 12 more </li>
                                                 </ul>
@@ -768,7 +877,7 @@ require_once '../php/auth.php';
                                         </li>
                                         <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                                             <div class="ms-chat-img mr-3 align-self-center">
-                                                <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round"
+                                                <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round"
                                                     alt="people">
                                             </div>
                                             <div class="media-body ms-chat-user-info mt-1">
@@ -777,16 +886,16 @@ require_once '../php/auth.php';
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu
                                                     turpis. Nunc</p>
                                                 <ul class="ms-group-members clearfix mt-3 mb-0">
-                                                    <li> <img src="../../assets/img/we-educate/topper-1.jpg"
+                                                    <li> <img src="../../assets/img/we-educate/topper-5.jpg"
                                                             alt="member"> </li>
-                                                    <li> <img src="../../assets/img/we-educate/topper-2.jpg"
+                                                    <li> <img src="../../assets/img/we-educate/topper-6.jpg"
                                                             alt="member"> </li>
                                                 </ul>
                                             </div>
                                         </li>
                                         <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                                             <div class="ms-chat-img mr-3 align-self-center">
-                                                <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round"
+                                                <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round"
                                                     alt="people">
                                             </div>
                                             <div class="media-body ms-chat-user-info mt-1">
@@ -795,11 +904,11 @@ require_once '../php/auth.php';
                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu
                                                     turpis. Nunc</p>
                                                 <ul class="ms-group-members clearfix mt-3 mb-0">
+                                                    <li> <img src="../../assets/img/we-educate/topper-2.jpg"
+                                                            alt="member"> </li>
                                                     <li> <img src="../../assets/img/we-educate/topper-3.jpg"
                                                             alt="member"> </li>
-                                                    <li> <img src="../../assets/img/we-educate/topper-5.jpg"
-                                                            alt="member"> </li>
-                                                    <li> <img src="../../assets/img/we-educate/topper-6.jpg"
+                                                    <li> <img src="../../assets/img/we-educate/topper-4.jpg"
                                                             alt="member"> </li>
                                                     <li class="ms-group-count"> + 4 more </li>
                                                 </ul>
@@ -811,7 +920,7 @@ require_once '../php/auth.php';
                                     <ul class="ms-scrollable ms-quickbar-container">
                                         <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                                             <div class="ms-chat-img mr-3 align-self-center">
-                                                <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round"
+                                                <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round"
                                                     alt="people">
                                             </div>
                                             <div class="media-body ms-chat-user-info mt-1">
@@ -823,7 +932,7 @@ require_once '../php/auth.php';
                                         </li>
                                         <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                                             <div class="ms-chat-img mr-3 align-self-center">
-                                                <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round"
+                                                <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round"
                                                     alt="people">
                                             </div>
                                             <div class="media-body ms-chat-user-info mt-1">
@@ -835,7 +944,7 @@ require_once '../php/auth.php';
                                         </li>
                                         <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                                             <div class="ms-chat-img mr-3 align-self-center">
-                                                <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round"
+                                                <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round"
                                                     alt="people">
                                             </div>
                                             <div class="media-body ms-chat-user-info mt-1">
@@ -847,7 +956,7 @@ require_once '../php/auth.php';
                                         </li>
                                         <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                                             <div class="ms-chat-img mr-3 align-self-center">
-                                                <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round"
+                                                <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round"
                                                     alt="people">
                                             </div>
                                             <div class="media-body ms-chat-user-info mt-1">
@@ -859,7 +968,7 @@ require_once '../php/auth.php';
                                         </li>
                                         <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                                             <div class="ms-chat-img mr-3 align-self-center">
-                                                <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round"
+                                                <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round"
                                                     alt="people">
                                             </div>
                                             <div class="media-body ms-chat-user-info mt-1">
@@ -871,7 +980,7 @@ require_once '../php/auth.php';
                                         </li>
                                         <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                                             <div class="ms-chat-img mr-3 align-self-center">
-                                                <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round"
+                                                <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round"
                                                     alt="people">
                                             </div>
                                             <div class="media-body ms-chat-user-info mt-1">
@@ -903,7 +1012,7 @@ require_once '../php/auth.php';
                         <ul class="ms-scrollable ms-quickbar-container">
                             <li class="p-3  media ms-email clearfix">
                                 <div class="ms-email-img mr-3 ">
-                                    <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round"
+                                    <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round"
                                         alt="people">
                                 </div>
                                 <div class="media-body ms-email-details">
@@ -916,7 +1025,7 @@ require_once '../php/auth.php';
                             </li>
                             <li class="p-3  media ms-email clearfix">
                                 <div class="ms-email-img mr-3 ">
-                                    <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round"
+                                    <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round"
                                         alt="people">
                                 </div>
                                 <div class="media-body ms-email-details">
@@ -929,7 +1038,7 @@ require_once '../php/auth.php';
                             </li>
                             <li class="p-3  media ms-email clearfix">
                                 <div class="ms-email-img mr-3 ">
-                                    <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round"
+                                    <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round"
                                         alt="people">
                                 </div>
                                 <div class="media-body ms-email-details">
@@ -1074,9 +1183,9 @@ require_once '../php/auth.php';
                                     vel varius metus. Pellentesque eget orci malesuada, venenatis magna et
                                 </p>
                                 <ul class="ms-note-members clearfix mb-0">
-                                    <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-1.jpg"
-                                            alt="member"> </li>
                                     <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-2.jpg"
+                                            alt="member"> </li>
+                                    <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-3.jpg"
                                             alt="member"> </li>
                                 </ul>
                             </div>
@@ -1096,7 +1205,7 @@ require_once '../php/auth.php';
                                         <li class="ms-scrollable ms-dropdown-list ms-members-list">
                                             <a class="media p-2" href="#">
                                                 <div class="mr-2 align-self-center">
-                                                    <img src="../../assets/img/we-educate/topper-3.jpg"
+                                                    <img src="../../assets/img/we-educate/topper-4.jpg"
                                                         class="ms-img-round" alt="people">
                                                 </div>
                                                 <div class="media-body">
@@ -1105,7 +1214,7 @@ require_once '../php/auth.php';
                                             </a>
                                             <a class="media p-2" href="#">
                                                 <div class="mr-2 align-self-center">
-                                                    <img src="../../assets/img/we-educate/topper-4.jpg"
+                                                    <img src="../../assets/img/we-educate/topper-5.jpg"
                                                         class="ms-img-round" alt="people">
                                                 </div>
                                                 <div class="media-body">
@@ -1114,7 +1223,7 @@ require_once '../php/auth.php';
                                             </a>
                                             <a class="media p-2" href="#">
                                                 <div class="mr-2 align-self-center">
-                                                    <img src="../../assets/img/we-educate/topper-5.jpg"
+                                                    <img src="../../assets/img/we-educate/topper-6.jpg"
                                                         class="ms-img-round" alt="people">
                                                 </div>
                                                 <div class="media-body">
@@ -1145,7 +1254,7 @@ require_once '../php/auth.php';
                                     vel varius metus. Pellentesque eget orci malesuada, venenatis magna et
                                 </p>
                                 <ul class="ms-note-members clearfix mb-0">
-                                    <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-6.jpg"
+                                    <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-1.jpg"
                                             alt="member"> </li>
                                 </ul>
                             </div>
@@ -1165,7 +1274,7 @@ require_once '../php/auth.php';
                                         <li class="ms-scrollable ms-dropdown-list ms-members-list">
                                             <a class="media p-2" href="#">
                                                 <div class="mr-2 align-self-center">
-                                                    <img src="../../assets/img/we-educate/topper-1.jpg"
+                                                    <img src="../../assets/img/we-educate/topper-2.jpg"
                                                         class="ms-img-round" alt="people">
                                                 </div>
                                                 <div class="media-body">
@@ -1174,7 +1283,7 @@ require_once '../php/auth.php';
                                             </a>
                                             <a class="media p-2" href="#">
                                                 <div class="mr-2 align-self-center">
-                                                    <img src="../../assets/img/we-educate/topper-2.jpg"
+                                                    <img src="../../assets/img/we-educate/topper-3.jpg"
                                                         class="ms-img-round" alt="people">
                                                 </div>
                                                 <div class="media-body">
@@ -1183,7 +1292,7 @@ require_once '../php/auth.php';
                                             </a>
                                             <a class="media p-2" href="#">
                                                 <div class="mr-2 align-self-center">
-                                                    <img src="../../assets/img/we-educate/topper-3.jpg"
+                                                    <img src="../../assets/img/we-educate/topper-4.jpg"
                                                         class="ms-img-round" alt="people">
                                                 </div>
                                                 <div class="media-body">
@@ -1333,9 +1442,29 @@ require_once '../php/auth.php';
         </div>
     </div>
 
+    <!-- Modal para agregar notas -->
+        <div class="modal fade" id="notaModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nota para <span id="modalFecha"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <textarea id="notaTexto" class="form-control" rows="5" placeholder="Escribe tu nota aquí..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button id="eliminarNota" class="btn btn-danger">Eliminar</button>
+                <button id="guardarNota" class="btn btn-primary">Guardar</button>
+            </div>
+            </div>
+        </div>
+        </div>
+
     <!-- SCRIPTS -->
     <!-- Global Required Scripts Start -->
     <script src="../../assets/js/jquery-3.3.1.min.js"></script>
+
     <script src="../../assets/js/popper.min.js"></script>
     <script src="../../assets/js/bootstrap.min.js"></script>
     <script src="../../assets/js/perfect-scrollbar.js"> </script>
@@ -1346,16 +1475,20 @@ require_once '../php/auth.php';
     <script src="../../assets/js/slick.min.js"> </script>
     <script src="../../assets/js/moment.js"> </script>
     <script src="../../assets/js/jquery.webticker.min.js"> </script>
-    <script src="../../assets/js/Chart.bundle.min.js"> </script>
-    <script src="../../assets/js/Chart.Financial.js"> </script>
+
 
     <!-- Page Specific Scripts Finish -->
-
+    <script src="../../assets/js/datatables.min.js"> </script>
+    <script src="../../assets/js/data-tables.js"> </script>
     <!-- Weeducate core JavaScript -->
     <script src="../../assets/js/framework.js"></script>
 
     <!-- Settings -->
     <script src="../../assets/js/settings.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script src="../scripts/cargaCalendario-tutor.js"></script>
 
 </body>
 

@@ -150,7 +150,7 @@
 
       <!--Holiday Start-->
       <li class="menu-item">
-        <a href="pages/holidays/holiday.html">
+        <a href="./pages/calendario-tutor/calendario-escolar.php">
           <span><i class="fa fa-calendar fs-16"></i>Calendario Escolar</span>
         </a>
       </li>
@@ -503,7 +503,6 @@
                 <span><i class="flaticon-shut-down mr-2"></i> Logout</span>
               </a>
             </li>
-
           </ul>
         </li>
       </ul>

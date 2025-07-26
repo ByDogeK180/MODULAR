@@ -1,0 +1,16 @@
+ 
+body { background: #f9f9f9; }
+    .calendar { max-width: 900px; margin: auto; }
+    .calendar-header { display: flex; justify-content: space-between; align-items: center; margin: 20px 0; }
+    .day { height: 120px; border: 1px solid #dee2e6; padding: 5px; position: relative; cursor: pointer; }
+    .day.festivo { background-color: #ffe8e8; }
+    .day.notas { background-color: #e7f3ff; }
+    .day:hover { background-color: #f1f1f1; }
+    .day .badge-note, .day .badge-festivo {
+    position: absolute; bottom: 5px; right: 5px; font-size: 0.7em;
+}
+  
+#calendario-festivos .fc {
+  max-width: 100%;
+  font-size: 0.9rem;
+}

@@ -158,7 +158,7 @@ session_start();
 
       <!--Holiday Start-->
       <li class="menu-item">
-        <a href="pages/holidays/holiday.html">
+        <a href="../calendario-tutor/calendario-escolar.php">
           <span><i class="fa fa-calendar fs-16"></i>Calendario Escolar</span>
         </a>
       </li>
@@ -483,7 +483,9 @@ session_start();
               <a class="media fs-14 p-2" href="pages/prebuilt-pages/lock-screen.html"> <span><i class="flaticon-security mr-2"></i> Lock</span> </a>
             </li>
             <li class="dropdown-menu-footer">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/default-login.html"> <span><i class="flaticon-shut-down mr-2"></i> Logout</span> </a>
+                <a class="media fs-14 p-2 logout-link" href="../php/auth.php?logout=true">
+                  <span><i class="flaticon-shut-down mr-2"></i> Logout</span>
+                </a>
             </li>
           </ul>
         </li>
