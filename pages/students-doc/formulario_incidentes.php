@@ -18,6 +18,8 @@
 
   <title>Weeducate</title>
   <!-- Iconic Fonts -->
+   <link rel="stylesheet" href="../../assets/css/estilos-selects.css">
+
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../../vendors/iconic-fonts/font-awesome/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../../vendors/iconic-fonts/flat-icons/flaticon.css">
@@ -460,17 +462,18 @@
     </nav>
 
 
-    <!-- Body Content Wrapper -->
-<!-- Body Content Wrapper -->
-<div class="container py-5" id="formulario-incidente">
-  <div class="row justify-content-center">
-    <div class="col-12 col-xl-10"> <!-- ancho ajustado -->
-      <div class="card p-4 shadow card-edu border-0">
-        
-        <!-- Cabecera -->
-        <div class="d-flex align-items-center mb-4">
-          <div class="edu-icon rounded-circle d-flex justify-content-center align-items-center me-3">
-            <i class="fas fa-clipboard-list fa-lg text-primary"></i>
+<!-- FORMULARIO DE INCIDENTE GRUPAL CON FORMULARIO INDIVIDUAL EN LA MISMA PÁGINA -->
+<link rel="stylesheet" href="../../assets/css/incidente-formulario.css">
+
+<div class="container py-5">
+  <div class="mx-auto" style="max-width: 1000px;">
+
+    <!-- Cabecera y tipo de formulario -->
+    <div class="card shadow mb-4 rounded-4 border-0">
+      <div class="card-body">
+        <div class="d-flex align-items-center mb-3">
+          <div class="bg-warning text-white rounded-circle d-flex justify-content-center align-items-center me-3" style="width: 50px; height: 50px;">
+            <i class="fas fa-clipboard-list fa-lg"></i>
           </div>
           <div>
             <h3 class="mb-0 text-primary fw-bold">Registro de Incidente</h3>
@@ -478,53 +481,164 @@
           </div>
         </div>
 
-        <!-- Formulario -->
-        <form id="formIncidente">
-          <div class="mb-3">
-            <label for="estudiante" class="form-label text-dark">
-              <i class="fas fa-user-graduate me-1 text-secondary"></i> Estudiante:
+        <div class="form-group mb-0">
+          <label class="form-label fw-bold text-primary fs-6 d-flex align-items-center">
+            <i class="fas fa-toggle-on me-2 text-primary"></i> Tipo de registro:
+          </label>
+          <div class="btn-group mt-2" role="group" aria-label="Tipo de registro">
+            <input type="radio" class="btn-check" name="modo" id="modoIndividual" value="individual" autocomplete="off" checked>
+            <label class="btn btn-outline-primary rounded-pill px-4" for="modoIndividual">
+              <i class="fas fa-user me-1"></i> Individual
             </label>
-            <select id="estudiante" name="estudiante_id" class="form-select" required></select>
-          </div>
 
-          <div class="mb-3">
-            <label for="tipo" class="form-label text-dark">
-              <i class="fas fa-tags me-1 text-warning"></i> Tipo de incidente:
+            <input type="radio" class="btn-check" name="modo" id="modoGrupal" value="grupal" autocomplete="off">
+            <label class="btn btn-outline-primary rounded-pill px-4" for="modoGrupal">
+              <i class="fas fa-users me-1"></i> Grupal
             </label>
-            <select id="tipo" name="tipo" class="form-select" required>
-              <option value="">Seleccione tipo</option>
-              <option value="conducta">Conducta</option>
-              <option value="tarea">Tarea</option>
-              <option value="asistencia">Asistencia</option>
-              <option value="otro">Otro</option>
-            </select>
           </div>
+        </div>
+      </div>
+    </div>
 
-          <div class="mb-3">
-            <label for="descripcion" class="form-label text-dark">
+    <!-- FORMULARIO INDIVIDUAL -->
+    <div id="contenedorIndividual" class="card shadow rounded-4 border-0 mb-4">
+      <div class="card-body">
+        <form id="formIncidenteIndividual" class="row g-4">
+        <div class="col-md-6">
+  <label for="estudiante" class="form-label fw-semibold text-primary">
+    <i class="fas fa-user-graduate me-1 text-secondary"></i> Estudiante:
+  </label>
+  <div class="custom-select-wrapper">
+    <select id="estudiante" name="estudiante_id" class="custom-select-style small-select" required></select>
+  </div>
+</div>
+
+<div class="col-md-6">
+  <label for="tipoIndividual" class="form-label fw-semibold text-primary">
+    <i class="fas fa-tags me-1 text-warning"></i> Tipo de incidente:
+  </label>
+  <div class="custom-select-wrapper">
+    <select id="tipoIndividual" name="tipo" class="custom-select-style small-select" required>
+      <option value="">Seleccione tipo</option>
+      <option value="conducta">Conducta</option>
+      <option value="tarea">Tarea</option>
+      <option value="asistencia">Asistencia</option>
+      <option value="aviso">Aviso</option>
+      <option value="otro">Otro</option>
+    </select>
+  </div>
+</div>
+
+          <div class="col-12">
+            <label for="descripcionIndividual" class="form-label fw-semibold">
               <i class="fas fa-align-left me-1 text-info"></i> Descripción:
             </label>
-            <textarea id="descripcion" name="descripcion" class="form-control" rows="3" placeholder="Ej. No entregó la actividad..." required></textarea>
+            <textarea id="descripcionIndividual" name="descripcion" class="form-control" rows="3" required></textarea>
           </div>
 
-          <div class="mb-4">
-            <label for="fecha" class="form-label text-dark">
+          <div class="col-md-6">
+            <label for="fechaIndividual" class="form-label fw-semibold">
               <i class="fas fa-calendar-alt me-1 text-success"></i> Fecha del incidente:
             </label>
-            <input type="date" id="fecha" name="fecha" class="form-control" required>
+            <input type="date" id="fechaIndividual" name="fecha" class="form-control" required>
           </div>
 
-          <button type="submit" class="btn btn-warning w-100 fw-bold shadow-sm">
-            <i class="fas fa-paper-plane me-1"></i> Enviar Incidente
-          </button>
+          <div class="col-12 text-end">
+            <button type="submit" class="btn btn-warning fw-bold shadow px-4 py-2">
+              <i class="fas fa-paper-plane me-2"></i> Enviar Incidente
+            </button>
+          </div>
 
-          <div id="mensaje" class="mt-4"></div>
+          <div id="mensajeIndividual" class="mt-3"></div>
         </form>
+      </div>
+    </div>
 
+    <!-- FORMULARIO GRUPAL -->
+    <div id="contenedorGrupal" class="card shadow rounded-4 border-0 d-none">
+      <div class="card-body">
+        <form id="formIncidenteGrupal" class="row g-4">
+          <div class="col-md-6">
+  <label for="selectClaseGrupal" class="form-label fw-semibold text-primary">
+    <i class="fas fa-school me-1 text-info"></i> Clase:
+  </label>
+  <div class="custom-select-wrapper">
+    <select id="selectClaseGrupal" class="form-select custom-select-style small-select" required></select>
+  </div>
+</div>
+
+<div class="col-md-6">
+  <label for="selectMateriaGrupal" class="form-label fw-semibold text-primary">
+    <i class="fas fa-book me-1 text-info"></i> Materia:
+  </label>
+  <div class="custom-select-wrapper">
+    <select id="selectMateriaGrupal" class="form-select custom-select-style small-select" required></select>
+  </div>
+</div>
+
+<div class="col-md-6">
+  <label for="tipoGrupal" class="form-label fw-semibold text-primary">
+    <i class="fas fa-tags me-1 text-warning"></i> Tipo de incidente:
+  </label>
+  <div class="custom-select-wrapper">
+    <select id="tipoGrupal" name="tipo" class="form-select custom-select-style small-select" required>
+      <option value="">Seleccione tipo</option>
+      <option value="conducta">Conducta</option>
+      <option value="tarea">Tarea</option>
+      <option value="asistencia">Asistencia</option>
+      <option value="aviso">Aviso</option>
+      <option value="otro">Otro</option>
+    </select>
+  </div>
+</div>
+
+          <div class="col-12">
+            <label for="descripcionGrupal" class="form-label fw-semibold">
+              <i class="fas fa-align-left me-1 text-info"></i> Descripción:
+            </label>
+            <textarea id="descripcionGrupal" name="descripcion" class="form-control" rows="3" required></textarea>
+          </div>
+
+          <div class="col-md-6">
+            <label for="fechaGrupal" class="form-label fw-semibold">
+              <i class="fas fa-calendar-alt me-1 text-success"></i> Fecha del incidente:
+            </label>
+            <input type="date" id="fechaGrupal" name="fecha" class="form-control" required>
+          </div>
+
+          <div class="col-12 text-end">
+            <button type="submit" class="btn btn-warning fw-bold shadow px-4 py-2">
+              <i class="fas fa-paper-plane me-2"></i> Enviar Incidente
+            </button>
+          </div>
+
+          <div id="mensajeGrupal" class="mt-3"></div>
+        </form>
       </div>
     </div>
   </div>
 </div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modoRadios = document.querySelectorAll('input[name="modo"]');
+    modoRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        const individual = document.getElementById('contenedorIndividual');
+        const grupal = document.getElementById('contenedorGrupal');
+
+        if (radio.value === 'individual') {
+          individual.classList.remove('d-none');
+          grupal.classList.add('d-none');
+        } else {
+          individual.classList.add('d-none');
+          grupal.classList.remove('d-none');
+        }
+      });
+    });
+  });
+</script>
 
   </main>
 
@@ -1221,6 +1335,8 @@
   <!-- Settings -->
   <script src="../scripts/cargarAlumnosDocente.js"></script>
   <script src="../scripts/validarIncidente.js"></script>
+  <script src="../../pages/scripts/cargarClasesMateriasGrupal.js"></script>
+  <script src="../../pages/scripts/validarIncidenteGrupal.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 

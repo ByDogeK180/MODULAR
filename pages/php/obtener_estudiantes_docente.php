@@ -2,31 +2,16 @@
 require_once 'conecta.php';
 session_start();
 
-if (!isset($_SESSION['usuario_id'])) {
+if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['docente_id'])) {
   echo json_encode([]);
   exit;
 }
 
-$usuario_id = $_SESSION['usuario_id'];
-
+$docente_id = $_SESSION['docente_id'];
 $con = conecta();
 
-// Obtener docente_id
-$stmt = $con->prepare("SELECT docente_id FROM docentes WHERE usuario_id = ?");
-$stmt->bind_param("i", $usuario_id);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows === 0) {
-  echo json_encode([]);
-  exit;
-}
-
-$docente_id = $result->fetch_assoc()['docente_id'];
-
-// Consulta con materia, grupo y ciclo
 $query = "
-SELECT DISTINCT 
+SELECT 
   e.estudiante_id,
   e.nombre AS estudiante_nombre,
   e.apellido AS estudiante_apellido,

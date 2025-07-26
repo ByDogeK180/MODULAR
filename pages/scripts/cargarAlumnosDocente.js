@@ -1,10 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
   const select = document.getElementById('estudiante');
-  if (!select) return; // ← evita el error si no existe el select
+  if (!select) return; // Si no existe el select, salimos
 
   fetch('../php/obtener_estudiantes_docente.php')
     .then(res => res.json())
     .then(data => {
+      // Limpiar y poner opción por defecto
+      select.innerHTML = '<option value="">Seleccione estudiante</option>';
+
+      if (!Array.isArray(data) || data.length === 0) {
+        select.innerHTML += '<option disabled>No hay estudiantes disponibles</option>';
+        return;
+      }
+
       data.forEach(e => {
         const opt = document.createElement('option');
         opt.value = e.estudiante_id;
