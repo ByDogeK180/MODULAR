@@ -1,33 +1,31 @@
-    <?php
-    header('Content-Type: application/json');
-    require_once 'conecta.php';
-    $conexion = conecta();
+<?php
+require_once 'conecta.php';
+session_start();
 
-    session_start();
-    $docente_id = $_SESSION['usuario_id'] ?? 0;
+$usuario_id = $_SESSION['usuario_id'] ?? null;
+if (!$usuario_id) {
+  echo json_encode([]);
+  exit;
+}
 
-    if ($docente_id === 0) {
-    echo json_encode(['error' => 'No hay sesión activa']);
-    exit;
-    }
+$con = conecta();
 
+$query = "
+  SELECT DISTINCT c.clase_id, c.grado, c.grupo
+  FROM clase_asignacion ca
+  JOIN clases c ON c.clase_id = ca.clase_id
+  JOIN docentes d ON d.docente_id = ca.docente_id
+  JOIN inscripciones i ON i.clase_id = c.clase_id
+  WHERE d.usuario_id = ?
+";
+$stmt = $con->prepare($query);
+$stmt->bind_param('i', $usuario_id);
+$stmt->execute();
+$res = $stmt->get_result();
 
-    $sql = "
-    SELECT DISTINCT c.clase_id, CONCAT(c.grado, '° ', c.grupo) AS nombre
-    FROM clase_asignacion ca
-    INNER JOIN clases c ON ca.clase_id = c.clase_id
-    WHERE ca.docente_id = ?
-    ";
+$clases = [];
+while ($row = $res->fetch_assoc()) {
+  $clases[] = $row;
+}
 
-    $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("i", $docente_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    $clases = [];
-    while ($row = $result->fetch_assoc()) {
-    $clases[] = $row;
-    }
-
-    echo json_encode($clases);
-    ?>
+echo json_encode($clases);

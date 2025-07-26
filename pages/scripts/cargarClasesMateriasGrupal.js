@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(data => {
       claseSelect.innerHTML = '<option value="">Seleccione clase</option>';
       data.forEach(clase => {
-        claseSelect.innerHTML += `<option value="${clase.clase_id}">${clase.nombre}</option>`;
+        claseSelect.innerHTML += `<option value="${clase.clase_id}">${clase.grado}° ${clase.grupo}</option>`;
       });
     })
     .catch(err => {
