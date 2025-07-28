@@ -473,6 +473,9 @@
       </nav>
     </div>
 
+
+
+
     <!-- Contenedor dinámico -->
     <div id="contenedor-recordatorios" class="row"></div>
   </div>
@@ -480,6 +483,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../scripts/cargarIncidentesDocente.js"></script>
+
 
 
   </main>
