@@ -1,10 +1,7 @@
 <?php include '../php/auth.php'; ?>
 <script>
-  const userRol = <?php echo $_SESSION['rol'] ?? 'null'; ?>;
+  const userRol = <?php echo $_SESSION['rol'] ?? 'null'; ?> ;
 </script>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,13 +15,13 @@
 
   <title>Weeducate</title>
   <!-- Iconic Fonts -->
-   <link rel="stylesheet" href="../../assets/css/estilos-selects.css">
+  <link rel="stylesheet" href="../../assets/css/estilos-selects.css">
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../../vendors/iconic-fonts/font-awesome/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../../vendors/iconic-fonts/flat-icons/flaticon.css">
-  
-     <link rel="stylesheet" href="../../assets/css/datatables.min.css">
+
+  <link rel="stylesheet" href="../../assets/css/datatables.min.css">
   <!-- Bootstrap core CSS -->
   <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
   <!-- jQuery UI -->
@@ -34,8 +31,8 @@
   <!-- Weeducate styles -->
   <link href="../../assets/css/style.css" rel="stylesheet">
   <!-- Favicon -->
- <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/weicon/weicon.ico">
- <link href="../../assets/css/datatables.min.css" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/weicon/weicon.ico">
+  <link href="../../assets/css/datatables.min.css" rel="stylesheet">
 
 
 </head>
@@ -53,16 +50,16 @@
         <h4 class="section-title">Customize</h4>
         <div>
           <label class="ms-switch">
-             <input type="checkbox" id="dark-mode">
-             <span class="ms-switch-slider round"></span>
-           </label>
+            <input type="checkbox" id="dark-mode">
+            <span class="ms-switch-slider round"></span>
+          </label>
           <span> Dark Mode </span>
         </div>
         <div>
           <label class="ms-switch">
-             <input type="checkbox" id="remove-quickbar">
-             <span class="ms-switch-slider round"></span>
-           </label>
+            <input type="checkbox" id="remove-quickbar">
+            <span class="ms-switch-slider round"></span>
+          </label>
           <span> Remove Quickbar </span>
         </div>
       </div>
@@ -98,75 +95,81 @@
 
   <!-- Overlays -->
   <div class="ms-aside-overlay ms-overlay-left ms-toggler" data-target="#ms-side-nav" data-toggle="slideLeft"></div>
-  <div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight"></div>
+  <div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight">
+  </div>
 
-   <!-- Sidebar Navigation Left -->
+  <!-- Sidebar Navigation Left -->
   <aside id="ms-side-nav" class="side-nav fixed ms-aside-scrollable ms-aside-left">
 
     <!-- Logo -->
     <div class="logo-sn ms-d-block-lg">
-      <a class="pl-0 ml-0 text-center" href="../../Docentes.php"><img src="../../assets/img/logo/weeducate-4.png" alt="logo">  </a>
+      <a class="pl-0 ml-0 text-center" href="../../Docentes.php"><img src="../../assets/img/logo/weeducate-4.png"
+          alt="logo"> </a>
     </div>
 
     <!-- Navigation -->
     <ul class="accordion ms-main-aside fs-14" id="side-nav-accordion">
-        <!-- Dashboard -->
-        <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#dashboard" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="material-icons fs-16">dashboard</i>Dashboard </span>
-             </a>
-            <ul id="dashboard" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-              <li> <a href="../../Docentes.php">Weeducate</a> </li>
-              
-            </ul>
-        </li>
-        <!-- /Dashboard -->
-        
-        <!--Proessors Start-->
-        <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#professor" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-user fs-16"></i>Students</span>
-             </a>
-            <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-              <li> <a href="studendoc.php">All Students</a> </li>
-               <li> <a href="asistencias.php">Assistences</a> </li>
-                 <li> <a href="scoredoc.php">About Students</a> </li>
-                  <li> <a href="formulario_incidentes.php">Reminders</a> </li>
-                    <li> <a href="recordatorios_docente.php">All Reminders  </a> </li>
-            </ul>
-        </li>
-        <!-- /Proessors End--->
-        
-         <!--Courses Start-->
-        <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#courses" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-graduation-cap fs-16"></i>Courses</span>
-             </a>
-            <ul id="courses" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-                 <li> <a href="allcoursesDoc.php">About Courses</a> </li>
-            </ul>
-        </li>
-        <!-- /Courses End--->
+      <!-- Dashboard -->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#dashboard" aria-expanded="false"
+          aria-controls="dashboard">
+          <span><i class="material-icons fs-16">dashboard</i>Dashboard </span>
+        </a>
+        <ul id="dashboard" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
+          <li> <a href="../../Docentes.php">Weeducate</a> </li>
 
-        <!--tutor Start-->
-        <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#staff" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-user-circle fs-16"></i>Tutores</span>
-             </a>
-            <ul id="staff" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-              <li> <a href="tutoresDoc.php">Tabla de Tutores</a> </li>
+        </ul>
+      </li>
+      <!-- /Dashboard -->
 
-            </ul>
-        </li>
-        <!-- /tutor End--->
-        
-        <!--Holiday Start-->
-        <li class="menu-item">
-          <a href="../holidays/holiday.html">
-            <span><i class="fa fa-calendar fs-16"></i>Holidays</span>
-          </a>
-        </li>
-        <!-- /Holiday End--->
+      <!--Proessors Start-->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#professor" aria-expanded="false"
+          aria-controls="dashboard">
+          <span><i class="fa fa-user fs-16"></i>Students</span>
+        </a>
+        <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
+          <li> <a href="studendoc.php">All Students</a> </li>
+          <li> <a href="asistencias.php">Assistences</a> </li>
+          <li> <a href="scoredoc.php">About Students</a> </li>
+          <li> <a href="formulario_incidentes.php">Reminders</a> </li>
+          <li> <a href="recordatorios_docente.php">All Reminders </a> </li>
+        </ul>
+      </li>
+      <!-- /Proessors End--->
+
+      <!--Courses Start-->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#courses" aria-expanded="false"
+          aria-controls="dashboard">
+          <span><i class="fa fa-graduation-cap fs-16"></i>Courses</span>
+        </a>
+        <ul id="courses" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
+          <li> <a href="allcoursesDoc.php">About Courses</a> </li>
+        </ul>
+      </li>
+      <!-- /Courses End--->
+
+      <!--tutor Start-->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#staff" aria-expanded="false"
+          aria-controls="dashboard">
+          <span><i class="fa fa-user-circle fs-16"></i>Tutores</span>
+        </a>
+        <ul id="staff" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
+          <li> <a href="tutoresDoc.php">Tabla de Tutores</a> </li>
+
+        </ul>
+      </li>
+      <!-- /tutor End--->
+
+      <!--Holiday Start-->
+      <li class="menu-item">
+        <a href="../holidays/holiday.html">
+          <span><i class="fa fa-calendar fs-16"></i>Holidays</span>
+        </a>
+      </li>
+      <!-- /Holiday End--->
 
 
     </ul>
@@ -179,142 +182,151 @@
 
     <div class="ms-aside-header">
       <ul class="nav nav-tabs tabs-bordered d-flex nav-justified mb-3" role="tablist">
-        <li role="presentation" class="fs-12"><a href="#activityLog" aria-controls="activityLog" class="active" role="tab" data-toggle="tab"> Activity Log</a></li>
-        <li role="presentation" class="fs-12"><a href="#recentPosts" aria-controls="recentPosts" role="tab" data-toggle="tab"> Settings </a></li>
-        <li><button type="button" class="close ms-toggler text-center" data-target="#ms-recent-activity" data-toggle="slideRight"><span aria-hidden="true">&times;</span></button></li>
+        <li role="presentation" class="fs-12"><a href="#activityLog" aria-controls="activityLog" class="active"
+            role="tab" data-toggle="tab"> Activity Log</a></li>
+        <li role="presentation" class="fs-12"><a href="#recentPosts" aria-controls="recentPosts" role="tab"
+            data-toggle="tab"> Settings </a></li>
+        <li><button type="button" class="close ms-toggler text-center" data-target="#ms-recent-activity"
+            data-toggle="slideRight"><span aria-hidden="true">&times;</span></button></li>
       </ul>
     </div>
 
     <div class="ms-aside-body">
 
-       <div class="tab-content">
+      <div class="tab-content">
 
-         <div role="tabpanel" class="tab-pane active fade show" id="activityLog">
-           <ul class="ms-activity-log">
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-light">
-                 <i class="flaticon-gear"></i>
-               </div>
-               <h6>Update 1.0.0 Pushed</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-success">
-                 <i class="flaticon-tick-inside-circle"></i>
-               </div>
-               <h6>Profile Updated</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-warning">
-                 <i class="flaticon-alert-1"></i>
-               </div>
-               <h6>Your payment is due</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-danger">
-                 <i class="flaticon-alert"></i>
-               </div>
-               <h6>Database Error</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-info">
-                 <i class="flaticon-information"></i>
-               </div>
-               <h6>Checkout what's Trending</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-secondary">
-                 <i class="flaticon-diamond"></i>
-               </div>
-               <h6>Your Dashboard is ready</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-           </ul>
-           <a href="#" class="btn btn-primary d-block"> View All </a>
-         </div>
+        <div role="tabpanel" class="tab-pane active fade show" id="activityLog">
+          <ul class="ms-activity-log">
+            <li>
+              <div class="ms-btn-icon btn-pill icon btn-light">
+                <i class="flaticon-gear"></i>
+              </div>
+              <h6>Update 1.0.0 Pushed</h6>
+              <span> <i class="material-icons">event</i>1 January, 2021</span>
+              <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non
+                nisi semper, ula in sodales vehicula....</p>
+            </li>
+            <li>
+              <div class="ms-btn-icon btn-pill icon btn-success">
+                <i class="flaticon-tick-inside-circle"></i>
+              </div>
+              <h6>Profile Updated</h6>
+              <span> <i class="material-icons">event</i>4 March, 2018</span>
+              <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque
+                felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
+            </li>
+            <li>
+              <div class="ms-btn-icon btn-pill icon btn-warning">
+                <i class="flaticon-alert-1"></i>
+              </div>
+              <h6>Your payment is due</h6>
+              <span> <i class="material-icons">event</i>1 January, 2021</span>
+              <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non
+                nisi semper, ula in sodales vehicula....</p>
+            </li>
+            <li>
+              <div class="ms-btn-icon btn-pill icon btn-danger">
+                <i class="flaticon-alert"></i>
+              </div>
+              <h6>Database Error</h6>
+              <span> <i class="material-icons">event</i>4 March, 2018</span>
+              <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque
+                felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
+            </li>
+            <li>
+              <div class="ms-btn-icon btn-pill icon btn-info">
+                <i class="flaticon-information"></i>
+              </div>
+              <h6>Checkout what's Trending</h6>
+              <span> <i class="material-icons">event</i>1 January, 2021</span>
+              <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non
+                nisi semper, ula in sodales vehicula....</p>
+            </li>
+            <li>
+              <div class="ms-btn-icon btn-pill icon btn-secondary">
+                <i class="flaticon-diamond"></i>
+              </div>
+              <h6>Your Dashboard is ready</h6>
+              <span> <i class="material-icons">event</i>4 March, 2018</span>
+              <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque
+                felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
+            </li>
+          </ul>
+          <a href="#" class="btn btn-primary d-block"> View All </a>
+        </div>
 
-         <div role="tabpanel" class="tab-pane fade" id="recentPosts">
+        <div role="tabpanel" class="tab-pane fade" id="recentPosts">
 
-           <h6>General Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Location Tracking</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Allow Notifications</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Allow Popups</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <h6>Log Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Enable Logging</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Audit Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Error Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <h6>Advanced Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Enable Logging</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Audit Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Error Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
+          <h6>General Settings</h6>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Location Tracking</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox">
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Allow Notifications</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox">
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Allow Popups</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox" checked>
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
+          <h6>Log Settings</h6>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Enable Logging</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox" checked>
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Audit Logs</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox">
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Error Logs</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox" checked>
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
+          <h6>Advanced Settings</h6>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Enable Logging</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox" checked>
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Audit Logs</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox">
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Error Logs</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox" checked>
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
 
-         </div>
+        </div>
 
-       </div>
+      </div>
 
     </div>
 
@@ -333,7 +345,8 @@
       </div>
 
       <div class="logo-sn logo-sm ms-d-block-sm">
-        <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="../../index.php"><img src="../../assets/img/logo/weeducate-4.png" alt="logo"> </a>
+        <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="../../index.php"><img
+            src="../../assets/img/logo/weeducate-4.png" alt="logo"> </a>
       </div>
 
       <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
@@ -346,10 +359,12 @@
           </form>
         </li>
         <li class="ms-nav-item dropdown">
-          <a href="#" class="text-disabled ms-has-notification" id="mailDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flaticon-mail"></i></a>
+          <a href="#" class="text-disabled ms-has-notification" id="mailDropdown" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false"><i class="flaticon-mail"></i></a>
           <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="mailDropdown">
             <li class="dropdown-menu-header">
-              <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Mail</span></h6><span class="badge badge-pill badge-success">3 New</span>
+              <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Mail</span></h6><span
+                class="badge badge-pill badge-success">3 New</span>
             </li>
             <li class="dropdown-divider"></li>
             <li class="ms-scrollable ms-dropdown-list">
@@ -388,10 +403,12 @@
           </ul>
         </li>
         <li class="ms-nav-item dropdown">
-          <a href="#" class="text-disabled ms-has-notification" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flaticon-bell"></i></a>
+          <a href="#" class="text-disabled ms-has-notification" id="notificationDropdown" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false"><i class="flaticon-bell"></i></a>
           <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown">
             <li class="dropdown-menu-header">
-              <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Notifications</span></h6><span class="badge badge-pill badge-info">4 New</span>
+              <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Notifications</span></h6><span
+                class="badge badge-pill badge-info">4 New</span>
             </li>
             <li class="dropdown-divider"></li>
             <li class="ms-scrollable ms-dropdown-list">
@@ -427,26 +444,33 @@
           </ul>
         </li>
         <li class="ms-nav-item">
-          <a href="#" class="text-disabled ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight"><i class="flaticon-menu"></i></a>
+          <a href="#" class="text-disabled ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight"><i
+              class="flaticon-menu"></i></a>
         </li>
         <li class="ms-nav-item ms-nav-user dropdown">
-          <a href="#"  id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img class="ms-user-img ms-img-round float-right" src="../../assets/img/we-educate/new-student-5.jpg" alt="people"> </a>
+          <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img
+              class="ms-user-img ms-img-round float-right" src="../../assets/img/we-educate/new-student-5.jpg"
+              alt="people"> </a>
           <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
             <li class="dropdown-menu-header">
               <span class="text-disabled">Welcome, <?php echo $_SESSION['correo']; ?></span>
             </li>
             <li class="dropdown-divider"></li>
             <li class="ms-dropdown-list">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i class="flaticon-user mr-2"></i> Profile</span> </a>
-              <a class="media fs-14 p-2" href="pages/apps/email.html"> <span><i class="flaticon-mail mr-2"></i> Inbox</span> <span class="badge badge-pill badge-info">3</span> </a>
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i class="flaticon-gear mr-2"></i> Account Settings</span> </a>
+              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i
+                    class="flaticon-user mr-2"></i> Profile</span> </a>
+              <a class="media fs-14 p-2" href="pages/apps/email.html"> <span><i class="flaticon-mail mr-2"></i>
+                  Inbox</span> <span class="badge badge-pill badge-info">3</span> </a>
+              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i
+                    class="flaticon-gear mr-2"></i> Account Settings</span> </a>
             </li>
             <li class="dropdown-divider"></li>
             <li class="dropdown-menu-footer">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/lock-screen.html"> <span><i class="flaticon-security mr-2"></i> Lock</span> </a>
+              <a class="media fs-14 p-2" href="pages/prebuilt-pages/lock-screen.html"> <span><i
+                    class="flaticon-security mr-2"></i> Lock</span> </a>
             </li>
             <li class="dropdown-menu-footer">
-                    <a class="media fs-14 p-2" href="../../pages/prebuilt-pages/default-login.html"> <span><i
+              <a class="media fs-14 p-2" href="../../pages/prebuilt-pages/default-login.html"> <span><i
                     class="flaticon-shut-down mr-2"></i> Logout</span> </a>
             </li>
           </ul>
@@ -462,183 +486,190 @@
     </nav>
 
 
-<!-- FORMULARIO DE INCIDENTE GRUPAL CON FORMULARIO INDIVIDUAL EN LA MISMA PÁGINA -->
-<link rel="stylesheet" href="../../assets/css/incidente-formulario.css">
+    <!-- FORMULARIO DE INCIDENTE GRUPAL CON FORMULARIO INDIVIDUAL EN LA MISMA PÁGINA -->
+    <link rel="stylesheet" href="../../assets/css/incidente-formulario.css">
 
-<div class="container py-5">
-  <div class="mx-auto" style="max-width: 1000px;">
+    <div class="container py-5">
+      <div class="mx-auto" style="max-width: 1000px;">
 
-    <!-- Cabecera y tipo de formulario -->
-    <div class="card shadow mb-4 rounded-4 border-0">
-      <div class="card-body">
-        <div class="d-flex align-items-center mb-3">
-          <div class="bg-warning text-white rounded-circle d-flex justify-content-center align-items-center me-3" style="width: 50px; height: 50px;">
-            <i class="fas fa-clipboard-list fa-lg"></i>
-          </div>
-          <div>
-            <h3 class="mb-0 text-primary fw-bold">Registro de Incidente</h3>
-            <small class="text-muted">Formulario exclusivo para docentes</small>
+        <!-- Cabecera y tipo de formulario -->
+        <div class="card shadow mb-4 rounded-4 border-0">
+          <div class="card-body">
+            <div class="d-flex align-items-center mb-3">
+              <div class="bg-warning text-white rounded-circle d-flex justify-content-center align-items-center me-3"
+                style="width: 50px; height: 50px;">
+                <i class="fas fa-clipboard-list fa-lg"></i>
+              </div>
+              <div>
+                <h3 class="mb-0 text-primary fw-bold">Registro de Incidente</h3>
+                <small class="text-muted">Formulario exclusivo para docentes</small>
+              </div>
+            </div>
+
+            <div class="form-group mb-0">
+              <label class="form-label fw-bold text-primary fs-6 d-flex align-items-center">
+                <i class="fas fa-toggle-on me-2 text-primary"></i> Tipo de registro:
+              </label>
+              <div class="btn-group mt-2" role="group" aria-label="Tipo de registro">
+                <input type="radio" class="btn-check" name="modo" id="modoIndividual" value="individual"
+                  autocomplete="off" checked>
+                <label class="btn btn-outline-primary rounded-pill px-4" for="modoIndividual">
+                  <i class="fas fa-user me-1"></i> Individual
+                </label>
+
+                <input type="radio" class="btn-check" name="modo" id="modoGrupal" value="grupal" autocomplete="off">
+                <label class="btn btn-outline-primary rounded-pill px-4" for="modoGrupal">
+                  <i class="fas fa-users me-1"></i> Grupal
+                </label>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="form-group mb-0">
-          <label class="form-label fw-bold text-primary fs-6 d-flex align-items-center">
-            <i class="fas fa-toggle-on me-2 text-primary"></i> Tipo de registro:
-          </label>
-          <div class="btn-group mt-2" role="group" aria-label="Tipo de registro">
-            <input type="radio" class="btn-check" name="modo" id="modoIndividual" value="individual" autocomplete="off" checked>
-            <label class="btn btn-outline-primary rounded-pill px-4" for="modoIndividual">
-              <i class="fas fa-user me-1"></i> Individual
-            </label>
+        <!-- FORMULARIO INDIVIDUAL -->
+        <div id="contenedorIndividual" class="card shadow rounded-4 border-0 mb-4">
+          <div class="card-body">
+            <form id="formIncidenteIndividual" class="row g-4">
+              <input type="hidden" name="alcance" value="particular" />
+              <input type="hidden" name="materia_id" id="materia_id" /> <!-- ← NUEVO -->
 
-            <input type="radio" class="btn-check" name="modo" id="modoGrupal" value="grupal" autocomplete="off">
-            <label class="btn btn-outline-primary rounded-pill px-4" for="modoGrupal">
-              <i class="fas fa-users me-1"></i> Grupal
-            </label>
+              <div class="col-md-6">
+                <label for="estudiante" class="form-label fw-semibold text-primary">
+                  <i class="fas fa-user-graduate me-1 text-secondary"></i> Estudiante:
+                </label>
+                <div class="custom-select-wrapper">
+                  <select id="estudiante" name="estudiante_id" class="custom-select-style small-select" required></select>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="tipoIndividual" class="form-label fw-semibold text-primary">
+                  <i class="fas fa-tags me-1 text-warning"></i> Tipo de incidente:
+                </label>
+                <div class="custom-select-wrapper">
+                  <select id="tipoIndividual" name="tipo" class="custom-select-style small-select" required>
+                    <option value="">Seleccione tipo</option>
+                    <option value="conducta">Conducta</option>
+                    <option value="tarea">Tarea</option>
+                    <option value="asistencia">Asistencia</option>
+                    <option value="aviso">Aviso</option>
+                    <option value="otro">Otro</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="descripcionIndividual" class="form-label fw-semibold">
+                  <i class="fas fa-align-left me-1 text-info"></i> Descripción:
+                </label>
+                <textarea id="descripcionIndividual" name="descripcion" class="form-control" rows="3" required></textarea>
+              </div>
+
+              <div class="col-md-6">
+                <label for="fechaIndividual" class="form-label fw-semibold">
+                  <i class="fas fa-calendar-alt me-1 text-success"></i> Fecha del incidente:
+                </label>
+                <input type="date" id="fechaIndividual" name="fecha" class="form-control" required>
+              </div>
+
+              <div class="col-12 text-end">
+                <button type="submit" class="btn btn-warning fw-bold shadow px-4 py-2">
+                  <i class="fas fa-paper-plane me-2"></i> Enviar Incidente
+                </button>
+              </div>
+
+              <div id="mensajeIndividual" class="mt-3"></div>
+            </form>
+          </div>
+        </div>
+
+        <!-- FORMULARIO GRUPAL -->
+        <div id="contenedorGrupal" class="card shadow rounded-4 border-0 d-none">
+          <div class="card-body">
+            <form id="formIncidenteGrupal" class="row g-4">
+            <input type="hidden" name="alcance" value="general" />
+              <div class="col-md-6">
+                <label for="selectClaseGrupal" class="form-label fw-semibold text-primary">
+                  <i class="fas fa-school me-1 text-info"></i> Clase:
+                </label>
+                <div class="custom-select-wrapper">
+                  <select id="selectClaseGrupal" class="form-select custom-select-style small-select" required></select>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="selectMateriaGrupal" class="form-label fw-semibold text-primary">
+                  <i class="fas fa-book me-1 text-info"></i> Materia:
+                </label>
+                <div class="custom-select-wrapper">
+                  <select id="selectMateriaGrupal" class="form-select custom-select-style small-select"
+                    required></select>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="tipoGrupal" class="form-label fw-semibold text-primary">
+                  <i class="fas fa-tags me-1 text-warning"></i> Tipo de incidente:
+                </label>
+                <div class="custom-select-wrapper">
+                  <select id="tipoGrupal" name="tipo" class="form-select custom-select-style small-select" required>
+                    <option value="">Seleccione tipo</option>
+                    <option value="conducta">Conducta</option>
+                    <option value="tarea">Tarea</option>
+                    <option value="asistencia">Asistencia</option>
+                    <option value="aviso">Aviso</option>
+                    <option value="otro">Otro</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="descripcionGrupal" class="form-label fw-semibold">
+                  <i class="fas fa-align-left me-1 text-info"></i> Descripción:
+                </label>
+                <textarea id="descripcionGrupal" name="descripcion" class="form-control" rows="3" required></textarea>
+              </div>
+
+              <div class="col-md-6">
+                <label for="fechaGrupal" class="form-label fw-semibold">
+                  <i class="fas fa-calendar-alt me-1 text-success"></i> Fecha del incidente:
+                </label>
+                <input type="date" id="fechaGrupal" name="fecha" class="form-control" required>
+              </div>
+
+              <div class="col-12 text-end">
+                <button type="submit" class="btn btn-warning fw-bold shadow px-4 py-2">
+                  <i class="fas fa-paper-plane me-2"></i> Enviar Incidente
+                </button>
+              </div>
+
+              <div id="mensajeGrupal" class="mt-3"></div>
+            </form>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- FORMULARIO INDIVIDUAL -->
-    <div id="contenedorIndividual" class="card shadow rounded-4 border-0 mb-4">
-      <div class="card-body">
-        <form id="formIncidenteIndividual" class="row g-4">
-        <div class="col-md-6">
-  <label for="estudiante" class="form-label fw-semibold text-primary">
-    <i class="fas fa-user-graduate me-1 text-secondary"></i> Estudiante:
-  </label>
-  <div class="custom-select-wrapper">
-    <select id="estudiante" name="estudiante_id" class="custom-select-style small-select" required></select>
-  </div>
-</div>
 
-<div class="col-md-6">
-  <label for="tipoIndividual" class="form-label fw-semibold text-primary">
-    <i class="fas fa-tags me-1 text-warning"></i> Tipo de incidente:
-  </label>
-  <div class="custom-select-wrapper">
-    <select id="tipoIndividual" name="tipo" class="custom-select-style small-select" required>
-      <option value="">Seleccione tipo</option>
-      <option value="conducta">Conducta</option>
-      <option value="tarea">Tarea</option>
-      <option value="asistencia">Asistencia</option>
-      <option value="aviso">Aviso</option>
-      <option value="otro">Otro</option>
-    </select>
-  </div>
-</div>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const modoRadios = document.querySelectorAll('input[name="modo"]');
+        modoRadios.forEach(radio => {
+          radio.addEventListener('change', () => {
+            const individual = document.getElementById('contenedorIndividual');
+            const grupal = document.getElementById('contenedorGrupal');
 
-          <div class="col-12">
-            <label for="descripcionIndividual" class="form-label fw-semibold">
-              <i class="fas fa-align-left me-1 text-info"></i> Descripción:
-            </label>
-            <textarea id="descripcionIndividual" name="descripcion" class="form-control" rows="3" required></textarea>
-          </div>
-
-          <div class="col-md-6">
-            <label for="fechaIndividual" class="form-label fw-semibold">
-              <i class="fas fa-calendar-alt me-1 text-success"></i> Fecha del incidente:
-            </label>
-            <input type="date" id="fechaIndividual" name="fecha" class="form-control" required>
-          </div>
-
-          <div class="col-12 text-end">
-            <button type="submit" class="btn btn-warning fw-bold shadow px-4 py-2">
-              <i class="fas fa-paper-plane me-2"></i> Enviar Incidente
-            </button>
-          </div>
-
-          <div id="mensajeIndividual" class="mt-3"></div>
-        </form>
-      </div>
-    </div>
-
-    <!-- FORMULARIO GRUPAL -->
-    <div id="contenedorGrupal" class="card shadow rounded-4 border-0 d-none">
-      <div class="card-body">
-        <form id="formIncidenteGrupal" class="row g-4">
-          <div class="col-md-6">
-  <label for="selectClaseGrupal" class="form-label fw-semibold text-primary">
-    <i class="fas fa-school me-1 text-info"></i> Clase:
-  </label>
-  <div class="custom-select-wrapper">
-    <select id="selectClaseGrupal" class="form-select custom-select-style small-select" required></select>
-  </div>
-</div>
-
-<div class="col-md-6">
-  <label for="selectMateriaGrupal" class="form-label fw-semibold text-primary">
-    <i class="fas fa-book me-1 text-info"></i> Materia:
-  </label>
-  <div class="custom-select-wrapper">
-    <select id="selectMateriaGrupal" class="form-select custom-select-style small-select" required></select>
-  </div>
-</div>
-
-<div class="col-md-6">
-  <label for="tipoGrupal" class="form-label fw-semibold text-primary">
-    <i class="fas fa-tags me-1 text-warning"></i> Tipo de incidente:
-  </label>
-  <div class="custom-select-wrapper">
-    <select id="tipoGrupal" name="tipo" class="form-select custom-select-style small-select" required>
-      <option value="">Seleccione tipo</option>
-      <option value="conducta">Conducta</option>
-      <option value="tarea">Tarea</option>
-      <option value="asistencia">Asistencia</option>
-      <option value="aviso">Aviso</option>
-      <option value="otro">Otro</option>
-    </select>
-  </div>
-</div>
-
-          <div class="col-12">
-            <label for="descripcionGrupal" class="form-label fw-semibold">
-              <i class="fas fa-align-left me-1 text-info"></i> Descripción:
-            </label>
-            <textarea id="descripcionGrupal" name="descripcion" class="form-control" rows="3" required></textarea>
-          </div>
-
-          <div class="col-md-6">
-            <label for="fechaGrupal" class="form-label fw-semibold">
-              <i class="fas fa-calendar-alt me-1 text-success"></i> Fecha del incidente:
-            </label>
-            <input type="date" id="fechaGrupal" name="fecha" class="form-control" required>
-          </div>
-
-          <div class="col-12 text-end">
-            <button type="submit" class="btn btn-warning fw-bold shadow px-4 py-2">
-              <i class="fas fa-paper-plane me-2"></i> Enviar Incidente
-            </button>
-          </div>
-
-          <div id="mensajeGrupal" class="mt-3"></div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const modoRadios = document.querySelectorAll('input[name="modo"]');
-    modoRadios.forEach(radio => {
-      radio.addEventListener('change', () => {
-        const individual = document.getElementById('contenedorIndividual');
-        const grupal = document.getElementById('contenedorGrupal');
-
-        if (radio.value === 'individual') {
-          individual.classList.remove('d-none');
-          grupal.classList.add('d-none');
-        } else {
-          individual.classList.add('d-none');
-          grupal.classList.remove('d-none');
-        }
+            if (radio.value === 'individual') {
+              individual.classList.remove('d-none');
+              grupal.classList.add('d-none');
+            } else {
+              individual.classList.add('d-none');
+              grupal.classList.remove('d-none');
+            }
+          });
+        });
       });
-    });
-  });
-</script>
+    </script>
 
   </main>
 
@@ -646,37 +677,43 @@
   <aside id="ms-quick-bar" class="ms-quick-bar fixed ms-d-block-lg">
 
     <ul class="nav nav-tabs ms-quick-bar-list" role="tablist">
-      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left" title="Launch Chat" data-title="Chat">
+      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left"
+        title="Launch Chat" data-title="Chat">
         <a href="#qa-chat" aria-controls="qa-chat" role="tab" data-toggle="tab">
           <i class="flaticon-chat"></i>
           <span class="ms-quick-bar-label">Chat</span>
         </a>
       </li>
-      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left" title="Launch Email" data-title="Email">
+      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left"
+        title="Launch Email" data-title="Email">
         <a href="#qa-email" aria-controls="qa-email" role="tab" data-toggle="tab">
           <i class="flaticon-mail"></i>
           <span class="ms-quick-bar-label">Email</span>
         </a>
       </li>
-      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left" title="Launch To-do-list" data-title="To-do-list">
+      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left"
+        title="Launch To-do-list" data-title="To-do-list">
         <a href="#qa-toDo" aria-controls="qa-toDo" role="tab" data-toggle="tab">
           <i class="flaticon-list"></i>
           <span class="ms-quick-bar-label">To-do</span>
         </a>
       </li>
-      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left" title="Launch Reminders" data-title="Reminders">
+      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left"
+        title="Launch Reminders" data-title="Reminders">
         <a href="#qa-reminder" aria-controls="qa-reminder" role="tab" data-toggle="tab">
           <i class="flaticon-bell"></i>
           <span class="ms-quick-bar-label">Reminder</span>
         </a>
       </li>
-      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left" title="Launch Notes" data-title="Notes">
+      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left"
+        title="Launch Notes" data-title="Notes">
         <a href="#qa-notes" aria-controls="qa-notes" role="tab" data-toggle="tab">
           <i class="flaticon-pencil"></i>
           <span class="ms-quick-bar-label">Notes</span>
         </a>
       </li>
-      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left" title="Invite Members" data-title="Invite Members">
+      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left"
+        title="Invite Members" data-title="Invite Members">
         <a href="#qa-invite" aria-controls="qa-invite" role="tab" data-toggle="tab">
           <i class="flaticon-share-1"></i>
           <span class="ms-quick-bar-label">Invite</span>
@@ -699,7 +736,8 @@
 
       <div class="ms-quick-bar-header clearfix">
         <h5 class="ms-quick-bar-title float-left">Title</h5>
-        <button type="button" class="close ms-toggler" data-target="#ms-quick-bar" data-toggle="hideQuickBar" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close ms-toggler" data-target="#ms-quick-bar" data-toggle="hideQuickBar"
+          aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
 
       <div class="ms-quick-bar-body tab-content">
@@ -714,7 +752,8 @@
                 </div>
                 <div class="media-body ms-chat-user-info mt-1">
                   <h6>Anny Farisha</h6>
-                  <a href="#" class="text-disabled has-chevron fs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a href="#" class="text-disabled has-chevron fs-12" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
                     Available
                   </a>
                   <ul class="dropdown-menu">
@@ -740,7 +779,8 @@
               </div>
               <form class="ms-form my-3" method="post">
                 <div class="ms-form-group my-0 mb-0 has-icon fs-14">
-                  <input type="search" class="ms-form-input w-100" name="search" placeholder="Search for People and Groups" value="">
+                  <input type="search" class="ms-form-input w-100" name="search"
+                    placeholder="Search for People and Groups" value="">
                   <i class="flaticon-search text-disabled"></i>
                 </div>
               </form>
@@ -748,9 +788,12 @@
 
             <div class="ms-chat-body">
               <ul class="nav nav-tabs tabs-bordered d-flex nav-justified px-3" role="tablist">
-                <li role="presentation" class="fs-12"><a href="#chats" aria-controls="chats" class="active show" role="tab" data-toggle="tab"> Chats </a></li>
-                <li role="presentation" class="fs-12"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab"> Groups </a></li>
-                <li role="presentation" class="fs-12"><a href="#contacts" aria-controls="contacts" role="tab" data-toggle="tab"> Contacts </a></li>
+                <li role="presentation" class="fs-12"><a href="#chats" aria-controls="chats" class="active show"
+                    role="tab" data-toggle="tab"> Chats </a></li>
+                <li role="presentation" class="fs-12"><a href="#groups" aria-controls="groups" role="tab"
+                    data-toggle="tab"> Groups </a></li>
+                <li role="presentation" class="fs-12"><a href="#contacts" aria-controls="contacts" role="tab"
+                    data-toggle="tab"> Contacts </a></li>
               </ul>
 
               <div class="tab-content">
@@ -927,7 +970,8 @@
           <div class="ms-email-container">
 
             <div class="ms-qa-options">
-              <a href="#" class="btn btn-primary w-100 mt-0 has-icon"> <i class="flaticon-pencil"></i> Compose Email </a>
+              <a href="#" class="btn btn-primary w-100 mt-0 has-icon"> <i class="flaticon-pencil"></i> Compose Email
+              </a>
             </div>
 
             <ul class="ms-scrollable ms-quickbar-container">
@@ -937,8 +981,10 @@
                 </div>
                 <div class="media-body ms-email-details">
                   <span class="ms-email-sender">James Zathila</span>
-                  <h6 class="ms-email-subject">[WordPress] New Comment</h6> <span class="ms-email-time">2 Hours ago</span>
-                  <p class="ms-email-msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
+                  <h6 class="ms-email-subject">[WordPress] New Comment</h6> <span class="ms-email-time">2 Hours
+                    ago</span>
+                  <p class="ms-email-msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis.
+                    Nunc</p>
                 </div>
               </li>
               <li class="p-3  media ms-email clearfix">
@@ -947,8 +993,10 @@
                 </div>
                 <div class="media-body ms-email-details">
                   <span class="ms-email-sender">John Doe</span>
-                  <h6 class="ms-email-subject">[WordPress] New Comment</h6> <span class="ms-email-time">8 Hours ago</span>
-                  <p class="ms-email-msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
+                  <h6 class="ms-email-subject">[WordPress] New Comment</h6> <span class="ms-email-time">8 Hours
+                    ago</span>
+                  <p class="ms-email-msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis.
+                    Nunc</p>
                 </div>
               </li>
               <li class="p-3  media ms-email clearfix">
@@ -958,7 +1006,8 @@
                 <div class="media-body ms-email-details">
                   <span class="ms-email-sender">Heather Brown</span>
                   <h6 class="ms-email-subject">[WordPress] New Comment</h6> <span class="ms-email-time">1 Day ago</span>
-                  <p class="ms-email-msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
+                  <p class="ms-email-msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis.
+                    Nunc</p>
                 </div>
               </li>
             </ul>
@@ -971,8 +1020,10 @@
 
             <form class="ms-add-task-block">
               <div class="form-group mx-3 mt-0  fs-14 clearfix">
-                <input type="text" class="form-control fs-14 float-left" id="task-block" name="todo-block" placeholder="Add Task Block" value="">
-                <button type="submit" class="ms-btn-icon bg-primary float-right"><i class="material-icons text-disabled">add</i></button>
+                <input type="text" class="form-control fs-14 float-left" id="task-block" name="todo-block"
+                  placeholder="Add Task Block" value="">
+                <button type="submit" class="ms-btn-icon bg-primary float-right"><i
+                    class="material-icons text-disabled">add</i></button>
               </div>
             </form>
 
@@ -981,7 +1032,9 @@
 
                 <div class="ms-card-header clearfix">
                   <h6 class="ms-card-title">Task Block Title</h6>
-                  <button data-toggle="tooltip" data-placement="left" title="Add a Task to this block" class="ms-add-task-to-block ms-btn-icon float-right"> <i class="material-icons text-disabled">add</i> </button>
+                  <button data-toggle="tooltip" data-placement="left" title="Add a Task to this block"
+                    class="ms-add-task-to-block ms-btn-icon float-right"> <i
+                      class="material-icons text-disabled">add</i> </button>
                 </div>
 
                 <div class="ms-card-body">
@@ -1007,7 +1060,8 @@
 
                 <div class="ms-card-footer clearfix">
                   <a href="#" class="text-disabled mr-2"> <i class="flaticon-archive"> </i> Archive </a>
-                  <a href="#" class="text-disabled  ms-delete-trigger float-right"> <i class="flaticon-trash"> </i> Delete </a>
+                  <a href="#" class="text-disabled  ms-delete-trigger float-right"> <i class="flaticon-trash"> </i>
+                    Delete </a>
                 </div>
 
               </li>
@@ -1020,7 +1074,8 @@
           <div class="ms-quickbar-container ms-reminders">
 
             <ul class="ms-qa-options">
-              <li> <a href="#" data-toggle="modal" data-target="#reminder-modal"> <i class="flaticon-bell"></i> New Reminder </a> </li>
+              <li> <a href="#" data-toggle="modal" data-target="#reminder-modal"> <i class="flaticon-bell"></i> New
+                  Reminder </a> </li>
             </ul>
 
             <div class="ms-quickbar-container ms-scrollable">
@@ -1028,12 +1083,14 @@
               <div class="ms-card ms-qa-card ms-deletable">
                 <div class="ms-card-body">
                   <p> Developer Meeting in Block B </p>
-                  <span class="text-disabled fs-12"><i class="material-icons fs-14">access_time</i> Today - 3:45 pm</span>
+                  <span class="text-disabled fs-12"><i class="material-icons fs-14">access_time</i> Today - 3:45
+                    pm</span>
                 </div>
                 <div class="ms-card-footer clearfix">
 
                   <div class="ms-note-editor float-right">
-                    <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#reminder-modal"> <i class="flaticon-pencil"> </i> Edit </a>
+                    <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#reminder-modal"> <i
+                        class="flaticon-pencil"> </i> Edit </a>
                     <a href="#" class="text-disabled  ms-delete-trigger"> <i class="flaticon-trash"> </i> Delete </a>
                   </div>
 
@@ -1042,12 +1099,14 @@
               <div class="ms-card ms-qa-card ms-deletable">
                 <div class="ms-card-body">
                   <p> Start adding change log to version 2 </p>
-                  <span class="text-disabled fs-12"><i class="material-icons fs-14">access_time</i> Tomorrow - 12:00 pm</span>
+                  <span class="text-disabled fs-12"><i class="material-icons fs-14">access_time</i> Tomorrow - 12:00
+                    pm</span>
                 </div>
                 <div class="ms-card-footer clearfix">
 
                   <div class="ms-note-editor float-right">
-                    <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#reminder-modal"> <i class="flaticon-pencil"> </i> Edit </a>
+                    <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#reminder-modal"> <i
+                        class="flaticon-pencil"> </i> Edit </a>
                     <a href="#" class="text-disabled  ms-delete-trigger"> <i class="flaticon-trash"> </i> Delete </a>
                   </div>
 
@@ -1062,7 +1121,8 @@
         <div role="tabpanel" class="tab-pane" id="qa-notes">
 
           <ul class="ms-qa-options">
-            <li> <a href="#" data-toggle="modal" data-target="#notes-modal"> <i class="flaticon-sticky-note"></i> New Note </a> </li>
+            <li> <a href="#" data-toggle="modal" data-target="#notes-modal"> <i class="flaticon-sticky-note"></i> New
+                Note </a> </li>
             <li> <a href="#"> <i class="flaticon-excel"></i> Export to Excel </a> </li>
           </ul>
 
@@ -1074,7 +1134,8 @@
               </div>
               <div class="ms-card-body">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vulputate urna in faucibus venenatis. Etiam at dapibus neque,
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vulputate urna in faucibus venenatis.
+                  Etiam at dapibus neque,
                   vel varius metus. Pellentesque eget orci malesuada, venenatis magna et
                 </p>
                 <ul class="ms-note-members clearfix mb-0">
@@ -1122,7 +1183,8 @@
                   </ul>
                 </div>
                 <div class="ms-note-editor float-right">
-                  <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#notes-modal"> <i class="flaticon-pencil"> </i> Edit </a>
+                  <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#notes-modal"> <i
+                      class="flaticon-pencil"> </i> Edit </a>
                   <a href="#" class="text-disabled  ms-delete-trigger"> <i class="flaticon-trash"> </i> Delete </a>
                 </div>
 
@@ -1135,7 +1197,8 @@
               </div>
               <div class="ms-card-body">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vulputate urna in faucibus venenatis. Etiam at dapibus neque,
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vulputate urna in faucibus venenatis.
+                  Etiam at dapibus neque,
                   vel varius metus. Pellentesque eget orci malesuada, venenatis magna et
                 </p>
                 <ul class="ms-note-members clearfix mb-0">
@@ -1182,7 +1245,8 @@
                   </ul>
                 </div>
                 <div class="ms-note-editor float-right">
-                  <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#notes-modal"> <i class="flaticon-pencil"> </i> Edit </a>
+                  <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#notes-modal"> <i
+                      class="flaticon-pencil"> </i> Edit </a>
                   <a href="#" class="text-disabled  ms-delete-trigger"> <i class="flaticon-trash"> </i> Delete </a>
                 </div>
 
@@ -1225,51 +1289,52 @@
 
         <div class="modal-header bg-secondary">
           <h5 class="modal-title has-icon text-white"> New Reminder</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
         </div>
 
         <form>
 
-        <div class="modal-body">
+          <div class="modal-body">
 
-          <div class="ms-form-group">
-            <label>Remind me about</label>
-            <textarea class="form-control" name="reminder"></textarea>
-          </div>
+            <div class="ms-form-group">
+              <label>Remind me about</label>
+              <textarea class="form-control" name="reminder"></textarea>
+            </div>
 
-          <div class="ms-form-group">
-            <span class="ms-option-name fs-14">Repeat Daily</span>
-            <label class="ms-switch float-right">
-              <input type="checkbox">
-              <span class="ms-switch-slider round"></span>
-            </label>
-          </div>
+            <div class="ms-form-group">
+              <span class="ms-option-name fs-14">Repeat Daily</span>
+              <label class="ms-switch float-right">
+                <input type="checkbox">
+                <span class="ms-switch-slider round"></span>
+              </label>
+            </div>
 
-          <div class="row">
-            <div class="col-md-6">
-              <div class="ms-form-group">
-                <input type="text" class="form-control datepicker" name="reminder-date" value="" />
+            <div class="row">
+              <div class="col-md-6">
+                <div class="ms-form-group">
+                  <input type="text" class="form-control datepicker" name="reminder-date" value="" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="ms-form-group">
+                  <select class="form-control" name="reminder-time">
+                    <option value="">12:00 pm</option>
+                    <option value="">1:00 pm</option>
+                    <option value="">2:00 pm</option>
+                    <option value="">3:00 pm</option>
+                    <option value="">4:00 pm</option>
+                  </select>
+                </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="ms-form-group">
-                <select class="form-control" name="reminder-time">
-                  <option value="">12:00 pm</option>
-                  <option value="">1:00 pm</option>
-                  <option value="">2:00 pm</option>
-                  <option value="">3:00 pm</option>
-                  <option value="">4:00 pm</option>
-                </select>
-              </div>
-            </div>
+
           </div>
 
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-secondary shadow-none" data-dismiss="modal">Add Reminder</button>
-        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary shadow-none" data-dismiss="modal">Add Reminder</button>
+          </div>
 
         </form>
 
@@ -1284,29 +1349,30 @@
 
         <div class="modal-header bg-secondary">
           <h5 class="modal-title has-icon text-white" id="NoteModal">New Note</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
         </div>
 
         <form>
 
-        <div class="modal-body">
+          <div class="modal-body">
 
-          <div class="ms-form-group">
-            <label>Note Title</label>
-            <input type="text" class="form-control" name="note-title" value="">
+            <div class="ms-form-group">
+              <label>Note Title</label>
+              <input type="text" class="form-control" name="note-title" value="">
+            </div>
+
+            <div class="ms-form-group">
+              <label>Note Description</label>
+              <textarea class="form-control" name="note-description"></textarea>
+            </div>
+
           </div>
 
-          <div class="ms-form-group">
-            <label>Note Description</label>
-            <textarea class="form-control" name="note-description"></textarea>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary shadow-none" data-dismiss="modal">Add Note</button>
           </div>
-
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-secondary shadow-none" data-dismiss="modal">Add Note</button>
-        </div>
 
         </form>
 
@@ -1327,7 +1393,7 @@
   <script src="../../assets/js/slick.min.js"> </script>
   <script src="../../assets/js/moment.js"> </script>
   <script src="../../assets/js/jquery.webticker.min.js"> </script>
-  
+
   <!-- Weeducate core JavaScript -->
   <script src="../../assets/js/framework.js"></script>
   <script src="../../assets/js/datatables.min.js"> </script>
@@ -1343,7 +1409,8 @@
   <!-- Importar CSV -->
   <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <form id="formImportarTutores" action="../php/importar_tutores.php" method="post" enctype="multipart/form-data" class="modal-content">
+      <form id="formImportarTutores" action="../php/importar_tutores.php" method="post" enctype="multipart/form-data"
+        class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="importModalLabel">Importar Tutores</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

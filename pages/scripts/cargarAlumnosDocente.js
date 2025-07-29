@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const opt = document.createElement('option');
         opt.value = e.estudiante_id;
         opt.textContent = `${e.estudiante_nombre} ${e.estudiante_apellido} - ${e.grado}°${e.grupo} - ${e.materia_nombre} (${e.ciclo || 'Sin ciclo'})`;
+
+        // ✅ Esto es lo que faltaba
+        opt.setAttribute('data-materia-id', e.materia_id);
+
         select.appendChild(opt);
       });
     })

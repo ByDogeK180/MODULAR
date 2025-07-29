@@ -9,19 +9,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $tipo = $_POST['tipo'] ?? null;
   $descripcion = trim($_POST['descripcion'] ?? '');
   $fecha = $_POST['fecha'] ?? null;
+  $alcance = 'general';
 
-  // Validación de datos
   if (!$clase_id || !$materia_id || !$tipo || !$descripcion || !$fecha) {
     echo json_encode(['status' => 'error', 'msg' => 'Faltan datos obligatorios']);
     exit;
   }
 
-  // Consulta corregida usando clase_asignacion
+  // Obtener estudiantes inscritos en esa clase y materia
   $stmt = $conexion->prepare("
     SELECT i.estudiante_id
     FROM inscripciones i
-    JOIN clase_asignacion ca ON i.clase_id = ca.clase_id
-    WHERE ca.clase_id = ? AND ca.materia_id = ?
+    JOIN clase_asignacion ca ON ca.clase_id = i.clase_id
+    WHERE i.clase_id = ? AND ca.materia_id = ?
   ");
   $stmt->bind_param('ii', $clase_id, $materia_id);
   $stmt->execute();
@@ -33,12 +33,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   $insert = $conexion->prepare("
-    INSERT INTO incidentes (estudiante_id, fecha, descripcion, tipo)
-    VALUES (?, ?, ?, ?)
+    INSERT INTO incidentes (estudiante_id, materia_id, fecha, descripcion, tipo, alcance)
+    VALUES (?, ?, ?, ?, ?, ?)
   ");
 
   while ($row = $resultado->fetch_assoc()) {
-    $insert->bind_param('isss', $row['estudiante_id'], $fecha, $descripcion, $tipo);
+    $estudiante_id = $row['estudiante_id'];
+    $insert->bind_param('iissss', $estudiante_id, $materia_id, $fecha, $descripcion, $tipo, $alcance);
     $insert->execute();
   }
 
@@ -46,4 +47,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
   echo json_encode(['status' => 'error', 'msg' => 'Método no permitido']);
 }
-?>

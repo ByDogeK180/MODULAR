@@ -117,9 +117,8 @@
           <span><i class="fa fa-users fs-16"></i>Mi hijo</span>
         </a>
         <ul id="student" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-          <li> <a href="pages/">Perfil</a></li>
+          <li> <a href="pages/perfil-hijo/perfil.php">Perfil</a></li>
           <li> <a href="pages/">Calificaciones</a></li>
-          <li> <a href="pages/">Materias del Curso</a></li>
         </ul>
       </li>
       <!-- /Student End--->

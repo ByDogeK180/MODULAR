@@ -42,10 +42,13 @@ document.addEventListener('DOMContentLoaded', () => {
       card.innerHTML = `
         <div class="card h-100 shadow-sm border-left-warning">
           <div class="card-body">
-            <h5 class="card-title text-danger">
-              <i class="fas fa-exclamation-triangle mr-2"></i> ${inc.tipo.toUpperCase()}
+            <h5 class="card-title text-danger d-flex justify-content-between">
+              <span><i class="fas fa-exclamation-triangle me-2"></i> ${inc.tipo.toUpperCase()}</span>
+              <span class="badge ${inc.alcance === 'general' ? 'bg-primary' : 'bg-info'} text-uppercase">${inc.alcance}</span>
             </h5>
-            <p class="card-text mb-1"><strong>Estudiante:</strong> ${inc.estudiante_nombre} ${inc.estudiante_apellido}</p>
+            ${inc.alcance === 'general' 
+              ? `<p class="card-text mb-1"><strong>Clase:</strong> ${inc.clase_nombre}</p>` 
+              : `<p class="card-text mb-1"><strong>Estudiante:</strong> ${inc.estudiante_nombre} ${inc.estudiante_apellido}</p>`}
             <p class="card-text mb-1"><strong>Materia:</strong> ${inc.materia_nombre}</p>
             <p class="card-text"><strong>Descripción:</strong> ${inc.descripcion}</p>
             <p class="card-text mb-1"><strong>Ciclo:</strong> ${inc.ciclo_nombre}</p>
