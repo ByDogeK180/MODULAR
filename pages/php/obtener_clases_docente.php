@@ -1,31 +1,32 @@
 <?php
-require_once 'conecta.php';
-session_start();
-
-$usuario_id = $_SESSION['usuario_id'] ?? null;
-if (!$usuario_id) {
-  echo json_encode([]);
-  exit;
-}
+require 'conecta.php';
+header('Content-Type: application/json');
 
 $con = conecta();
+if (!$con) {
+    echo json_encode([]);
+    exit;
+}
 
-$query = "
-  SELECT DISTINCT c.clase_id, c.grado, c.grupo
-  FROM clase_asignacion ca
-  JOIN clases c ON c.clase_id = ca.clase_id
-  JOIN docentes d ON d.docente_id = ca.docente_id
-  JOIN inscripciones i ON i.clase_id = c.clase_id
-  WHERE d.usuario_id = ?
+// Trae todas las clases con su ciclo escolar
+$sql = "
+  SELECT 
+    c.clase_id,
+    ce.nombre AS ciclo,
+    c.grado,
+    c.grupo,
+    c.ciclo_id
+  FROM clases c
+  JOIN ciclos_escolares ce ON ce.ciclo_id = c.ciclo_id
+  ORDER BY ce.fecha_inicio DESC, c.grado, c.grupo
 ";
-$stmt = $con->prepare($query);
-$stmt->bind_param('i', $usuario_id);
-$stmt->execute();
-$res = $stmt->get_result();
 
+$res = $con->query($sql);
 $clases = [];
-while ($row = $res->fetch_assoc()) {
-  $clases[] = $row;
+if ($res) {
+  while ($row = $res->fetch_assoc()) {
+    $clases[] = $row;
+  }
 }
 
 echo json_encode($clases);
