@@ -5,10 +5,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const selPeriodo = document.getElementById('selectPeriodo');
   const tbody = document.querySelector('#tablaCalificaciones tbody');
   const form = document.getElementById('formCalificaciones');
+  const headerFila = document.getElementById('headerFila');
 
-  let estudiantes = [];
+  let materias = [];
 
-  // Cargar clases
+  // Cargar clases disponibles
   fetch('../php/obtener_clases_docente.php')
     .then(res => res.json())
     .then(data => {
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-  // Al cambiar clase, cargar periodos del ciclo
+  // Al cambiar clase, cargar periodos
   selClase.addEventListener('change', () => {
     selPeriodo.innerHTML = '<option value="">Selecciona periodo</option>';
     const cicloId = selClase.selectedOptions[0]?.dataset?.ciclo;
@@ -39,23 +40,34 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   });
 
-  // Al seleccionar clase y periodo, cargar alumnos y calificaciones
+  // Al seleccionar clase y periodo, cargar materias, estudiantes y calificaciones
   selPeriodo.addEventListener('change', () => {
     const claseId = selClase.value;
     const periodoId = selPeriodo.value;
     if (!claseId || !periodoId) return;
 
-    // 🔁 CAMBIADO aquí el archivo a usar:
-    fetch(`../php/obtener_estudiantes_por_clase.php?clase_id=${claseId}`)
-      .then(r => r.json())
-      .then(data => {
-        estudiantes = data;
-        return fetch(`../php/obtener_calificaciones_docente.php?clase_id=${claseId}&periodo_id=${periodoId}`);
+    Promise.all([
+      fetch(`../php/obtener_materias_por_clase.php?clase_id=${claseId}`).then(r => r.json()),
+      fetch(`../php/obtener_estudiantes_por_clase.php?clase_id=${claseId}`).then(r => r.json()),
+      fetch(`../php/obtener_calificaciones_docente.php?clase_id=${claseId}&periodo_id=${periodoId}`).then(r => r.json())
+    ])
+      .then(([mats, estudiantes, califs]) => {
+        materias = mats;
+        renderEncabezado(mats);
+        renderTabla(estudiantes, califs);
       })
-      .then(r => r.json())
-      .then(calif => renderTabla(estudiantes, calif))
-      .catch(err => console.error('Error:', err));
+      .catch(err => console.error('Error al cargar:', err));
   });
+
+  function renderEncabezado(materias) {
+    headerFila.innerHTML = '<th>Estudiante</th>';
+    materias.forEach(m => {
+      const th = document.createElement('th');
+      th.textContent = m.nombre;
+      headerFila.appendChild(th);
+    });
+    headerFila.innerHTML += '<th>Promedio</th>';
+  }
 
   function renderTabla(estudiantes, calificaciones) {
     tbody.innerHTML = '';
@@ -65,63 +77,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const tdNombre = document.createElement('td');
       tdNombre.textContent = `${est.nombre} ${est.apellido}`;
+      tr.appendChild(tdNombre);
 
-      const tdCalif = document.createElement('td');
-      tdCalif.className = 'inputs-calif';
-      const califEst = calificaciones.find(c => c.estudiante_id == est.estudiante_id);
-      const valores = califEst?.detalles || [];
-      valores.forEach(valor => {
-        const input = crearInput(valor.valor);
-        tdCalif.appendChild(input);
+      let suma = 0;
+      let cuenta = 0;
+
+      materias.forEach(mat => {
+        const td = document.createElement('td');
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.className = 'form-control form-control-sm';
+        input.min = 0;
+        input.max = 10;
+        input.step = 0.1;
+        input.dataset.materiaId = mat.materia_id;
+
+        const valor = calificaciones.find(c =>
+          c.estudiante_id == est.estudiante_id && c.materia_id == mat.materia_id)?.valor;
+
+        if (valor !== undefined) {
+          input.value = valor;
+          suma += parseFloat(valor);
+          cuenta++;
+        }
+
+        input.addEventListener('input', () => {
+          const rowInputs = tr.querySelectorAll('input');
+          const valores = [...rowInputs].map(i => parseFloat(i.value)).filter(v => !isNaN(v));
+          const promedio = valores.reduce((a, b) => a + b, 0) / valores.length;
+          tr.querySelector('.promedio').textContent = isNaN(promedio)
+            ? '-'
+            : (Number.isInteger(promedio) ? promedio : promedio.toFixed(1));
+        });
+
+        td.appendChild(input);
+        tr.appendChild(td);
       });
-      if (valores.length === 0) {
-        tdCalif.appendChild(crearInput());
-      }
 
       const tdProm = document.createElement('td');
       tdProm.className = 'promedio';
-      tdProm.textContent = calcularPromedio(tdCalif);
+      const promedioFinal = suma / cuenta;
+      tdProm.textContent = cuenta
+        ? Number.isInteger(promedioFinal)
+          ? promedioFinal
+          : promedioFinal.toFixed(1)
+        : '-';
+      tr.appendChild(tdProm);
 
-      const tdBtn = document.createElement('td');
-      const btn = document.createElement('button');
-      btn.className = 'btn btn-sm btn-outline-success';
-      btn.type = 'button';
-      btn.innerHTML = '<i class="fas fa-plus"></i>';
-      btn.addEventListener('click', () => {
-        tdCalif.appendChild(crearInput());
-        tdProm.textContent = calcularPromedio(tdCalif);
-      });
-      tdBtn.appendChild(btn);
-
-      tr.append(tdNombre, tdCalif, tdProm, tdBtn);
       tbody.appendChild(tr);
     });
-  }
-
-  function crearInput(valor = '') {
-    const input = document.createElement('input');
-    input.type = 'number';
-    input.min = 0;
-    input.max = 10;
-    input.step = 0.1;
-    input.value = valor;
-    input.className = 'form-control form-control-sm d-inline-block';
-    input.style.width = '60px';
-    input.addEventListener('input', () => {
-      const tr = input.closest('tr');
-      const tdProm = tr.querySelector('.promedio');
-      const cont = tr.querySelector('.inputs-calif');
-      tdProm.textContent = calcularPromedio(cont);
-    });
-    return input;
-  }
-
-  function calcularPromedio(container) {
-    const inputs = container.querySelectorAll('input');
-    const valores = [...inputs].map(i => parseFloat(i.value)).filter(v => !isNaN(v));
-    if (valores.length === 0) return '-';
-    const suma = valores.reduce((a, b) => a + b, 0);
-    return (suma / valores.length).toFixed(2);
   }
 
   form.addEventListener('submit', (e) => {
@@ -133,10 +137,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const payload = [];
     tbody.querySelectorAll('tr').forEach(tr => {
       const estudianteId = tr.dataset.estudianteId;
-      const valores = [...tr.querySelectorAll('input')]
-        .map(i => parseFloat(i.value))
-        .filter(v => !isNaN(v));
-      payload.push({ estudiante_id: estudianteId, valores });
+      const calificaciones = [];
+
+      tr.querySelectorAll('input').forEach(input => {
+        const materiaId = input.dataset.materiaId;
+        const valor = parseFloat(input.value);
+        if (!isNaN(valor)) {
+          calificaciones.push({ materia_id: materiaId, valor });
+        }
+      });
+
+      payload.push({ estudiante_id: estudianteId, calificaciones });
     });
 
     fetch('../php/guardar_calificacion_docente.php', {
@@ -146,9 +157,12 @@ document.addEventListener('DOMContentLoaded', () => {
     })
       .then(r => r.json())
       .then(resp => {
-        if (resp.success) alert('Calificaciones guardadas');
-        else alert('Error al guardar');
+        if (resp.success) alert('Calificaciones guardadas correctamente.');
+        else alert('Error al guardar calificaciones.');
       })
-      .catch(err => console.error('Error al guardar:', err));
+      .catch(err => {
+        console.error('Error al guardar:', err);
+        alert('Error al guardar calificaciones.');
+      });
   });
 });

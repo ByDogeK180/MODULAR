@@ -1,49 +1,32 @@
 <?php
-// File: obtener_calificaciones_docente.php
-require 'conecta.php';
-header('Content-Type: application/json');
-
+require_once 'conecta.php';
 $con = conecta();
-if (!$con) {
-  echo json_encode([]);
-  exit;
-}
 
-$clase_id = isset($_GET['clase_id']) ? intval($_GET['clase_id']) : 0;
-$periodo_id = isset($_GET['periodo_id']) ? intval($_GET['periodo_id']) : 0;
-if ($clase_id <= 0 || $periodo_id <= 0) {
-  echo json_encode([]);
-  exit;
-}
+$clase_id = $_GET['clase_id'] ?? 0;
+$periodo_id = $_GET['periodo_id'] ?? 0;
 
-$query = "
-  SELECT c.calificacion_id, c.estudiante_id, d.numero, d.valor
-  FROM calificaciones c
-  LEFT JOIN calificaciones_detalle d ON d.calificacion_id = c.calificacion_id
-  WHERE c.clase_id = ? AND c.periodo_id = ?
-  ORDER BY c.estudiante_id, d.numero
+$sql = "
+SELECT 
+  c.estudiante_id,
+  d.numero AS materia_id,
+  d.valor
+FROM calificaciones c
+JOIN calificaciones_detalle d ON d.calificacion_id = c.calificacion_id
+WHERE c.clase_id = ? AND c.periodo_id = ?
 ";
 
-$stmt = $con->prepare($query);
-$stmt->bind_param('ii', $clase_id, $periodo_id);
+$stmt = $con->prepare($sql);
+$stmt->bind_param("ii", $clase_id, $periodo_id);
 $stmt->execute();
-$result = $stmt->get_result();
+$res = $stmt->get_result();
 
-$calificaciones = [];
-while ($row = $result->fetch_assoc()) {
-  $id = $row['estudiante_id'];
-  if (!isset($calificaciones[$id])) {
-    $calificaciones[$id] = [
-      'estudiante_id' => $id,
-      'detalles' => []
-    ];
-  }
-  if ($row['numero'] !== null) {
-    $calificaciones[$id]['detalles'][] = [
-      'numero' => $row['numero'],
-      'valor' => $row['valor']
-    ];
-  }
+$data = [];
+while ($row = $res->fetch_assoc()) {
+  $data[] = [
+    'estudiante_id' => $row['estudiante_id'],
+    'materia_id' => $row['materia_id'],
+    'valor' => $row['valor']
+  ];
 }
 
-echo json_encode(array_values($calificaciones));
+echo json_encode($data);
