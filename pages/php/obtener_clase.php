@@ -1,5 +1,5 @@
 <?php
-// File: obtener_clases.php
+// File: obtener_clase.php
 
 require 'conecta.php';
 header('Content-Type: application/json');
@@ -10,11 +10,12 @@ if (!$con) {
     exit;
 }
 
-// Ajusta el JOIN y el filtro de estados según tu esquema
+// Incluye ciclo_id en el SELECT
 $sql = "
   SELECT 
     cl.clase_id,
-    ce.nombre   AS ciclo,
+    cl.ciclo_id,
+    ce.nombre AS ciclo,
     cl.grado,
     cl.grupo
   FROM clases cl
@@ -25,9 +26,16 @@ $sql = "
 
 $res = $con->query($sql);
 $clases = [];
+
 if ($res) {
     while ($row = $res->fetch_assoc()) {
-        $clases[] = $row;
+        $clases[] = [
+            'clase_id'  => $row['clase_id'],
+            'ciclo_id'  => $row['ciclo_id'], // necesario para filtros por ciclo
+            'ciclo'     => $row['ciclo'],
+            'grado'     => $row['grado'],
+            'grupo'     => $row['grupo']
+        ];
     }
 }
 

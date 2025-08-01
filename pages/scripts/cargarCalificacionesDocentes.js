@@ -1,4 +1,4 @@
-// File: cargarCalificacionesDoc.js
+// File: cargarCalificacionesDocentes.js
 
 document.addEventListener('DOMContentLoaded', () => {
   const selClase = document.getElementById('selectClase');
@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let materias = [];
 
-  // Cargar clases disponibles
-  fetch('../php/obtener_clases_docente.php')
+  // Cargar clases disponibles para el docente logueado
+  fetch('../php/obtener_clases_docenteda.php')
     .then(res => res.json())
     .then(data => {
       data.forEach(c => {
@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
       payload.push({ estudiante_id: estudianteId, calificaciones });
     });
 
-    fetch('../php/guardar_calificacion_docente.php', {
+    fetch('../php/guardar_calificacion_docenteda.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ clase_id: claseId, periodo_id: periodoId, calificaciones: payload })

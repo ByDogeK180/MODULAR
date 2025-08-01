@@ -121,6 +121,7 @@
                <li> <a href="asistencias.php">Assistences</a> </li>
                  <li> <a href="scoredoc.php">About Students</a> </li>
                  <li> <a href="formulario_incidentes.php">Reminders</a> </li>
+                 <li> <a href="recordatorios_docente.php">All Reminders  </a> </li>
             </ul>
         </li>
         <!-- /Proessors End--->

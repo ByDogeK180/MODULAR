@@ -5,7 +5,6 @@ $(function() {
   const $tblIns   = $('#tablaInscritos');
   const $tblOut   = $('#tablaNoInscritos');
   const $titulo   = $('#tituloClase');
-  // Las flechas ya invierten su contenido con CSS .flip en el HTML
   const $btnDer   = $('#btnPasarADerecha');
   const $btnIzq   = $('#btnPasarAIzquierda');
   const $form     = $('#formInscripciones');
@@ -14,7 +13,7 @@ $(function() {
   let inscritos   = [];
   let noInscritos = [];
 
-  // ── 1️⃣ Carga todas las clases (array) o detalle si se pasa clase_id :contentReference[oaicite:0]{index=0}
+  // 1️⃣ Cargar clases con ciclo_id visible
   function cargarClases() {
     fetch('../php/obtener_clase.php')
       .then(r => r.json())
@@ -24,7 +23,7 @@ $(function() {
           .append('<option value="">Seleccione clase</option>');
         data.forEach(c => {
           $selClase.append(
-            `<option value="${c.clase_id}">
+            `<option value="${c.clase_id}" data-ciclo="${c.ciclo_id}">
                ${c.ciclo} • Grado ${c.grado}${c.grupo}
              </option>`
           );
@@ -33,37 +32,39 @@ $(function() {
       .catch(err => console.error('Error cargando clases:', err));
   }
 
-  // ── 2️⃣ Al cambiar de clase, trae estudiantes + inscripciones de clase + globales :contentReference[oaicite:1]{index=1} :contentReference[oaicite:2]{index=2}
+  // 2️⃣ Cargar estudiantes, inscripciones por clase y por ciclo
   function cargarDatos(claseId) {
     if (!claseId) {
       $titulo.text('');
-      inscritos   = [];
+      inscritos = [];
       noInscritos = [];
       renderTablas();
       return;
     }
+
+    const selectedOption = $selClase.find(':selected');
+    const cicloId = selectedOption.data('ciclo');
+
     Promise.all([
       fetch('../php/obtener_estudiantes.php').then(r => r.json()),
       fetch(`../php/obtener_inscripciones.php?clase_id=${claseId}`).then(r => r.json()),
-      fetch('../php/obtener_inscripciones.php').then(r => r.json())
+      fetch(`../php/obtener_inscripciones.php?ciclo_id=${cicloId}`).then(r => r.json())
     ])
-    .then(([allEst, insClase, insTodas]) => {
+    .then(([allEst, insClase, insCiclo]) => {
       todos = allEst.filter(e => e.activo == 1);
       const setClase = new Set(insClase.map(i => +i.estudiante_id));
-      const setTodas = new Set(insTodas.map(i => +i.estudiante_id));
+      const setCiclo = new Set(insCiclo.map(i => +i.estudiante_id));
 
-      // 🔹 Inscritos en la clase actual
       inscritos = todos.filter(e => setClase.has(+e.estudiante_id));
-      // 🔹 Los "no inscritos" serán sólo los que NO están en ninguna inscripción
-      noInscritos = todos.filter(e => !setTodas.has(+e.estudiante_id));
+      noInscritos = todos.filter(e => !setCiclo.has(+e.estudiante_id));
 
-      $titulo.text( $selClase.find(':selected').text() );
+      $titulo.text($selClase.find(':selected').text());
       renderTablas();
     })
     .catch(err => console.error('Error cargando datos:', err));
   }
 
-  // ── 3️⃣ Dibuja TK con checkbox en la primera columna ──
+  // 3️⃣ Pintar las dos tablas
   function renderTablas() {
     const $inB  = $tblIns.find('tbody').empty();
     const $outB = $tblOut.find('tbody').empty();
@@ -87,7 +88,7 @@ $(function() {
     });
   }
 
-  // ── 4️⃣ Botón “>”: mueve solo los checkeds de No inscritos → Inscritos ──
+  // 4️⃣ Pasar de no inscritos → inscritos
   $btnDer.on('click', () => {
     $tblOut.find('tbody .chkOut:checked').each(function() {
       const id = +$(this).data('id');
@@ -100,7 +101,7 @@ $(function() {
     renderTablas();
   });
 
-  // ── 5️⃣ Botón “<”: mueve solo los checkeds de Inscritos → No inscritos ──
+  // 5️⃣ Pasar de inscritos → no inscritos
   $btnIzq.on('click', () => {
     $tblIns.find('tbody .chkIns:checked').each(function() {
       const id = +$(this).data('id');
@@ -113,18 +114,22 @@ $(function() {
     renderTablas();
   });
 
-  // ── 6️⃣ Guardar cambios: envía solo los IDs de 'inscritos' actuales :contentReference[oaicite:3]{index=3}
+  // 6️⃣ Guardar inscripciones (enviando clase y ciclo)
   $form.on('submit', function(e) {
     e.preventDefault();
     const claseId = +$selClase.val();
-    if (!claseId) {
-      return alert('Seleccione una clase primero.');
+    const cicloId = +$selClase.find(':selected').data('ciclo');
+
+    if (!claseId || !cicloId) {
+      return alert('Seleccione una clase válida.');
     }
+
     fetch('../php/guardar_inscripciones.php', {
-      method:  'POST',
-      headers: {'Content-Type':'application/json'},
-      body:    JSON.stringify({
-        clase_id:    claseId,
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        clase_id: claseId,
+        ciclo_id: cicloId,
         estudiantes: inscritos.map(e => e.estudiante_id)
       })
     })
@@ -142,7 +147,7 @@ $(function() {
     });
   });
 
-  // ── 7️⃣ Inicialización: carga ciclo y configura el cambio ──
+  // 7️⃣ Inicializar
   cargarClases();
   $selClase.on('change', () => cargarDatos($selClase.val()));
 });

@@ -13,34 +13,36 @@ if (!$con) {
 
 // Leer el body como JSON
 $input = json_decode(file_get_contents('php://input'), true);
-$clase_id    = isset($input['clase_id']) ? intval($input['clase_id']) : 0;
+
+$clase_id  = isset($input['clase_id']) ? intval($input['clase_id']) : 0;
+$ciclo_id  = isset($input['ciclo_id']) ? intval($input['ciclo_id']) : 0;
 $estudiantes = isset($input['estudiantes']) && is_array($input['estudiantes'])
               ? array_map('intval', $input['estudiantes'])
               : [];
 
 // Validaciones básicas
-if ($clase_id <= 0) {
-    echo json_encode(['success' => false, 'message' => 'clase_id inválido.']);
+if ($clase_id <= 0 || $ciclo_id <= 0) {
+    echo json_encode(['success' => false, 'message' => 'clase_id o ciclo_id inválido.']);
     exit;
 }
 
 $con->begin_transaction();
 
 try {
-    // 1) Eliminar todas las inscripciones de esta clase
-    $del = $con->prepare("DELETE FROM inscripciones WHERE clase_id = ?");
-    $del->bind_param('i', $clase_id);
+    // 1) Eliminar inscripciones actuales de esta clase y ciclo
+    $del = $con->prepare("DELETE FROM inscripciones WHERE clase_id = ? AND ciclo_id = ?");
+    $del->bind_param('ii', $clase_id, $ciclo_id);
     $del->execute();
     $del->close();
 
-    // 2) Insertar las nuevas inscripciones
+    // 2) Insertar nuevas inscripciones
     if (count($estudiantes) > 0) {
         $ins = $con->prepare("
-            INSERT INTO inscripciones (estudiante_id, clase_id)
-            VALUES (?, ?)
+            INSERT INTO inscripciones (estudiante_id, clase_id, ciclo_id)
+            VALUES (?, ?, ?)
         ");
         foreach ($estudiantes as $est_id) {
-            $ins->bind_param('ii', $est_id, $clase_id);
+            $ins->bind_param('iii', $est_id, $clase_id, $ciclo_id);
             $ins->execute();
         }
         $ins->close();
