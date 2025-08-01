@@ -1,11 +1,42 @@
+
 <?php
+session_start();
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
+
+//require_once '../php/auth.php';
+?>
+
+<?php
+
 require_once '../php/conecta.php';
 $con = conecta();
 
-// Obtenemos el ID del estudiante desde GET
-$estudiante_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+// Asegura que el tutor esté logueado
+$tutor_id = $_SESSION['tutor_id'] ?? 0;
 
-// Obtenemos los datos del estudiante
+if ($tutor_id === 0) {
+  echo "<div class='alert alert-danger m-4'><strong>Error:</strong> No has iniciado sesión como tutor.</div>";
+  exit;
+}
+
+// Buscar automáticamente el primer hijo del tutor
+$sqlHijo = "SELECT estudiante_id FROM tutor_estudiante WHERE tutor_id = ? LIMIT 1";
+$stmtHijo = $con->prepare($sqlHijo);
+$stmtHijo->bind_param("i", $tutor_id);
+$stmtHijo->execute();
+$resHijo = $stmtHijo->get_result();
+$hijo = $resHijo->fetch_assoc();
+
+if (!$hijo) {
+  echo "<div class='alert alert-warning m-4'><strong>Info:</strong> Aún no tienes hijos asignados.</div>";
+  exit;
+}
+
+$estudiante_id = $hijo['estudiante_id'];
+
+// Obtener los datos del estudiante
 $sql = "SELECT e.*, t.nombre AS tutor_nombre, t.apellido AS tutor_apellido
         FROM estudiantes e
         LEFT JOIN tutores t ON e.tutor_id = t.tutor_id
@@ -16,7 +47,12 @@ $stmt->execute();
 $resultado = $stmt->get_result();
 $estudiante = $resultado->fetch_assoc();
 
-// Obtenemos las materias del estudiante
+if (!$estudiante) {
+  echo "<div class='alert alert-danger m-4'><strong>Error:</strong> No se encontró información del estudiante.</div>";
+  exit;
+}
+
+// Obtener materias del estudiante
 $sqlMaterias = "SELECT m.nombre, m.foto_url, d.nombre AS docente_nombre, d.apellido AS docente_apellido
                 FROM asignacion_materias am
                 JOIN materias m ON am.materia_id = m.materia_id
@@ -27,8 +63,8 @@ $stmtMaterias = $con->prepare($sqlMaterias);
 $stmtMaterias->bind_param("i", $estudiante_id);
 $stmtMaterias->execute();
 $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,6 +84,7 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
   <link href="../../assets/css/jquery-ui.min.css" rel="stylesheet">
   <!-- Weeducate styles -->
   <link href="../../assets/css/style.css" rel="stylesheet">
+  <link href="../../assets/css/perfil-hijo.css" rel="stylesheet">
   <!-- Favicon -->
    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/weicon/weicon.ico">
 </head>
@@ -522,52 +559,182 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
     </nav>
 
 
-    <!-- Body Content Wrapper -->
-    <div class="ms-content-wrapper">
-        <div class="container py-4">
-    <div class="card shadow border-0 rounded-4">
-      <div class="card-body">
-        <h3 class="text-primary fw-bold mb-4">
-          <i class="fas fa-user-graduate me-2"></i>Perfil de <?php echo $estudiante['nombre'] . ' ' . $estudiante['apellido']; ?>
-        </h3>
+  <!-- Body Content Wrapper -->
+<div class="container py-5">
+  <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
 
-        <div class="row mb-4">
-          <div class="col-md-6">
-            <p><i class="fas fa-calendar-day me-2 text-secondary"></i><strong>Fecha de nacimiento:</strong> <?php echo $estudiante['fecha_nacimiento']; ?></p>
-            <p><i class="fas fa-layer-group me-2 text-secondary"></i><strong>Grado y Grupo:</strong> <?php echo $estudiante['grado'] . '° ' . $estudiante['grupo']; ?></p>
-            <p><i class="fas fa-chalkboard-teacher me-2 text-secondary"></i><strong>Tutor:</strong> <?php echo $estudiante['tutor_nombre'] . ' ' . $estudiante['tutor_apellido']; ?></p>
-          </div>
-          <div class="col-md-6">
-            <p><i class="fas fa-clipboard-list me-2 text-secondary"></i><strong>Estado:</strong> <?php echo $estudiante['activo'] ? 'Activo' : 'Inactivo'; ?></p>
-            <p><i class="fas fa-calendar-check me-2 text-secondary"></i><strong>Creado en:</strong> <?php echo $estudiante['creado_en']; ?></p>
-          </div>
-        </div>
+    <!-- Header con estilo -->
+    <div class="bg-warning text-white px-4 py-4 d-flex align-items-center gap-4">
+      <div class="bg-white bg-opacity-25 p-3 rounded-circle">
+        <i class="fas fa-user-graduate fa-2x text-warning"></i>
+      </div>
+      <div>
+        <h3 class="fw-bold mb-1">Perfil de <?php echo $estudiante['nombre'] . ' ' . $estudiante['apellido']; ?></h3>
+        <small class="d-flex align-items-center gap-2 text-white-50">
+          <i class="far fa-calendar-alt"></i> Registrado el <?php echo $estudiante['creado_en']; ?>
+        </small>
+      </div>
+      <div class="ms-auto">
+        <span class="badge bg-light text-<?php echo $estudiante['activo'] ? 'success' : 'danger'; ?> fs-6 py-2 px-3 rounded-pill">
+          <?php echo $estudiante['activo'] ? 'Activo' : 'Inactivo'; ?>
+        </span>
+      </div>
+    </div>
 
-        <h4 class="fw-bold text-dark mb-3"><i class="fas fa-book-open me-2"></i>Materias actuales</h4>
-        <div class="row g-3">
-          <?php foreach ($materias as $materia): ?>
-            <div class="col-md-6 col-lg-4">
-              <div class="card h-100 border-0 shadow-sm rounded-3">
-                <img src="../../<?php echo $materia['foto_url']; ?>" class="card-img-top" alt="<?php echo $materia['nombre']; ?>">
-                <div class="card-body">
-                  <h5 class="card-title text-primary fw-semibold"><i class="fas fa-book me-1"></i> <?php echo $materia['nombre']; ?></h5>
-                  <p class="card-text"><i class="fas fa-person-chalkboard me-1"></i> Docente: <?php echo $materia['docente_nombre'] . ' ' . $materia['docente_apellido']; ?></p>
+    <div class="card-body p-4">
+
+      <!-- Información básica y académica -->
+      <div class="row g-4 mb-5">
+        <div class="col-lg-6">
+          <div class="card bg-light-subtle border-0 h-100">
+            <div class="card-body p-4">
+              <h5 class="fw-bold mb-4 text-primary d-flex align-items-center gap-2">
+                <i class="fas fa-info-circle"></i> Información básica
+              </h5>
+              <div class="d-flex align-items-start gap-3 mb-3">
+                <i class="fas fa-calendar-day text-primary mt-1"></i>
+                <div>
+                  <p class="mb-0 text-muted small">Fecha de nacimiento</p>
+                  <p class="mb-0 fw-semibold"><?php echo $estudiante['fecha_nacimiento']; ?></p>
+                </div>
+              </div>
+              <div class="d-flex align-items-start gap-3 mb-3">
+                <i class="fas fa-graduation-cap text-primary mt-1"></i>
+                <div>
+                  <p class="mb-0 text-muted small">Grado y Grupo</p>
+                  <p class="mb-0 fw-semibold"><?php echo $estudiante['grado'] . '° ' . $estudiante['grupo']; ?></p>
+                </div>
+              </div>
+              <div class="d-flex align-items-start gap-3">
+                <i class="fas fa-user-tie text-primary mt-1"></i>
+                <div>
+                  <p class="mb-0 text-muted small">Tutor</p>
+                  <p class="mb-0 fw-semibold"><?php echo $estudiante['tutor_nombre'] . ' ' . $estudiante['tutor_apellido']; ?></p>
                 </div>
               </div>
             </div>
-          <?php endforeach; ?>
+          </div>
         </div>
 
-        <div class="mt-5">
-          <h4 class="fw-bold text-dark mb-3"><i class="fas fa-star-half-stroke me-2"></i>Calificaciones</h4>
-          <div class="alert alert-info">
-            <i class="fas fa-info-circle me-2"></i>Las calificaciones aún no están disponibles para este estudiante.
+        <div class="col-lg-6">
+          <div class="card bg-light-subtle border-0 h-100">
+            <div class="card-body p-4">
+              <h5 class="fw-bold mb-4 text-primary d-flex align-items-center gap-2">
+                <i class="fas fa-id-card"></i> Datos académicos
+              </h5>
+              <div class="d-flex align-items-start gap-3 mb-3">
+                <i class="fas fa-hashtag text-primary mt-1"></i>
+                <div>
+                  <p class="mb-0 text-muted small">ID Estudiante</p>
+                  <p class="mb-0 fw-semibold"><?php echo $estudiante['estudiante_id']; ?></p>
+                </div>
+              </div>
+              <div class="d-flex align-items-start gap-3 mb-3">
+                <i class="fas fa-chart-line text-primary mt-1"></i>
+                <div>
+                  <p class="mb-0 text-muted small">Promedio general</p>
+                  <p class="mb-0 fw-semibold">8.7</p>
+                </div>
+              </div>
+              <div class="d-flex align-items-start gap-3">
+                <i class="fas fa-clock text-primary mt-1"></i>
+                <div>
+                  <p class="mb-0 text-muted small">Horario</p>
+                  <p class="mb-0 fw-semibold">7:00 AM - 2:00 PM</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Materias -->
+      <div class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h4 class="fw-bold text-dark d-flex align-items-center gap-2">
+            <i class="fas fa-book-open text-primary"></i> Materias actuales
+          </h4>
+          <span class="badge bg-primary bg-opacity-10 text-primary py-2 px-3 rounded-pill">
+            <?php echo count($materias); ?> materias
+          </span>
+        </div>
+
+        <?php if (count($materias) > 0): ?>
+          <div class="row g-4">
+            <?php foreach ($materias as $materia): ?>
+              <div class="col-sm-6 col-lg-4 col-xl-3">
+                <div class="card border-0 shadow-sm h-100 rounded-3 hover-shadow-lg transition-all">
+                  <div class="position-relative">
+                    <img src="../../<?php echo $materia['foto_url']; ?>" class="card-img-top" alt="Imagen materia" style="object-fit: cover; height: 140px;">
+                    <span class="badge bg-success position-absolute top-0 end-0 m-2">En curso</span>
+                  </div>
+                  <div class="card-body">
+                    <h6 class="fw-bold text-dark mb-2"><?php echo $materia['nombre']; ?></h6>
+                    <div class="d-flex align-items-center gap-2 text-muted small mb-3">
+                      <i class="fas fa-user-tie"></i> <?php echo $materia['docente_nombre'] . ' ' . $materia['docente_apellido']; ?>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <span class="badge bg-primary bg-opacity-10 text-primary py-1 px-2 rounded">
+                        <i class="fas fa-clock me-1"></i> L-V 10:00
+                      </span>
+                      <a href="#" class="text-decoration-none small">Ver detalles <i class="fas fa-chevron-right ms-1"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <?php endforeach; ?>
+          </div>
+        <?php else: ?>
+          <div class="alert alert-warning d-flex align-items-center gap-3 py-3">
+            <i class="fas fa-info-circle fa-lg"></i>
+            <div>
+              <h6 class="alert-heading mb-1">Sin materias asignadas</h6>
+              <p class="mb-0 small">Este estudiante aún no tiene materias asignadas para este periodo.</p>
+            </div>
+          </div>
+        <?php endif; ?>
+      </div>
+
+      <!-- Calificaciones -->
+      <div>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h4 class="fw-bold text-dark d-flex align-items-center gap-2">
+            <i class="fas fa-star-half-alt text-primary"></i> Rendimiento académico
+          </h4>
+          <div class="dropdown">
+            <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+              <i class="fas fa-filter me-1"></i> Periodo
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Primer trimestre</a></li>
+              <li><a class="dropdown-item" href="#">Segundo trimestre</a></li>
+              <li><a class="dropdown-item" href="#">Tercer trimestre</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="alert alert-info d-flex align-items-center gap-3 py-3">
+              <i class="fas fa-info-circle fa-lg"></i>
+              <div>
+                <h6 class="alert-heading mb-1">Calificaciones no disponibles</h6>
+                <p class="mb-0 small">Las calificaciones aún no están disponibles para este periodo académico.</p>
+              </div>
+            </div>
+
+            <!-- Placeholder de gráfico -->
+            <div class="bg-light rounded-3 p-4 text-center">
+              <img src="https://via.placeholder.com/800x300?text=Gráfico+de+progreso+del+estudiante" alt="Gráfico de progreso" class="img-fluid rounded-2">
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-    </div>
+</div>
+
+
 
   </main>
 
