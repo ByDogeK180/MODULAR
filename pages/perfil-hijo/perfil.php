@@ -1,11 +1,11 @@
 
 <?php
-session_start();
-echo '<pre>';
-print_r($_SESSION);
-echo '</pre>';
+//session_start();
+//echo '<pre>';
+//print_r($_SESSION);
+//echo '</pre>';
 
-//require_once '../php/auth.php';
+require_once '../php/auth.php';
 ?>
 
 <?php
@@ -54,11 +54,13 @@ if (!$estudiante) {
 
 // Obtener materias del estudiante
 $sqlMaterias = "SELECT m.nombre, m.foto_url, d.nombre AS docente_nombre, d.apellido AS docente_apellido
-                FROM asignacion_materias am
-                JOIN materias m ON am.materia_id = m.materia_id
-                LEFT JOIN clase_asignacion ca ON ca.materia_id = m.materia_id
-                LEFT JOIN docentes d ON ca.docente_id = d.docente_id
-                WHERE am.estudiante_id = ?";
+                FROM inscripciones i
+                JOIN clases c ON i.clase_id = c.clase_id
+                JOIN clase_asignacion ca ON ca.clase_id = c.clase_id
+                JOIN materias m ON m.materia_id = ca.materia_id
+                LEFT JOIN docentes d ON d.docente_id = ca.docente_id
+                WHERE i.estudiante_id = ?
+                ";
 $stmtMaterias = $con->prepare($sqlMaterias);
 $stmtMaterias->bind_param("i", $estudiante_id);
 $stmtMaterias->execute();
@@ -695,33 +697,25 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
         <?php endif; ?>
       </div>
 
-      <!-- Calificaciones -->
-      <div>
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h4 class="fw-bold text-dark d-flex align-items-center gap-2">
-            <i class="fas fa-star-half-alt text-primary"></i> Rendimiento académico
-          </h4>
-          <div class="dropdown">
-            <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-              <i class="fas fa-filter me-1"></i> Periodo
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Primer trimestre</a></li>
-              <li><a class="dropdown-item" href="#">Segundo trimestre</a></li>
-              <li><a class="dropdown-item" href="#">Tercer trimestre</a></li>
-            </ul>
-          </div>
-        </div>
+<!-- Calificaciones -->
+<!-- Dropdown y contenedor de tabla -->
+<div class="mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5 class="text-dark fw-bold"><i class="fas fa-star-half-alt text-primary me-1"></i> Rendimiento académico</h5>
+    <div class="dropdown">
+  <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="dropdownPeriodoBtn" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fas fa-filter me-1"></i> Selecciona periodo
+  </button>
+  <ul class="dropdown-menu" id="dropdownPeriodos" aria-labelledby="dropdownPeriodoBtn"></ul>
+</div>
+  </div>
 
-        <div class="card border-0 shadow-sm">
-          <div class="card-body p-4">
-            <div class="alert alert-info d-flex align-items-center gap-3 py-3">
-              <i class="fas fa-info-circle fa-lg"></i>
-              <div>
-                <h6 class="alert-heading mb-1">Calificaciones no disponibles</h6>
-                <p class="mb-0 small">Las calificaciones aún no están disponibles para este periodo académico.</p>
-              </div>
-            </div>
+  <div id="tablaCalificaciones" class="mt-4">
+    <div class="alert alert-info">
+      <i class="fas fa-info-circle me-2"></i> Selecciona un periodo para visualizar las calificaciones.
+    </div>
+  </div>
+</div>
 
             <!-- Placeholder de gráfico -->
             <div class="bg-light rounded-3 p-4 text-center">
@@ -1418,6 +1412,114 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
   <script src="../../assets/js/perfect-scrollbar.js"> </script>
   <script src="../../assets/js/jquery-ui.min.js"> </script>
   <!-- Global Required Scripts End -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const estudianteId = <?php echo $estudiante['estudiante_id']; ?>;
+  const menu = document.getElementById('dropdownPeriodos');
+  const tablaContainer = document.getElementById('tablaCalificaciones');
+  const btn = document.getElementById('dropdownPeriodoBtn');
+
+  function cargarCalificaciones(periodoId, nombrePeriodo) {
+    console.log(`📥 Cargando calificaciones para estudiante ${estudianteId}, periodo ${periodoId}`);
+
+    fetch(`../php/obtener_calificaciones_estudiante.php?estudiante_id=${estudianteId}&periodo_id=${periodoId}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log("✅ Datos recibidos:", data);
+
+        if (!Array.isArray(data) || data.length === 0) {
+          tablaContainer.innerHTML = `
+            <div class="alert alert-warning">
+              <i class="fas fa-exclamation-circle me-2"></i> 
+              No hay calificaciones registradas para el periodo <strong>${nombrePeriodo}</strong>.
+            </div>`;
+          return;
+        }
+
+        const materias = {};
+        data.forEach(row => {
+          const mat = row.materia;
+          const num = parseInt(row.numero);
+          const val = parseFloat(row.valor);
+          if (!materias[mat]) materias[mat] = {};
+          materias[mat][num] = val;
+        });
+
+        let html = `
+          <h6 class="text-primary fw-bold mb-3">Calificaciones del periodo: ${nombrePeriodo}</h6>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead class="table-light">
+                <tr>
+                  <th>Materia</th>
+                  <th>Calificación 1</th>
+                  <th>Calificación 2</th>
+                  <th>Calificación 3</th>
+                </tr>
+              </thead>
+              <tbody>`;
+
+        for (const materia in materias) {
+          const c1 = materias[materia][1] ?? '-';
+          const c2 = materias[materia][2] ?? '-';
+          const c3 = materias[materia][3] ?? '-';
+          html += `
+            <tr>
+              <td>${materia}</td>
+              <td>${c1}</td>
+              <td>${c2}</td>
+              <td>${c3}</td>
+            </tr>`;
+        }
+
+        html += '</tbody></table></div>';
+        tablaContainer.innerHTML = html;
+      })
+      .catch(err => {
+        console.error("❌ Error al obtener calificaciones:", err);
+        tablaContainer.innerHTML = `<div class="alert alert-danger">Error al cargar calificaciones.</div>`;
+      });
+  }
+
+  fetch(`../php/obtener_periodos_tutor.php?estudiante_id=${estudianteId}`)
+    .then(res => res.json())
+    .then(periodos => {
+      console.log("📦 Periodos recibidos:", periodos);
+
+      if (!Array.isArray(periodos) || periodos.length === 0) {
+        menu.innerHTML = '<li><span class="dropdown-item disabled">Sin periodos disponibles</span></li>';
+        return;
+      }
+
+      menu.innerHTML = '';
+      periodos.forEach(p => {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.classList.add('dropdown-item');
+        a.href = "#";
+        a.textContent = p.nombre;
+
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          btn.innerHTML = `<i class="fas fa-filter me-1"></i> ${p.nombre}`;
+          cargarCalificaciones(p.periodo_id, p.nombre);
+        });
+
+        li.appendChild(a);
+        menu.appendChild(li);
+      });
+
+      // Autocargar primer periodo
+      const primer = periodos[0];
+      btn.innerHTML = `<i class="fas fa-filter me-1"></i> ${primer.nombre}`;
+      cargarCalificaciones(primer.periodo_id, primer.nombre);
+    })
+    .catch(err => {
+      console.error("❌ Error al cargar periodos:", err);
+    });
+});
+</script>
 
   <!-- Weeducate core JavaScript -->
   <script src="../../assets/js/framework.js"></script>
