@@ -1,12 +1,56 @@
- .bg-gradient-primary {
-    background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%);
-  }
-  
-  .hover-shadow-lg:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 1rem 2rem rgba(0,0,0,.15) !important;
-  }
-  
-  .transition-all {
-    transition: all 0.3s ease;
-  }
+/* ===== Header como en la imagen ===== */
+.profile-header{
+  display:flex; align-items:flex-start;
+  padding:1rem 1.25rem;
+  background:#fff;
+  border-bottom:1px solid rgba(0,0,0,.06);
+  gap: .75rem;                 /* espacio real, con fallback abajo */
+}
+.profile-header > * + *{ margin-left:.75rem; } /* fallback de gap */
+
+/* Icono pequeño a la izquierda (sin círculo) */
+.profile-header .ph-avatar{
+  width:22px; height:22px; border-radius:4px;
+  background:transparent; box-shadow:none;
+  display:flex; align-items:center; justify-content:center;
+  margin-top:.1rem;            /* alinea con texto */
+}
+.profile-header .ph-avatar i{ font-size:18px; color:#212529; }
+
+/* Contenedor de texto */
+.ph-block{ min-width:0; flex:1; }
+
+/* Primera fila: título grande + estado a la derecha del título */
+.ph-row{
+  display:flex; align-items:baseline;
+  gap: .85rem;
+  flex-wrap:wrap;              /* si no cabe, el estado baja */
+}
+.ph-title{
+  color:#1f2d3d; font-weight:800; line-height:1.1;
+  font-size:1.55rem;
+  margin:0;
+  max-width:100%;
+}
+
+/* Estado “Activo” como texto con ícono (sin pastilla) */
+.status-inline{
+  display:inline-flex; align-items:center; gap:.4rem;
+  font-weight:700; white-space:nowrap;
+  color:#198754;               /* ok */
+}
+.status-inline.off{ color:#dc3545; }
+
+/* Segunda fila: fecha de registro */
+.ph-meta-line{
+  margin-top:.35rem;
+  color:#1f2d3d;               /* como en la imagen, no tan tenue */
+  font-size:1rem;
+  display:flex; align-items:center; gap:.45rem;
+}
+.ph-meta-line i{ opacity:.95; }
+
+/* Opcional: en pantallas muy estrechas fuerza que el estado baje de línea */
+@media (max-width:480px){
+  .ph-row{ flex-direction:column; align-items:flex-start; gap:.25rem; }
+}

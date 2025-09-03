@@ -1,4 +1,3 @@
-
 <?php
 //session_start();
 //echo '<pre>';
@@ -79,7 +78,7 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
   <!-- Iconic Fonts -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="../../vendors/iconic-fonts/flat-icons/flaticon.css">
-    <link rel="stylesheet" href="../../vendors/iconic-fonts/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="../../vendors/iconic-fonts/font-awesome/css/all.min.css">
   <!-- Bootstrap core CSS -->
   <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
   <!-- jQuery UI -->
@@ -88,7 +87,7 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
   <link href="../../assets/css/style.css" rel="stylesheet">
   <link href="../../assets/css/perfil-hijo.css" rel="stylesheet">
   <!-- Favicon -->
-   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/weicon/weicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/weicon/weicon.ico">
 </head>
 
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
@@ -104,16 +103,16 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
         <h4 class="section-title">Customize</h4>
         <div>
           <label class="ms-switch">
-             <input type="checkbox" id="dark-mode">
-             <span class="ms-switch-slider round"></span>
-           </label>
+            <input type="checkbox" id="dark-mode">
+            <span class="ms-switch-slider round"></span>
+          </label>
           <span> Dark Mode </span>
         </div>
         <div>
           <label class="ms-switch">
-             <input type="checkbox" id="remove-quickbar">
-             <span class="ms-switch-slider round"></span>
-           </label>
+            <input type="checkbox" id="remove-quickbar">
+            <span class="ms-switch-slider round"></span>
+          </label>
           <span> Remove Quickbar </span>
         </div>
       </div>
@@ -149,31 +148,34 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
 
   <!-- Overlays -->
   <div class="ms-aside-overlay ms-overlay-left ms-toggler" data-target="#ms-side-nav" data-toggle="slideLeft"></div>
-  <div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight"></div>
+  <div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight">
+  </div>
 
   <!-- Sidebar Navigation Left -->
   <aside id="ms-side-nav" class="side-nav fixed ms-aside-scrollable ms-aside-left">
 
     <!-- Logo -->
     <div class="logo-sn ms-d-block-lg">
-      <a class="pl-0 ml-0 text-center" href="../../Tutor.php"> <img src="../../assets/img/logo/weeducate-4.png" alt="logo">  </a>
+      <a class="pl-0 ml-0 text-center" href="../../Tutor.php"> <img src="../../assets/img/logo/weeducate-4.png"
+          alt="logo"> </a>
     </div>
 
     <!-- Navigation -->
     <ul class="accordion ms-main-aside fs-14" id="side-nav-accordion">
-       <!-- Dashboard -->
-        <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#dashboard" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="material-icons fs-16">dashboard</i>Dashboard </span>
-             </a>
-            <ul id="dashboard" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-              <li> <a href="../../Tutor.php">SchoolCare</a> </li>
-              
-            </ul>
-        </li>
-        <!-- /Dashboard -->
-        
-        <li class="menu-item">
+      <!-- Dashboard -->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#dashboard" aria-expanded="false"
+          aria-controls="dashboard">
+          <span><i class="material-icons fs-16">dashboard</i>Dashboard </span>
+        </a>
+        <ul id="dashboard" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
+          <li> <a href="../../Tutor.php">SchoolCare</a> </li>
+
+        </ul>
+      </li>
+      <!-- /Dashboard -->
+
+      <li class="menu-item">
         <a href="#" class="has-chevron" data-toggle="collapse" data-target="#dashboard" aria-expanded="false"
           aria-controls="dashboard">
           <span><i class="material-icons fs-16">dashboard</i>Home </span>
@@ -220,7 +222,7 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
           <li> <a href="pages/profesores-tutor/profesores-estudiante.php">Mis Docentes</a> </li>
         </ul>
       </li>
-      <!-- /Professors End--->  
+      <!-- /Professors End--->
 
       <!--Holiday Start-->
       <li class="menu-item">
@@ -279,142 +281,151 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
 
     <div class="ms-aside-header">
       <ul class="nav nav-tabs tabs-bordered d-flex nav-justified mb-3" role="tablist">
-        <li role="presentation" class="fs-12"><a href="#activityLog" aria-controls="activityLog" class="active" role="tab" data-toggle="tab"> Activity Log</a></li>
-        <li role="presentation" class="fs-12"><a href="#recentPosts" aria-controls="recentPosts" role="tab" data-toggle="tab"> Settings </a></li>
-        <li><button type="button" class="close ms-toggler text-center" data-target="#ms-recent-activity" data-toggle="slideRight"><span aria-hidden="true">&times;</span></button></li>
+        <li role="presentation" class="fs-12"><a href="#activityLog" aria-controls="activityLog" class="active"
+            role="tab" data-toggle="tab"> Activity Log</a></li>
+        <li role="presentation" class="fs-12"><a href="#recentPosts" aria-controls="recentPosts" role="tab"
+            data-toggle="tab"> Settings </a></li>
+        <li><button type="button" class="close ms-toggler text-center" data-target="#ms-recent-activity"
+            data-toggle="slideRight"><span aria-hidden="true">&times;</span></button></li>
       </ul>
     </div>
 
     <div class="ms-aside-body">
 
-       <div class="tab-content">
+      <div class="tab-content">
 
-         <div role="tabpanel" class="tab-pane active fade show" id="activityLog">
-           <ul class="ms-activity-log">
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-light">
-                 <i class="flaticon-gear"></i>
-               </div>
-               <h6>Update 1.0.0 Pushed</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-success">
-                 <i class="flaticon-tick-inside-circle"></i>
-               </div>
-               <h6>Profile Updated</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-warning">
-                 <i class="flaticon-alert-1"></i>
-               </div>
-               <h6>Your payment is due</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-danger">
-                 <i class="flaticon-alert"></i>
-               </div>
-               <h6>Database Error</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-info">
-                 <i class="flaticon-information"></i>
-               </div>
-               <h6>Checkout what's Trending</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-secondary">
-                 <i class="flaticon-diamond"></i>
-               </div>
-               <h6>Your Dashboard is ready</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-           </ul>
-           <a href="#" class="btn btn-primary d-block"> View All </a>
-         </div>
+        <div role="tabpanel" class="tab-pane active fade show" id="activityLog">
+          <ul class="ms-activity-log">
+            <li>
+              <div class="ms-btn-icon btn-pill icon btn-light">
+                <i class="flaticon-gear"></i>
+              </div>
+              <h6>Update 1.0.0 Pushed</h6>
+              <span> <i class="material-icons">event</i>1 January, 2021</span>
+              <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non
+                nisi semper, ula in sodales vehicula....</p>
+            </li>
+            <li>
+              <div class="ms-btn-icon btn-pill icon btn-success">
+                <i class="flaticon-tick-inside-circle"></i>
+              </div>
+              <h6>Profile Updated</h6>
+              <span> <i class="material-icons">event</i>4 March, 2018</span>
+              <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque
+                felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
+            </li>
+            <li>
+              <div class="ms-btn-icon btn-pill icon btn-warning">
+                <i class="flaticon-alert-1"></i>
+              </div>
+              <h6>Your payment is due</h6>
+              <span> <i class="material-icons">event</i>1 January, 2021</span>
+              <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non
+                nisi semper, ula in sodales vehicula....</p>
+            </li>
+            <li>
+              <div class="ms-btn-icon btn-pill icon btn-danger">
+                <i class="flaticon-alert"></i>
+              </div>
+              <h6>Database Error</h6>
+              <span> <i class="material-icons">event</i>4 March, 2018</span>
+              <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque
+                felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
+            </li>
+            <li>
+              <div class="ms-btn-icon btn-pill icon btn-info">
+                <i class="flaticon-information"></i>
+              </div>
+              <h6>Checkout what's Trending</h6>
+              <span> <i class="material-icons">event</i>1 January, 2021</span>
+              <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non
+                nisi semper, ula in sodales vehicula....</p>
+            </li>
+            <li>
+              <div class="ms-btn-icon btn-pill icon btn-secondary">
+                <i class="flaticon-diamond"></i>
+              </div>
+              <h6>Your Dashboard is ready</h6>
+              <span> <i class="material-icons">event</i>4 March, 2018</span>
+              <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque
+                felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
+            </li>
+          </ul>
+          <a href="#" class="btn btn-primary d-block"> View All </a>
+        </div>
 
-         <div role="tabpanel" class="tab-pane fade" id="recentPosts">
+        <div role="tabpanel" class="tab-pane fade" id="recentPosts">
 
-           <h6>General Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Location Tracking</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Allow Notifications</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Allow Popups</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <h6>Log Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Enable Logging</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Audit Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Error Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <h6>Advanced Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Enable Logging</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Audit Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Error Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
+          <h6>General Settings</h6>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Location Tracking</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox">
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Allow Notifications</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox">
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Allow Popups</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox" checked>
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
+          <h6>Log Settings</h6>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Enable Logging</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox" checked>
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Audit Logs</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox">
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Error Logs</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox" checked>
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
+          <h6>Advanced Settings</h6>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Enable Logging</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox" checked>
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Audit Logs</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox">
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
+          <div class="ms-form-group">
+            <span class="ms-option-name fs-14">Error Logs</span>
+            <label class="ms-switch float-right">
+              <input type="checkbox" checked>
+              <span class="ms-switch-slider round"></span>
+            </label>
+          </div>
 
-         </div>
+        </div>
 
-       </div>
+      </div>
 
     </div>
 
@@ -433,7 +444,8 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
       </div>
 
       <div class="logo-sn logo-sm ms-d-block-sm">
-        <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="../../index.html"><img src="../../assets/img/logo/weeducate-4.png" alt="logo"> </a>
+        <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="../../index.html"><img
+            src="../../assets/img/logo/weeducate-4.png" alt="logo"> </a>
       </div>
 
       <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
@@ -446,10 +458,12 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
           </form>
         </li>
         <li class="ms-nav-item dropdown">
-          <a href="#" class="text-disabled ms-has-notification" id="mailDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flaticon-mail"></i></a>
+          <a href="#" class="text-disabled ms-has-notification" id="mailDropdown" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false"><i class="flaticon-mail"></i></a>
           <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="mailDropdown">
             <li class="dropdown-menu-header">
-              <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Mail</span></h6><span class="badge badge-pill badge-success">3 New</span>
+              <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Mail</span></h6><span
+                class="badge badge-pill badge-success">3 New</span>
             </li>
             <li class="dropdown-divider"></li>
             <li class="ms-scrollable ms-dropdown-list">
@@ -488,10 +502,12 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
           </ul>
         </li>
         <li class="ms-nav-item dropdown">
-          <a href="#" class="text-disabled ms-has-notification" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flaticon-bell"></i></a>
+          <a href="#" class="text-disabled ms-has-notification" id="notificationDropdown" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false"><i class="flaticon-bell"></i></a>
           <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown">
             <li class="dropdown-menu-header">
-              <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Notifications</span></h6><span class="badge badge-pill badge-info">4 New</span>
+              <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Notifications</span></h6><span
+                class="badge badge-pill badge-info">4 New</span>
             </li>
             <li class="dropdown-divider"></li>
             <li class="ms-scrollable ms-dropdown-list">
@@ -527,26 +543,34 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
           </ul>
         </li>
         <li class="ms-nav-item">
-          <a href="#" class="text-disabled ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight"><i class="flaticon-menu"></i></a>
+          <a href="#" class="text-disabled ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight"><i
+              class="flaticon-menu"></i></a>
         </li>
         <li class="ms-nav-item ms-nav-user dropdown">
-          <a href="#"  id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img class="ms-user-img ms-img-round float-right" src="../../assets/img/we-educate/new-student-5.jpg" alt="people"> </a>
+          <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img
+              class="ms-user-img ms-img-round float-right" src="../../assets/img/we-educate/new-student-5.jpg"
+              alt="people"> </a>
           <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
             <li class="dropdown-menu-header">
               <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Welcome, Anny Farisha</span></h6>
             </li>
             <li class="dropdown-divider"></li>
             <li class="ms-dropdown-list">
-              <a class="media fs-14 p-2" href="../prebuilt-pages/user-profile.html"> <span><i class="flaticon-user mr-2"></i> Profile</span> </a>
-              <a class="media fs-14 p-2" href="../apps/email.html"> <span><i class="flaticon-mail mr-2"></i> Inbox</span> <span class="badge badge-pill badge-info">3</span> </a>
-              <a class="media fs-14 p-2" href="../prebuilt-pages/user-profile.html"> <span><i class="flaticon-gear mr-2"></i> Account Settings</span> </a>
+              <a class="media fs-14 p-2" href="../prebuilt-pages/user-profile.html"> <span><i
+                    class="flaticon-user mr-2"></i> Profile</span> </a>
+              <a class="media fs-14 p-2" href="../apps/email.html"> <span><i class="flaticon-mail mr-2"></i>
+                  Inbox</span> <span class="badge badge-pill badge-info">3</span> </a>
+              <a class="media fs-14 p-2" href="../prebuilt-pages/user-profile.html"> <span><i
+                    class="flaticon-gear mr-2"></i> Account Settings</span> </a>
             </li>
             <li class="dropdown-divider"></li>
             <li class="dropdown-menu-footer">
-              <a class="media fs-14 p-2" href="../prebuilt-pages/lock-screen.html"> <span><i class="flaticon-security mr-2"></i> Lock</span> </a>
+              <a class="media fs-14 p-2" href="../prebuilt-pages/lock-screen.html"> <span><i
+                    class="flaticon-security mr-2"></i> Lock</span> </a>
             </li>
             <li class="dropdown-menu-footer">
-              <a class="media fs-14 p-2" href="../prebuilt-pages/default-login.html"> <span><i class="flaticon-shut-down mr-2"></i> Logout</span> </a>
+              <a class="media fs-14 p-2" href="../prebuilt-pages/default-login.html"> <span><i
+                    class="flaticon-shut-down mr-2"></i> Logout</span> </a>
             </li>
           </ul>
         </li>
@@ -561,132 +585,150 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
     </nav>
 
 
-  <!-- Body Content Wrapper -->
-<div class="container py-5">
-  <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+    <!-- Body Content Wrapper -->
+    <div class="container py-5">
+      <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
 
-    <!-- Header con estilo -->
-    <div class="bg-warning text-white px-4 py-4 d-flex align-items-center gap-4">
-      <div class="bg-white bg-opacity-25 p-3 rounded-circle">
-        <i class="fas fa-user-graduate fa-2x text-warning"></i>
-      </div>
-      <div>
-        <h3 class="fw-bold mb-1">Perfil de <?php echo $estudiante['nombre'] . ' ' . $estudiante['apellido']; ?></h3>
-        <small class="d-flex align-items-center gap-2 text-white-50">
-          <i class="far fa-calendar-alt"></i> Registrado el <?php echo $estudiante['creado_en']; ?>
-        </small>
-      </div>
-      <div class="ms-auto">
-        <span class="badge bg-light text-<?php echo $estudiante['activo'] ? 'success' : 'danger'; ?> fs-6 py-2 px-3 rounded-pill">
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
+  <div class="profile-header">
+    <!-- Icono pequeño a la izquierda -->
+    <i class="ph-icon fas fa-user-graduate" aria-hidden="true"></i>
+
+    <!-- Cuerpo (título+estado arriba, fecha abajo) -->
+    <div class="ph-body">
+      <div class="ph-top">
+        <h2 class="ph-title mb-0">
+          Perfil de <?php echo $estudiante['nombre'].' '.$estudiante['apellido']; ?>
+        </h2>
+        <span class="status-inline <?php echo $estudiante['activo'] ? 'ok' : 'off'; ?>">
+          <i class="fas <?php echo $estudiante['activo'] ? 'fa-check-circle' : 'fa-times-circle'; ?>"></i>
           <?php echo $estudiante['activo'] ? 'Activo' : 'Inactivo'; ?>
         </span>
       </div>
-    </div>
 
-    <div class="card-body p-4">
-
-      <!-- Información básica y académica -->
-      <div class="row g-4 mb-5">
-        <div class="col-lg-6">
-          <div class="card bg-light-subtle border-0 h-100">
-            <div class="card-body p-4">
-              <h5 class="fw-bold mb-4 text-primary d-flex align-items-center gap-2">
-                <i class="fas fa-info-circle"></i> Información básica
-              </h5>
-              <div class="d-flex align-items-start gap-3 mb-3">
-                <i class="fas fa-calendar-day text-primary mt-1"></i>
-                <div>
-                  <p class="mb-0 text-muted small">Fecha de nacimiento</p>
-                  <p class="mb-0 fw-semibold"><?php echo $estudiante['fecha_nacimiento']; ?></p>
-                </div>
-              </div>
-              <div class="d-flex align-items-start gap-3 mb-3">
-                <i class="fas fa-graduation-cap text-primary mt-1"></i>
-                <div>
-                  <p class="mb-0 text-muted small">Grado y Grupo</p>
-                  <p class="mb-0 fw-semibold"><?php echo $estudiante['grado'] . '° ' . $estudiante['grupo']; ?></p>
-                </div>
-              </div>
-              <div class="d-flex align-items-start gap-3">
-                <i class="fas fa-user-tie text-primary mt-1"></i>
-                <div>
-                  <p class="mb-0 text-muted small">Tutor</p>
-                  <p class="mb-0 fw-semibold"><?php echo $estudiante['tutor_nombre'] . ' ' . $estudiante['tutor_apellido']; ?></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6">
-          <div class="card bg-light-subtle border-0 h-100">
-            <div class="card-body p-4">
-              <h5 class="fw-bold mb-4 text-primary d-flex align-items-center gap-2">
-                <i class="fas fa-id-card"></i> Datos académicos
-              </h5>
-              <div class="d-flex align-items-start gap-3 mb-3">
-                <i class="fas fa-hashtag text-primary mt-1"></i>
-                <div>
-                  <p class="mb-0 text-muted small">ID Estudiante</p>
-                  <p class="mb-0 fw-semibold"><?php echo $estudiante['estudiante_id']; ?></p>
-                </div>
-              </div>
-              <div class="d-flex align-items-start gap-3 mb-3">
-                <i class="fas fa-chart-line text-primary mt-1"></i>
-                <div>
-                  <p class="mb-0 text-muted small">Promedio general</p>
-                  <p class="mb-0 fw-semibold">8.7</p>
-                </div>
-              </div>
-              <div class="d-flex align-items-start gap-3">
-                <i class="fas fa-clock text-primary mt-1"></i>
-                <div>
-                  <p class="mb-0 text-muted small">Horario</p>
-                  <p class="mb-0 fw-semibold">7:00 AM - 2:00 PM</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="ph-registered">
+        <i class="far fa-calendar-alt"></i>
+        Registrado el <?php echo $estudiante['creado_en']; ?>
       </div>
+    </div>
+  </div>
+</div>
 
-      <!-- Materias -->
-      <div class="mb-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h4 class="fw-bold text-dark d-flex align-items-center gap-2">
-            <i class="fas fa-book-open text-primary"></i> Materias actuales
-          </h4>
-          <span class="badge bg-primary bg-opacity-10 text-primary py-2 px-3 rounded-pill">
-            <?php echo count($materias); ?> materias
-          </span>
-        </div>
+        <div class="card-body p-4">
 
-        <?php if (count($materias) > 0): ?>
+          <!-- Información básica y académica -->
+          <div class="row g-4 mb-5">
+
+            <!-- Información básica -->
+            <div class="col-lg-6">
+              <div class="info-card shadow-sm h-100">
+                <h5 class="section-title text-primary mb-3">
+                  <span class="title-icon"><i class="fas fa-info-circle"></i></span> Información básica
+                </h5>
+
+                <div class="info-grid">
+                  <div class="info-item">
+                    <span class="info-icon"><i class="fas fa-calendar-day"></i></span>
+                    <div>
+                      <p class="info-label">Fecha de nacimiento</p>
+                      <p class="info-value"><?php echo $estudiante['fecha_nacimiento']; ?></p>
+                    </div>
+                  </div>
+
+                  <div class="info-item">
+                    <span class="info-icon"><i class="fas fa-graduation-cap"></i></span>
+                    <div>
+                      <p class="info-label">Grado y Grupo</p>
+                      <p class="info-value"><?php echo $estudiante['grado'] . '° ' . $estudiante['grupo']; ?></p>
+                    </div>
+                  </div>
+
+                  <div class="info-item">
+                    <span class="info-icon"><i class="fas fa-user-tie"></i></span>
+                    <div>
+                      <p class="info-label">Tutor</p>
+                      <p class="info-value">
+                        <?php echo $estudiante['tutor_nombre'] . ' ' . $estudiante['tutor_apellido']; ?></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Datos académicos -->
+            <div class="col-lg-6">
+              <div class="info-card shadow-sm h-100">
+                <h5 class="section-title text-primary mb-3">
+                  <span class="title-icon"><i class="fas fa-id-card"></i></span> Datos académicos
+                </h5>
+
+                <div class="info-grid">
+                  <div class="info-item">
+                    <span class="info-icon"><i class="fas fa-hashtag"></i></span>
+                    <div>
+                      <p class="info-label">ID Estudiante</p>
+                      <p class="info-value"><?php echo $estudiante['estudiante_id']; ?></p>
+                    </div>
+                  </div>
+
+                  <div class="info-item">
+                    <span class="info-icon"><i class="fas fa-chart-line"></i></span>
+                    <div>
+                      <p class="info-label">Promedio general</p>
+                      <p class="info-value">8.7</p>
+                    </div>
+                  </div>
+
+                  <div class="info-item">
+                    <span class="info-icon"><i class="fas fa-clock"></i></span>
+                    <div>
+                      <p class="info-label">Horario</p>
+                      <p class="info-value">7:00 AM - 2:00 PM</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- Materias -->
+          <div class="d-flex justify-content-between align-items-center mb-4 materias-header">
+            <h4 class="section-title text-dark">
+              <span class="title-icon"><i class="fas fa-book-open"></i></span> Materias actuales
+            </h4>
+            <span class="contador"><?php echo count($materias); ?> materias</span>
+          </div>
+
+          <?php if (count($materias) > 0): ?>
           <div class="row g-4">
             <?php foreach ($materias as $materia): ?>
-              <div class="col-sm-6 col-lg-4 col-xl-3">
-                <div class="card border-0 shadow-sm h-100 rounded-3 hover-shadow-lg transition-all">
-                  <div class="position-relative">
-                    <img src="../../<?php echo $materia['foto_url']; ?>" class="card-img-top" alt="Imagen materia" style="object-fit: cover; height: 140px;">
-                    <span class="badge bg-success position-absolute top-0 end-0 m-2">En curso</span>
+            <div class="col-sm-6 col-lg-4 col-xl-3">
+
+              <div class="card materia-card border-0 shadow-sm h-100 rounded-3">
+                <div class="position-relative">
+                  <img src="../../<?php echo $materia['foto_url']; ?>" class="card-img-top" alt="Imagen materia">
+                  <span class="badge badge-status bg-success">En curso</span>
+                </div>
+                <div class="card-body">
+                  <h6 class="fw-bold text-dark mb-2"><?php echo $materia['nombre']; ?></h6>
+                  <div class="d-flex align-items-center gap-2 text-muted small mb-3">
+                    <i class="fas fa-user-tie"></i>
+                    <span><?php echo $materia['docente_nombre'] . ' ' . $materia['docente_apellido']; ?></span>
                   </div>
-                  <div class="card-body">
-                    <h6 class="fw-bold text-dark mb-2"><?php echo $materia['nombre']; ?></h6>
-                    <div class="d-flex align-items-center gap-2 text-muted small mb-3">
-                      <i class="fas fa-user-tie"></i> <?php echo $materia['docente_nombre'] . ' ' . $materia['docente_apellido']; ?>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <span class="badge bg-primary bg-opacity-10 text-primary py-1 px-2 rounded">
-                        <i class="fas fa-clock me-1"></i> L-V 10:00
-                      </span>
-                      <a href="#" class="text-decoration-none small">Ver detalles <i class="fas fa-chevron-right ms-1"></i></a>
-                    </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="badge-chip"><i class="fas fa-clock me-1"></i> L-V 10:00</span>
+                    <a href="#" class="text-decoration-none small">Ver detalles <i
+                        class="fas fa-chevron-right ms-1"></i></a>
                   </div>
                 </div>
               </div>
+
+            </div>
             <?php endforeach; ?>
           </div>
-        <?php else: ?>
+          <?php else: ?>
           <div class="alert alert-warning d-flex align-items-center gap-3 py-3">
             <i class="fas fa-info-circle fa-lg"></i>
             <div>
@@ -694,39 +736,42 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
               <p class="mb-0 small">Este estudiante aún no tiene materias asignadas para este periodo.</p>
             </div>
           </div>
-        <?php endif; ?>
-      </div>
+          <?php endif; ?>
+        </div>
 
-<!-- Calificaciones -->
-<!-- Dropdown y contenedor de tabla -->
-<div class="mt-4">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h5 class="text-dark fw-bold"><i class="fas fa-star-half-alt text-primary me-1"></i> Rendimiento académico</h5>
-    <div class="dropdown">
-  <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="dropdownPeriodoBtn" data-bs-toggle="dropdown" aria-expanded="false">
-    <i class="fas fa-filter me-1"></i> Selecciona periodo
-  </button>
-  <ul class="dropdown-menu" id="dropdownPeriodos" aria-labelledby="dropdownPeriodoBtn"></ul>
-</div>
-  </div>
+        <!-- Calificaciones -->
+        <!-- Dropdown y contenedor de tabla -->
+        <div class="mt-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="text-dark fw-bold"><i class="fas fa-star-half-alt text-primary me-1"></i> Rendimiento académico
+            </h5>
+            <div class="dropdown">
+              <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="dropdownPeriodoBtn"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-filter me-1"></i> Selecciona periodo
+              </button>
+              <ul class="dropdown-menu" id="dropdownPeriodos" aria-labelledby="dropdownPeriodoBtn"></ul>
+            </div>
+          </div>
 
-  <div id="tablaCalificaciones" class="mt-4">
-    <div class="alert alert-info">
-      <i class="fas fa-info-circle me-2"></i> Selecciona un periodo para visualizar las calificaciones.
-    </div>
-  </div>
-</div>
-
-            <!-- Placeholder de gráfico -->
-            <div class="bg-light rounded-3 p-4 text-center">
-              <img src="https://via.placeholder.com/800x300?text=Gráfico+de+progreso+del+estudiante" alt="Gráfico de progreso" class="img-fluid rounded-2">
+          <div id="tablaCalificaciones" class="mt-4">
+            <div class="alert alert-info">
+              <i class="fas fa-info-circle me-2"></i> Selecciona un periodo para visualizar las calificaciones.
             </div>
           </div>
         </div>
+
+        <!-- Placeholder de gráfico -->
+        <div class="bg-light rounded-3 p-4 text-center">
+          <img src="https://via.placeholder.com/800x300?text=Gráfico+de+progreso+del+estudiante"
+            alt="Gráfico de progreso" class="img-fluid rounded-2">
+        </div>
       </div>
     </div>
-  </div>
-</div>
+    </div>
+    </div>
+    </div>
+    </div>
 
 
 
@@ -736,37 +781,43 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
   <aside id="ms-quick-bar" class="ms-quick-bar fixed ms-d-block-lg">
 
     <ul class="nav nav-tabs ms-quick-bar-list" role="tablist">
-      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left" title="Launch Chat" data-title="Chat">
+      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left"
+        title="Launch Chat" data-title="Chat">
         <a href="#qa-chat" aria-controls="qa-chat" role="tab" data-toggle="tab">
           <i class="flaticon-chat"></i>
           <span class="ms-quick-bar-label">Chat</span>
         </a>
       </li>
-      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left" title="Launch Email" data-title="Email">
+      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left"
+        title="Launch Email" data-title="Email">
         <a href="#qa-email" aria-controls="qa-email" role="tab" data-toggle="tab">
           <i class="flaticon-mail"></i>
           <span class="ms-quick-bar-label">Email</span>
         </a>
       </li>
-      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left" title="Launch To-do-list" data-title="To-do-list">
+      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left"
+        title="Launch To-do-list" data-title="To-do-list">
         <a href="#qa-toDo" aria-controls="qa-toDo" role="tab" data-toggle="tab">
           <i class="flaticon-list"></i>
           <span class="ms-quick-bar-label">To-do</span>
         </a>
       </li>
-      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left" title="Launch Reminders" data-title="Reminders">
+      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left"
+        title="Launch Reminders" data-title="Reminders">
         <a href="#qa-reminder" aria-controls="qa-reminder" role="tab" data-toggle="tab">
           <i class="flaticon-bell"></i>
           <span class="ms-quick-bar-label">Reminder</span>
         </a>
       </li>
-      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left" title="Launch Notes" data-title="Notes">
+      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left"
+        title="Launch Notes" data-title="Notes">
         <a href="#qa-notes" aria-controls="qa-notes" role="tab" data-toggle="tab">
           <i class="flaticon-pencil"></i>
           <span class="ms-quick-bar-label">Notes</span>
         </a>
       </li>
-      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left" title="Invite Members" data-title="Invite Members">
+      <li class="ms-quick-bar-item ms-has-qa" role="presentation" data-toggle="tooltip" data-placement="left"
+        title="Invite Members" data-title="Invite Members">
         <a href="#qa-invite" aria-controls="qa-invite" role="tab" data-toggle="tab">
           <i class="flaticon-share-1"></i>
           <span class="ms-quick-bar-label">Invite</span>
@@ -789,7 +840,8 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
 
       <div class="ms-quick-bar-header clearfix">
         <h5 class="ms-quick-bar-title float-left">Title</h5>
-        <button type="button" class="close ms-toggler" data-target="#ms-quick-bar" data-toggle="hideQuickBar" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close ms-toggler" data-target="#ms-quick-bar" data-toggle="hideQuickBar"
+          aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
 
       <div class="ms-quick-bar-body tab-content">
@@ -804,7 +856,8 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
                 </div>
                 <div class="media-body ms-chat-user-info mt-1">
                   <h6>Anny Farisha</h6>
-                  <a href="#" class="text-disabled has-chevron fs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a href="#" class="text-disabled has-chevron fs-12" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
                     Available
                   </a>
                   <ul class="dropdown-menu">
@@ -830,7 +883,8 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
               </div>
               <form class="ms-form my-3" method="post">
                 <div class="ms-form-group my-0 mb-0 has-icon fs-14">
-                  <input type="search" class="ms-form-input w-100" name="search" placeholder="Search for People and Groups" value="">
+                  <input type="search" class="ms-form-input w-100" name="search"
+                    placeholder="Search for People and Groups" value="">
                   <i class="flaticon-search text-disabled"></i>
                 </div>
               </form>
@@ -838,9 +892,12 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
 
             <div class="ms-chat-body">
               <ul class="nav nav-tabs tabs-bordered d-flex nav-justified px-3" role="tablist">
-                <li role="presentation" class="fs-12"><a href="#chats" aria-controls="chats" class="active show" role="tab" data-toggle="tab"> Chats </a></li>
-                <li role="presentation" class="fs-12"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab"> Groups </a></li>
-                <li role="presentation" class="fs-12"><a href="#contacts" aria-controls="contacts" role="tab" data-toggle="tab"> Contacts </a></li>
+                <li role="presentation" class="fs-12"><a href="#chats" aria-controls="chats" class="active show"
+                    role="tab" data-toggle="tab"> Chats </a></li>
+                <li role="presentation" class="fs-12"><a href="#groups" aria-controls="groups" role="tab"
+                    data-toggle="tab"> Groups </a></li>
+                <li role="presentation" class="fs-12"><a href="#contacts" aria-controls="contacts" role="tab"
+                    data-toggle="tab"> Contacts </a></li>
               </ul>
 
               <div class="tab-content">
@@ -1017,7 +1074,8 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
           <div class="ms-email-container">
 
             <div class="ms-qa-options">
-              <a href="#" class="btn btn-primary w-100 mt-0 has-icon"> <i class="flaticon-pencil"></i> Compose Email </a>
+              <a href="#" class="btn btn-primary w-100 mt-0 has-icon"> <i class="flaticon-pencil"></i> Compose Email
+              </a>
             </div>
 
             <ul class="ms-scrollable ms-quickbar-container">
@@ -1027,8 +1085,10 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
                 </div>
                 <div class="media-body ms-email-details">
                   <span class="ms-email-sender">James Zathila</span>
-                  <h6 class="ms-email-subject">[WordPress] New Comment</h6> <span class="ms-email-time">2 Hours ago</span>
-                  <p class="ms-email-msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
+                  <h6 class="ms-email-subject">[WordPress] New Comment</h6> <span class="ms-email-time">2 Hours
+                    ago</span>
+                  <p class="ms-email-msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis.
+                    Nunc</p>
                 </div>
               </li>
               <li class="p-3  media ms-email clearfix">
@@ -1037,8 +1097,10 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
                 </div>
                 <div class="media-body ms-email-details">
                   <span class="ms-email-sender">John Doe</span>
-                  <h6 class="ms-email-subject">[WordPress] New Comment</h6> <span class="ms-email-time">8 Hours ago</span>
-                  <p class="ms-email-msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
+                  <h6 class="ms-email-subject">[WordPress] New Comment</h6> <span class="ms-email-time">8 Hours
+                    ago</span>
+                  <p class="ms-email-msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis.
+                    Nunc</p>
                 </div>
               </li>
               <li class="p-3  media ms-email clearfix">
@@ -1048,7 +1110,8 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
                 <div class="media-body ms-email-details">
                   <span class="ms-email-sender">Heather Brown</span>
                   <h6 class="ms-email-subject">[WordPress] New Comment</h6> <span class="ms-email-time">1 Day ago</span>
-                  <p class="ms-email-msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
+                  <p class="ms-email-msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis.
+                    Nunc</p>
                 </div>
               </li>
             </ul>
@@ -1061,8 +1124,10 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
 
             <form class="ms-add-task-block">
               <div class="form-group mx-3 mt-0  fs-14 clearfix">
-                <input type="text" class="form-control fs-14 float-left" id="task-block" name="todo-block" placeholder="Add Task Block" value="">
-                <button type="submit" class="ms-btn-icon bg-primary float-right"><i class="material-icons text-disabled">add</i></button>
+                <input type="text" class="form-control fs-14 float-left" id="task-block" name="todo-block"
+                  placeholder="Add Task Block" value="">
+                <button type="submit" class="ms-btn-icon bg-primary float-right"><i
+                    class="material-icons text-disabled">add</i></button>
               </div>
             </form>
 
@@ -1071,7 +1136,9 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
 
                 <div class="ms-card-header clearfix">
                   <h6 class="ms-card-title">Task Block Title</h6>
-                  <button data-toggle="tooltip" data-placement="left" title="Add a Task to this block" class="ms-add-task-to-block ms-btn-icon float-right"> <i class="material-icons text-disabled">add</i> </button>
+                  <button data-toggle="tooltip" data-placement="left" title="Add a Task to this block"
+                    class="ms-add-task-to-block ms-btn-icon float-right"> <i
+                      class="material-icons text-disabled">add</i> </button>
                 </div>
 
                 <div class="ms-card-body">
@@ -1097,7 +1164,8 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
 
                 <div class="ms-card-footer clearfix">
                   <a href="#" class="text-disabled mr-2"> <i class="flaticon-archive"> </i> Archive </a>
-                  <a href="#" class="text-disabled  ms-delete-trigger float-right"> <i class="flaticon-trash"> </i> Delete </a>
+                  <a href="#" class="text-disabled  ms-delete-trigger float-right"> <i class="flaticon-trash"> </i>
+                    Delete </a>
                 </div>
 
               </li>
@@ -1110,7 +1178,8 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
           <div class="ms-quickbar-container ms-reminders">
 
             <ul class="ms-qa-options">
-              <li> <a href="#" data-toggle="modal" data-target="#reminder-modal"> <i class="flaticon-bell"></i> New Reminder </a> </li>
+              <li> <a href="#" data-toggle="modal" data-target="#reminder-modal"> <i class="flaticon-bell"></i> New
+                  Reminder </a> </li>
             </ul>
 
             <div class="ms-quickbar-container ms-scrollable">
@@ -1118,12 +1187,14 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
               <div class="ms-card ms-qa-card ms-deletable">
                 <div class="ms-card-body">
                   <p> Developer Meeting in Block B </p>
-                  <span class="text-disabled fs-12"><i class="material-icons fs-14">access_time</i> Today - 3:45 pm</span>
+                  <span class="text-disabled fs-12"><i class="material-icons fs-14">access_time</i> Today - 3:45
+                    pm</span>
                 </div>
                 <div class="ms-card-footer clearfix">
 
                   <div class="ms-note-editor float-right">
-                    <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#reminder-modal"> <i class="flaticon-pencil"> </i> Edit </a>
+                    <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#reminder-modal"> <i
+                        class="flaticon-pencil"> </i> Edit </a>
                     <a href="#" class="text-disabled  ms-delete-trigger"> <i class="flaticon-trash"> </i> Delete </a>
                   </div>
 
@@ -1132,12 +1203,14 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
               <div class="ms-card ms-qa-card ms-deletable">
                 <div class="ms-card-body">
                   <p> Start adding change log to version 2 </p>
-                  <span class="text-disabled fs-12"><i class="material-icons fs-14">access_time</i> Tomorrow - 12:00 pm</span>
+                  <span class="text-disabled fs-12"><i class="material-icons fs-14">access_time</i> Tomorrow - 12:00
+                    pm</span>
                 </div>
                 <div class="ms-card-footer clearfix">
 
                   <div class="ms-note-editor float-right">
-                    <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#reminder-modal"> <i class="flaticon-pencil"> </i> Edit </a>
+                    <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#reminder-modal"> <i
+                        class="flaticon-pencil"> </i> Edit </a>
                     <a href="#" class="text-disabled  ms-delete-trigger"> <i class="flaticon-trash"> </i> Delete </a>
                   </div>
 
@@ -1152,7 +1225,8 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
         <div role="tabpanel" class="tab-pane" id="qa-notes">
 
           <ul class="ms-qa-options">
-            <li> <a href="#" data-toggle="modal" data-target="#notes-modal"> <i class="flaticon-sticky-note"></i> New Note </a> </li>
+            <li> <a href="#" data-toggle="modal" data-target="#notes-modal"> <i class="flaticon-sticky-note"></i> New
+                Note </a> </li>
             <li> <a href="#"> <i class="flaticon-excel"></i> Export to Excel </a> </li>
           </ul>
 
@@ -1164,7 +1238,8 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
               </div>
               <div class="ms-card-body">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vulputate urna in faucibus venenatis. Etiam at dapibus neque,
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vulputate urna in faucibus venenatis.
+                  Etiam at dapibus neque,
                   vel varius metus. Pellentesque eget orci malesuada, venenatis magna et
                 </p>
                 <ul class="ms-note-members clearfix mb-0">
@@ -1212,7 +1287,8 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
                   </ul>
                 </div>
                 <div class="ms-note-editor float-right">
-                  <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#notes-modal"> <i class="flaticon-pencil"> </i> Edit </a>
+                  <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#notes-modal"> <i
+                      class="flaticon-pencil"> </i> Edit </a>
                   <a href="#" class="text-disabled  ms-delete-trigger"> <i class="flaticon-trash"> </i> Delete </a>
                 </div>
 
@@ -1225,7 +1301,8 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
               </div>
               <div class="ms-card-body">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vulputate urna in faucibus venenatis. Etiam at dapibus neque,
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vulputate urna in faucibus venenatis.
+                  Etiam at dapibus neque,
                   vel varius metus. Pellentesque eget orci malesuada, venenatis magna et
                 </p>
                 <ul class="ms-note-members clearfix mb-0">
@@ -1272,7 +1349,8 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
                   </ul>
                 </div>
                 <div class="ms-note-editor float-right">
-                  <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#notes-modal"> <i class="flaticon-pencil"> </i> Edit </a>
+                  <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#notes-modal"> <i
+                      class="flaticon-pencil"> </i> Edit </a>
                   <a href="#" class="text-disabled  ms-delete-trigger"> <i class="flaticon-trash"> </i> Delete </a>
                 </div>
 
@@ -1315,51 +1393,52 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
 
         <div class="modal-header bg-secondary">
           <h5 class="modal-title has-icon text-white"> New Reminder</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
         </div>
 
         <form>
 
-        <div class="modal-body">
+          <div class="modal-body">
 
-          <div class="ms-form-group">
-            <label>Remind me about</label>
-            <textarea class="form-control" name="reminder"></textarea>
-          </div>
+            <div class="ms-form-group">
+              <label>Remind me about</label>
+              <textarea class="form-control" name="reminder"></textarea>
+            </div>
 
-          <div class="ms-form-group">
-            <span class="ms-option-name fs-14">Repeat Daily</span>
-            <label class="ms-switch float-right">
-              <input type="checkbox">
-              <span class="ms-switch-slider round"></span>
-            </label>
-          </div>
+            <div class="ms-form-group">
+              <span class="ms-option-name fs-14">Repeat Daily</span>
+              <label class="ms-switch float-right">
+                <input type="checkbox">
+                <span class="ms-switch-slider round"></span>
+              </label>
+            </div>
 
-          <div class="row">
-            <div class="col-md-6">
-              <div class="ms-form-group">
-                <input type="text" class="form-control datepicker" name="reminder-date" value="" />
+            <div class="row">
+              <div class="col-md-6">
+                <div class="ms-form-group">
+                  <input type="text" class="form-control datepicker" name="reminder-date" value="" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="ms-form-group">
+                  <select class="form-control" name="reminder-time">
+                    <option value="">12:00 pm</option>
+                    <option value="">1:00 pm</option>
+                    <option value="">2:00 pm</option>
+                    <option value="">3:00 pm</option>
+                    <option value="">4:00 pm</option>
+                  </select>
+                </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="ms-form-group">
-                <select class="form-control" name="reminder-time">
-                  <option value="">12:00 pm</option>
-                  <option value="">1:00 pm</option>
-                  <option value="">2:00 pm</option>
-                  <option value="">3:00 pm</option>
-                  <option value="">4:00 pm</option>
-                </select>
-              </div>
-            </div>
+
           </div>
 
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-secondary shadow-none" data-dismiss="modal">Add Reminder</button>
-        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary shadow-none" data-dismiss="modal">Add Reminder</button>
+          </div>
 
         </form>
 
@@ -1374,29 +1453,30 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
 
         <div class="modal-header bg-secondary">
           <h5 class="modal-title has-icon text-white" id="NoteModal">New Note</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+              aria-hidden="true">&times;</span></button>
         </div>
 
         <form>
 
-        <div class="modal-body">
+          <div class="modal-body">
 
-          <div class="ms-form-group">
-            <label>Note Title</label>
-            <input type="text" class="form-control" name="note-title" value="">
+            <div class="ms-form-group">
+              <label>Note Title</label>
+              <input type="text" class="form-control" name="note-title" value="">
+            </div>
+
+            <div class="ms-form-group">
+              <label>Note Description</label>
+              <textarea class="form-control" name="note-description"></textarea>
+            </div>
+
           </div>
 
-          <div class="ms-form-group">
-            <label>Note Description</label>
-            <textarea class="form-control" name="note-description"></textarea>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary shadow-none" data-dismiss="modal">Add Note</button>
           </div>
-
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-secondary shadow-none" data-dismiss="modal">Add Note</button>
-        </div>
 
         </form>
 
@@ -1415,108 +1495,121 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const estudianteId = <?php echo $estudiante['estudiante_id']; ?>;
+  // ✅ PHP embebido correctamente y seguro
+  const estudianteId = <?php echo json_encode((int)$estudiante['estudiante_id']); ?>;
+
   const menu = document.getElementById('dropdownPeriodos');
   const tablaContainer = document.getElementById('tablaCalificaciones');
   const btn = document.getElementById('dropdownPeriodoBtn');
 
+  if (!menu || !tablaContainer || !btn) {
+    console.error('No se encontraron elementos requeridos:', { menu, tablaContainer, btn });
+    return;
+  }
+
+  // Guion gris cuando no hay calificación
+  const fmt = (v) => (v === '-' ? '<span class="placeholder">-</span>' : v);
+
+  function renderTabla(nombrePeriodo, materiasDict) {
+    let html = `
+      <h6 class="text-primary fw-bold mb-3">Calificaciones del periodo: ${nombrePeriodo}</h6>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover table-grades">
+          <thead class="table-light">
+            <tr>
+              <th><i class="fas fa-book me-1 text-muted"></i> Materia</th>
+              <th><i class="fas fa-check me-1 text-muted"></i> Calificación 1</th>
+              <th><i class="fas fa-check me-1 text-muted"></i> Calificación 2</th>
+              <th><i class="fas fa-check me-1 text-muted"></i> Calificación 3</th>
+            </tr>
+          </thead>
+          <tbody>`;
+
+    for (const materia in materiasDict) {
+      const c1 = materiasDict[materia][1] ?? '-';
+      const c2 = materiasDict[materia][2] ?? '-';
+      const c3 = materiasDict[materia][3] ?? '-';
+      html += `
+        <tr>
+          <td>${materia}</td>
+          <td>${fmt(c1)}</td>
+          <td>${fmt(c2)}</td>
+          <td>${fmt(c3)}</td>
+        </tr>`;
+    }
+
+    html += `</tbody></table></div>`;
+    tablaContainer.innerHTML = html;
+  }
+
   function cargarCalificaciones(periodoId, nombrePeriodo) {
-    console.log(`📥 Cargando calificaciones para estudiante ${estudianteId}, periodo ${periodoId}`);
+    tablaContainer.innerHTML = `
+      <div class="alert alert-info">
+        <i class="fas fa-spinner fa-spin me-2"></i> Cargando calificaciones...
+      </div>`;
 
-    fetch(`../php/obtener_calificaciones_estudiante.php?estudiante_id=${estudianteId}&periodo_id=${periodoId}`)
-      .then(res => res.json())
+    fetch(`../php/obtener_calificaciones_estudiante.php?estudiante_id=${encodeURIComponent(estudianteId)}&periodo_id=${encodeURIComponent(periodoId)}`)
+      .then(r => r.ok ? r.json() : Promise.reject(r.statusText))
       .then(data => {
-        console.log("✅ Datos recibidos:", data);
-
         if (!Array.isArray(data) || data.length === 0) {
           tablaContainer.innerHTML = `
             <div class="alert alert-warning">
-              <i class="fas fa-exclamation-circle me-2"></i> 
-              No hay calificaciones registradas para el periodo <strong>${nombrePeriodo}</strong>.
+              <i class="fas fa-exclamation-circle me-2"></i>
+              No hay calificaciones registradas para <strong>${nombrePeriodo}</strong>.
             </div>`;
           return;
         }
 
         const materias = {};
-        data.forEach(row => {
+        for (const row of data) {
           const mat = row.materia;
-          const num = parseInt(row.numero);
-          const val = parseFloat(row.valor);
+          const num = Number.parseInt(row.numero, 10);
+          const val = Number.parseFloat(row.valor);
           if (!materias[mat]) materias[mat] = {};
-          materias[mat][num] = val;
-        });
-
-        let html = `
-          <h6 class="text-primary fw-bold mb-3">Calificaciones del periodo: ${nombrePeriodo}</h6>
-          <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-              <thead class="table-light">
-                <tr>
-                  <th>Materia</th>
-                  <th>Calificación 1</th>
-                  <th>Calificación 2</th>
-                  <th>Calificación 3</th>
-                </tr>
-              </thead>
-              <tbody>`;
-
-        for (const materia in materias) {
-          const c1 = materias[materia][1] ?? '-';
-          const c2 = materias[materia][2] ?? '-';
-          const c3 = materias[materia][3] ?? '-';
-          html += `
-            <tr>
-              <td>${materia}</td>
-              <td>${c1}</td>
-              <td>${c2}</td>
-              <td>${c3}</td>
-            </tr>`;
+          if (Number.isFinite(num)) materias[mat][num] = Number.isFinite(val) ? val : '-';
         }
 
-        html += '</tbody></table></div>';
-        tablaContainer.innerHTML = html;
+        renderTabla(nombrePeriodo, materias);
       })
       .catch(err => {
-        console.error("❌ Error al obtener calificaciones:", err);
+        console.error('Error al obtener calificaciones:', err);
         tablaContainer.innerHTML = `<div class="alert alert-danger">Error al cargar calificaciones.</div>`;
       });
   }
 
-  fetch(`../php/obtener_periodos_tutor.php?estudiante_id=${estudianteId}`)
-    .then(res => res.json())
+  // Cargar periodos del estudiante
+  fetch(`../php/obtener_periodos_tutor.php?estudiante_id=${encodeURIComponent(estudianteId)}`)
+    .then(r => r.ok ? r.json() : Promise.reject(r.statusText))
     .then(periodos => {
-      console.log("📦 Periodos recibidos:", periodos);
-
       if (!Array.isArray(periodos) || periodos.length === 0) {
         menu.innerHTML = '<li><span class="dropdown-item disabled">Sin periodos disponibles</span></li>';
         return;
       }
 
       menu.innerHTML = '';
-      periodos.forEach(p => {
+      for (const p of periodos) {
         const li = document.createElement('li');
         const a = document.createElement('a');
-        a.classList.add('dropdown-item');
-        a.href = "#";
+        a.className = 'dropdown-item';
+        a.href = '#';
         a.textContent = p.nombre;
-
         a.addEventListener('click', (e) => {
           e.preventDefault();
           btn.innerHTML = `<i class="fas fa-filter me-1"></i> ${p.nombre}`;
           cargarCalificaciones(p.periodo_id, p.nombre);
         });
-
         li.appendChild(a);
         menu.appendChild(li);
-      });
+      }
 
-      // Autocargar primer periodo
+      // Autocargar el primero
       const primer = periodos[0];
       btn.innerHTML = `<i class="fas fa-filter me-1"></i> ${primer.nombre}`;
       cargarCalificaciones(primer.periodo_id, primer.nombre);
     })
     .catch(err => {
-      console.error("❌ Error al cargar periodos:", err);
+      console.error('Error al cargar periodos:', err);
+      menu.innerHTML = '<li><span class="dropdown-item disabled">Error al cargar periodos</span></li>';
     });
 });
 </script>
