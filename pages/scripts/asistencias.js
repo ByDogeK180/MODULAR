@@ -11,9 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const option = document.createElement("option");
         option.value = mat.materia_id;
         option.textContent = `${mat.nombre} (${mat.nivel_grado}, Ciclo ${mat.ciclo}) - ID ${mat.materia_id}`;
-
-
-
         materiaSelect.appendChild(option);
       });
     });
@@ -21,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // 2. Cuando el docente selecciona una materia
   materiaSelect.addEventListener("change", () => {
     const materiaId = materiaSelect.value;
-
     if (!materiaId) return;
 
     // Limpiar tabla
@@ -68,40 +64,37 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const asistencias = [];
-
       document.querySelectorAll(".asistencia-select").forEach(select => {
         const estudianteId = select.dataset.id;
         const valor = select.value;
 
         asistencias.push({
           estudiante_id: estudianteId,
-          estado: valor
+          estado: (valor === "presente" ? 1 : 0)
         });
       });
 
-fetch('../../pages/php/guardar_asistencias.php', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ materia_id: materiaId, asistencias })
-})
-  .then(res => res.text()) // OBTENEMOS texto crudo primero
-  .then(text => {
-    console.log("Respuesta cruda del servidor:", text);
-    const data = JSON.parse(text); // ahora sí parseamos
-    if (data.success) {
-      Swal.fire("Guardado", "Asistencias guardadas exitosamente", "success");
-      document.querySelectorAll(".asistencia-select").forEach(select => {
-        select.value = "presente";
-      });
-    } else {
-      Swal.fire("Error", data.error || "No se pudo guardar", "error");
-    }
-  })
-  .catch(err => {
-    console.error("Error al guardar asistencias:", err);
-  });
-
-
+      fetch("../php/guardar_asistencias.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ materia_id: materiaId, asistencias })
+      })
+        .then(res => res.text()) // primero crudo
+        .then(text => {
+          console.log("Respuesta cruda del servidor:", text);
+          const data = JSON.parse(text);
+          if (data.success) {
+            Swal.fire("Guardado", "Asistencias guardadas exitosamente", "success");
+            document.querySelectorAll(".asistencia-select").forEach(select => {
+              select.value = "presente";
+            });
+          } else {
+            Swal.fire("Error", data.error || "No se pudo guardar", "error");
+          }
+        })
+        .catch(err => {
+          console.error("Error al guardar asistencias:", err);
+        });
     });
   }
 });

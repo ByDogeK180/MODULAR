@@ -48,7 +48,8 @@ $docente_id = (int)$result->fetch_assoc()['docente_id'];
 $docenteQuery->close();
 
 // Preparar inserción
-$query = "INSERT INTO asistencias (estudiante_id, estado, fecha, docente_id, materia_id) VALUES (?, ?, ?, ?, ?)";
+$query = "INSERT INTO asistencias (estudiante_id, estado, fecha, docente_id, materia_id) 
+          VALUES (?, ?, ?, ?, ?)";
 $stmt = $con->prepare($query);
 
 if (!$stmt) {
@@ -59,9 +60,11 @@ if (!$stmt) {
 // Insertar asistencias
 foreach ($data['asistencias'] as $registro) {
   $estudiante_id = (int)$registro['estudiante_id'];
-  $estado = $registro['estado'];
+  $estado = $registro['estado']; // "presente" o "ausente"
 
-  $stmt->bind_param("sssii", $estudiante_id, $estado, $fecha, $docente_id, $materia_id);
+  // Vincular parámetros: estudiante_id (int), estado (string), fecha (string), docente_id (int), materia_id (int)
+  $stmt->bind_param("issii", $estudiante_id, $estado, $fecha, $docente_id, $materia_id);
+
   if (!$stmt->execute()) {
     echo json_encode(["success" => false, "error" => "Error al insertar asistencia"]);
     exit;

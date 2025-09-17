@@ -12,9 +12,10 @@ if (!$usuario_id) {
 }
 
 $query = "
-  SELECT m.materia_id, m.nombre, m.nivel_grado, m.ciclo
-  FROM materias m
-  INNER JOIN docentes d ON m.docente_id = d.docente_id
+  SELECT DISTINCT m.materia_id, m.nombre, m.nivel_grado, m.ciclo
+  FROM docentes d
+  INNER JOIN clase_asignacion ca ON d.docente_id = ca.docente_id
+  INNER JOIN materias m ON ca.materia_id = m.materia_id
   WHERE d.usuario_id = ?
 ";
 
@@ -24,9 +25,11 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 $materias = [];
-
 while ($row = $result->fetch_assoc()) {
   $materias[] = $row;
 }
 
-echo json_encode($materias);
+echo json_encode($materias, JSON_UNESCAPED_UNICODE);
+
+$stmt->close();
+$con->close();
