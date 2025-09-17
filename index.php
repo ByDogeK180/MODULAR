@@ -382,75 +382,114 @@
 
     </nav>
 
+    <!-- Filtros -->
+    <style>
+      .ml-filters{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0 16px;}
+      .ml-filters .form-group{min-width:220px}
+      .ml-filters label{font-size:.9rem;color:#6b7280;margin-bottom:4px}
+    </style>
+    <div class="ml-filters">
+      <div class="form-group">
+        <label for="cicloSelect">Ciclo</label>
+        <select id="cicloSelect" class="form-select form-select-sm"></select>
+      </div>
+      <div class="form-group">
+        <label for="periodoSelect">Periodo</label>
+        <select id="periodoSelect" class="form-select form-select-sm"></select>
+      </div>
+      <div class="form-group" style="display:flex;align-items:flex-end">
+        <button id="btnReset" class="btn btn-sm btn-outline-secondary">Ver todos</button>
+      </div>
+    </div>
 
-    <!-- Body content -->
-  <!-- ======= Predicción automática (admin) ======= -->
-<div class="card" style="background:#121821;border:1px solid #1f2a37;border-radius:12px;padding:16px;margin-top:20px;">
-  <h5 style="margin-bottom:10px;">Estadísticas de reprobación (automático)</h5>
-  <div id="status" class="text-muted" style="margin-bottom:10px;"></div>
+    <!-- ======= Predicción automática (admin) ======= -->
+    <style>
+      .ml-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin-top:20px;box-shadow:0 1px 2px rgba(0,0,0,.04);}
+      .ml-grid{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
+      .ml-mini{flex:1;min-width:220px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px}
+      .ml-panels{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+      .ml-panel{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px}
+      .ml-tablewrap{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px;margin-bottom:16px}
+      .ml-muted{color:#6b7280}
+      .ml-h6{margin:0 0 8px}
+      .ml-table thead th{background:#f8fafc}
+      @media (max-width: 992px){ .ml-panels{grid-template-columns:1fr} }
+      /* Badges neutros para fondo blanco */
+      .badge-soft-danger{background:#fee2e2;color:#991b1b;border-radius:20px;padding:.25rem .5rem;font-weight:600}
+      .badge-soft-success{background:#dcfce7;color:#166534;border-radius:20px;padding:.25rem .5rem;font-weight:600}
+      .badge-soft-info{background:#e0f2fe;color:#075985;border-radius:20px;padding:.25rem .5rem;font-weight:600}
+      .badge-soft-warning{background:#fef3c7;color:#92400e;border-radius:20px;padding:.25rem .5rem;font-weight:600}
+    </style>
 
-  <!-- Tarjetas resumen -->
-  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
-    <div class="mini" style="flex:1;background:#0f1622;border:1px solid #1f2a37;border-radius:10px;padding:12px;">
-      <div class="text-muted">Alumnos totales</div>
-      <div id="statTotal" style="font-size:22px;font-weight:700;">—</div>
-    </div>
-    <div class="mini" style="flex:1;background:#0f1622;border:1px solid #1f2a37;border-radius:10px;padding:12px;">
-      <div class="text-muted">Predichos en riesgo (≥0.5)</div>
-      <div id="statRiesgo" style="font-size:22px;font-weight:700;">—</div>
-    </div>
-    <div class="mini" style="flex:1;background:#0f1622;border:1px solid #1f2a37;border-radius:10px;padding:12px;">
-      <div class="text-muted">Tasa de riesgo</div>
-      <div id="statRate" style="font-size:22px;font-weight:700;">—</div>
-    </div>
-  </div>
+    <div class="ml-card">
+      <h5 style="margin-bottom:10px;">Estadísticas de reprobación (automático)</h5>
+      <div id="status" class="ml-muted" style="margin-bottom:10px;">—</div>
 
-  <!-- Gráficas -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
-    <div style="background:#0f1622;border:1px solid #1f2a37;border-radius:10px;padding:12px;">
-      <div class="text-muted" style="margin-bottom:6px;">Matriz de confusión (Ensable)</div>
-      <canvas id="cmChart" height="200"></canvas>
-    </div>
-    <div style="background:#0f1622;border:1px solid #1f2a37;border-radius:10px;padding:12px;">
-      <div class="text-muted" style="margin-bottom:6px;">Distribución de etiquetas (0 No repr. / 1 Repr.)</div>
-      <canvas id="distChart" height="200"></canvas>
-    </div>
-  </div>
+      <!-- Tarjetas resumen -->
+      <div class="ml-grid">
+        <div class="ml-mini">
+          <div class="ml-muted">Alumnos totales</div>
+          <div id="statTotal" style="font-size:22px;font-weight:700;">—</div>
+        </div>
+        <div class="ml-mini">
+          <div class="ml-muted">Predichos en riesgo (≥0.5)</div>
+          <div id="statRiesgo" style="font-size:22px;font-weight:700;">—</div>
+        </div>
+        <div class="ml-mini">
+          <div class="ml-muted">Tasa de riesgo</div>
+          <div id="statRate" style="font-size:22px;font-weight:700;">—</div>
+        </div>
+      </div>
 
-  <!-- Tabla: alumnos en mayor riesgo -->
-  <div style="background:#0f1622;border:1px solid #1f2a37;border-radius:10px;padding:12px;margin-bottom:16px;">
-    <h6 style="margin:0 0 8px;">Top alumnos en riesgo (ordenado por probabilidad)</h6>
-    <div class="table-responsive">
-      <table class="table table-dark table-striped">
-        <thead>
-          <tr>
-            <th>Alumno</th><th>Materia</th><th>Periodo</th><th>Clase</th>
-            <th>Asistencia</th><th>Incidentes</th><th>Parciales</th>
-            <th>Prob. CART</th><th>Prob. RF</th><th>Prob. Final</th><th>Pred.</th>
-          </tr>
-        </thead>
-        <tbody id="tbRiesgo"></tbody>
-      </table>
-    </div>
-  </div>
+      <!-- Gráficas -->
+      <div class="ml-panels">
+        <div class="ml-panel">
+          <div class="ml-muted" style="margin-bottom:6px;">Matriz de confusión (Ensamble)</div>
+          <canvas id="cmChart" height="200"></canvas>
+        </div>
+        <div class="ml-panel">
+          <div class="ml-muted" style="margin-bottom:6px;">Distribución de etiquetas (0 No repr. / 1 Repr.)</div>
+          <canvas id="distChart" height="200"></canvas>
+        </div>
+      </div>
 
-  <!-- Tabla: resumen por clase / periodo / materia -->
-  <div style="background:#0f1622;border:1px solid #1f2a37;border-radius:10px;padding:12px;">
-    <h6 style="margin:0 0 8px;">Resumen por Clase / Periodo / Materia</h6>
-    <div class="table-responsive">
-      <table class="table table-dark table-striped">
-        <thead>
-          <tr>
-            <th>Periodo</th><th>Clase</th><th>Materia</th>
-            <th>#Alumnos</th><th>#Riesgo</th><th>Tasa Riesgo</th>
-          </tr>
-        </thead>
-        <tbody id="tbResumen"></tbody>
-      </table>
+      <!-- Tabla: alumnos en mayor riesgo -->
+      <div class="ml-tablewrap">
+        <h6 class="ml-h6">Top alumnos en riesgo (ordenado por probabilidad)</h6>
+        <div class="table-responsive">
+          <table class="table table-striped ml-table align-middle">
+            <thead>
+              <tr>
+                <th>Alumno</th><th>Materia</th><th>Periodo</th><th>Clase</th>
+                <th>Asistencia</th><!-- Incidentes opcional, puedes quitar esta columna visual -->
+                <th>Incidentes</th>
+                <th>Parciales</th>
+                <th>Prob. CART</th><th>Prob. RF</th><th>Prob. Final</th><th>Pred.</th>
+                <th>Req. promedio resto</th><th>Estado ciclo</th>
+              </tr>
+            </thead>
+            <tbody id="tbRiesgo"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tabla: resumen por clase / periodo / materia -->
+      <div class="ml-tablewrap">
+        <h6 class="ml-h6">Resumen por Clase / Periodo / Materia</h6>
+        <div class="table-responsive">
+          <table class="table table-striped ml-table align-middle">
+            <thead>
+              <tr>
+                <th>Periodo</th><th>Clase</th><th>Materia</th>
+                <th>#Alumnos</th><th>#Riesgo</th><th>Tasa Riesgo</th>
+              </tr>
+            </thead>
+            <tbody id="tbResumen"></tbody>
+          </table>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-<!-- ============================================ -->
+    <!-- ============================================ -->
 
 
 
