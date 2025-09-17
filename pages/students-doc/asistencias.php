@@ -186,60 +186,65 @@
 
     </nav>
 
+<!-- Body Content Wrapper -->
+<div class="ms-content-wrapper">
+  <div class="row">
+    <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb pl-0">
+          <li class="breadcrumb-item"><a href="../../index.php"><i class="material-icons">home</i> Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Materias</li>
+          <li class="breadcrumb-item active" aria-current="page">Añadir Asistencias</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
 
-    <!-- Body Content Wrapper -->
+  <!-- Selección de materia -->
+  <div class="form-group">
+    <label for="materia-select">Selecciona una materia:</label>
+    <select id="materia-select" class="form-control">
+      <option value="">-- Selecciona una materia --</option>
+    </select>
+  </div>
 
-    <!-- Body Content Wrapper -->
-    <div class="ms-content-wrapper">
-      <div class="row">
+  <!-- Selección o creación de fecha -->
+  <div class="form-group">
+    <label for="fecha-select">Selecciona una fecha:</label>
+    <select id="fecha-select" class="form-control">
+      <option value="">-- Selecciona una fecha --</option>
+    </select>
+  </div>
 
-        <div class="col-md-12">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb pl-0">
-              <li class="breadcrumb-item"><a href="../../index.php"><i class="material-icons">home</i> Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Materias</li>
-              <li class="breadcrumb-item active" aria-current="page">Añadir Asistencias</li>
-            </ol>
-          </nav>
-        </div>
+  <!-- Input oculto para nueva fecha -->
+  <div class="form-group" id="nueva-fecha-container" style="display: none;">
+    <label for="nueva-fecha">Nueva fecha:</label>
+    <input type="date" id="nueva-fecha" class="form-control">
+  </div>
+
+  <!-- Tabla de asistencias -->
+  <div class="ms-panel-body">
+    <form id="form-asistencias">
+      <div class="table-responsive">
+        <table class="table" id="tablaAsistencias">
+          <thead>
+            <tr>
+              <th>Nombres</th>
+              <th>Apellido</th>
+              <th>Asistencia</th>
+            </tr>
+          </thead>
+          <tbody id="asistencias-body">
+            <!-- Se llena con JS -->
+          </tbody>
+        </table>
       </div>
+      <button id="guardarAsistencias" type="submit" class="btn btn-primary mt-3">Guardar Asistencias</button>
+    </form>
+  </div>
 
-      <div class="form-group">
-        <label for="materia-select">Selecciona una materia:</label>
-        <select id="materia-select" class="form-control">
-          <option value="">-- Selecciona una materia --</option>
-        </select>
-      </div>
-
-      <!-- Asistencias Table -->
-      <div class="ms-panel-body">
-        <form id="form-asistencias">
-          <div class="table-responsive">
-            <table class="table" id="tablaAsistencias">
-              <thead>
-                <tr>
-                  <th>Nombres</th>
-                  <th>Apellido</th>
-                  <th>Asistencia</th>
-                </tr>
-              </thead>
-              <tbody id="asistencias-body">
-                <!-- Se llena con JS -->
-              </tbody>
-            </table>
-
-
-
-          </div>
-          <button id="guardarAsistencias" type="submit" class="btn btn-primary mt-3">Guardar Asistencias</button>
-
-        </form>
-      </div>
-
-
-      <script src="../scripts/asistencias.js"></script>
-
-
+  <script src="../scripts/asistencias.js?v=4"></script>
+</div>
 
 
   </main>

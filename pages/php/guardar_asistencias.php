@@ -2,10 +2,12 @@
 declare(strict_types=1);
 session_start();
 require 'conecta.php';
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=utf-8');
 
-// Desactivar warnings visibles para evitar interferencias con JSON
+// Evitar que warnings/errores rompan el JSON
 ini_set('display_errors', '0');
+ini_set('log_errors', '1');
+ini_set('error_log', __DIR__ . '/error_log.txt');
 error_reporting(E_ALL);
 
 $con = conecta();
@@ -14,17 +16,22 @@ $con = conecta();
 $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 
-// Verificar datos
+// Validar estructura
 if (
-  !isset($data['asistencias']) || !is_array($data['asistencias']) ||
-  !isset($data['materia_id'])
+  empty($data['asistencias']) || !is_array($data['asistencias']) ||
+  empty($data['materia_id']) ||
+  empty($data['fecha'])
 ) {
-  echo json_encode(["success" => false, "error" => "Datos inválidos"]);
+  echo json_encode([
+    "success" => false,
+    "error" => "Datos inválidos",
+    "recibido" => $data
+  ]);
   exit;
 }
 
 $materia_id = (int)$data['materia_id'];
-$fecha = date("Y-m-d");
+$fecha = $data['fecha'];
 
 // Verificar sesión
 $usuario_id = $_SESSION['usuario_id'] ?? null;
@@ -33,45 +40,57 @@ if (!$usuario_id) {
   exit;
 }
 
-// Obtener el docente_id correspondiente al usuario_id
+// Obtener docente_id
 $docenteQuery = $con->prepare("SELECT docente_id FROM docentes WHERE usuario_id = ?");
 $docenteQuery->bind_param("i", $usuario_id);
 $docenteQuery->execute();
 $result = $docenteQuery->get_result();
-
 if ($result->num_rows === 0) {
   echo json_encode(["success" => false, "error" => "Docente no encontrado"]);
   exit;
 }
-
 $docente_id = (int)$result->fetch_assoc()['docente_id'];
 $docenteQuery->close();
 
-// Preparar inserción
-$query = "INSERT INTO asistencias (estudiante_id, estado, fecha, docente_id, materia_id) 
-          VALUES (?, ?, ?, ?, ?)";
-$stmt = $con->prepare($query);
+// Preparar queries
+$queryCheck = "SELECT asistencia_id 
+               FROM asistencias 
+               WHERE estudiante_id = ? AND materia_id = ? AND fecha = ?";
+$stmtCheck = $con->prepare($queryCheck);
 
-if (!$stmt) {
-  echo json_encode(["success" => false, "error" => "Error en la preparación"]);
-  exit;
-}
+$queryInsert = "INSERT INTO asistencias (estudiante_id, estado, fecha, docente_id, materia_id)
+                VALUES (?, ?, ?, ?, ?)";
+$stmtInsert = $con->prepare($queryInsert);
 
-// Insertar asistencias
-foreach ($data['asistencias'] as $registro) {
-  $estudiante_id = (int)$registro['estudiante_id'];
-  $estado = $registro['estado']; // "presente" o "ausente"
+$queryUpdate = "UPDATE asistencias 
+                SET estado = ?, actualizado_en = NOW()
+                WHERE estudiante_id = ? AND materia_id = ? AND fecha = ?";
+$stmtUpdate = $con->prepare($queryUpdate);
 
-  // Vincular parámetros: estudiante_id (int), estado (string), fecha (string), docente_id (int), materia_id (int)
-  $stmt->bind_param("issii", $estudiante_id, $estado, $fecha, $docente_id, $materia_id);
+// Procesar asistencias
+foreach ($data['asistencias'] as $a) {
+  $estudiante_id = (int)$a['estudiante_id'];
+  $estado = $a['estado'];
 
-  if (!$stmt->execute()) {
-    echo json_encode(["success" => false, "error" => "Error al insertar asistencia"]);
-    exit;
+  // 1. Verificar si ya existe
+  $stmtCheck->bind_param("iis", $estudiante_id, $materia_id, $fecha);
+  $stmtCheck->execute();
+  $res = $stmtCheck->get_result();
+
+  if ($res->num_rows > 0) {
+    // 2. Ya existe → UPDATE
+    $stmtUpdate->bind_param("siis", $estado, $estudiante_id, $materia_id, $fecha);
+    $stmtUpdate->execute();
+  } else {
+    // 3. No existe → INSERT
+    $stmtInsert->bind_param("issii", $estudiante_id, $estado, $fecha, $docente_id, $materia_id);
+    $stmtInsert->execute();
   }
 }
 
-$stmt->close();
+$stmtCheck->close();
+$stmtInsert->close();
+$stmtUpdate->close();
 $con->close();
 
-echo json_encode(["success" => true]);
+echo json_encode(["success" => true, "message" => "Asistencias guardadas/actualizadas"]);
