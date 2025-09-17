@@ -13,13 +13,13 @@ if (!isset($_SESSION['usuario_id']) || !isset($_SESSION['rol'])) {
 }
 
 $usuario_id = $_SESSION['usuario_id'];
-$rol = $_SESSION['rol']; // 1 = docente, 2 = admin
+$rol = $_SESSION['rol']; // 1 = docente, 0 = admin, 2 = tutor
 $materia_id = isset($_GET['materia_id']) ? intval($_GET['materia_id']) : 0;
 
 $estudiantes = [];
 
 if ($rol == 1) {
-  // 🧑‍🏫 DOCENTE: solo estudiantes asignados a sus materias
+  // 🧑‍🏫 DOCENTE: solo estudiantes de sus materias
   $query = "
     SELECT DISTINCT
       e.estudiante_id,
@@ -34,16 +34,18 @@ if ($rol == 1) {
       t.tutor_id,
       CONCAT(t.nombre, ' ', t.apellido) AS tutor_nombre,
       m.materia_id,
+      m.nombre AS materia,
       m.ciclo
-    FROM estudiantes e
-    JOIN tutores t ON e.tutor_id = t.tutor_id
-    JOIN asignacion_materias am ON am.estudiante_id = e.estudiante_id
-    JOIN materias m ON am.materia_id = m.materia_id
-    JOIN docentes d ON m.docente_id = d.docente_id
+    FROM docentes d
+    INNER JOIN clase_asignacion ca ON d.docente_id = ca.docente_id
+    INNER JOIN materias m ON ca.materia_id = m.materia_id
+    INNER JOIN clases c ON ca.clase_id = c.clase_id
+    INNER JOIN inscripciones i ON c.clase_id = i.clase_id
+    INNER JOIN estudiantes e ON i.estudiante_id = e.estudiante_id
+    LEFT JOIN tutores t ON e.tutor_id = t.tutor_id
     WHERE d.usuario_id = ?
   ";
 
-  // Agregar filtro por materia si se solicita
   if ($materia_id > 0) {
     $query .= " AND m.materia_id = ?";
     $stmt = $con->prepare($query);
@@ -53,8 +55,8 @@ if ($rol == 1) {
     $stmt->bind_param("i", $usuario_id);
   }
 
-} else {
-  // 👑 ADMIN: ver todos los estudiantes activos (sin importar materia)
+} elseif ($rol == 0) {
+  // 👑 ADMIN: ver todos los estudiantes activos
   $query = "
     SELECT 
       e.estudiante_id,
@@ -72,8 +74,29 @@ if ($rol == 1) {
     LEFT JOIN tutores t ON e.tutor_id = t.tutor_id
     WHERE e.activo = 1
   ";
-
   $stmt = $con->prepare($query);
+
+} elseif ($rol == 2) {
+  // 👨‍👩‍👧 TUTOR: ver solo sus hijos
+  $query = "
+    SELECT 
+      e.estudiante_id,
+      e.nombre,
+      e.apellido,
+      e.fecha_nacimiento,
+      e.grado,
+      e.grupo,
+      e.activo,
+      e.creado_en,
+      e.actualizado_en,
+      t.tutor_id,
+      CONCAT(t.nombre, ' ', t.apellido) AS tutor_nombre
+    FROM estudiantes e
+    INNER JOIN tutores t ON e.tutor_id = t.tutor_id
+    WHERE t.usuario_id = ?
+  ";
+  $stmt = $con->prepare($query);
+  $stmt->bind_param("i", $usuario_id);
 }
 
 if (!$stmt) {
