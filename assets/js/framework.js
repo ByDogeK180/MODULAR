@@ -284,14 +284,17 @@
     }
 
     /* Populate Quickbar with saved values */
-    function quickBarPopulate(){
-      if(checkReffererProtocol()){
-        var localQuickBar = getFromLocal("quickbar_layout");
-        if(localQuickBar.length > 0){
-          $('.ms-quick-bar-list')[0].innerHTML = localQuickBar;
-        }
+function quickBarPopulate(){
+  if (checkReffererProtocol()) {
+    var localQuickBar = getFromLocal("quickbar_layout");
+    if (localQuickBar.length > 0) {
+      var quickBarEl = $('.ms-quick-bar-list')[0];
+      if (quickBarEl) {            // ✅ Validación
+        quickBarEl.innerHTML = localQuickBar;
       }
     }
+  }
+}
 
     /* Custom Scrollbar */
     function customScrollbar(){

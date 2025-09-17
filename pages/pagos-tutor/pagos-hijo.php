@@ -126,7 +126,7 @@ session_start();
         </a>
         <ul id="student" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
           <li> <a href="../perfil-hijo/perfil.php">Perfil</a></li>
-          <li> <a href="pages/">Calificaciones</a></li>
+          <li> <a href="../perfil-hijo/calificaciones-hijo.php">Calificaciones</a></li>
         </ul>
       </li>
       <!-- /Student End--->
@@ -174,34 +174,6 @@ session_start();
         </ul>
       </li>
       <!-- /Feess End--->
-
-      <li class="menu-item">
-        <a href="pages/widgets.html">
-          <span><i class="material-icons fs-16">widgets</i>Widgets</span>
-        </a>
-      </li>
-      <!-- Basic UI Elements -->
-      <li class="menu-item">
-        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#basic-elements" aria-expanded="false"
-          aria-controls="basic-elements">
-          <span><i class="material-icons fs-16">filter_list</i>Estadisticas</span>
-        </a>
-        <ul id="basic-elements" class="collapse" aria-labelledby="basic-elements" data-parent="#side-nav-accordion">
-          <li> <a href="pages/ui-basic/accordions.html">Accordions</a> </li>
-          <li> <a href="pages/ui-basic/alerts.html">Alerts</a> </li>
-          <li> <a href="pages/ui-basic/buttons.html">Buttons</a> </li>
-          <li> <a href="pages/ui-basic/breadcrumbs.html">Breadcrumbs</a> </li>
-          <li> <a href="pages/ui-basic/badges.html">Badges</a> </li>
-          <li> <a href="pages/ui-basic/cards.html">Cards</a> </li>
-          <li> <a href="pages/ui-basic/progress-bars.html">Progress Bars</a> </li>
-          <li> <a href="pages/ui-basic/preloaders.html">Pre-loaders</a> </li>
-          <li> <a href="pages/ui-basic/pagination.html">Pagination</a> </li>
-          <li> <a href="pages/ui-basic/tabs.html">Tabs</a> </li>
-
-          <li> <a href="pages/ui-basic/typography.html">Typography</a> </li>
-        </ul>
-      </li>
-      <!-- /Basic UI Elements -->
 
     </ul>
 
@@ -468,18 +440,18 @@ session_start();
             </li>
             <li class="dropdown-divider"></li>
             <li class="ms-dropdown-list">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i class="flaticon-user mr-2"></i> Profile</span> </a>
-              <a class="media fs-14 p-2" href="pages/apps/email.html"> <span><i class="flaticon-mail mr-2"></i> Inbox</span> <span class="badge badge-pill badge-info">3</span> </a>
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i class="flaticon-gear mr-2"></i> Account Settings</span> </a>
+              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i
+                    class="flaticon-user mr-2"></i> Perfil</span> </a>
+
             </li>
             <li class="dropdown-divider"></li>
             <li class="dropdown-menu-footer">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/lock-screen.html"> <span><i class="flaticon-security mr-2"></i> Lock</span> </a>
+
             </li>
             <li class="dropdown-menu-footer">
-                <a class="media fs-14 p-2 logout-link" href="../php/auth.php?logout=true">
-                  <span><i class="flaticon-shut-down mr-2"></i> Logout</span>
-                </a>
+              <a class="media fs-14 p-2 logout-link" href="pages/php/auth.php?logout=true">
+                <span><i class="flaticon-shut-down mr-2"></i> Cerrar Sesión</span>
+              </a>
             </li>
           </ul>
         </li>

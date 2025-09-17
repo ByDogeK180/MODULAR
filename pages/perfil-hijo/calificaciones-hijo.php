@@ -1,69 +1,10 @@
-<?php
-//session_start();
-//echo '<pre>';
-//print_r($_SESSION);
-//echo '</pre>';
+<?php 
+// session_start();
+// echo '<pre>';
+// print_r($_SESSION);
+// echo '</pre>';
 
 require_once '../php/auth.php';
-?>
-
-<?php
-
-require_once '../php/conecta.php';
-$con = conecta();
-
-// Asegura que el tutor esté logueado
-$tutor_id = $_SESSION['tutor_id'] ?? 0;
-
-if ($tutor_id === 0) {
-  echo "<div class='alert alert-danger m-4'><strong>Error:</strong> No has iniciado sesión como tutor.</div>";
-  exit;
-}
-
-// Buscar automáticamente el primer hijo del tutor
-$sqlHijo = "SELECT estudiante_id FROM tutor_estudiante WHERE tutor_id = ? LIMIT 1";
-$stmtHijo = $con->prepare($sqlHijo);
-$stmtHijo->bind_param("i", $tutor_id);
-$stmtHijo->execute();
-$resHijo = $stmtHijo->get_result();
-$hijo = $resHijo->fetch_assoc();
-
-if (!$hijo) {
-  echo "<div class='alert alert-warning m-4'><strong>Info:</strong> Aún no tienes hijos asignados.</div>";
-  exit;
-}
-
-$estudiante_id = $hijo['estudiante_id'];
-
-// Obtener los datos del estudiante
-$sql = "SELECT e.*, t.nombre AS tutor_nombre, t.apellido AS tutor_apellido
-        FROM estudiantes e
-        LEFT JOIN tutores t ON e.tutor_id = t.tutor_id
-        WHERE e.estudiante_id = ?";
-$stmt = $con->prepare($sql);
-$stmt->bind_param("i", $estudiante_id);
-$stmt->execute();
-$resultado = $stmt->get_result();
-$estudiante = $resultado->fetch_assoc();
-
-if (!$estudiante) {
-  echo "<div class='alert alert-danger m-4'><strong>Error:</strong> No se encontró información del estudiante.</div>";
-  exit;
-}
-
-// Obtener materias del estudiante
-$sqlMaterias = "SELECT m.nombre, m.foto_url, d.nombre AS docente_nombre, d.apellido AS docente_apellido
-                FROM inscripciones i
-                JOIN clases c ON i.clase_id = c.clase_id
-                JOIN clase_asignacion ca ON ca.clase_id = c.clase_id
-                JOIN materias m ON m.materia_id = ca.materia_id
-                LEFT JOIN docentes d ON d.docente_id = ca.docente_id
-                WHERE i.estudiante_id = ?
-                ";
-$stmtMaterias = $con->prepare($sqlMaterias);
-$stmtMaterias->bind_param("i", $estudiante_id);
-$stmtMaterias->execute();
-$materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -74,25 +15,27 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Weeducate </title>
+  <title>ShoolCare</title>
   <!-- Iconic Fonts -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="../../vendors/iconic-fonts/font-awesome/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../../vendors/iconic-fonts/flat-icons/flaticon.css">
-  <link rel="stylesheet" href="../../vendors/iconic-fonts/font-awesome/css/all.min.css">
+
   <!-- Bootstrap core CSS -->
   <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
   <!-- jQuery UI -->
   <link href="../../assets/css/jquery-ui.min.css" rel="stylesheet">
+  <!-- Page Specific CSS (Slick Slider.css) -->
+  <link href="../../assets/css/slick.css" rel="stylesheet">
   <!-- Weeducate styles -->
   <link href="../../assets/css/style.css" rel="stylesheet">
-  <link href="../../assets/css/perfil-hijo.css" rel="stylesheet">
   <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/weicon/weicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/LogoSchoolCare.png">
 </head>
 
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
 
-
+  </div>
 
   <!-- Preloader -->
   <div id="preloader-wrap">
@@ -117,13 +60,12 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
   <div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight">
   </div>
 
-  <!-- Sidebar Navigation Left -->
+<!-- Sidebar Navigation Left -->
   <aside id="ms-side-nav" class="side-nav fixed ms-aside-scrollable ms-aside-left">
 
     <!-- Logo -->
     <div class="logo-sn ms-d-block-lg">
-      <a class="pl-0 ml-0 text-center" href="../../Tutor.php"> <img src="../../assets/img/logo/weeducate-4.png"
-          alt="logo"> </a>
+      <a class="pl-0 ml-0 text-center" href="../../Tutor.php"><img src="../../assets/img/LogoSchoolCare.png" alt="logo"> </a>
     </div>
 
     <!-- Navigation -->
@@ -140,7 +82,6 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
         </ul>
       </li>
       <!-- /Dashboard -->
-
 
       <!--Student Start-->
       <li class="menu-item">
@@ -177,7 +118,7 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
           <li> <a href="../profesores-tutor/profesores-estudiante.php">Mis Docentes</a> </li>
         </ul>
       </li>
-      <!-- /Professors End--->
+      <!-- /Professors End--->  
 
       <!--Holiday Start-->
       <li class="menu-item">
@@ -198,6 +139,7 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
         </ul>
       </li>
       <!-- /Feess End--->
+
     </ul>
 
   </aside>
@@ -370,8 +312,8 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
       </div>
 
       <div class="logo-sn logo-sm ms-d-block-sm">
-        <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="../../index.html"><img
-            src="../../assets/img/logo/weeducate-4.png" alt="logo"> </a>
+        <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="../../index.php"><img
+            src="../../assets/img/LogoSchoolCare.png" alt="logo"> </a>
       </div>
 
       <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
@@ -383,7 +325,7 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
             </div>
           </form>
         </li>
-          
+        
           <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="mailDropdown">
             <li class="dropdown-menu-header">
               <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Mail</span></h6><span
@@ -393,7 +335,7 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
             <li class="ms-scrollable ms-dropdown-list">
               <a class="media p-2" href="#">
                 <div class="ms-chat-status ms-status-offline ms-chat-img mr-2 align-self-center">
-                  <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
+                  <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
                 </div>
                 <div class="media-body">
                   <span>Hey man, looking forward to your new project.</span>
@@ -421,11 +363,10 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
             </li>
             <li class="dropdown-divider"></li>
             <li class="dropdown-menu-footer text-center">
-              <a href="../apps/email.html">Go to Inbox</a>
+              <a href="apps/email.html">Go to Inbox</a>
             </li>
           </ul>
         </li>
-          
           <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown">
             <li class="dropdown-menu-header">
               <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Notifications</span></h6><span
@@ -464,8 +405,7 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
             </li>
           </ul>
         </li>
-          
-        </li>
+        
         <li class="ms-nav-item ms-nav-user dropdown">
           <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img
               class="ms-user-img ms-img-round float-right" src="../../assets/img/we-educate/new-student-5.jpg"
@@ -475,19 +415,14 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
               <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Bienvenido, <?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellido']; ?></span></h6>
             </li>
             <li class="dropdown-divider"></li>
-          <li class="ms-dropdown-list">
+            <li class="ms-dropdown-list">
               <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i
-                    class="flaticon-user mr-2"></i> Perfil</span> </a>
-
+                    class="flaticon-user mr-2"></i> Profile</span> </a>
             </li>
             <li class="dropdown-divider"></li>
             <li class="dropdown-menu-footer">
-
-            </li>
-            <li class="dropdown-menu-footer">
-              <a class="media fs-14 p-2 logout-link" href="pages/php/auth.php?logout=true">
-                <span><i class="flaticon-shut-down mr-2"></i> Cerrar Sesión</span>
-              </a>
+              <a class="media fs-14 p-2" href="pages/prebuilt-pages/default-login.html"> <span><i
+                    class="flaticon-shut-down mr-2"></i> Logout</span> </a>
             </li>
           </ul>
         </li>
@@ -503,167 +438,59 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
 
 
     <!-- Body Content Wrapper -->
-    <div class="container py-5">
-      <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
 
-<div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
-  <div class="profile-header">
-    <!-- Icono pequeño a la izquierda -->
-    <i class="ph-icon fas fa-user-graduate" aria-hidden="true"></i>
+    <!-- Body Content Wrapper -->
 
-    <!-- Cuerpo (título+estado arriba, fecha abajo) -->
-    <div class="ph-body">
-      <div class="ph-top">
-        <h2 class="ph-title mb-0">
-          Perfil de <?php echo $estudiante['nombre'].' '.$estudiante['apellido']; ?>
-        </h2>
-        <span class="status-inline <?php echo $estudiante['activo'] ? 'ok' : 'off'; ?>">
-          <i class="fas <?php echo $estudiante['activo'] ? 'fa-check-circle' : 'fa-times-circle'; ?>"></i>
-          <?php echo $estudiante['activo'] ? 'Activo' : 'Inactivo'; ?>
-        </span>
+<div class="ms-content-wrapper">
+  <div class="d-flex justify-content-center my-5">
+    <div class="card shadow-lg p-4 rounded-4 w-100" style="max-width: 1100px;">
+      <div class="ms-panel-header d-flex justify-content-between align-items-center">
+        <h6 class="mb-0 text-primary fw-bold">Calificaciones del alumno</h6>
       </div>
 
-      <div class="ph-registered">
-        <i class="far fa-calendar-alt"></i>
-        Registrado el <?php echo $estudiante['creado_en']; ?>
+      <div class="ms-panel-body">
+         <form id="formCalificaciones">
+      <div class="row g-3 mb-3">
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Hijo</label>
+          <select id="selectHijo" class="form-select" required>
+            <option value="">Cargando hijos...</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="form-label fw-bold">Periodo</label>
+          <select id="selectPeriodo" class="form-select">
+            <option value="">Todos</option>
+            <option value="1">Periodo Anual</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table table-bordered align-middle text-center" id="tablaCalificaciones">
+          <thead class="table-light">
+            <tr>
+              <th>Materia</th>
+              <th>Promedio</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="3">Selecciona un hijo</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="text-end mt-3">
+        <button id="btnGuardarCalificaciones" type="button" class="btn btn-warning" style="display:none;">
+          Guardar Calificaciones
+        </button>
+      </div>
+    </form>
       </div>
     </div>
   </div>
 </div>
-
-        <div class="card-body p-4">
-
-          <!-- Información básica y académica -->
-          <div class="row g-4 mb-5">
-
-            <!-- Información básica -->
-            <div class="col-lg-6">
-              <div class="info-card shadow-sm h-100">
-                <h5 class="section-title text-primary mb-3">
-                  <span class="title-icon"><i class="fas fa-info-circle"></i></span> Información básica
-                </h5>
-
-                <div class="info-grid">
-                  <div class="info-item">
-                    <span class="info-icon"><i class="fas fa-calendar-day"></i></span>
-                    <div>
-                      <p class="info-label">Fecha de nacimiento</p>
-                      <p class="info-value"><?php echo $estudiante['fecha_nacimiento']; ?></p>
-                    </div>
-                  </div>
-
-                  <div class="info-item">
-                    <span class="info-icon"><i class="fas fa-graduation-cap"></i></span>
-                    <div>
-                      <p class="info-label">Grado y Grupo</p>
-                      <p class="info-value"><?php echo $estudiante['grado'] . '° ' . $estudiante['grupo']; ?></p>
-                    </div>
-                  </div>
-
-                  <div class="info-item">
-                    <span class="info-icon"><i class="fas fa-user-tie"></i></span>
-                    <div>
-                      <p class="info-label">Tutor</p>
-                      <p class="info-value">
-                        <?php echo $estudiante['tutor_nombre'] . ' ' . $estudiante['tutor_apellido']; ?></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Datos académicos -->
-            <div class="col-lg-6">
-              <div class="info-card shadow-sm h-100">
-                <h5 class="section-title text-primary mb-3">
-                  <span class="title-icon"><i class="fas fa-id-card"></i></span> Datos académicos
-                </h5>
-
-                <div class="info-grid">
-                  <div class="info-item">
-                    <span class="info-icon"><i class="fas fa-hashtag"></i></span>
-                    <div>
-                      <p class="info-label">ID Estudiante</p>
-                      <p class="info-value"><?php echo $estudiante['estudiante_id']; ?></p>
-                    </div>
-                  </div>
-
-                  <div class="info-item">
-                    <span class="info-icon"><i class="fas fa-chart-line"></i></span>
-                    <div>
-                      <p class="info-label">Promedio general</p>
-                      <p class="info-value">8.7</p>
-                    </div>
-                  </div>
-
-                  <div class="info-item">
-                    <span class="info-icon"><i class="fas fa-clock"></i></span>
-                    <div>
-                      <p class="info-label">Horario</p>
-                      <p class="info-value">7:00 AM - 2:00 PM</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-
-          <!-- Materias -->
-          <div class="d-flex justify-content-between align-items-center mb-4 materias-header">
-            <h4 class="section-title text-dark">
-              <span class="title-icon"><i class="fas fa-book-open"></i></span> Materias actuales
-            </h4>
-            <span class="contador"><?php echo count($materias); ?> materias</span>
-          </div>
-
-          <?php if (count($materias) > 0): ?>
-          <div class="row g-4">
-            <?php foreach ($materias as $materia): ?>
-            <div class="col-sm-6 col-lg-4 col-xl-3">
-
-              <div class="card materia-card border-0 shadow-sm h-100 rounded-3">
-                <div class="position-relative">
-                  <img src="../../<?php echo $materia['foto_url']; ?>" class="card-img-top" alt="Imagen materia">
-                  <span class="badge badge-status bg-success">En curso</span>
-                </div>
-                <div class="card-body">
-                  <h6 class="fw-bold text-dark mb-2"><?php echo $materia['nombre']; ?></h6>
-                  <div class="d-flex align-items-center gap-2 text-muted small mb-3">
-                    <i class="fas fa-user-tie"></i>
-                    <span><?php echo $materia['docente_nombre'] . ' ' . $materia['docente_apellido']; ?></span>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <span class="badge-chip"><i class="fas fa-clock me-1"></i> L-V 10:00</span>
-                    <a href="#" class="text-decoration-none small">Ver detalles <i
-                        class="fas fa-chevron-right ms-1"></i></a>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            <?php endforeach; ?>
-          </div>
-          <?php else: ?>
-          <div class="alert alert-warning d-flex align-items-center gap-3 py-3">
-            <i class="fas fa-info-circle fa-lg"></i>
-            <div>
-              <h6 class="alert-heading mb-1">Sin materias asignadas</h6>
-              <p class="mb-0 small">Este estudiante aún no tiene materias asignadas para este periodo.</p>
-            </div>
-          </div>
-          <?php endif; ?>
-        </div>
-        
-      </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
-
-
 
   </main>
 
@@ -673,6 +500,24 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
 
   <!-- MODALS -->
 
+  <!-- Modal detalle -->
+  <div class="modal fade" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="modalDetalleLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalDetalleLabel">Detalle de Calificación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <!-- contenido dinámico desde JS -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- SCRIPTS -->
   <!-- Global Required Scripts Start -->
   <script src="../../assets/js/jquery-3.3.1.min.js"></script>
@@ -680,52 +525,24 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
   <script src="../../assets/js/bootstrap.min.js"></script>
   <script src="../../assets/js/perfect-scrollbar.js"> </script>
   <script src="../../assets/js/jquery-ui.min.js"> </script>
+  <script src="../scripts/cargarCalificacionesTutor.js"></script>
   <!-- Global Required Scripts End -->
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  // ✅ PHP embebido correctamente y seguro
-  const estudianteId = <?php echo json_encode((int)$estudiante['estudiante_id']); ?>;
+  <!-- Page Specific Scripts Start -->
+  <script src="../../assets/js/slick.min.js"> </script>
+  <script src="../../assets/js/moment.js"> </script>
+  <script src="../../assets/js/jquery.webticker.min.js"> </script>
 
-  function renderTabla(nombrePeriodo, materiasDict) {
-    let html = `
-      <h6 class="text-primary fw-bold mb-3">Calificaciones del periodo: ${nombrePeriodo}</h6>
-      <div class="table-responsive">
-        <table class="table table-bordered table-hover table-grades">
-          <thead class="table-light">
-            <tr>
-              <th><i class="fas fa-book me-1 text-muted"></i> Materia</th>
-              <th><i class="fas fa-check me-1 text-muted"></i> Calificación 1</th>
-              <th><i class="fas fa-check me-1 text-muted"></i> Calificación 2</th>
-              <th><i class="fas fa-check me-1 text-muted"></i> Calificación 3</th>
-            </tr>
-          </thead>
-          <tbody>`;
+  <!-- Page Specific Scripts Finish -->
 
-    for (const materia in materiasDict) {
-      const c1 = materiasDict[materia][1] ?? '-';
-      const c2 = materiasDict[materia][2] ?? '-';
-      const c3 = materiasDict[materia][3] ?? '-';
-      html += `
-        <tr>
-          <td>${materia}</td>
-          <td>${fmt(c1)}</td>
-          <td>${fmt(c2)}</td>
-          <td>${fmt(c3)}</td>
-        </tr>`;
-    }
+  <!-- Weeducate core JavaScript -->
+  <script src="../../assets/js/framework.js"></script>
 
-    html += `</tbody></table></div>`;
-    tablaContainer.innerHTML = html;
-  }
-});
-</script>
-
-<!-- Weeducate core JavaScript -->
-<script src="../../assets/js/framework.js"></script>
-
-<!-- Settings -->
-<script src="../../assets/js/settings.js"></script>
-
+  <!-- Settings -->
+  <script src="../../assets/js/settings.js"></script>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
 </body>
+
 </html>
