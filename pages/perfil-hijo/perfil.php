@@ -132,7 +132,7 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
       <li class="menu-item">
         <a href="#" class="has-chevron" data-toggle="collapse" data-target="#dashboard" aria-expanded="false"
           aria-controls="dashboard">
-          <span><i class="material-icons fs-16">dashboard</i>Dashboard </span>
+          <span><i class="material-icons fs-16">dashboard</i>Home </span>
         </a>
         <ul id="dashboard" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
           <li> <a href="../../Tutor.php">SchoolCare</a> </li>
@@ -149,8 +149,8 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
           <span><i class="fa fa-users fs-16"></i>Mi hijo</span>
         </a>
         <ul id="student" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-          <li> <a href="pages/perfil-hijo/perfil.php">Perfil</a></li>
-          <li> <a href="pages/">Calificaciones</a></li>
+          <li> <a href="./perfil.php">Perfil</a></li>
+          <li> <a href="./calificaciones-hijo.php">Calificaciones</a></li>
         </ul>
       </li>
       <!-- /Student End--->
@@ -162,7 +162,7 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
           <span><i class="fa fa-graduation-cap fs-16"></i>Materias</span>
         </a>
         <ul id="courses" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-          <li> <a href="pages/cursos-tutor/materias-hijo.php">Todas mis materias</a> </li>
+          <li> <a href="../cursos-tutor/materias-hijo.php">Todas mis materias</a> </li>
         </ul>
       </li>
       <!-- /Courses End--->
@@ -174,14 +174,14 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
           <span><i class="fa fa-user fs-16"></i>Docentes</span>
         </a>
         <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-          <li> <a href="pages/profesores-tutor/profesores-estudiante.php">Mis Docentes</a> </li>
+          <li> <a href="../profesores-tutor/profesores-estudiante.php">Mis Docentes</a> </li>
         </ul>
       </li>
       <!-- /Professors End--->
 
       <!--Holiday Start-->
       <li class="menu-item">
-        <a href="./pages/calendario-tutor/calendario-escolar.php">
+        <a href="../calendario-tutor/calendario-escolar.php">
           <span><i class="fa fa-calendar fs-16"></i>Calendario Escolar</span>
         </a>
       </li>
@@ -194,40 +194,11 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
           <span><i class="fas fa-dollar-sign"></i>Pagos Escolares</span>
         </a>
         <ul id="fees" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-          <li> <a href="./pages/pagos-tutor/pagos-hijo.php">Orden de pago</a></li>
+          <li> <a href="../pagos-tutor/pagos-hijo.php">Orden de pago</a></li>
         </ul>
       </li>
       <!-- /Feess End--->
-
-      <li class="menu-item">
-        <a href="pages/widgets.html">
-          <span><i class="material-icons fs-16">widgets</i>Widgets</span>
-        </a>
-      </li>
-      <!-- Basic UI Elements -->
-      <li class="menu-item">
-        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#basic-elements" aria-expanded="false"
-          aria-controls="basic-elements">
-          <span><i class="material-icons fs-16">filter_list</i>Estadisticas</span>
-        </a>
-        <ul id="basic-elements" class="collapse" aria-labelledby="basic-elements" data-parent="#side-nav-accordion">
-          <li> <a href="pages/ui-basic/accordions.html">Accordions</a> </li>
-          <li> <a href="pages/ui-basic/alerts.html">Alerts</a> </li>
-          <li> <a href="pages/ui-basic/buttons.html">Buttons</a> </li>
-          <li> <a href="pages/ui-basic/breadcrumbs.html">Breadcrumbs</a> </li>
-          <li> <a href="pages/ui-basic/badges.html">Badges</a> </li>
-          <li> <a href="pages/ui-basic/cards.html">Cards</a> </li>
-          <li> <a href="pages/ui-basic/progress-bars.html">Progress Bars</a> </li>
-          <li> <a href="pages/ui-basic/preloaders.html">Pre-loaders</a> </li>
-          <li> <a href="pages/ui-basic/pagination.html">Pagination</a> </li>
-          <li> <a href="pages/ui-basic/tabs.html">Tabs</a> </li>
-
-          <li> <a href="pages/ui-basic/typography.html">Typography</a> </li>
-        </ul>
-      </li>
-      <!-- /Basic UI Elements -->
     </ul>
-
 
   </aside>
 
@@ -501,18 +472,22 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
               alt="people"> </a>
           <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
             <li class="dropdown-menu-header">
-              <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Welcome, Anny Farisha</span></h6>
+              <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Bienvenido, <?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellido']; ?></span></h6>
             </li>
             <li class="dropdown-divider"></li>
-            <li class="ms-dropdown-list">
-              <a class="media fs-14 p-2" href="../prebuilt-pages/user-profile.html"> <span><i
-                    class="flaticon-user mr-2"></i> Profile</span> </a>
+          <li class="ms-dropdown-list">
+              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i
+                    class="flaticon-user mr-2"></i> Perfil</span> </a>
+
             </li>
             <li class="dropdown-divider"></li>
-            
             <li class="dropdown-menu-footer">
-              <a class="media fs-14 p-2" href="../prebuilt-pages/default-login.html"> <span><i
-                    class="flaticon-shut-down mr-2"></i> Logout</span> </a>
+
+            </li>
+            <li class="dropdown-menu-footer">
+              <a class="media fs-14 p-2 logout-link" href="pages/php/auth.php?logout=true">
+                <span><i class="flaticon-shut-down mr-2"></i> Cerrar Sesión</span>
+              </a>
             </li>
           </ul>
         </li>
@@ -680,34 +655,7 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
           </div>
           <?php endif; ?>
         </div>
-
-        <!-- Calificaciones -->
-        <!-- Dropdown y contenedor de tabla -->
-        <div class="mt-4">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5 class="text-dark fw-bold"><i class="fas fa-star-half-alt text-primary me-1"></i> Rendimiento académico
-            </h5>
-            <div class="dropdown">
-              <button class="btn btn-sm btn-outline-primary dropdown-toggle" type="button" id="dropdownPeriodoBtn"
-                data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fas fa-filter me-1"></i> Selecciona periodo
-              </button>
-              <ul class="dropdown-menu" id="dropdownPeriodos" aria-labelledby="dropdownPeriodoBtn"></ul>
-            </div>
-          </div>
-
-          <div id="tablaCalificaciones" class="mt-4">
-            <div class="alert alert-info">
-              <i class="fas fa-info-circle me-2"></i> Selecciona un periodo para visualizar las calificaciones.
-            </div>
-          </div>
-        </div>
-
-        <!-- Placeholder de gráfico -->
-        <div class="bg-light rounded-3 p-4 text-center">
-          <img src="https://via.placeholder.com/800x300?text=Gráfico+de+progreso+del+estudiante"
-            alt="Gráfico de progreso" class="img-fluid rounded-2">
-        </div>
+        
       </div>
     </div>
     </div>
@@ -738,18 +686,6 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
 document.addEventListener('DOMContentLoaded', () => {
   // ✅ PHP embebido correctamente y seguro
   const estudianteId = <?php echo json_encode((int)$estudiante['estudiante_id']); ?>;
-
-  const menu = document.getElementById('dropdownPeriodos');
-  const tablaContainer = document.getElementById('tablaCalificaciones');
-  const btn = document.getElementById('dropdownPeriodoBtn');
-
-  if (!menu || !tablaContainer || !btn) {
-    console.error('No se encontraron elementos requeridos:', { menu, tablaContainer, btn });
-    return;
-  }
-
-  // Guion gris cuando no hay calificación
-  const fmt = (v) => (v === '-' ? '<span class="placeholder">-</span>' : v);
 
   function renderTabla(nombrePeriodo, materiasDict) {
     let html = `
@@ -782,85 +718,14 @@ document.addEventListener('DOMContentLoaded', () => {
     html += `</tbody></table></div>`;
     tablaContainer.innerHTML = html;
   }
-
-  function cargarCalificaciones(periodoId, nombrePeriodo) {
-    tablaContainer.innerHTML = `
-      <div class="alert alert-info">
-        <i class="fas fa-spinner fa-spin me-2"></i> Cargando calificaciones...
-      </div>`;
-
-    fetch(`../php/obtener_calificaciones_estudiante.php?estudiante_id=${encodeURIComponent(estudianteId)}&periodo_id=${encodeURIComponent(periodoId)}`)
-      .then(r => r.ok ? r.json() : Promise.reject(r.statusText))
-      .then(data => {
-        if (!Array.isArray(data) || data.length === 0) {
-          tablaContainer.innerHTML = `
-            <div class="alert alert-warning">
-              <i class="fas fa-exclamation-circle me-2"></i>
-              No hay calificaciones registradas para <strong>${nombrePeriodo}</strong>.
-            </div>`;
-          return;
-        }
-
-        const materias = {};
-        for (const row of data) {
-          const mat = row.materia;
-          const num = Number.parseInt(row.numero, 10);
-          const val = Number.parseFloat(row.valor);
-          if (!materias[mat]) materias[mat] = {};
-          if (Number.isFinite(num)) materias[mat][num] = Number.isFinite(val) ? val : '-';
-        }
-
-        renderTabla(nombrePeriodo, materias);
-      })
-      .catch(err => {
-        console.error('Error al obtener calificaciones:', err);
-        tablaContainer.innerHTML = `<div class="alert alert-danger">Error al cargar calificaciones.</div>`;
-      });
-  }
-
-  // Cargar periodos del estudiante
-  fetch(`../php/obtener_periodos_tutor.php?estudiante_id=${encodeURIComponent(estudianteId)}`)
-    .then(r => r.ok ? r.json() : Promise.reject(r.statusText))
-    .then(periodos => {
-      if (!Array.isArray(periodos) || periodos.length === 0) {
-        menu.innerHTML = '<li><span class="dropdown-item disabled">Sin periodos disponibles</span></li>';
-        return;
-      }
-
-      menu.innerHTML = '';
-      for (const p of periodos) {
-        const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.className = 'dropdown-item';
-        a.href = '#';
-        a.textContent = p.nombre;
-        a.addEventListener('click', (e) => {
-          e.preventDefault();
-          btn.innerHTML = `<i class="fas fa-filter me-1"></i> ${p.nombre}`;
-          cargarCalificaciones(p.periodo_id, p.nombre);
-        });
-        li.appendChild(a);
-        menu.appendChild(li);
-      }
-
-      // Autocargar el primero
-      const primer = periodos[0];
-      btn.innerHTML = `<i class="fas fa-filter me-1"></i> ${primer.nombre}`;
-      cargarCalificaciones(primer.periodo_id, primer.nombre);
-    })
-    .catch(err => {
-      console.error('Error al cargar periodos:', err);
-      menu.innerHTML = '<li><span class="dropdown-item disabled">Error al cargar periodos</span></li>';
-    });
 });
 </script>
 
-  <!-- Weeducate core JavaScript -->
-  <script src="../../assets/js/framework.js"></script>
+<!-- Weeducate core JavaScript -->
+<script src="../../assets/js/framework.js"></script>
 
-  <!-- Settings -->
-  <script src="../../assets/js/settings.js"></script>
+<!-- Settings -->
+<script src="../../assets/js/settings.js"></script>
 
 </body>
-
 </html>

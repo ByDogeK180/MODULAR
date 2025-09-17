@@ -28,10 +28,6 @@
 
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
 
-
-
-
-
   <!-- Preloader -->
   <div id="preloader-wrap">
     <div class="spinner spinner-8">
@@ -85,7 +81,7 @@
           <span><i class="fa fa-users fs-16"></i>Mi hijo</span>
         </a>
         <ul id="student" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-          <li> <a href="pages/perfil-hijo/perfil.php">Perfil</a></li>
+          <li> <a href="./pages/perfil-hijo/perfil.php">Perfil</a></li>
           <li> <a href="pages/">Calificaciones</a></li>
         </ul>
       </li>
@@ -135,39 +131,7 @@
       </li>
       <!-- /Feess End--->
 
-      <li class="menu-item">
-        <a href="pages/widgets.html">
-          <span><i class="material-icons fs-16">widgets</i>Widgets</span>
-        </a>
-      </li>
-      <!-- Basic UI Elements -->
-      <li class="menu-item">
-        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#basic-elements" aria-expanded="false"
-          aria-controls="basic-elements">
-          <span><i class="material-icons fs-16">filter_list</i>Estadisticas</span>
-        </a>
-        <ul id="basic-elements" class="collapse" aria-labelledby="basic-elements" data-parent="#side-nav-accordion">
-          <li> <a href="pages/ui-basic/accordions.html">Accordions</a> </li>
-          <li> <a href="pages/ui-basic/alerts.html">Alerts</a> </li>
-          <li> <a href="pages/ui-basic/buttons.html">Buttons</a> </li>
-          <li> <a href="pages/ui-basic/breadcrumbs.html">Breadcrumbs</a> </li>
-          <li> <a href="pages/ui-basic/badges.html">Badges</a> </li>
-          <li> <a href="pages/ui-basic/cards.html">Cards</a> </li>
-          <li> <a href="pages/ui-basic/progress-bars.html">Progress Bars</a> </li>
-          <li> <a href="pages/ui-basic/preloaders.html">Pre-loaders</a> </li>
-          <li> <a href="pages/ui-basic/pagination.html">Pagination</a> </li>
-          <li> <a href="pages/ui-basic/tabs.html">Tabs</a> </li>
-
-          <li> <a href="pages/ui-basic/typography.html">Typography</a> </li>
-        </ul>
-      </li>
-      <!-- /Basic UI Elements -->
-
-
-
-
     </ul>
-
 
   </aside>
 
@@ -444,14 +408,14 @@
 
             <li class="dropdown-menu-header">
               <h6 class="dropdown-header ms-inline m-0">
-                <span class="text-disabled">Welcome, <?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellido']; ?></span>
+                <span class="text-disabled">Bienvenido, <?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellido']; ?></span>
               </h6>
             </li>
 
             <li class="dropdown-divider"></li>
             <li class="ms-dropdown-list">
               <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i
-                    class="flaticon-user mr-2"></i> Profile</span> </a>
+                    class="flaticon-user mr-2"></i> Perfil</span> </a>
 
             </li>
             <li class="dropdown-divider"></li>
@@ -460,7 +424,7 @@
             </li>
             <li class="dropdown-menu-footer">
               <a class="media fs-14 p-2 logout-link" href="pages/php/auth.php?logout=true">
-                <span><i class="flaticon-shut-down mr-2"></i> Logout</span>
+                <span><i class="flaticon-shut-down mr-2"></i> Cerrar Sesión</span>
               </a>
             </li>
           </ul>

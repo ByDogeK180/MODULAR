@@ -147,21 +147,6 @@ require_once '../php/auth.php';
                 </ul>
             </li>
             <!-- /Feess End--->
-
-
-            <!-- Charts -->
-            <li class="menu-item">
-                <a href="#" class="has-chevron" data-toggle="collapse" data-target="#charts" aria-expanded="false"
-                    aria-controls="charts">
-                    <span><i class="material-icons fs-16">equalizer</i>Charts</span>
-                </a>
-                <ul id="charts" class="collapse" aria-labelledby="charts" data-parent="#side-nav-accordion">
-                    <li> <a href="../charts/chartjs.html">Chart JS</a> </li>
-                    <li> <a href="../charts/morris-charts.html">Morris Chart</a> </li>
-                </ul>
-            </li>
-            <!-- /Charts -->
-
         </ul>
 
 
@@ -456,16 +441,19 @@ require_once '../php/auth.php';
                         </li>
                         <li class="dropdown-divider"></li>
                         <li class="ms-dropdown-list">
-                            <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i
-                                        class="flaticon-user mr-2"></i> Profile</span> </a>                      
-                        </li>
-                        <li class="dropdown-divider"></li>
-                        
-                        <li class="dropdown-menu-footer">
-                            <a class="media fs-14 p-2 logout-link" href="../php/auth.php?logout=true">
-                                <span><i class="flaticon-shut-down mr-2"></i> Logout</span>
-                            </a>
-                        </li>
+              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i
+                    class="flaticon-user mr-2"></i> Perfil</span> </a>
+
+            </li>
+            <li class="dropdown-divider"></li>
+            <li class="dropdown-menu-footer">
+
+            </li>
+            <li class="dropdown-menu-footer">
+              <a class="media fs-14 p-2 logout-link" href="pages/php/auth.php?logout=true">
+                <span><i class="flaticon-shut-down mr-2"></i> Cerrar Sesión</span>
+              </a>
+            </li>
                     </ul>
                 </li>
             </ul>
