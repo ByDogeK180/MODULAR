@@ -625,7 +625,7 @@ $materias = $stmtMaterias->get_result()->fetch_all(MYSQLI_ASSOC);
 
               <div class="card materia-card border-0 shadow-sm h-100 rounded-3">
                 <div class="position-relative">
-                  <img src="../../<?php echo $materia['foto_url']; ?>" class="card-img-top" alt="Imagen materia">
+                  <img src="<?php echo $materia['foto_url']; ?>" class="card-img-top" alt="Imagen materia">
                   <span class="badge badge-status bg-success">En curso</span>
                 </div>
                 <div class="card-body">
