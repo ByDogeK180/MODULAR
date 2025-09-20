@@ -11,13 +11,23 @@ if (!isset($_SESSION['docente_id'])) {
 $docente_id = $_SESSION['docente_id'];
 $con = conecta();
 
+if (!$con) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Error de conexión a la base de datos']);
+    exit;
+}
+
 $query = "
     SELECT DISTINCT 
-        m.materia_id, m.ciclo, e.grado, e.grupo
-    FROM materias m
-    INNER JOIN asignacion_materias am ON m.materia_id = am.materia_id
-    INNER JOIN estudiantes e ON am.estudiante_id = e.estudiante_id
-    WHERE m.docente_id = ?
+        ca.materia_id,
+        m.nombre AS materia_nombre,
+        c.grado,
+        c.grupo
+    FROM clase_asignacion ca
+    INNER JOIN clases c ON c.clase_id = ca.clase_id
+    INNER JOIN materias m ON m.materia_id = ca.materia_id
+    WHERE ca.docente_id = ?
+    ORDER BY c.grado, c.grupo, m.nombre
 ";
 
 $stmt = $con->prepare($query);
@@ -30,6 +40,7 @@ while ($row = $res->fetch_assoc()) {
     $grupos[] = $row;
 }
 
-echo json_encode($grupos);
+echo json_encode($grupos, JSON_UNESCAPED_UNICODE);
+
 $stmt->close();
 $con->close();
