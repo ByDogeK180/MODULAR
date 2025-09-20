@@ -9,7 +9,6 @@ require_once '../php/auth.php';
 
 <?php
 
-require_once '../php/conecta.php';
 $con = conecta();
 
 // Asegura que el tutor esté logueado

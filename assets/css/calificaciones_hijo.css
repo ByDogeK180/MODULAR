@@ -1,0 +1,100 @@
+/* --- Bloque resumen Promedio General --- */
+.summary-row td {
+  border-top: 2px solid #dee2e6;
+  background: #f9fafb;
+  padding: 1rem;
+}
+.summary-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.summary-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #495057;
+}
+.summary-value {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.summary-value .badge {
+  font-size: 1.1rem;
+  padding: .55rem .9rem;
+  min-width: 60px;
+  text-align: center;
+  border-radius: .5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,.08);
+}
+.summary-status { font-weight: 700; font-size: 1rem; }
+.summary-status.aprobado  { color: #198754; }
+.summary-status.reprobado { color: #dc3545; }
+
+/* ---------- Pretty selects (Hijo/Periodo) ---------- */
+.pretty-label{
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: .35rem;
+}
+
+.nice-select{
+  position: relative;                 /* para la flecha ::after */
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(16,24,40,.05);
+}
+
+.nice-select .input-group-text{
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #e5e7eb;
+  border-right: 0;
+  padding: .6rem .8rem;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.nice-select .form-select{
+  height: 48px;
+  padding-left: .6rem;
+  border: 1px solid #e5e7eb;
+  border-left: 0;
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+  background-color: #fff;
+
+  /* quitar flecha nativa */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: none !important;
+
+  padding-right: 2.4rem;              /* espacio para nuestra flecha */
+}
+
+/* flecha personalizada */
+.nice-select::after{
+  content: "";
+  position: absolute;
+  right: .9rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 6l4 4 4-4' fill='none' stroke='%236b7280' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E")
+    no-repeat center / 16px 16px;
+  pointer-events: none;
+  opacity: .75;
+}
+
+.nice-select .form-select:focus{
+  border-color: #4e73df;
+  box-shadow: 0 0 0 .25rem rgba(78,115,223,.15);
+  outline: 0;
+}
+
+/* Responsive */
+@media (max-width: 576px){
+  .nice-select{ margin-bottom: .5rem; }
+}

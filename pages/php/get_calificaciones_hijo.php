@@ -1,143 +1,139 @@
 <?php
-// api/get_hijos.php
+// ../php/get_calificaciones_hijo.php
+declare(strict_types=1);
 session_start();
-require 'conecta.php';
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=utf-8');
 
-// Conexión
+require_once 'conecta.php';
 $con = conecta();
-if (!$con) {
-    echo json_encode([]);
-    exit;
-}
-// ------------------------------------------------------------------------------
 
-$estudiante_id = isset($_GET['estudiante_id']) ? intval($_GET['estudiante_id']) : 0;
-$periodo_id = isset($_GET['periodo_id']) ? intval($_GET['periodo_id']) : null;
-
-if (!$estudiante_id) {
-    echo json_encode(['error' => 'Falta estudiante_id']);
+function respond($arr, int $code = 200) {
+    http_response_code($code);
+    echo json_encode($arr, JSON_UNESCAPED_UNICODE);
     exit;
 }
 
-// ------------- Estrategia A: calificaciones.clase_id -> clase_asignacion.id --------------
-$sqlA = "
-    SELECT m.materia_id, m.nombre AS materia, m.foto_url,
-           c.promedio, c.calificacion_id, p.nombre AS periodo
-    FROM calificaciones c
-    JOIN clase_asignacion ca ON c.clase_id = ca.id
-    JOIN materias m ON ca.materia_id = m.materia_id
-    LEFT JOIN periodos p ON p.periodo_id = c.periodo_id
-    WHERE c.estudiante_id = ?
+// --------- Resolver tutor en sesión ---------
+$tutor_id = $_SESSION['tutor_id'] ?? null;
+$usuario_id = $_SESSION['usuario_id'] ?? null;
+$correo_sesion = $_SESSION['correo'] ?? null;
+
+if (!$tutor_id) {
+    if ($usuario_id) {
+        $st = $con->prepare("SELECT tutor_id FROM tutores WHERE usuario_id = ? AND activo = 1 LIMIT 1");
+        $st->bind_param("i", $usuario_id);
+        $st->execute();
+        if ($row = $st->get_result()->fetch_assoc()) $tutor_id = (int)$row['tutor_id'];
+    }
+    if (!$tutor_id && $correo_sesion) {
+        $st = $con->prepare("SELECT tutor_id FROM tutores WHERE correo = ? AND activo = 1 LIMIT 1");
+        $st->bind_param("s", $correo_sesion);
+        $st->execute();
+        if ($row = $st->get_result()->fetch_assoc()) $tutor_id = (int)$row['tutor_id'];
+    }
+}
+if (!$tutor_id) respond(['error' => 'No tienes una sesión de tutor válida.'], 401);
+
+// --------- Parámetros ---------
+$estudiante_id     = isset($_GET['estudiante_id']) ? (int)$_GET['estudiante_id'] : 0;
+$periodo_id        = isset($_GET['periodo_id'])    ? (int)$_GET['periodo_id']    : 0;
+$min_aprobatoria   = isset($_GET['min_aprobatoria']) ? (float)$_GET['min_aprobatoria'] : 6.0;
+
+if ($estudiante_id <= 0) respond(['error' => 'Falta parámetro estudiante_id.'], 400);
+
+// --------- Autorización: el alumno pertenece al tutor ---------
+$sqlCheck = "
+    SELECT 1
+    FROM estudiantes e
+    WHERE e.estudiante_id = ?
+      AND (
+            e.tutor_id = ? 
+            OR EXISTS (
+                SELECT 1 
+                FROM tutor_estudiante te
+                WHERE te.tutor_id = ? AND te.estudiante_id = e.estudiante_id
+            )
+          )
+    LIMIT 1
 ";
-$params = [$estudiante_id];
-$types = "i";
-if ($periodo_id) {
-    $sqlA .= " AND c.periodo_id = ?";
-    $types .= "i";
-    $params[] = $periodo_id;
+$st = $con->prepare($sqlCheck);
+$st->bind_param("iii", $estudiante_id, $tutor_id, $tutor_id);
+$st->execute();
+if (!$st->get_result()->fetch_row()) {
+    respond(['error' => 'No tienes permiso para ver las calificaciones de este estudiante.'], 403);
 }
 
-$stmt = $con->prepare($sqlA);
-if ($periodo_id) {
-    $stmt->bind_param($types, $params[0], $params[1]);
-} else {
-    $stmt->bind_param($types, $params[0]);
-}
-$stmt->execute();
-$res = $stmt->get_result();
+// --------- Datos de calificaciones ---------
+$sql = "
+    SELECT 
+        c.calificacion_id,
+        c.periodo_id,
+        p.nombre AS periodo_nombre,        -- NUEVO
+        d.numero AS materia_id,
+        d.valor   AS valor_materia,
+        m.nombre  AS materia,
+        m.foto_url
+    FROM calificaciones c
+    JOIN calificaciones_detalle d 
+        ON d.calificacion_id = c.calificacion_id
+    LEFT JOIN materias m 
+        ON m.materia_id = d.numero
+    LEFT JOIN periodos p                 -- NUEVO
+        ON p.periodo_id = c.periodo_id   -- NUEVO
+    WHERE c.estudiante_id = ?
+      AND (? = 0 OR c.periodo_id = ?)
+    ORDER BY m.nombre IS NULL, m.nombre, d.numero
+";
+$st = $con->prepare($sql);
+$st->bind_param("iii", $estudiante_id, $periodo_id, $periodo_id);
+$st->execute();
+$res = $st->get_result();
 
 $materias = [];
-while ($r = $res->fetch_assoc()) {
-    $materias[] = $r;
-}
-$stmt->close();
-
-if (count($materias) === 0) {
-    // ---------- Estrategia B: buscar clase del estudiante y materias asignadas a esa clase ----------
-    $stmt = $con->prepare("
-        SELECT i.clase_id
-        FROM inscripciones i
-        JOIN ciclos_escolares ce ON i.ciclo_id = ce.ciclo_id
-        WHERE i.estudiante_id = ? AND ce.estado = 'activo'
-        ORDER BY i.inscripcion_id DESC
-        LIMIT 1
-    ");
-    $stmt->bind_param('i', $estudiante_id);
-    $stmt->execute();
-    $stmt->bind_result($clase_id);
-    $clase_id = null;
-    if ($stmt->fetch()) $clase_id = intval($clase_id);
-    $stmt->close();
-
-    if (!$clase_id) {
-        // No hay inscripcion activa -> intentar usar la última inscripcion
-        $stmt = $con->prepare("SELECT clase_id FROM inscripciones WHERE estudiante_id = ? ORDER BY inscripcion_id DESC LIMIT 1");
-        $stmt->bind_param('i', $estudiante_id);
-        $stmt->execute();
-        $stmt->bind_result($clase_idTmp);
-        if ($stmt->fetch()) $clase_id = intval($clase_idTmp);
-        $stmt->close();
+while ($row = $res->fetch_assoc()) {
+    $matId = (int)$row['materia_id'];
+    if (!isset($materias[$matId])) {
+        $materias[$matId] = [
+            'materia_id'      => $matId,
+            'materia'         => $row['materia'] ?? ('Materia #' . $matId),
+            'foto_url'        => $row['foto_url'] ?? null,
+            'promedio'        => null,           // promedio de esta materia
+            'calificacion'    => null,           // alias claro para tu UI
+            'calificacion_id' => (int)$row['calificacion_id'],
+            'detalles'        => []              // “Evaluación X”
+        ];
     }
-
-    if ($clase_id) {
-        $sqlB = "
-            SELECT ca.id as clase_asignacion_id, m.materia_id, m.nombre AS materia, m.foto_url,
-                   c.promedio, c.calificacion_id, p.nombre AS periodo
-            FROM clase_asignacion ca
-            JOIN materias m ON ca.materia_id = m.materia_id
-            LEFT JOIN calificaciones c ON (c.estudiante_id = ? AND c.clase_id = ca.clase_id" . ($periodo_id ? " AND c.periodo_id = ?" : "") . ")
-            LEFT JOIN periodos p ON p.periodo_id = c.periodo_id
-            WHERE ca.clase_id = ?
-            ORDER BY m.nombre
-        ";
-        if ($periodo_id) {
-            $stmt = $con->prepare($sqlB);
-            $stmt->bind_param('iii', $estudiante_id, $periodo_id, $clase_id);
-        } else {
-            $stmt = $con->prepare($sqlB);
-            $stmt->bind_param('ii', $estudiante_id, $clase_id);
-        }
-        $stmt->execute();
-        $res = $stmt->get_result();
-        while ($r = $res->fetch_assoc()) {
-            $materias[] = $r;
-        }
-        $stmt->close();
-    }
+    $materias[$matId]['detalles'][] = [
+        'numero'       => $matId,
+        'valor'        => (float)$row['valor_materia'],
+        'periodo_id'   => (int)$row['periodo_id'],           // NUEVO
+        'periodo'      => $row['periodo_nombre'] ?? null     // NUEVO
+    ];
 }
 
-// Si hay calificacion_id's recabar detalles en una sola consulta:
-$califIds = [];
+// Promedio por materia y calificación (si hay varias evidencias, promedia)
+foreach ($materias as $k => $m) {
+    $suma = 0.0; $n = 0;
+    foreach ($m['detalles'] as $d) { $suma += (float)$d['valor']; $n++; }
+    $prom = $n ? round($suma / $n, 2) : null;
+    $materias[$k]['promedio']     = $prom;
+    $materias[$k]['calificacion'] = $prom; // para “Calificación por MATERIA”
+}
+
+// Promedio general de TODAS las materias (solo cuenta materias con número válido)
+$sumGen = 0.0; $nGen = 0;
 foreach ($materias as $m) {
-    if (!empty($m['calificacion_id'])) $califIds[] = intval($m['calificacion_id']);
+    if ($m['promedio'] !== null) { $sumGen += (float)$m['promedio']; $nGen++; }
 }
+$promedio_general = $nGen ? round($sumGen / $nGen, 2) : null;
+$aprobado = ($promedio_general !== null) ? ($promedio_general >= $min_aprobatoria) : null;
 
-$detallesMap = [];
-if (count($califIds) > 0) {
-    $in = implode(',', array_fill(0, count($califIds), '?'));
-    // prepare types string
-    $types = str_repeat('i', count($califIds));
-    $sqlD = "SELECT calificacion_id, numero, valor FROM calificaciones_detalle WHERE calificacion_id IN ($in) ORDER BY numero";
-    $stmt = $con->prepare($sqlD);
-    // bind params dynamically
-    $stmt->bind_param($types, ...$califIds);
-    $stmt->execute();
-    $res = $stmt->get_result();
-    while ($r = $res->fetch_assoc()) {
-        $cid = intval($r['calificacion_id']);
-        if (!isset($detallesMap[$cid])) $detallesMap[$cid] = [];
-        $detallesMap[$cid][] = ['numero' => intval($r['numero']), 'valor' => floatval($r['valor'])];
-    }
-    $stmt->close();
-}
-
-// adjuntar detalles a las materias
-foreach ($materias as &$m) {
-    $cid = !empty($m['calificacion_id']) ? intval($m['calificacion_id']) : null;
-    $m['detalles'] = $cid && isset($detallesMap[$cid]) ? $detallesMap[$cid] : [];
-    // normalizar promedio
-    $m['promedio'] = isset($m['promedio']) && $m['promedio'] !== null ? floatval($m['promedio']) : null;
-}
-
-echo json_encode(['materias' => $materias]);
+// --------- Respuesta ---------
+respond([
+    'estudiante_id'    => $estudiante_id,
+    'periodo_id'       => $periodo_id ?: null,
+    'promedio_general' => $promedio_general,
+    'min_aprobatoria'  => $min_aprobatoria,
+    'aprobado'         => $aprobado,
+    'materias'         => array_values($materias)
+]);

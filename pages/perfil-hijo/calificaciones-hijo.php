@@ -29,6 +29,8 @@ require_once '../php/auth.php';
   <link href="../../assets/css/slick.css" rel="stylesheet">
   <!-- Weeducate styles -->
   <link href="../../assets/css/style.css" rel="stylesheet">
+
+  <link href="../../assets/css/calificaciones_hijo.css" rel="stylesheet">
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/LogoSchoolCare.png">
 </head>
@@ -417,12 +419,12 @@ require_once '../php/auth.php';
             <li class="dropdown-divider"></li>
             <li class="ms-dropdown-list">
               <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i
-                    class="flaticon-user mr-2"></i> Profile</span> </a>
+                    class="flaticon-user mr-2"></i> Perfil</span> </a>
             </li>
             <li class="dropdown-divider"></li>
             <li class="dropdown-menu-footer">
               <a class="media fs-14 p-2" href="pages/prebuilt-pages/default-login.html"> <span><i
-                    class="flaticon-shut-down mr-2"></i> Logout</span> </a>
+                    class="flaticon-shut-down mr-2"></i> Cerrar Sesión</span> </a>
             </li>
           </ul>
         </li>
@@ -448,43 +450,44 @@ require_once '../php/auth.php';
         <h6 class="mb-0 text-primary fw-bold">Calificaciones del alumno</h6>
       </div>
 
-      <div class="ms-panel-body">
-         <form id="formCalificaciones">
       <div class="row g-3 mb-3">
-        <div class="col-md-6">
-          <label class="form-label fw-bold">Hijo</label>
-          <select id="selectHijo" class="form-select" required>
-            <option value="">Cargando hijos...</option>
-          </select>
-        </div>
-        <div class="col-md-6">
-          <label class="form-label fw-bold">Periodo</label>
-          <select id="selectPeriodo" class="form-select">
-            <option value="">Todos</option>
-            <option value="1">Periodo Anual</option>
-          </select>
-        </div>
-      </div>
+  <div class="col-md-6">
+    <label class="form-label pretty-label"></label>
+    <div class="input-group nice-select">
+      <span class="input-group-text"><i class="material-icons">face</i></span>
+      <select id="selectHijo" class="form-select" required>
+        <option value="">Cargando hijos...</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label pretty-label"></label>
+    <div class="input-group nice-select">
+      <span class="input-group-text"><i class="material-icons">event</i></span>
+      <select id="selectPeriodo" class="form-select">
+        <option value="">Todos</option>
+        <option value="1">Periodo Anual</option>
+      </select>
+    </div>
+  </div>
+</div>
 
       <div class="table-responsive">
         <table class="table table-bordered align-middle text-center" id="tablaCalificaciones">
           <thead class="table-light">
             <tr>
               <th>Materia</th>
-              <th>Promedio</th>
+              <th>Calificación</th>
               <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
             <tr><td colspan="3">Selecciona un hijo</td></tr>
           </tbody>
+          <tfoot>
+            <!-- aquí inyectamos el resumen -->
+          </tfoot>
         </table>
-      </div>
-
-      <div class="text-end mt-3">
-        <button id="btnGuardarCalificaciones" type="button" class="btn btn-warning" style="display:none;">
-          Guardar Calificaciones
-        </button>
       </div>
     </form>
       </div>
@@ -500,31 +503,27 @@ require_once '../php/auth.php';
 
   <!-- MODALS -->
 
-  <!-- Modal detalle -->
-  <div class="modal fade" id="modalDetalle" tabindex="-1" role="dialog" aria-labelledby="modalDetalleLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalDetalleLabel">Detalle de Calificación</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body">
-          <!-- contenido dinámico desde JS -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
-        </div>
+<!-- Modal de detalle (ÚNICO) -->
+<div class="modal fade" id="modalDetalle" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detalle de la materia</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
+      <div class="modal-body"><!-- el JS inyecta lista + canvas aquí --></div>
     </div>
   </div>
+</div>
 
   <!-- SCRIPTS -->
   <!-- Global Required Scripts Start -->
   <script src="../../assets/js/jquery-3.3.1.min.js"></script>
   <script src="../../assets/js/popper.min.js"></script>
-  <script src="../../assets/js/bootstrap.min.js"></script>
   <script src="../../assets/js/perfect-scrollbar.js"> </script>
+  <script src="../../assets/js/bootstrap.min.js"></script>
   <script src="../../assets/js/jquery-ui.min.js"> </script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="../scripts/cargarCalificacionesTutor.js"></script>
   <!-- Global Required Scripts End -->
 
