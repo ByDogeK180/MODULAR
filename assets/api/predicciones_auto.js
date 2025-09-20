@@ -2,24 +2,34 @@
 (function () {
   const DATASET_URL = "assets/api/dataset_admin.php";
 
-  // UMBRALES / PARÁMETROS
-  const THR = 0.5;                 // umbral de riesgo del ensamble
-  const PASS_THRESHOLD = 6.0;      // nota mínima para aprobar el ciclo
-  const TOTAL_PERIODOS_DEFAULT = 3;// #periodos por ciclo (ajústalo a tu escuela)
+  // ===== Paleta para charts =====
+  const COLORS = {
+    tp: "#22c55e",  // verde
+    tn: "#60a5fa",  // azul
+    fp: "#f59e0b",  // ámbar
+    fn: "#ef4444",  // rojo
+    zero: "#60a5fa",// 0 (No repr.)
+    one:  "#ef4444" // 1 (Repr.)
+  };
 
-  // Estado global
-  let RAW = [];                  // dataset completo sin filtrar (del backend)
-  let DATA = [];                 // dataset filtrado (ciclo/periodo)
-  const FILTERS = { ciclo_id: 'all', periodo_id: 'all' };
+  // ===== Parámetros =====
+  const THR = 0.5;                  // umbral de riesgo del ensamble
+  const PASS_THRESHOLD = 6.0;       // nota mínima para aprobar el ciclo
+  const TOTAL_PERIODOS_DEFAULT = 3; // # periodos por ciclo (si no es detectable)
 
-  // Datos ML (solo 2 features: asistencia, parciales)
+  // ===== Estado global =====
+  let RAW = [];                   // dataset completo sin filtrar (del backend)
+  let DATA = [];                  // dataset filtrado (ciclo/periodo/clase)
+  const FILTERS = { ciclo_id: 'all', periodo_id: 'all', clase_key: 'all' };
+
+  // Datos ML (2 features: asistencia, parciales)
   let X = [], y = [];
   let cartModel = null, rfModel = null;
 
   // Gráficas
   let cmChart = null, distChart = null;
 
-  // --------- HELPERS UI ----------
+  // ===== Helpers UI =====
   const $ = (id) => document.getElementById(id);
   const setStatus = (msg, err = false) => {
     const el = $("status");
@@ -39,7 +49,38 @@
     if (distChart){ distChart.destroy(); distChart=null; }
   }
 
-  // --------- FILTROS ----------
+  // ===== Chart.js defaults (seguros para v2/v3) =====
+  function applyChartDefaults(){
+    if (!window.Chart || !Chart.defaults) return;
+
+    // v3+ (Chart.defaults.plugins...)
+    if (Chart.defaults.plugins && Chart.defaults.plugins.legend && Chart.defaults.plugins.legend.labels) {
+      Chart.defaults.plugins.legend.labels.boxWidth = 12;
+    }
+    // v2 (Chart.defaults.global...)
+    else if (Chart.defaults.global && Chart.defaults.global.legend && Chart.defaults.global.legend.labels) {
+      Chart.defaults.global.legend.labels.boxWidth = 12;
+    }
+
+    if ('color' in Chart.defaults)      Chart.defaults.color = "#374151";
+    if ('borderColor' in Chart.defaults) Chart.defaults.borderColor = "rgba(55,65,81,.15)";
+  }
+
+  // ===== Filtros =====
+  function getClaseKey(r){
+    if (r.clase_id != null) return 'id::' + String(r.clase_id);
+    const g  = (r.grado != null ? r.grado : '-');
+    const gr = (r.grupo != null ? r.grupo : '-');
+    return `gg::${g}-${gr}`;
+  }
+  function getClaseLabel(r){
+    if (r.clase_nombre) return r.clase_nombre;
+    if (r.clase_id != null && r.grado == null && r.grupo == null) return `Clase ${r.clase_id}`;
+    const g  = (r.grado != null ? r.grado : '-');
+    const gr = (r.grupo != null ? r.grupo : '-');
+    return `${g}-${gr}`;
+  }
+
   function filterData(raw){
     let arr = raw.slice();
     if (FILTERS.ciclo_id !== 'all') {
@@ -48,15 +89,19 @@
     if (FILTERS.periodo_id !== 'all') {
       arr = arr.filter(r => String(r.periodo_id) === String(FILTERS.periodo_id));
     }
+    if (FILTERS.clase_key !== 'all') {
+      arr = arr.filter(r => getClaseKey(r) === FILTERS.clase_key);
+    }
     return arr;
   }
 
   function buildFilters() {
     const $ciclo = $('cicloSelect');
     const $per   = $('periodoSelect');
-    if (!$ciclo || !$per) return;
+    const $clase = $('claseSelect');
+    if (!$ciclo || !$per || !$clase) return;
 
-    // Ciclos únicos
+    // --- CICLOS ---
     const ciclosMap = new Map();
     RAW.forEach(r => {
       if (r.ciclo_id != null) ciclosMap.set(String(r.ciclo_id), r.ciclo_nombre || r.ciclo_id);
@@ -68,7 +113,7 @@
     $ciclo.value = FILTERS.ciclo_id;
 
     function refreshPeriodos(run=true){
-      const base = (FILTERS.ciclo_id === 'all') ? RAW : RAW.filter(r => String(r.ciclo_id) === String(FILTERS.ciclo_id));
+      let base = (FILTERS.ciclo_id === 'all') ? RAW : RAW.filter(r => String(r.ciclo_id) === String(FILTERS.ciclo_id));
       const perMap = new Map();
       base.forEach(r => {
         if (r.periodo_id != null) perMap.set(String(r.periodo_id), r.periodo_nombre || r.periodo_id);
@@ -88,30 +133,70 @@
         FILTERS.periodo_id = 'all';
         $per.value = 'all';
       }
+      refreshClases(run);
+    }
+
+    function refreshClases(run=true){
+      let base = RAW;
+      if (FILTERS.ciclo_id !== 'all') {
+        base = base.filter(r => String(r.ciclo_id) === String(FILTERS.ciclo_id));
+      }
+      if (FILTERS.periodo_id !== 'all') {
+        base = base.filter(r => String(r.periodo_id) === String(FILTERS.periodo_id));
+      }
+
+      const clsMap = new Map(); // key -> label
+      base.forEach(r => {
+        const key = getClaseKey(r);
+        const label = getClaseLabel(r);
+        if (key) clsMap.set(key, label);
+      });
+
+      const sorted = Array.from(clsMap.entries())
+        .sort((a,b)=> String(a[1]).localeCompare(String(b[1]), undefined, {numeric:true, sensitivity:'base'}));
+
+      $clase.innerHTML = `<option value="all">Todas las clases</option>`;
+      for (const [k, label] of sorted) $clase.innerHTML += `<option value="${k}">${label}</option>`;
+
+      FILTERS.clase_key = 'all';
+      $clase.value = 'all';
+
       if (run) runPipeline();
     }
 
+    // eventos
     $ciclo.onchange = () => { FILTERS.ciclo_id = $ciclo.value; refreshPeriodos(true); };
-    $per.onchange   = () => { FILTERS.periodo_id = $per.value; runPipeline(); };
-    const $btn = $('btnReset');
-    if ($btn) $btn.onclick = () => { FILTERS.ciclo_id = 'all'; $ciclo.value = 'all'; refreshPeriodos(true); };
+    $per.onchange   = () => { FILTERS.periodo_id = $per.value; refreshClases(true); };
+    $clase.onchange = () => { FILTERS.clase_key = $clase.value; runPipeline(); };
 
+    const $btn = $('btnReset');
+    if ($btn) $btn.onclick = () => {
+      FILTERS.ciclo_id  = 'all';
+      FILTERS.periodo_id= 'all';
+      FILTERS.clase_key = 'all';
+      $ciclo.value = 'all';
+      refreshPeriodos(true);
+    };
+
+    // arranque inicial
     refreshPeriodos(false);
+    refreshClases(false);
   }
 
-  // --------- PROYECCIÓN A FIN DE CICLO ----------
+  // ===== Proyección fin de ciclo =====
   function detectTotalPeriods(cicloId, raw){
     const set = new Set(
       raw.filter(r => String(r.ciclo_id) === String(cicloId))
          .map(r => r.periodo_id)
          .filter(v => v !== null && v !== undefined)
     );
-    return set.size || TOTAL_PERIODOS_DEFAULT;
+    return set.size || 0;
   }
 
   function cycleProjectionForRow(row, raw, totalDefault = TOTAL_PERIODOS_DEFAULT, target = PASS_THRESHOLD){
     const cicloId = row.ciclo_id;
-    const total = totalDefault || detectTotalPeriods(cicloId, raw);
+    // Usa primero lo detectado; si no hay, el default
+    const total = detectTotalPeriods(cicloId, raw) || totalDefault;
 
     // filas del mismo alumno-materia-ciclo
     const same = raw.filter(
@@ -144,7 +229,7 @@
     return { needed: neededClamped, feasible, tot: total, done, rem: remaining };
   }
 
-  // --------- MÉTRICAS Y GRÁFICAS ----------
+  // ===== Métricas y gráficas =====
   const confusion = (yT, yP) => {
     let TP = 0, TN = 0, FP = 0, FN = 0;
     for (let i = 0; i < yT.length; i++) {
@@ -159,25 +244,69 @@
   function drawCM(cm) {
     const ctx = $("cmChart");
     if (!ctx || typeof Chart === "undefined") return;
-    const data = {
-      labels: ['TP', 'TN', 'FP', 'FN'],
-      datasets: [{ label: 'Conteo', data: [cm.TP, cm.TN, cm.FP, cm.FN] }]
-    };
+
+    const labels = ["TP", "TN", "FP", "FN"];
+    const values = [cm.TP, cm.TN, cm.FP, cm.FN];
+    const bg = [
+      COLORS.tp + "33", // 20% alpha
+      COLORS.tn + "33",
+      COLORS.fp + "33",
+      COLORS.fn + "33"
+    ];
+    const border = [COLORS.tp, COLORS.tn, COLORS.fp, COLORS.fn];
+
     if (cmChart) cmChart.destroy();
-    cmChart = new Chart(ctx, { type: 'bar', data });
+    cmChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [{
+          label: "Conteo",
+          data: values,
+          backgroundColor: bg,
+          borderColor: border,
+          borderWidth: 1.5,
+          borderRadius: 6
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { display: false } },
+          y: { beginAtZero: true, grid: { color: "rgba(55,65,81,.08)" } }
+        }
+      }
+    });
   }
 
   function drawDist(y) {
     const ctx = $("distChart");
     if (!ctx || typeof Chart === "undefined") return;
+
     const zeros = y.filter(v => v === 0).length;
-    const ones = y.filter(v => v === 1).length;
-    const data = { labels: ['0 (No repr.)', '1 (Repr.)'], datasets: [{ data: [zeros, ones] }] };
+    const ones  = y.filter(v => v === 1).length;
+
     if (distChart) distChart.destroy();
-    distChart = new Chart(ctx, { type: 'doughnut', data });
+    distChart = new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: ["0 (No repr.)", "1 (Repr.)"],
+        datasets: [{
+          data: [zeros, ones],
+          backgroundColor: [COLORS.zero, COLORS.one],
+          borderColor: "#ffffff",
+          borderWidth: 2,
+          hoverOffset: 6
+        }]
+      },
+      options: {
+        plugins: { legend: { position: "top" } },
+        cutout: "60%"
+      }
+    });
   }
 
-  // --------- MODELOS ----------
+  // ===== Modelos =====
   function getCARTCtor() {
     const c1 = (window.ML && window.ML.Cart && window.ML.Cart.DecisionTreeClassifier);
     const c2 = (window.ML && window.ML.DecisionTreeClassifier);
@@ -199,7 +328,7 @@
   }
 
   function trainAndEvaluate() {
-    // split robusto 80/20 (evita sets vacíos)
+    // split 80/20 robusto
     const idx = [...X.keys()].sort(() => Math.random() - 0.5);
     let tr = [], te = [];
     if (idx.length <= 1) {
@@ -212,14 +341,14 @@
       te = idx.slice(cut);
     }
     const Xtr = tr.map(i => X[i]), ytr = tr.map(i => y[i]);
-    const Xte = te.map(i => X[i]), yte = te.map(i => y[i]);
+    // const Xte = te.map(i => X[i]), yte = te.map(i => y[i]); // (ya no usamos aquí)
 
     if (!Xtr.length || !ytr.length) {
       setStatus("Dataset insuficiente para entrenar (necesitas ≥2 filas).", true);
       return;
     }
 
-    // ===== CART =====
+    // --- CART ---
     const CARTCtor = getCARTCtor();
     if (CARTCtor) {
       setStatus("Entrenando CART…");
@@ -238,34 +367,14 @@
       cartModel = new ML.RandomForestClassifier({ nEstimators: 1, maxFeatures: 2, replacement: true, seed: 7 });
       cartModel.train(Xtr, ytr);
     }
-    const yCart = cartModel.predict(Xte).map(p => (p === true) ? 1 : (p === false) ? 0 : (Number(p) >= 0.5 ? 1 : 0));
 
-    // ===== RANDOM FOREST =====
+    // --- Random Forest ---
     setStatus("Entrenando Random Forest…");
     rfModel = new ML.RandomForestClassifier({ nEstimators: 200, maxFeatures: 2, replacement: true, seed: 42 });
     rfModel.train(Xtr, ytr);
-
-    // Colapsar la matriz de votos del RF a vector por mayoría
-    const rfAll = rfModel.predict(Xte); // [nÁrboles][nMuestras]
-    const nTrees = rfAll.length;
-    const yRf = Array(Xte.length).fill(0);
-    for (let t = 0; t < nTrees; t++) {
-      const predsT = rfAll[t];
-      for (let j = 0; j < predsT.length; j++) {
-        const v = (predsT[j] === true) ? 1 : (predsT[j] === false) ? 0 : Number(predsT[j]);
-        yRf[j] += (Number.isFinite(v) && v >= 0.5) ? 1 : 0;
-      }
-    }
-    for (let j = 0; j < yRf.length; j++) yRf[j] = (nTrees ? (yRf[j] / nTrees) : 0) >= 0.5 ? 1 : 0;
-
-    // Ensamble CART + RF (mayoría de 2 modelos)
-    const yEns = yCart.map((yc, i) => (yc + yRf[i]) >= 1 ? 1 : 0);
-
-    drawCM(confusion(yte, yEns));
-    drawDist(y);
   }
 
-  // --------- PREDICCIÓN ----------
+  // ===== Predicción =====
   function predictMany(rows) {
     return rows.map(r => {
       const x = [[
@@ -273,7 +382,7 @@
         Number(r.parciales_avg || 0)
       ]];
 
-      // CART -> 0/1 como prob
+      // CART -> 0/1 como "prob"
       let cartPred = 0;
       try {
         const p = cartModel && cartModel.predict ? cartModel.predict(x)[0] : 0;
@@ -281,14 +390,14 @@
       } catch { cartPred = 0; }
       const probCart = clamp01(cartPred);
 
-      // RF -> prob por votos de árboles
+      // RF -> voto promedio
       const probRf = clamp01(rfProbOne(x));
 
       // Ensamble (promedio simple)
       let probFinal = clamp01((probCart + probRf) / 2);
       let pred = probFinal >= THR ? 1 : 0;
 
-      // Proyección a FIN DE CICLO (usa TODOS los periodos del ciclo del alumno)
+      // Proyección a fin de ciclo (usa TODOS los periodos del ciclo del alumno)
       const proj = cycleProjectionForRow(r, RAW, TOTAL_PERIODOS_DEFAULT, PASS_THRESHOLD);
       const estadoCiclo = (proj.rem === 0)
         ? (proj.feasible ? 'Aprobado (cierre)' : 'Reprobado (cierre)')
@@ -309,7 +418,63 @@
     });
   }
 
-  // --------- RENDER ----------
+  // === Gráficas ligadas al filtro, agregadas por ALUMNO ÚNICO ===
+  function updateChartsForFilter() {
+    // Solo filas del filtro actual que SÍ tienen etiqueta
+    const LAB = DATA.filter(r => r.y_reprobado !== null && r.y_reprobado !== undefined);
+
+    // Map por estudiante: { yTrue:0/1, yPred:0/1, maxProb:0..1 }
+    const byStudent = new Map();
+
+    for (const r of LAB) {
+      const sid = String(r.estudiante_id);
+
+      // etiqueta real de esa fila (0/1)
+      const ytrue = Number(r.y_reprobado || 0);
+
+      // predicción de esa fila
+      const x = [[
+        Number(r.asistencia_pct || 0),
+        Number(r.parciales_avg || 0)
+      ]];
+
+      // CART -> 0/1 como prob
+      let cartPred = 0;
+      try {
+        const p = cartModel && cartModel.predict ? cartModel.predict(x)[0] : 0;
+        cartPred = (p === true) ? 1 : (p === false) ? 0 : Number(p);
+      } catch { cartPred = 0; }
+      const probCart = clamp01(cartPred);
+
+      // RF -> prob por votos
+      const probRf = clamp01(rfProbOne(x));
+
+      const probFinal = clamp01((probCart + probRf) / 2);
+      const ypred = probFinal >= THR ? 1 : 0;
+
+      const cur = byStudent.get(sid) || { yTrue: 0, yPred: 0, maxProb: 0 };
+      // Agregamos por "máximo": si en alguna materia es 1, cuenta como 1
+      cur.yTrue = Math.max(cur.yTrue, ytrue);
+      cur.yPred = Math.max(cur.yPred, ypred);
+      cur.maxProb = Math.max(cur.maxProb, probFinal);
+      byStudent.set(sid, cur);
+    }
+
+    const yTrueArr = [];
+    const yPredArr = [];
+    byStudent.forEach(v => { yTrueArr.push(v.yTrue); yPredArr.push(v.yPred); });
+
+    if (!yTrueArr.length) {
+      drawCM({ TP:0, TN:0, FP:0, FN:0 });
+      drawDist([]); // dona vacía
+      return;
+    }
+
+    drawCM(confusion(yTrueArr, yPredArr)); // ahora por alumno único
+    drawDist(yTrueArr);                     // distribución 0/1 por alumno
+  }
+
+  // ===== Render =====
   function renderTables(PREDS) {
     // Totales por ALUMNO ÚNICO
     const alumnosUnicos = new Set(PREDS.map(r => r.estudiante_id)).size;
@@ -345,21 +510,21 @@
         <td>${Number(r.prob_cart).toFixed(2)}</td>
         <td>${Number(r.prob_rf).toFixed(2)}</td>
         <td>${Number(r.prob_final).toFixed(2)}</td>
-        <td>${r.pred ? '<span class="badge bg-danger">Reprobará</span>' : '<span class="badge bg-success">No reprobará</span>'}</td>
+        <td>${r.pred ? '<span class="badge-soft-danger">Reprobará</span>' : '<span class="badge-soft-success">No reprobará</span>'}</td>
         <td>${Number(r.req_avg_rest ?? 0).toFixed(2)}</td>
         <td>${
           r.estado_ciclo === 'Aún puede pasar'
-            ? '<span class="badge bg-info text-dark">Aún puede pasar</span>'
+            ? '<span class="badge-soft-info">Aún puede pasar</span>'
             : (r.estado_ciclo === 'Muy difícil'
-                ? '<span class="badge bg-warning text-dark">Muy difícil</span>'
+                ? '<span class="badge-soft-warning">Muy difícil</span>'
                 : (r.estado_ciclo.includes('Aprobado')
-                    ? '<span class="badge bg-success">Aprobado (cierre)</span>'
-                    : '<span class="badge bg-danger">Reprobado (cierre)</span>'))
+                    ? '<span class="badge-soft-success">Aprobado (cierre)</span>'
+                    : '<span class="badge-soft-danger">Reprobado (cierre)</span>'))
         }</td>`;
       tbody && tbody.appendChild(tr);
     });
 
-    // Resumen por periodo/clase/materia
+    // Resumen por periodo/clase/materia (por filas)
     const byKey = {};
     PREDS.forEach(r => {
       const key = `${r.periodo_nombre || r.periodo_id}||${r.grado || '-'}-${r.grupo || '-'}||${r.materia_nombre || '-'}`;
@@ -376,7 +541,7 @@
     });
   }
 
-  // --------- PICK TRAIN SET ----------
+  // ===== Trainer-set picker =====
   function pickTrainSet(raw, filters){
     // prioriza entrenar con el mismo ciclo seleccionado
     let base = raw;
@@ -386,14 +551,14 @@
     const withYSameCycle = base.filter(r => r.y_reprobado !== null && r.y_reprobado !== undefined);
     if (withYSameCycle.length >= 2) return withYSameCycle;
 
-    // fallback: con cualquier ciclo que tenga etiqueta
+    // fallback: con cualquier ciclo etiquetado
     const withYAny = raw.filter(r => r.y_reprobado !== null && r.y_reprobado !== undefined);
     return withYAny;
   }
 
-  // --------- PIPELINE ----------
+  // ===== Pipeline =====
   function runPipeline(){
-    DATA = filterData(RAW);           // lo que se va a predecir / mostrar
+    DATA = filterData(RAW); // lo que se va a predecir / mostrar
 
     if (!DATA.length) {
       setStatus("Sin datos para ese filtro", true);
@@ -416,10 +581,14 @@
     setStatus("Prediciendo alumnos…");
     const PREDS = predictMany(DATA);
     renderTables(PREDS);
+
+    // === Gráficas con el filtro activo ===
+    updateChartsForFilter();
+
     setStatus("Listo ✅");
   }
 
-  // --------- INIT ----------
+  // ===== Init =====
   async function init() {
     try {
       setStatus("Cargando datos…");
@@ -430,8 +599,9 @@
       RAW = js.data || [];
       if (!RAW.length) { setStatus("Dataset vacío", true); return; }
 
-      buildFilters(); // construye selects y ejecuta la primera corrida
-      runPipeline();
+      applyChartDefaults();   // aplicar defaults de Chart.js de forma segura
+      buildFilters();         // construye selects
+      runPipeline();          // ejecuta la primera corrida
     } catch (e) {
       console.error(e);
       setStatus("Error: " + e.message, true);

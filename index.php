@@ -397,6 +397,11 @@
         <label for="periodoSelect">Periodo</label>
         <select id="periodoSelect" class="form-select form-select-sm"></select>
       </div>
+      <div class="form-group">
+      <label for="claseSelect">Clase</label>
+      <select id="claseSelect" class="form-select form-select-sm"></select>
+    </div>
+
       <div class="form-group" style="display:flex;align-items:flex-end">
         <button id="btnReset" class="btn btn-sm btn-outline-secondary">Ver todos</button>
       </div>
