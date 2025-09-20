@@ -111,7 +111,7 @@
 
        <!--Holiday Start-->
         <li class="menu-item">
-          <a href="pages/holidays/holiday.html">
+          <a href="pages/holidays/holiday_docente.php">
             <span><i class="fa fa-calendar fs-16"></i>Holidays</span>
           </a>
         </li>
@@ -165,11 +165,12 @@
             <li class="dropdown-menu-footer">
               
             </li>
-            <li class="dropdown-menu-footer">
-             <a class="media fs-14 p-2" href="Docentes.php?logout=true">
-             <span><i class="flaticon-shut-down mr-2"></i> Logout</span>
-    </a>
-</li>
+                  <li class="dropdown-menu-footer">
+            <a class="media fs-14 p-2" href="pages/php/logout.php">
+              <span><i class="flaticon-shut-down mr-2"></i> Logout</span>
+            </a>
+          </li>
+
           </ul>
         </li>
       </ul>

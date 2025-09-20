@@ -1,31 +1,64 @@
-<?php require_once 'pages/php/auth.php'; ?>
+<?php require_once '../php/auth.php'; ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>ShoolCare</title>
   <!-- Iconic Fonts -->
+    <link href=" https://fullcalendar.io/">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="vendors/iconic-fonts/font-awesome/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="vendors/iconic-fonts/flat-icons/flaticon.css">
-
+  <link href="../../vendors/iconic-fonts/font-awesome/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../vendors/iconic-fonts/flat-icons/flaticon.css">
+  
   <!-- Bootstrap core CSS -->
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/datatables.min.css">
+  <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
+     
   <!-- jQuery UI -->
-  <link href="assets/css/jquery-ui.min.css" rel="stylesheet">
+  <link href="../../assets/css/jquery-ui.min.css" rel="stylesheet">
   <!-- Page Specific CSS (Slick Slider.css) -->
-  <link href="assets/css/slick.css" rel="stylesheet">
+  <link href="../../assets/css/slick.css" rel="stylesheet">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/LogoSchoolCare.png">
   <!-- Weeducate styles -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="../../assets/css/style.css" rel="stylesheet">
   <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/LogoSchoolCare.png">
+
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+
+  <style>
+    .fc-toolbar-title,
+    .fc-col-header-cell-cushion,
+    .fc-daygrid-day-number {
+      text-transform: capitalize;
+    }
+
+    /* Cambiar el color del botón "Hoy" y flechas de navegación */
+    .fc-button, .fc .fc-button-primary {
+      background-color: orange !important;
+      border-color: orange !important;
+      color: white !important;
+    }
+
+    .fc .fc-button-primary:not(:disabled):hover {
+      background-color: #cc7000 !important;
+      border-color: #cc7000 !important;
+    }
+  </style>
+
+  
+
 
 </head>
+
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
+
 
   <!-- Preloader -->
   <div id="preloader-wrap">
@@ -48,13 +81,12 @@
   <!-- Overlays -->
   <div class="ms-aside-overlay ms-overlay-left ms-toggler" data-target="#ms-side-nav" data-toggle="slideLeft"></div>
   <div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight"></div>
-
-  <!-- Sidebar Navigation Left -->
+ <!-- Sidebar Navigation Left -->
   <aside id="ms-side-nav" class="side-nav fixed ms-aside-scrollable ms-aside-left">
 
     <!-- Logo -->
     <div class="logo-sn ms-d-block-lg">
-      <a class="pl-0 ml-0 text-center" href="index.php"> <img src="assets/img/LogoSchoolCare.png" alt="logo">  </a>
+      <a class="pl-0 ml-0 text-center" href="Docentes.php"><img src="../../assets/img/LogoSchoolCare.png" alt="logo">  </a>
     </div>
 
     <!-- Navigation -->
@@ -65,8 +97,8 @@
                <span><i class="material-icons fs-16">dashboard</i>Dashboard </span>
              </a>
             <ul id="dashboard" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-              <li> <a href="index.php">ShoolCare</a> </li>
-              
+              <li> <a href="../../Docentes.php">Schoolcare</a> </li>
+
             </ul>
         </li>
         <!-- /Dashboard -->
@@ -74,12 +106,14 @@
         <!--Proessors Start-->
         <li class="menu-item">
             <a href="#" class="has-chevron" data-toggle="collapse" data-target="#professor" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-user fs-16"></i>Professors</span>
+               <span><i class="fa fa-user fs-16"></i>Estudiantes</span>
              </a>
             <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-              <li> <a href="pages/professors/allprofessor.html">All Professors</a> </li>
-               <li> <a href="pages/professors/addprofessor.html">Add Professors</a> </li>
-                 <li> <a href="pages/professors/aboutprofessor.html">About Professors</a> </li>
+              <li> <a href="../../pages/students-doc/studendoc.php">Todos los Estudiantes</a> </li>
+               <li> <a href="../../pages/students-doc/asistencias.php">Asistencias</a> </li>
+                 <li> <a href="../../pages/students-doc/scoredoc.php">Acerca de los Estudiantes</a> </li>
+                  <li> <a href="../../pages/students-doc/formulario_incidentes.php">Recordatorios  </a> </li>
+                  <li> <a href="../../pages/students-doc/recordatorios_docente.php">Todos los Recordatorios  </a> </li>
             </ul>
         </li>
         <!-- /Proessors End--->
@@ -87,104 +121,35 @@
          <!--Courses Start-->
         <li class="menu-item">
             <a href="#" class="has-chevron" data-toggle="collapse" data-target="#courses" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-graduation-cap fs-16"></i>Courses</span>
+               <span><i class="fa fa-graduation-cap fs-16"></i>Materias</span>
              </a>
             <ul id="courses" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-              <li> <a href="pages/courses/allcourses.html">All Courses</a> </li>
-               <li> <a href="pages/courses/addcourses.html">Add Courses</a> </li>
-                 <li> <a href="pages/courses/aboutcourses.html">About Courses</a> </li>
-                  <li> <a href="pages/courses/ciclos.html">Ciclos</a> </li>
-                   <li> <a href="pages/courses/clases.html">Clases</a> </li>
-                    <li> <a href="pages/courses/inscripciones.html">Inscripciones</a> </li>
+              <li> <a href="../../pages/students-doc/allcoursesDoc.php">Todas las Materias</a> </li>
             </ul>
         </li>
         <!-- /Courses End--->
-        
-        <!--Student Start-->
-        <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#student" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-users fs-16"></i>Student</span>
-             </a>
-            <ul id="student" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-              <li> <a href="pages/student/studentadd.html">Student Add</a> </li>
-               <li> <a href="pages/student/studenttable.html">Student Table</a> </li>
-                  </ul>
-        </li>
-        <!-- /Student End--->
-        
-        
-        <!--tutor Start-->
+          <!--tutor Start-->
         <li class="menu-item">
             <a href="#" class="has-chevron" data-toggle="collapse" data-target="#staff" aria-expanded="false" aria-controls="dashboard">
                <span><i class="fa fa-user-circle fs-16"></i>Tutores</span>
              </a>
             <ul id="staff" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-              <li> <a href="pages/tutor/addtutor.html">Añadir Tutor</a> </li>
-               <li> <a href="pages/tutor/tutorprofile.html">Tabla de Tutores</a> </li>
-                 
+               <li> <a href="../../pages/students-doc/tutoresDoc.php">Tabla de Tutores</a> </li>
             </ul>
         </li>
         <!-- /tutor End--->
         
-        
-        
-        <!--Fees Start-->
+
+
+       <!--Holiday Start-->
         <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#fees" aria-expanded="false" aria-controls="dashboard">
-                <span><i class="fas fa-dollar-sign"></i>Fees</span>
-             </a>
-            <ul id="fees" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-              <li> <a href="pages/fees/feescollection.html">Fees Collection</a> </li>
-              <li> <a href="pages/fees/addfees.html">Add Fees</a> </li>
-              <li> <a href="pages/fees/feesrecepit.html">Fees Recepit</a> </li>
-               
-                 
-            </ul>
-        </li>
-        <!-- /Feess End--->
-      
-        
-       
-       
-        <!--Holiday Start-->
-        <li class="menu-item">
-          <a href="pages/holidays/holiday.html">
+          <a href="holiday_docente.php">
             <span><i class="fa fa-calendar fs-16"></i>Holidays</span>
           </a>
         </li>
         <!-- /Holiday End--->
-        <li class="menu-item">
-          <a href="pages/widgets.html">
-            <span><i class="material-icons fs-16">widgets</i>Widgets</span>
-          </a>
-        </li>
-        <!-- Basic UI Elements -->
-        <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#basic-elements" aria-expanded="false" aria-controls="basic-elements">
-              <span><i class="material-icons fs-16">filter_list</i>Estadisticas</span>
-            </a>
-            <ul id="basic-elements" class="collapse" aria-labelledby="basic-elements" data-parent="#side-nav-accordion">
-              <li> <a href="pages/ui-basic/accordions.html">Accordions</a> </li>
-              <li> <a href="pages/ui-basic/alerts.html">Alerts</a> </li>
-              <li> <a href="pages/ui-basic/buttons.html">Buttons</a> </li>
-              <li> <a href="pages/ui-basic/breadcrumbs.html">Breadcrumbs</a> </li>
-              <li> <a href="pages/ui-basic/badges.html">Badges</a> </li>
-              <li> <a href="pages/ui-basic/cards.html">Cards</a> </li>
-              <li> <a href="pages/ui-basic/progress-bars.html">Progress Bars</a> </li>
-              <li> <a href="pages/ui-basic/preloaders.html">Pre-loaders</a> </li>
-              <li> <a href="pages/ui-basic/pagination.html">Pagination</a> </li>
-              <li> <a href="pages/ui-basic/tabs.html">Tabs</a> </li>
-
-              <li> <a href="pages/ui-basic/typography.html">Typography</a> </li>
-            </ul>
-        </li>
-        <!-- /Basic UI Elements -->
-
-        
-
-        
+ 
     </ul>
-
 
   </aside>
 
@@ -345,31 +310,35 @@
         <span class="ms-toggler-bar bg-primary"></span>
         <span class="ms-toggler-bar bg-primary"></span>
       </div>
-      <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
-        <li class="ms-nav-item ms-nav-user dropdown">
-          <a href="#"  id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img class="ms-user-img ms-img-round float-right" src="assets/img/we-educate/new-student-5.jpg" alt="people"> </a>
-          <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
-         
-          <li class="dropdown-menu-header">
-        <h6 class="dropdown-header ms-inline m-0">
-        <span class="text-disabled">Welcome, <?php echo $_SESSION['correo']; ?></span>
-        </h6>
-            </li>
 
+      <div class="logo-sn logo-sm ms-d-block-sm">
+        <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="../../index.php"><img src="../../assets/img/LogoSchoolCare.png" alt="logo"> </a>
+      </div>
+
+      <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
+        <li class="ms-nav-item ms-search-form pb-0 py-0">
+          <form class="ms-form" method="post">
+          </form>
+        </li>
+        <li class="ms-nav-item">
+        </li>
+        <li class="ms-nav-item ms-nav-user dropdown">
+          <a href="#"  id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img class="ms-user-img ms-img-round float-right" src="../../assets/img/we-educate/new-student-5.jpg" alt="people"> </a>
+          <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
+            <li class="dropdown-menu-header">
+              <span class="text-disabled">Welcome, <?php echo $_SESSION['correo']; ?></span>
+            </li>
             <li class="dropdown-divider"></li>
             <li class="ms-dropdown-list">
               <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i class="flaticon-user mr-2"></i> Profile</span> </a>
             </li>
             <li class="dropdown-divider"></li>
-            <li class="dropdown-menu-footer">
-              
-            </li>
-            <li class="dropdown-menu-footer">
-             <a class="media fs-14 p-2" href="pages/php/logout.php">
-             <span><i class="flaticon-shut-down mr-2"></i> Logout</span>
-    </a>
-</li>
 
+ </li>
+            <li class="dropdown-menu-footer">
+                    <a class="media fs-14 p-2" href="../../pages/prebuilt-pages/default-login.html"> <span><i
+                    class="flaticon-shut-down mr-2"></i> Logout</span> </a>
+            </li>
           </ul>
         </li>
       </ul>
@@ -382,127 +351,111 @@
 
     </nav>
 
-    <!-- Filtros -->
-    <style>
-      .ml-filters{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0 16px;}
-      .ml-filters .form-group{min-width:220px}
-      .ml-filters label{font-size:.9rem;color:#6b7280;margin-bottom:4px}
-    </style>
-    <div class="ml-filters">
-      <div class="form-group">
-        <label for="cicloSelect">Ciclo</label>
-        <select id="cicloSelect" class="form-select form-select-sm"></select>
+
+    <!-- Body Content Wrapper -->
+    
+    <!-- Body Content Wrapper -->
+    <div class="ms-content-wrapper">
+      <div class="row">
+
+        <div class="col-md-12">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb pl-0">
+              <li class="breadcrumb-item"><a href="../../index.php"><i class="material-icons">home</i> Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Calendario</li>
+               
+            </ol>
+          </nav>
+        </div>
+        </div>
+        
+         <div class="col-xl-12">
+        <div class="ms-panel">
+            <div class="ms-panel-header">
+              <h6>Calendario Anual</h6>
+            </div>
+            <div class="ms-panel-body">
+              <div id="calendario-festivos"></div>
+            </div>
+          </div>
+          </div>
+ 
+      
       </div>
-      <div class="form-group">
-        <label for="periodoSelect">Periodo</label>
-        <select id="periodoSelect" class="form-select form-select-sm"></select>
+      
+<!-- calendar modal -->
+<div id="modal-view-event" class="modal modal-top fade calendar-modal">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-body">
+					<h4 class="modal-title"><span class="event-icon"></span><span class="event-title"></span></h4>
+					<div class="event-body"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div id="modal-view-event-add" class="modal modal-top fade calendar-modal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <form id="add-event">
+        <div class="modal-body">
+        <h4>Add Event Detail</h4>        
+          <div class="form-group">
+            <label>Event name</label>
+            <input type="text" class="form-control" name="ename">
+          </div>
+          <div class="form-group">
+            <label>Event Date</label>
+            <input type='text' class="datetimepicker form-control" name="edate">
+          </div>        
+          <div class="form-group">
+            <label>Event Description</label>
+            <textarea class="form-control" name="edesc"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Event Color</label>
+            <select class="form-control" name="ecolor">
+              <option value="fc-bg-default">fc-bg-default</option>
+              <option value="fc-bg-blue">fc-bg-blue</option>
+              <option value="fc-bg-lightgreen">fc-bg-lightgreen</option>
+              <option value="fc-bg-pinkred">fc-bg-pinkred</option>
+              <option value="fc-bg-deepskyblue">fc-bg-deepskyblue</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Event Icon</label>
+            <select class="form-control" name="eicon">
+              <option value="circle">circle</option>
+              <option value="cog">cog</option>
+              <option value="group">group</option>
+              <option value="suitcase">suitcase</option>
+              <option value="calendar">calendar</option>
+            </select>
+          </div>        
       </div>
-      <div class="form-group">
-      <label for="claseSelect">Clase</label>
-      <select id="claseSelect" class="form-select form-select-sm"></select>
+        <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" >Save</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>        
+      </div>
+      </form>
     </div>
+  </div>
+</div>
+     
+        
+        
+<div>   
+        
+          </div>
+    
+  </main>
 
-      <div class="form-group" style="display:flex;align-items:flex-end">
-        <button id="btnReset" class="btn btn-sm btn-outline-secondary">Ver todos</button>
-      </div>
-    </div>
-
-    <!-- ======= Predicción automática (admin) ======= -->
-    <style>
-      .ml-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin-top:20px;box-shadow:0 1px 2px rgba(0,0,0,.04);}
-      .ml-grid{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
-      .ml-mini{flex:1;min-width:220px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px}
-      .ml-panels{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
-      .ml-panel{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px}
-      .ml-tablewrap{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px;margin-bottom:16px}
-      .ml-muted{color:#6b7280}
-      .ml-h6{margin:0 0 8px}
-      .ml-table thead th{background:#f8fafc}
-      @media (max-width: 992px){ .ml-panels{grid-template-columns:1fr} }
-      /* Badges neutros para fondo blanco */
-      .badge-soft-danger{background:#fee2e2;color:#991b1b;border-radius:20px;padding:.25rem .5rem;font-weight:600}
-      .badge-soft-success{background:#dcfce7;color:#166534;border-radius:20px;padding:.25rem .5rem;font-weight:600}
-      .badge-soft-info{background:#e0f2fe;color:#075985;border-radius:20px;padding:.25rem .5rem;font-weight:600}
-      .badge-soft-warning{background:#fef3c7;color:#92400e;border-radius:20px;padding:.25rem .5rem;font-weight:600}
-    </style>
-
-    <div class="ml-card">
-      <h5 style="margin-bottom:10px;">Estadísticas de reprobación (automático)</h5>
-      <div id="status" class="ml-muted" style="margin-bottom:10px;">—</div>
-
-      <!-- Tarjetas resumen -->
-      <div class="ml-grid">
-        <div class="ml-mini">
-          <div class="ml-muted">Alumnos totales</div>
-          <div id="statTotal" style="font-size:22px;font-weight:700;">—</div>
-        </div>
-        <div class="ml-mini">
-          <div class="ml-muted">Predichos en riesgo (≥0.5)</div>
-          <div id="statRiesgo" style="font-size:22px;font-weight:700;">—</div>
-        </div>
-        <div class="ml-mini">
-          <div class="ml-muted">Tasa de riesgo</div>
-          <div id="statRate" style="font-size:22px;font-weight:700;">—</div>
-        </div>
-      </div>
-
-      <!-- Gráficas -->
-      <div class="ml-panels">
-        <div class="ml-panel">
-          <div class="ml-muted" style="margin-bottom:6px;">Matriz de confusión (Ensamble)</div>
-          <canvas id="cmChart" height="200"></canvas>
-        </div>
-        <div class="ml-panel">
-          <div class="ml-muted" style="margin-bottom:6px;">Distribución de etiquetas (0 No repr. / 1 Repr.)</div>
-          <canvas id="distChart" height="200"></canvas>
-        </div>
-      </div>
-
-      <!-- Tabla: alumnos en mayor riesgo -->
-      <div class="ml-tablewrap">
-        <h6 class="ml-h6">Top alumnos en riesgo (ordenado por probabilidad)</h6>
-        <div class="table-responsive">
-          <table class="table table-striped ml-table align-middle">
-            <thead>
-              <tr>
-                <th>Alumno</th><th>Materia</th><th>Periodo</th><th>Clase</th>
-                <th>Asistencia</th><!-- Incidentes opcional, puedes quitar esta columna visual -->
-                <th>Incidentes</th>
-                <th>Parciales</th>
-                <th>Prob. CART</th><th>Prob. RF</th><th>Prob. Final</th><th>Pred.</th>
-                <th>Req. promedio resto</th><th>Estado ciclo</th>
-              </tr>
-            </thead>
-            <tbody id="tbRiesgo"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Tabla: resumen por clase / periodo / materia -->
-      <div class="ml-tablewrap">
-        <h6 class="ml-h6">Resumen por Clase / Periodo / Materia</h6>
-        <div class="table-responsive">
-          <table class="table table-striped ml-table align-middle">
-            <thead>
-              <tr>
-                <th>Periodo</th><th>Clase</th><th>Materia</th>
-                <th>#Alumnos</th><th>#Riesgo</th><th>Tasa Riesgo</th>
-              </tr>
-            </thead>
-            <tbody id="tbResumen"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <!-- ============================================ -->
-
-
-
-</main>
-
-<!--   Quick bar -->
+  <!-- Quick bar -->
   <aside id="ms-quick-bar" class="ms-quick-bar fixed ms-d-block-lg">
-    </div>
 
     <!-- Quick bar Content -->
     <div class="ms-quick-bar-content">
@@ -520,7 +473,7 @@
             <div class="ms-chat-header px-3">
               <div class="ms-chat-user-container media clearfix">
                 <div class="ms-chat-status ms-status-online ms-chat-img mr-3 align-self-center">
-                  <img src="assets/img/we-educate/new-student-4.jpg" class="ms-img-round" alt="people">
+                  <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
                 </div>
                 <div class="media-body ms-chat-user-info mt-1">
                   <h6>Anny Farisha</h6>
@@ -549,10 +502,6 @@
                 </div>
               </div>
               <form class="ms-form my-3" method="post">
-                <div class="ms-form-group my-0 mb-0 has-icon fs-14">
-                  <input type="search" class="ms-form-input w-100" name="search" placeholder="Search for People and Groups" value="">
-                  <i class="flaticon-search text-disabled"></i>
-                </div>
               </form>
             </div>
 
@@ -569,7 +518,7 @@
                     <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
                       <div class="ms-chat-status ms-status-away ms-has-new-msg ms-chat-img mr-3 align-self-center">
                         <span class="msg-count">3</span>
-                        <img src="assets/img/we-educate/new-student-5.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>James Zathila</h6> <span class="ms-chat-time">2 Hours ago</span>
@@ -579,7 +528,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
                       <div class="ms-chat-status ms-status-online ms-chat-img mr-3 align-self-center">
-                        <img src="assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>Raymart Sandiago</h6> <span class="ms-chat-time">3 Hours ago</span>
@@ -589,7 +538,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
                       <div class="ms-chat-status ms-status-offline ms-chat-img mr-3 align-self-center">
-                        <img src="assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>Heather Brown</h6> <span class="ms-chat-time">12 Hours ago</span>
@@ -599,7 +548,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
                       <div class="ms-chat-status ms-status-busy ms-chat-img mr-3 align-self-center">
-                        <img src="assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>Micheal John</h6> <span class="ms-chat-time">Yesterday</span>
@@ -609,7 +558,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
                       <div class="ms-chat-status ms-status-online ms-chat-img mr-3 align-self-center">
-                        <img src="assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>John Doe</h6> <span class="ms-chat-time">3 Days ago</span>
@@ -623,43 +572,43 @@
                   <ul class="ms-scrollable ms-quickbar-container">
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>James Zathila</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
                         <ul class="ms-group-members clearfix mt-3 mb-0">
-                          <li> <img src="assets/img/we-educate/topper-2.jpg" alt="member"> </li>
-                          <li> <img src="assets/img/we-educate/topper-3.jpg" alt="member"> </li>
-                          <li> <img src="assets/img/we-educate/topper-4.jpg" alt="member"> </li>
+                          <li> <img src="../../assets/img/we-educate/topper-1.jpg" alt="member"> </li>
+                          <li> <img src="../../assets/img/we-educate/topper-2.jpg" alt="member"> </li>
+                          <li> <img src="../../assets/img/we-educate/topper-3.jpg" alt="member"> </li>
                           <li class="ms-group-count"> + 12 more </li>
                         </ul>
                       </div>
                     </li>
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>Raymart Sandiago</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
                         <ul class="ms-group-members clearfix mt-3 mb-0">
-                          <li> <img src="assets/img/we-educate/topper-3.jpg" alt="member"> </li>
-                          <li> <img src="assets/img/we-educate/topper-4.jpg" alt="member"> </li>
+                          <li> <img src="../../assets/img/we-educate/topper-5.jpg" alt="member"> </li>
+                          <li> <img src="../../assets/img/we-educate/topper-6.jpg" alt="member"> </li>
                         </ul>
                       </div>
                     </li>
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>John Doe</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
                         <ul class="ms-group-members clearfix mt-3 mb-0">
-                          <li> <img src="assets/img/we-educate/topper-4.jpg" alt="member"> </li>
-                          <li> <img src="assets/img/we-educate/topper-5.jpg" alt="member"> </li>
-                          <li> <img src="assets/img/we-educate/topper-6.jpg" alt="member"> </li>
+                          <li> <img src="../../assets/img/we-educate/topper-2.jpg" alt="member"> </li>
+                          <li> <img src="../../assets/img/we-educate/topper-3.jpg" alt="member"> </li>
+                          <li> <img src="../../assets/img/we-educate/topper-4.jpg" alt="member"> </li>
                           <li class="ms-group-count"> + 4 more </li>
                         </ul>
                       </div>
@@ -670,7 +619,7 @@
                   <ul class="ms-scrollable ms-quickbar-container">
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>John Doe</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
@@ -679,7 +628,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>Raymart Sandiago</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
@@ -688,7 +637,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>Micheal John</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
@@ -697,7 +646,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>Heather Brown</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
@@ -706,7 +655,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>Mila Freign</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
@@ -715,7 +664,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>James Zathila</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
@@ -743,7 +692,7 @@
             <ul class="ms-scrollable ms-quickbar-container">
               <li class="p-3  media ms-email clearfix">
                 <div class="ms-email-img mr-3 ">
-                  <img src="assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
+                  <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
                 </div>
                 <div class="media-body ms-email-details">
                   <span class="ms-email-sender">James Zathila</span>
@@ -753,7 +702,7 @@
               </li>
               <li class="p-3  media ms-email clearfix">
                 <div class="ms-email-img mr-3 ">
-                  <img src="assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
+                  <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
                 </div>
                 <div class="media-body ms-email-details">
                   <span class="ms-email-sender">John Doe</span>
@@ -763,7 +712,7 @@
               </li>
               <li class="p-3  media ms-email clearfix">
                 <div class="ms-email-img mr-3 ">
-                  <img src="assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
+                  <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
                 </div>
                 <div class="media-body ms-email-details">
                   <span class="ms-email-sender">Heather Brown</span>
@@ -888,8 +837,8 @@
                   vel varius metus. Pellentesque eget orci malesuada, venenatis magna et
                 </p>
                 <ul class="ms-note-members clearfix mb-0">
-                  <li class="ms-deletable"> <img src="assets/img/we-educate/topper-3.jpg" alt="member"> </li>
-                  <li class="ms-deletable"> <img src="assets/img/we-educate/topper-4.jpg" alt="member"> </li>
+                  <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-2.jpg" alt="member"> </li>
+                  <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-3.jpg" alt="member"> </li>
                 </ul>
               </div>
               <div class="ms-card-footer clearfix">
@@ -906,7 +855,7 @@
                     <li class="ms-scrollable ms-dropdown-list ms-members-list">
                       <a class="media p-2" href="#">
                         <div class="mr-2 align-self-center">
-                          <img src="assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
+                          <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
                         </div>
                         <div class="media-body">
                           <span>John Doe</span>
@@ -914,7 +863,7 @@
                       </a>
                       <a class="media p-2" href="#">
                         <div class="mr-2 align-self-center">
-                          <img src="assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
+                          <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
                         </div>
                         <div class="media-body">
                           <span>Raymart Sandiago</span>
@@ -922,7 +871,7 @@
                       </a>
                       <a class="media p-2" href="#">
                         <div class="mr-2 align-self-center">
-                          <img src="assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
+                          <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
                         </div>
                         <div class="media-body">
                           <span>Heather Brown</span>
@@ -949,7 +898,7 @@
                   vel varius metus. Pellentesque eget orci malesuada, venenatis magna et
                 </p>
                 <ul class="ms-note-members clearfix mb-0">
-                  <li class="ms-deletable"> <img src="assets/img/we-educate/topper-1.jpg" alt="member"> </li>
+                  <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-1.jpg" alt="member"> </li>
                 </ul>
               </div>
               <div class="ms-card-footer clearfix">
@@ -966,7 +915,7 @@
                     <li class="ms-scrollable ms-dropdown-list ms-members-list">
                       <a class="media p-2" href="#">
                         <div class="mr-2 align-self-center">
-                          <img src="assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
+                          <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
                         </div>
                         <div class="media-body">
                           <span>John Doe</span>
@@ -974,7 +923,7 @@
                       </a>
                       <a class="media p-2" href="#">
                         <div class="mr-2 align-self-center">
-                          <img src="assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
+                          <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
                         </div>
                         <div class="media-body">
                           <span>Raymart Sandiago</span>
@@ -982,7 +931,7 @@
                       </a>
                       <a class="media p-2" href="#">
                         <div class="mr-2 align-self-center">
-                          <img src="assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
+                          <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
                         </div>
                         <div class="media-body">
                           <span>Heather Brown</span>
@@ -1124,32 +1073,64 @@
     </div>
   </div>
 
- 
   <!-- SCRIPTS -->
-<!-- Global Required Scripts -->
-<script src="assets/js/jquery-3.3.1.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/perfect-scrollbar.js"></script>
-<script src="assets/js/jquery-ui.min.js"></script>
+  <!-- Global Required Scripts Start -->
+  <script src="../../assets/js/jquery-3.3.1.min.js"></script>
 
-<!-- Chart -->
-<script src="assets/js/Chart.bundle.min.js"></script>
+    <script src="../../assets/js/popper.min.js"></script>
+  <script src="../../assets/js/bootstrap.min.js"></script>
+  <script src="../../assets/js/perfect-scrollbar.js"> </script>
+  <script src="../../assets/js/jquery-ui.min.js"> </script>
+  <!-- Global Required Scripts End -->
 
-<!-- Framework, settings, etc -->
-<script src="assets/js/framework.js"></script>
-<script src="assets/js/settings.js"></script>
-<script src="assets/js/datatables.min.js"></script>
-<script src="assets/js/data-tables.js"></script>
+  <!-- Page Specific Scripts Start -->
+  <script src="../../assets/js/slick.min.js"> </script>
+  <script src="../../assets/js/moment.js"> </script>
+  <script src="../../assets/js/jquery.webticker.min.js"> </script>
+ 
+    
+  <!-- Page Specific Scripts Finish -->
+ <script src="../../assets/js/datatables.min.js"> </script>
+  <script src="../../assets/js/data-tables.js"> </script>
+  <!-- Weeducate core JavaScript -->
+  <script src="../../assets/js/framework.js"></script>
 
-<!-- ML y predicciones -->
-<script src="assets/api/ml-cart.min.js"></script>
-<script src="assets/api/random-forest.min.js"></script>
-<script src="assets/api/predicciones_auto.js"></script>
+  <!-- Settings -->
+  <script src="../../assets/js/settings.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const calendarEl = document.getElementById('calendario-festivos');
 
+      fetch('../holidays/dias_festivos.json')
+        .then(response => response.json())
+        .then(data => {
+          const eventos = data.map(festivo => {
+            const rango = festivo.fecha.split(' al ');
+            return {
+              title: festivo.motivo,
+              start: rango[0],
+              end: rango[1] ? new Date(new Date(rango[1]).getTime() + 86400000).toISOString().split('T')[0] : undefined,
+              allDay: true
+            };
+          });
 
+          const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'es',
+            height: 600,
+            events: eventos,
+            eventClick: function (info) {
+              alert(`📅 ${info.event.title}\nFecha: ${info.event.start.toLocaleDateString('es-MX')}`);
+            }
+          });
 
+          calendar.render();
+        });
+    });
+  </script>
 
 </body>
 

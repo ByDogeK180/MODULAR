@@ -1,4 +1,5 @@
-<?php include '../php/auth.php'; ?>
+<?php require_once __DIR__ . '/../php/auth.php'; ?>
+
 <script>
   const userRol = <?php echo $_SESSION['rol'] ?? 'null'; ?>;
 </script>
@@ -122,7 +123,7 @@
         
         <!--Holiday Start-->
         <li class="menu-item">
-          <a href="../holidays/holiday.html">
+          <a href="../holidays/holiday_docente.php">
             <span><i class="fa fa-calendar fs-16"></i>Holidays</span>
           </a>
         </li>
@@ -173,7 +174,7 @@
             <li class="dropdown-menu-footer">
             </li>
             <li class="dropdown-menu-footer">
-                    <a class="media fs-14 p-2" href="../../pages/prebuilt-pages/default-login.html"> <span><i
+                    <a class="media fs-14 p-2" href="../php/logout.php"> <span><i
                     class="flaticon-shut-down mr-2"></i> Logout</span> </a>
             </li>
           </ul>
@@ -204,43 +205,66 @@
       </nav>
     </div>
 
-<select id="filtroGrupo" class="form-control mb-3" style="width: auto;">
-  <option value="">Todos los grupos</option>
-</select>
+    <select id="filtroGrupo" class="form-control mb-3" style="width: auto;">
+      <option value="">Todos los grupos</option>
+    </select>
 
+    <div class="col-lg-12">
+      <div class="ms-panel">
+        <!-- Header -->
+        <div class="ms-panel-header d-flex justify-content-between align-items-center">
+          <h6>Perfiles de Tutores</h6>
+        </div>
 
-
-<div class="col-lg-12">
-  <div class="ms-panel">
-    <!-- Header -->
-    <div class="ms-panel-header d-flex justify-content-between align-items-center">
-      <h6>Perfiles de Tutores</h6>
-
-      
-    </div>
-
-    <!-- Tabla -->
-    <div class="ms-panel-body">
-      <div class="table-responsive">
-        <table id="tablaTutores" class="table">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Teléfono</th>
-              <th>Correo</th>
-              <th>Dirección</th>
-            </tr>
-          </thead>
-          <tbody id="tutores-lista">
-            <!-- Los tutores se insertan dinámicamente aquí -->
-          </tbody>
-        </table>
+        <!-- Tabla -->
+        <div class="ms-panel-body">
+          <div class="table-responsive">
+            <table id="tablaTutores" class="table">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Teléfono</th>
+                  <th>Correo</th>
+                  <th>Dirección</th>
+                  <th>Acciones</th> <!-- 👈 Nueva columna -->
+                </tr>
+              </thead>
+              <tbody id="tutores-lista">
+                <!-- Los tutores se insertan dinámicamente aquí -->
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Modal para Hijos -->
+<div class="modal fade" id="modalHijos" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Hijos del Tutor</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Grado</th>
+              <th>Grupo</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-hijos"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
 
   </main>
 
