@@ -1,56 +1,96 @@
-/* ===== Header como en la imagen ===== */
+/* ====== Perfil del alumno (tarjeta superior) ====== */
 .profile-header{
-  display:flex; align-items:flex-start;
-  padding:1rem 1.25rem;
-  background:#fff;
-  border-bottom:1px solid rgba(0,0,0,.06);
-  gap: .75rem;                 /* espacio real, con fallback abajo */
+  display:flex; align-items:center; gap:16px;
+  background: linear-gradient(180deg,#fff 0%, #f8fafc 100%);
+  border:1px solid #e5e7eb; border-radius:16px;
+  padding:16px 18px; position:relative;
 }
-.profile-header > * + *{ margin-left:.75rem; } /* fallback de gap */
-
-/* Icono pequeño a la izquierda (sin círculo) */
-.profile-header .ph-avatar{
-  width:22px; height:22px; border-radius:4px;
-  background:transparent; box-shadow:none;
-  display:flex; align-items:center; justify-content:center;
-  margin-top:.1rem;            /* alinea con texto */
+.ph-icon{
+  width:44px; height:44px; display:inline-grid; place-items:center;
+  border-radius:50%; background:#eef2ff; color:#4e73df; font-size:20px;
+  box-shadow:0 1px 2px rgba(0,0,0,.06) inset;
 }
-.profile-header .ph-avatar i{ font-size:18px; color:#212529; }
-
-/* Contenedor de texto */
-.ph-block{ min-width:0; flex:1; }
-
-/* Primera fila: título grande + estado a la derecha del título */
-.ph-row{
-  display:flex; align-items:baseline;
-  gap: .85rem;
-  flex-wrap:wrap;              /* si no cabe, el estado baja */
-}
-.ph-title{
-  color:#1f2d3d; font-weight:800; line-height:1.1;
-  font-size:1.55rem;
-  margin:0;
-  max-width:100%;
-}
-
-/* Estado “Activo” como texto con ícono (sin pastilla) */
+.ph-body{ flex:1; min-width:0; }
+.ph-top{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.ph-title{ font-weight:700; color:#111827; font-size:1.15rem; }
 .status-inline{
-  display:inline-flex; align-items:center; gap:.4rem;
-  font-weight:700; white-space:nowrap;
-  color:#198754;               /* ok */
+  display:inline-flex; align-items:center; gap:6px;
+  font-weight:600; padding:.25rem .6rem; border-radius:999px;
+  background:#f1f5f9; color:#334155;
+  border:1px solid #e2e8f0;
 }
-.status-inline.off{ color:#dc3545; }
+.status-inline.ok{ background:#ecfdf5; color:#065f46; border-color:#bbf7d0; }
+.status-inline.off{ background:#fef2f2; color:#991b1b; border-color:#fecaca; }
+.ph-registered{ color:#6b7280; font-size:.875rem; }
 
-/* Segunda fila: fecha de registro */
-.ph-meta-line{
-  margin-top:.35rem;
-  color:#1f2d3d;               /* como en la imagen, no tan tenue */
-  font-size:1rem;
-  display:flex; align-items:center; gap:.45rem;
+/* ====== Tarjetas de información (2 columnas) ====== */
+.info-card{
+  background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:16px;
 }
-.ph-meta-line i{ opacity:.95; }
+.section-title{ display:flex; align-items:center; gap:8px; font-weight:700; }
+.title-icon{
+  width:28px; height:28px; display:inline-grid; place-items:center;
+  border-radius:8px; background:#eef2ff; color:#4e73df;
+}
+.info-grid{
+  display:grid; grid-template-columns:1fr; gap:14px;
+}
+@media (min-width:768px){
+  .info-grid{ grid-template-columns:1fr; } /* 1 columna en md para lectura limpia */
+}
+.info-item{ display:flex; align-items:flex-start; gap:12px; }
+.info-icon{
+  width:36px; height:36px; display:inline-grid; place-items:center;
+  border-radius:10px; background:#f8fafc; color:#475569; border:1px solid #eef2f7;
+}
+.info-label{ margin:0; color:#64748b; font-size:.85rem; }
+.info-value{ margin:0; color:#111827; font-weight:600; }
 
-/* Opcional: en pantallas muy estrechas fuerza que el estado baje de línea */
-@media (max-width:480px){
-  .ph-row{ flex-direction:column; align-items:flex-start; gap:.25rem; }
+/* ====== Encabezado “Materias actuales” ====== */
+.materias-header .contador{
+  font-weight:700; font-size:.875rem; color:#334155;
+  background:#f1f5f9; border:1px solid #e2e8f0; padding:.25rem .55rem; border-radius:999px;
 }
+
+/* ====== Card de materia ====== */
+.materia-card{ transition:transform .15s ease, box-shadow .15s ease; }
+.materia-card:hover{ transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.08); }
+.materia-card .card-img-top{
+  height:160px; object-fit:cover; border-top-left-radius:12px; border-top-right-radius:12px;
+}
+.badge-status{
+  position:absolute; top:10px; left:10px;
+  color:#fff; font-weight:700; border-radius:999px; padding:.25rem .5rem;
+  box-shadow:0 1px 2px rgba(0,0,0,.15);
+}
+.badge-chip{
+  display:inline-flex; align-items:center; gap:6px;
+  padding:.25rem .5rem; border-radius:999px; background:#eef2ff; color:#3730a3; font-weight:600;
+  border:1px solid #e0e7ff;
+}
+
+/* ====== Pequeños ajustes generales ====== */
+.card.shadow-lg.border-0.rounded-4{ border-radius:16px !important; }
+.table-light{ background:#f8fafc !important; }
+
+/* --- Tabs de hijos --- */
+.nav-pills.child-tabs { gap: .5rem; flex-wrap: wrap; }
+.child-tabs .nav-link{
+  display: flex; align-items: center; gap: .6rem;
+  padding: .5rem .75rem; border-radius: 999px;
+  background: #f8fafc; border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px rgba(16,24,40,.05);
+  transition: background .15s, border-color .15s, box-shadow .15s;
+}
+.child-tabs .nav-link:hover{ background: #f1f5f9; border-color:#d1d5db; }
+.child-tabs .nav-link.active{
+  background:#eef2ff; border-color:#c7d2fe; color:#1f2937;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.4);
+}
+.child-tabs .avatar{
+  width: 28px; height: 28px; border-radius: 50%;
+  background:#4e73df; color:#fff; font-weight:700; font-size:.9rem;
+  display:inline-flex; align-items:center; justify-content:center;
+}
+.child-tabs .name{ line-height: 1; font-weight: 600; }
+.child-tabs .sub{ display:block; margin-top:-2px; font-size:.72rem; color:#6b7280; }
