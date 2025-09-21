@@ -12,9 +12,10 @@ function cargarEstudiantes(materiaId = null) {
     dataType: "json",
     success: data => {
       console.log("ESTUDIANTES RECIBIDOS:", data);
+
       let tbody = '';
       data.forEach(est => {
-        if (est.activo == 1) {
+        if (String(est.activo) === "1") { // solo los activos
           tbody += `
             <tr>
               <td>${est.estudiante_id}</td>
@@ -37,12 +38,14 @@ function cargarEstudiantes(materiaId = null) {
         }
       });
 
-      const $tabla = $('#data-table-4');
+      const $tabla = $('#tabla-estudiantes'); // 👈 ID corregido
       if ($.fn.DataTable.isDataTable($tabla)) {
         $tabla.DataTable().clear().destroy();
       }
 
       $('#student-body').html(tbody);
+
+      // Inicializar DataTable y actualizar contador con los visibles en la página actual
       $tabla.DataTable({
         responsive: true,
         pageLength: 10,
@@ -54,12 +57,18 @@ function cargarEstudiantes(materiaId = null) {
           infoEmpty: "No hay registros disponibles",
           infoFiltered: "(filtrado de _MAX_ registros totales)",
           paginate: { next: "Siguiente", previous: "Anterior" }
+        },
+        drawCallback: function () {
+          const api = this.api();
+          const visibles = api.rows({ page: 'current' }).count(); // 👈 cuenta solo visibles
+          document.getElementById("total-estudiantes").textContent = visibles;
         }
       });
     },
     error: (xhr, status, err) => {
       console.error("Error al cargar estudiantes:", err);
-      $('#student-body').html('<tr><td colspan="14">Error al cargar estudiantes</td></tr>');
+      $('#student-body').html('<tr><td colspan="12">Error al cargar estudiantes</td></tr>');
+      document.getElementById("total-estudiantes").textContent = 0;
     }
   });
 }
@@ -90,7 +99,10 @@ function cargarMateriasDocente() {
     .then(materias => {
       let opciones = '<option value="">Seleccione una materia</option>';
       materias.forEach(m => {
-        opciones += `<option value="${m.materia_id}">${m.nombre} (ID: ${m.materia_id} | Ciclo: ${m.ciclo})</option>`;
+        // muestra nombre, ciclo y grupo
+        opciones += `<option value="${m.materia_id}">
+          ${m.materia} - ${m.ciclo} - Grupo ${m.grupo}
+        </option>`;
       });
       $('#materia-select').html(opciones);
     })
@@ -108,7 +120,8 @@ $(document).ready(function () {
         cargarEstudiantes(materiaId);
       } else {
         $('#student-body').html('');
-        $('#data-table-4').DataTable().clear().draw();
+        $('#tabla-estudiantes').DataTable().clear().draw();
+        document.getElementById("total-estudiantes").textContent = 0;
       }
     });
   } else {
@@ -116,6 +129,7 @@ $(document).ready(function () {
     cargarEstudiantes();
   }
 
+  // Botón eliminar
   $(document).on('click', '.btn-eliminar', function () {
     const id = $(this).data('id');
     if (!confirm('¿Deseas eliminar este estudiante?')) return;
@@ -124,18 +138,19 @@ $(document).ready(function () {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id })
     })
-    .then(r => r.json())
-    .then(resp => {
-      if (resp.success) {
-        Swal.fire({ icon: 'success', title: 'Eliminado', timer: 1500, showConfirmButton: false });
-        const materiaId = $('#materia-select').val();
-        cargarEstudiantes(materiaId);
-      } else {
-        alert('Error al eliminar estudiante.');
-      }
-    });
+      .then(r => r.json())
+      .then(resp => {
+        if (resp.success) {
+          Swal.fire({ icon: 'success', title: 'Eliminado', timer: 1500, showConfirmButton: false });
+          const materiaId = $('#materia-select').val();
+          cargarEstudiantes(materiaId);
+        } else {
+          alert('Error al eliminar estudiante.');
+        }
+      });
   });
 
+  // Botón editar
   $(document).on('click', '.btn-editar', function () {
     const id = $(this).data('id');
     fetch(`../php/obtener_estudiante.php?id=${id}`)
@@ -157,6 +172,7 @@ $(document).ready(function () {
       });
   });
 
+  // Guardar edición
   $('#formEditarEstudiante').on('submit', function (e) {
     e.preventDefault();
     const formData = new FormData(this);
@@ -164,20 +180,20 @@ $(document).ready(function () {
       method: 'POST',
       body: formData
     })
-    .then(r => r.json())
-    .then(data => {
-      if (data.success) {
-        $('#modalEditarEstudiante').modal('hide');
-        Swal.fire({ icon: 'success', title: '¡Estudiante actualizado!', timer: 1500, showConfirmButton: false });
-        const materiaId = $('#materia-select').val();
-        cargarEstudiantes(materiaId);
-      } else {
-        alert(`No se pudo actualizar: ${data.message || 'Error desconocido'}`);
-      }
-    })
-    .catch(err => {
-      console.error('Fetch error al actualizar estudiante:', err);
-      alert('Error de red al actualizar estudiante.');
-    });
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          $('#modalEditarEstudiante').modal('hide');
+          Swal.fire({ icon: 'success', title: '¡Estudiante actualizado!', timer: 1500, showConfirmButton: false });
+          const materiaId = $('#materia-select').val();
+          cargarEstudiantes(materiaId);
+        } else {
+          alert(`No se pudo actualizar: ${data.message || 'Error desconocido'}`);
+        }
+      })
+      .catch(err => {
+        console.error('Fetch error al actualizar estudiante:', err);
+        alert('Error de red al actualizar estudiante.');
+      });
   });
 });
