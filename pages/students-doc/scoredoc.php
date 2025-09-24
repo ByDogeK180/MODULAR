@@ -199,30 +199,41 @@
 
 <div class="ms-content-wrapper">
   <div class="d-flex justify-content-center my-5">
-    <div class="card shadow-lg p-4 rounded-4 w-100" style="max-width: 1100px;">
-      <div class="ms-panel-header d-flex justify-content-between align-items-center">
-        <h6 class="mb-0 text-primary fw-bold">Registro de Calificaciones por Periodo</h6>
+    <div class="card shadow-lg rounded-4 w-100" style="max-width: 1100px;">
+      
+      <!-- Encabezado -->
+      <div class="card-header bg-warning text-white d-flex align-items-center">
+        <i class="material-icons me-2">grading</i>
+        <h6 class="mb-0 fw-bold">Registro de Calificaciones por Periodo</h6>
       </div>
 
-      <div class="ms-panel-body">
+      <!-- Contenido -->
+      <div class="card-body p-4">
         <form id="formCalificaciones">
-          <div class="row g-3 mb-3">
+          
+          <!-- Filtros -->
+          <div class="row g-3 mb-4">
             <div class="col-md-6">
-              <label class="form-label fw-bold">Clase</label>
+              <label for="selectClase" class="form-label fw-bold">
+                <i class="material-icons me-1 text-secondary">class</i> Clase
+              </label>
               <select id="selectClase" class="form-select" required>
                 <option value="">Selecciona clase</option>
               </select>
             </div>
             <div class="col-md-6">
-              <label class="form-label fw-bold">Periodo</label>
+              <label for="selectPeriodo" class="form-label fw-bold">
+                <i class="material-icons me-1 text-secondary">calendar_today</i> Periodo
+              </label>
               <select id="selectPeriodo" class="form-select" required>
                 <option value="">Selecciona periodo</option>
               </select>
             </div>
           </div>
 
+          <!-- Tabla -->
           <div class="table-responsive">
-            <table class="table table-bordered align-middle text-center" id="tablaCalificaciones">
+            <table class="table table-bordered table-hover align-middle text-center" id="tablaCalificaciones">
               <thead class="table-light">
                 <tr id="headerFila">
                   <th>Estudiante</th>
@@ -231,14 +242,23 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- Cuerpo generado dinámicamente -->
+                <tr>
+                  <td colspan="2" class="text-muted py-4">
+                    <i class="fa fa-users fa-lg d-block mb-2 text-warning"></i>
+                    Selecciona una clase y periodo para mostrar estudiantes.
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
 
-          <div class="text-end mt-3">
-            <button type="submit" class="btn btn-warning">Guardar Calificaciones</button>
+          <!-- Botón -->
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-warning btn-lg px-5 shadow-sm">
+              <i class="material-icons me-1">save</i> Guardar Calificaciones
+            </button>
           </div>
+
         </form>
       </div>
     </div>

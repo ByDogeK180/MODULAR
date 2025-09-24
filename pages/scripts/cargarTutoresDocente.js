@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   const selectGrupo = document.getElementById('filtroGrupo');
-  const tablaTutores = document.getElementById('tablaTutores');
   const tablaHijos = document.getElementById('tabla-hijos');
 
+  // 1. Cargar grupos del docente
   function cargarGrupos() {
     fetch('../php/obtener_grupos_docente.php')
       .then(res => res.json())
@@ -11,14 +11,15 @@ document.addEventListener('DOMContentLoaded', () => {
         selectGrupo.innerHTML = '<option value="">Todos los grupos</option>';
         grupos.forEach(g => {
           const opt = document.createElement('option');
-          opt.value = `${g.grado}-${g.grupo}-${g.materia_id}`;
-          opt.textContent = `${g.grado} - ${g.grupo} (${g.ciclo}) - ID: ${g.materia_id}`;
+          opt.value = g.materia_id; // usamos materia_id como valor
+          opt.textContent = ` ${g.ciclo} - Grado ${g.grado}${g.grupo}`;
           selectGrupo.appendChild(opt);
         });
       })
       .catch(err => console.error('❌ Error al cargar grupos:', err));
   }
 
+  // 2. Cargar tutores (con o sin filtro de materia_id)
   function cargarTutores(filtro = '') {
     const url = filtro
       ? `../php/obtener_tutores_docente.php${filtro}`
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 data: 'tutor_id',
                 render: function (data) {
                   return `
-                    <button class="btn btn-info btn-sm ver-hijos" data-id="${data}">
+                    <button class="btn btn-warning btn-sm ver-hijos" data-id="${data}">
                       Ver Hijos
                     </button>`;
                 }
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           });
 
-          // Evento delegado para abrir el modal
+          // Evento delegado para abrir modal de hijos
           $('#tablaTutores tbody').on('click', '.ver-hijos', function () {
             const tutorId = $(this).data('id');
 
@@ -95,18 +96,19 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(err => console.error("❌ Error al cargar tutores:", err));
   }
 
+  // 3. Evento para aplicar filtro
   if (selectGrupo) {
     selectGrupo.addEventListener('change', () => {
-      const valor = selectGrupo.value;
-      if (valor) {
-        const [grado, grupo] = valor.split('-');
-        cargarTutores(`?grado=${grado}&grupo=${grupo}`);
+      const materiaId = selectGrupo.value;
+      if (materiaId) {
+        cargarTutores(`?materia_id=${materiaId}`);
       } else {
         cargarTutores();
       }
     });
   }
 
+  // 4. Inicializar
   cargarGrupos();
   cargarTutores();
 });

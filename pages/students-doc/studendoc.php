@@ -190,134 +190,101 @@
 
     </nav>
 
+<!-- Body Content Wrapper -->
+<!-- Body Content Wrapper -->
+<div class="ms-content-wrapper">
+  <div class="row">
+    <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb pl-0">
+          <li class="breadcrumb-item">
+            <a href="../../Docentes.php"><i class="material-icons">home</i> Home</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Estudiantes</li>
+          <li class="breadcrumb-item active" aria-current="page">Tabla de Estudiantes</li>
+        </ol>
+      </nav>
+    </div>
 
- <!-- Body Content Wrapper -->
-  <div class="ms-content-wrapper">
-    <div class="row">
-      <div class="col-md-12">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb pl-0">
-            <li class="breadcrumb-item"><a href="../../Docentes.php"><i class="material-icons">home</i> Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Estudiantes</li>
-            <li class="breadcrumb-item active" aria-current="page">Tabla de Estudiantes</li>
-          </ol>
-        </nav>
+    <div class="col-lg-12">
+      <div class="ms-panel shadow-sm rounded">
+        <!-- Header -->
+        <div class="ms-panel-header d-flex justify-content-between align-items-center bg-white p-3 rounded-top border-bottom">
+          <h6 class="mb-0 font-weight-bold text-warning">
+            <i class="material-icons mr-1">school</i> Tabla de Estudiantes
+          </h6>
+
+          <div class="dropdown">
+            <a href="#" class="fa fa-ellipsis-v text-secondary p-0" data-toggle="dropdown"></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item" href="#">Exportar Excel</a>
+              <a class="dropdown-item" href="#">Exportar PDF</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta de resumen -->
+        <div class="row px-4 pt-3">
+          <div class="col-12 mb-3">
+            <div class="card text-center shadow-sm">
+              <div class="card-body p-4">
+                <h5 class="text-secondary mb-2">Total Estudiantes</h5>
+                <h3 class="text-dark mb-0" id="total-estudiantes">0</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Selector de materia -->
+        <div class="bg-light border-bottom px-4 py-3">
+          <div class="d-flex align-items-center">
+            <label for="materia-select" class="font-weight-bold text-secondary mr-3 mb-0">
+              Selecciona una materia:
+            </label>
+            <select id="materia-select" class="form-control w-auto mr-3">
+              <option value="">-- Selecciona --</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Tabla -->
+        <div class="ms-panel-body p-4">
+          <div class="table-responsive">
+            <table id="tabla-estudiantes" class="table table-striped table-bordered table-hover w-100 mb-0">
+              <thead class="thead-light">
+                <tr>
+                  <th>ID Alumno</th>
+                  <th>Tutor ID</th>
+                  <th>Nombre Tutor</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Fecha de Nacimiento</th>
+                  <th>Grado</th>
+                  <th>Grupo</th>
+                  <th>Activo</th>
+                  <th>Creado en</th>
+                  <th>Actualizado en</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="student-body">
+                <!-- Placeholder cuando no hay datos -->
+                <tr>
+                  <td colspan="12" class="text-center text-muted py-5">
+                    <i class="fa fa-user-graduate fa-2x d-block mb-3 text-warning"></i>
+                    <span class="font-italic">No se encontraron estudiantes para la materia seleccionada.</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
-
-      <div class="col-lg-12">
-        <div class="ms-panel">
-          <div class="ms-panel-header d-flex justify-content-between align-items-center">
-            <h6>Tabla de Estudiantes</h6>
-
-            <div>
-             
-              </form>
-
-<!-- Botones dropdown -->
-<div class="dropdown d-inline-block ml-3">
-  <a href="#" class="fa fa-chevron-down text-secondary p-0" data-toggle="dropdown"></a>
-  <div class="dropdown-menu dropdown-menu-right">
-
+    </div>
   </div>
 </div>
-</div> <!-- <- cierre del contenedor de botones -->
-</div> <!-- <- cierre del contenedor superior -->
 
-<!-- ✅ Selector de materia -->
-<div style="margin-left: 20px; display: flex; align-items: center; gap: 10px;">
-  <label for="materia-select">Selecciona una materia:</label>
-  <select id="materia-select">...</select>
-</div>
-
-
-<!-- Tabla -->
-<div class="ms-panel-body">
-  <div class="table-responsive">
-    <table id="tabla-estudiantes" class="table table-striped table-bordered w-100">
-      <thead>
-        <tr>
-          <th>ID Alumno</th>
-          <th>Tutor ID</th>
-          <th>Nombre Tutor</th>
-          <th>Nombre</th>
-          <th>Apellido</th>
-          <th>Fecha de Nacimiento</th>
-          <th>Grado</th>
-          <th>Grupo</th>
-          <th>Activo</th>
-          <th>Creado en</th>
-          <th>Actualizado en</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody id="student-body">
-        <!-- Aquí van los datos -->
-      </tbody>
-    </table>
-  </div>
-</div>
-
-
-
-
-  <!-- Modal Editar Estudiante -->
-<div class="modal fade" id="modalEditarEstudiante" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <form id="formEditarEstudiante" class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Editar Estudiante</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body">
-        <input type="hidden" id="edit-id" name="estudiante_id">
-
-       <div class="form-group">
-        <label>Tutor asignado:</label>
-        <select class="form-control" name="tutor_id" id="edit-tutor-id" required>
-          <option value="">Cargando tutores...</option>
-        </select>
-       </div>
-
-        <div class="form-group">
-          <label>Nombre:</label>
-          <input type="text" class="form-control" name="nombre" id="edit-nombre" required>
-        </div>
-
-        <div class="form-group">
-          <label>Apellido:</label>
-          <input type="text" class="form-control" name="apellido" id="edit-apellido" required>
-        </div>
-
-        <div class="form-group">
-          <label>Fecha de Nacimiento:</label>
-          <input type="date" class="form-control" name="fecha_nacimiento" id="edit-nacimiento" required>
-        </div>
-
-        <div class="form-group">
-          <label>Grado:</label>
-          <input type="number" class="form-control" name="grado" id="edit-grado" min="1" max="12" required>
-        </div>
-
-        <div class="form-group">
-          <label>Grupo:</label>
-          <select class="form-control" name="grupo" id="edit-grupo" required>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-warning">Guardar cambios</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-      </div>
-    </form>
-  </div>
-</div>
 
   </main>
 
@@ -359,7 +326,7 @@
 <!-- Nombre del Archico CV -->
   <script src="../scripts/ImportarEstudiantes.js" defer></script>
   <script src="../scripts/alertaImportacionAlumnos.js" defer></script>
-  <script src="../scripts/estudiantes.js"></script>
+
 
 
 

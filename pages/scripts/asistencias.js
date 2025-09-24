@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
       materias.forEach(mat => {
         const option = document.createElement("option");
         option.value = mat.materia_id;
-        option.textContent = `${mat.nombre} (${mat.nivel_grado}, Ciclo ${mat.ciclo}) - ID ${mat.materia_id}`;
+        option.textContent = `${mat.materia} - ${mat.ciclo} - Grupo ${mat.grupo}`;
         materiaSelect.appendChild(option);
       });
     });
