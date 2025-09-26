@@ -7,7 +7,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ShoolCare</title>
+  <title>SchoolCare</title>
   <!-- Iconic Fonts -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="vendors/iconic-fonts/font-awesome/css/all.min.css" rel="stylesheet">
@@ -65,7 +65,7 @@
                <span><i class="material-icons fs-16">dashboard</i>Dashboard </span>
              </a>
             <ul id="dashboard" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-              <li> <a href="index.php">ShoolCare</a> </li>
+              <li> <a href="index.php">SchoolCare</a> </li>
               
             </ul>
         </li>
@@ -74,12 +74,12 @@
         <!--Proessors Start-->
         <li class="menu-item">
             <a href="#" class="has-chevron" data-toggle="collapse" data-target="#professor" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-user fs-16"></i>Professors</span>
+               <span><i class="fa fa-user fs-16"></i>Profesores</span>
              </a>
             <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-              <li> <a href="pages/professors/allprofessor.html">All Professors</a> </li>
-               <li> <a href="pages/professors/addprofessor.html">Add Professors</a> </li>
-                 <li> <a href="pages/professors/aboutprofessor.html">About Professors</a> </li>
+              <li> <a href="pages/professors/allprofessor.html">Todos los Profesores</a> </li>
+               <li> <a href="pages/professors/addprofessor.html">Añadir Profesores</a> </li>
+                 <li> <a href="pages/professors/aboutprofessor.html">Acerca de Profesores</a> </li>
             </ul>
         </li>
         <!-- /Proessors End--->
@@ -87,12 +87,12 @@
          <!--Courses Start-->
         <li class="menu-item">
             <a href="#" class="has-chevron" data-toggle="collapse" data-target="#courses" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-graduation-cap fs-16"></i>Courses</span>
+               <span><i class="fa fa-graduation-cap fs-16"></i>Materias</span>
              </a>
             <ul id="courses" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-              <li> <a href="pages/courses/allcourses.html">All Courses</a> </li>
-               <li> <a href="pages/courses/addcourses.html">Add Courses</a> </li>
-                 <li> <a href="pages/courses/aboutcourses.html">About Courses</a> </li>
+              <li> <a href="pages/courses/allcourses.html">Todas las Materias</a> </li>
+               <li> <a href="pages/courses/addcourses.html">Añadir Materias</a> </li>
+                 <li> <a href="pages/courses/aboutcourses.html">Acerca de Materias</a> </li>
                   <li> <a href="pages/courses/ciclos.html">Ciclos</a> </li>
                    <li> <a href="pages/courses/clases.html">Clases</a> </li>
                     <li> <a href="pages/courses/inscripciones.html">Inscripciones</a> </li>
@@ -103,11 +103,11 @@
         <!--Student Start-->
         <li class="menu-item">
             <a href="#" class="has-chevron" data-toggle="collapse" data-target="#student" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-users fs-16"></i>Student</span>
+               <span><i class="fa fa-users fs-16"></i>Estudiantes</span>
              </a>
             <ul id="student" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-              <li> <a href="pages/student/studentadd.html">Student Add</a> </li>
-               <li> <a href="pages/student/studenttable.html">Student Table</a> </li>
+              <li> <a href="pages/student/studentadd.html">Añadir Estudiante</a> </li>
+               <li> <a href="pages/student/studenttable.html">Tabla de Estudiantes</a> </li>
                   </ul>
         </li>
         <!-- /Student End--->
@@ -131,57 +131,25 @@
         <!--Fees Start-->
         <li class="menu-item">
             <a href="#" class="has-chevron" data-toggle="collapse" data-target="#fees" aria-expanded="false" aria-controls="dashboard">
-                <span><i class="fas fa-dollar-sign"></i>Fees</span>
+                <span><i class="fas fa-dollar-sign"></i>Orden de Pago</span>
              </a>
             <ul id="fees" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-              <li> <a href="pages/fees/feescollection.html">Fees Collection</a> </li>
-              <li> <a href="pages/fees/addfees.html">Add Fees</a> </li>
-              <li> <a href="pages/fees/feesrecepit.html">Fees Recepit</a> </li>
-               
-                 
+              <li> <a href="pages/fees/feescollection.html">Colección de Pagos</a> </li>
+              <li> <a href="pages/fees/addfees.html">Añadir Pago</a> </li>
+              <li> <a href="pages/fees/feesrecepit.html">Recibo de Pago</a> </li>
+
             </ul>
         </li>
         <!-- /Feess End--->
-      
-        
-       
        
         <!--Holiday Start-->
         <li class="menu-item">
           <a href="pages/holidays/holiday.html">
-            <span><i class="fa fa-calendar fs-16"></i>Holidays</span>
+            <span><i class="fa fa-calendar fs-16"></i>Calendario Escolar</span>
           </a>
         </li>
         <!-- /Holiday End--->
-        <li class="menu-item">
-          <a href="pages/widgets.html">
-            <span><i class="material-icons fs-16">widgets</i>Widgets</span>
-          </a>
-        </li>
-        <!-- Basic UI Elements -->
-        <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#basic-elements" aria-expanded="false" aria-controls="basic-elements">
-              <span><i class="material-icons fs-16">filter_list</i>Estadisticas</span>
-            </a>
-            <ul id="basic-elements" class="collapse" aria-labelledby="basic-elements" data-parent="#side-nav-accordion">
-              <li> <a href="pages/ui-basic/accordions.html">Accordions</a> </li>
-              <li> <a href="pages/ui-basic/alerts.html">Alerts</a> </li>
-              <li> <a href="pages/ui-basic/buttons.html">Buttons</a> </li>
-              <li> <a href="pages/ui-basic/breadcrumbs.html">Breadcrumbs</a> </li>
-              <li> <a href="pages/ui-basic/badges.html">Badges</a> </li>
-              <li> <a href="pages/ui-basic/cards.html">Cards</a> </li>
-              <li> <a href="pages/ui-basic/progress-bars.html">Progress Bars</a> </li>
-              <li> <a href="pages/ui-basic/preloaders.html">Pre-loaders</a> </li>
-              <li> <a href="pages/ui-basic/pagination.html">Pagination</a> </li>
-              <li> <a href="pages/ui-basic/tabs.html">Tabs</a> </li>
-
-              <li> <a href="pages/ui-basic/typography.html">Typography</a> </li>
-            </ul>
-        </li>
-        <!-- /Basic UI Elements -->
-
-        
-
+      
         
     </ul>
 
@@ -191,146 +159,6 @@
   <!-- Sidebar Right -->
   <aside id="ms-recent-activity" class="side-nav fixed ms-aside-right ms-scrollable">
 
-    <div class="ms-aside-header">
-      <ul class="nav nav-tabs tabs-bordered d-flex nav-justified mb-3" role="tablist">
-        <li role="presentation" class="fs-12"><a href="#activityLog" aria-controls="activityLog" class="active" role="tab" data-toggle="tab"> Activity Log</a></li>
-        <li role="presentation" class="fs-12"><a href="#recentPosts" aria-controls="recentPosts" role="tab" data-toggle="tab"> Settings </a></li>
-        <li><button type="button" class="close ms-toggler text-center" data-target="#ms-recent-activity" data-toggle="slideRight"><span aria-hidden="true">&times;</span></button></li>
-      </ul>
-    </div>
-
-    <div class="ms-aside-body">
-
-       <div class="tab-content">
-
-         <div role="tabpanel" class="tab-pane active fade show" id="activityLog">
-           <ul class="ms-activity-log">
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-light">
-                 <i class="flaticon-gear"></i>
-               </div>
-               <h6>Update 1.0.0 Pushed</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-success">
-                 <i class="flaticon-tick-inside-circle"></i>
-               </div>
-               <h6>Profile Updated</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-warning">
-                 <i class="flaticon-alert-1"></i>
-               </div>
-               <h6>Your payment is due</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-danger">
-                 <i class="flaticon-alert"></i>
-               </div>
-               <h6>Database Error</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-info">
-                 <i class="flaticon-information"></i>
-               </div>
-               <h6>Checkout what's Trending</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-secondary">
-                 <i class="flaticon-diamond"></i>
-               </div>
-               <h6>Your Dashboard is ready</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-           </ul>
-           <a href="#" class="btn btn-primary d-block"> View All </a>
-         </div>
-
-         <div role="tabpanel" class="tab-pane fade" id="recentPosts">
-
-           <h6>General Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Location Tracking</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Allow Notifications</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Allow Popups</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <h6>Log Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Enable Logging</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Audit Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Error Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <h6>Advanced Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Enable Logging</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Audit Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Error Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-
-         </div>
-
-       </div>
-
-    </div>
 
   </aside>
 
