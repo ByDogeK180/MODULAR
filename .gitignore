@@ -1,0 +1,24 @@
+# Ignorar archivos de configuración sensibles
+config/config.php
+
+# Ignorar dependencias instaladas por Composer
+/vendor/
+
+# Ignorar archivos de entorno
+.env
+.env.local
+.env.*.backup
+
+# Ignorar archivos temporales del sistema
+*.log
+*.cache
+*.tmp
+*.bak
+
+# Ignorar archivos de IDE
+.vscode/
+.idea/
+
+# Ignorar otros del sistema operativo
+.DS_Store
+Thumbs.db
