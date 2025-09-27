@@ -77,9 +77,9 @@
                <span><i class="fa fa-user fs-16"></i>Profesores</span>
              </a>
             <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-              <li> <a href="pages/professors/allprofessor.html">Todos los Profesores</a> </li>
-               <li> <a href="pages/professors/addprofessor.html">Añadir Profesores</a> </li>
-                 <li> <a href="pages/professors/aboutprofessor.html">Acerca de Profesores</a> </li>
+              <li> <a href="pages/professors/allprofessor.php">Todos los Profesores</a> </li>
+               <li> <a href="pages/professors/addprofessor.php">Añadir Profesores</a> </li>
+                 <li> <a href="pages/professors/aboutprofessor.php">Acerca de Profesores</a> </li>
             </ul>
         </li>
         <!-- /Proessors End--->
@@ -90,12 +90,12 @@
                <span><i class="fa fa-graduation-cap fs-16"></i>Materias</span>
              </a>
             <ul id="courses" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-              <li> <a href="pages/courses/allcourses.html">Todas las Materias</a> </li>
-               <li> <a href="pages/courses/addcourses.html">Añadir Materias</a> </li>
-                 <li> <a href="pages/courses/aboutcourses.html">Acerca de Materias</a> </li>
-                  <li> <a href="pages/courses/ciclos.html">Ciclos</a> </li>
-                   <li> <a href="pages/courses/clases.html">Clases</a> </li>
-                    <li> <a href="pages/courses/inscripciones.html">Inscripciones</a> </li>
+              <li> <a href="pages/courses/allcourses.php">Todas las Materias</a> </li>
+               <li> <a href="pages/courses/addcourses.php">Añadir Materias</a> </li>
+                 <li> <a href="pages/courses/aboutcourses.php">Acerca de Materias</a> </li>
+                  <li> <a href="pages/courses/ciclos.php">Ciclos</a> </li>
+                   <li> <a href="pages/courses/clases.php">Clases</a> </li>
+                    <li> <a href="pages/courses/inscripciones.php">Inscripciones</a> </li>
             </ul>
         </li>
         <!-- /Courses End--->
@@ -106,8 +106,8 @@
                <span><i class="fa fa-users fs-16"></i>Estudiantes</span>
              </a>
             <ul id="student" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-              <li> <a href="pages/student/studentadd.html">Añadir Estudiante</a> </li>
-               <li> <a href="pages/student/studenttable.html">Tabla de Estudiantes</a> </li>
+              <li> <a href="pages/student/studentadd.php">Añadir Estudiante</a> </li>
+               <li> <a href="pages/student/studenttable.php">Tabla de Estudiantes</a> </li>
                   </ul>
         </li>
         <!-- /Student End--->
@@ -119,8 +119,8 @@
                <span><i class="fa fa-user-circle fs-16"></i>Tutores</span>
              </a>
             <ul id="staff" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-              <li> <a href="pages/tutor/addtutor.html">Añadir Tutor</a> </li>
-               <li> <a href="pages/tutor/tutorprofile.html">Tabla de Tutores</a> </li>
+              <li> <a href="pages/tutor/addtutor.php">Añadir Tutor</a> </li>
+               <li> <a href="pages/tutor/tutorprofile.php">Tabla de Tutores</a> </li>
                  
             </ul>
         </li>
@@ -134,9 +134,9 @@
                 <span><i class="fas fa-dollar-sign"></i>Orden de Pago</span>
              </a>
             <ul id="fees" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-              <li> <a href="pages/fees/feescollection.html">Colección de Pagos</a> </li>
-              <li> <a href="pages/fees/addfees.html">Añadir Pago</a> </li>
-              <li> <a href="pages/fees/feesrecepit.html">Recibo de Pago</a> </li>
+              <li> <a href="pages/fees/feescollection.php">Colección de Pagos</a> </li>
+              <li> <a href="pages/fees/addfees.php">Añadir Pago</a> </li>
+              <li> <a href="pages/fees/feesrecepit.php">Recibo de Pago</a> </li>
 
             </ul>
         </li>
@@ -144,7 +144,7 @@
        
         <!--Holiday Start-->
         <li class="menu-item">
-          <a href="pages/holidays/holiday.html">
+          <a href="pages/holidays/holiday.php">
             <span><i class="fa fa-calendar fs-16"></i>Calendario Escolar</span>
           </a>
         </li>

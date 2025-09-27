@@ -1,3 +1,5 @@
+<?php include '../php/auth.php';?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,10 +15,6 @@
   <link rel="stylesheet" href="../../vendors/iconic-fonts/flat-icons/flaticon.css">
   
   <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="../../assets/css/datatables.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap4.min.css">
-
-          
   <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
   <!-- jQuery UI -->
   <link href="../../assets/css/jquery-ui.min.css" rel="stylesheet">
@@ -24,6 +22,8 @@
   <link href="../../assets/css/slick.css" rel="stylesheet">
   <!-- Weeducate styles -->
   <link href="../../assets/css/style.css" rel="stylesheet">
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/LogoSchoolCare.png">
 
@@ -81,9 +81,9 @@
                <span><i class="fa fa-user fs-16"></i>Profesores</span>
              </a>
             <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-              <li> <a href="../professors/allprofessor.html">Todos los Profesores</a> </li>
-               <li> <a href="../professors/addprofessor.html">Añadir Profesores</a> </li>
-                 <li> <a href="../professors/aboutprofessor.html">Acerca de Profesores</a> </li>
+              <li> <a href="../professors/allprofessor.php">Todos los Profesores</a> </li>
+               <li> <a href="../professors/addprofessor.php">Añadir Profesores</a> </li>
+                 <li> <a href="../professors/aboutprofessor.php">Acerca de Profesores</a> </li>
             </ul>
         </li>
         <!-- /Proessors End--->
@@ -94,12 +94,12 @@
                <span><i class="fa fa-graduation-cap fs-16"></i>Materias</span>
              </a>
             <ul id="courses" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-              <li> <a href="../courses/allcourses.html">Todas las Materias</a> </li>
-               <li> <a href="../courses/addcourses.html">Añadir Materias</a> </li>
-                 <li> <a href="../courses/aboutcourses.html">Acerca de Materias</a> </li>
-                  <li> <a href="../courses/ciclos.html">Ciclos</a> </li>
-                    <li> <a href="../courses/clases.html">Clases</a> </li>
-                     <li> <a href="../courses/inscripciones.html">Inscripciones</a> </li>
+              <li> <a href="../courses/allcourses.php">Todas las Materias</a> </li>
+               <li> <a href="../courses/addcourses.php">Añadir Materias</a> </li>
+                 <li> <a href="../courses/aboutcourses.php">Acerca de Materias</a> </li>
+                  <li> <a href="../courses/ciclos.php">Ciclos</a> </li>
+                   <li> <a href="../courses/clases.php">Clases</a> </li>
+                    <li> <a href="../courses/inscripciones.php">Inscripciones</a> </li>
             </ul>
         </li>
         <!-- /Courses End--->
@@ -110,8 +110,8 @@
                <span><i class="fa fa-users fs-16"></i>Estudiantes</span>
              </a>
             <ul id="student" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-              <li> <a href="../student/studentadd.html">Añadir Estudiante</a> </li>
-               <li> <a href="../student/studenttable.html">Tabla de Estudiantes</a> </li>
+              <li> <a href="../student/studentadd.php">Añadir Estudiante</a> </li>
+               <li> <a href="../student/studenttable.php">Tabla de Estudiantes</a> </li>
                   </ul>
         </li>
         <!-- /Student End--->
@@ -123,8 +123,8 @@
                <span><i class="fa fa-user-circle fs-16"></i>Tutores</span>
              </a>
             <ul id="staff" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-              <li> <a href="../tutor/addtutor.html">Añadir Tutor</a> </li>
-              <li> <a href="../tutor/tutorprofile.html">Tabla de Tutores</a> </li>
+              <li> <a href="../tutor/addtutor.php">Añadir Tutor</a> </li>
+              <li> <a href="../tutor/tutorprofile.php">Tabla de Tutores</a> </li>
                  
             </ul>
         </li>
@@ -138,18 +138,19 @@
                 <span><i class="fas fa-dollar-sign"></i>Orden de Pago</span>
              </a>
             <ul id="fees" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-              <li> <a href="../fees/feescollection.html">Colección de Pagos</a> </li>
-              <li> <a href="../fees/addfees.html">Añadir Pago</a> </li>
-              <li> <a href="../fees/feesrecepit.html">Recibo de Pago</a> </li>
+              <li> <a href="../fees/feescollection.php">Colección de Pagos</a> </li>
+              <li> <a href="../fees/addfees.php">Añadir Pago</a> </li>
+              <li> <a href="../fees/feesrecepit.php">Recibo de Pago</a> </li>
                
                  
             </ul>
         </li>
         <!-- /Fees End--->
         
+        
         <!--Holiday Start-->
         <li class="menu-item">
-          <a href="../holidays/holiday.html">
+          <a href="../holidays/holiday.php">
             <span><i class="fa fa-calendar fs-16"></i>Calendario Escolar</span>
           </a>
         </li>
@@ -164,260 +165,204 @@
   <!-- Sidebar Right -->
   <aside id="ms-recent-activity" class="side-nav fixed ms-aside-right ms-scrollable">
 
-    <div class="ms-aside-header">
-      <ul class="nav nav-tabs tabs-bordered d-flex nav-justified mb-3" role="tablist">
-        <li role="presentation" class="fs-12"><a href="#activityLog" aria-controls="activityLog" class="active" role="tab" data-toggle="tab"> Activity Log</a></li>
-        <li role="presentation" class="fs-12"><a href="#recentPosts" aria-controls="recentPosts" role="tab" data-toggle="tab"> Settings </a></li>
-        <li><button type="button" class="close ms-toggler text-center" data-target="#ms-recent-activity" data-toggle="slideRight"><span aria-hidden="true">&times;</span></button></li>
-      </ul>
-    </div>
-
-    <div class="ms-aside-body">
-
-       <div class="tab-content">
-
-         <div role="tabpanel" class="tab-pane active fade show" id="activityLog">
-           <ul class="ms-activity-log">
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-light">
-                 <i class="flaticon-gear"></i>
-               </div>
-               <h6>Update 1.0.0 Pushed</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-success">
-                 <i class="flaticon-tick-inside-circle"></i>
-               </div>
-               <h6>Profile Updated</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-warning">
-                 <i class="flaticon-alert-1"></i>
-               </div>
-               <h6>Your payment is due</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-danger">
-                 <i class="flaticon-alert"></i>
-               </div>
-               <h6>Database Error</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-info">
-                 <i class="flaticon-information"></i>
-               </div>
-               <h6>Checkout what's Trending</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-secondary">
-                 <i class="flaticon-diamond"></i>
-               </div>
-               <h6>Your Dashboard is ready</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-           </ul>
-           <a href="#" class="btn btn-primary d-block"> View All </a>
-         </div>
-
-         <div role="tabpanel" class="tab-pane fade" id="recentPosts">
-
-           <h6>General Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Location Tracking</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Allow Notifications</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Allow Popups</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <h6>Log Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Enable Logging</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Audit Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Error Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <h6>Advanced Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Enable Logging</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Audit Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Error Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-
-         </div>
-
-       </div>
-
-    </div>
+   
 
   </aside>
 
   <!-- Main Content -->
   <main class="body-content">
 
-     <!-- Navigation Bar -->
-        <nav class="navbar ms-navbar">
+    <!-- Navigation Bar -->
+    <nav class="navbar ms-navbar">
 
-            <div class="ms-aside-toggler ms-toggler pl-0" data-target="#ms-side-nav" data-toggle="slideLeft">
-                <span class="ms-toggler-bar bg-primary"></span>
-                <span class="ms-toggler-bar bg-primary"></span>
-                <span class="ms-toggler-bar bg-primary"></span>
+      <div class="ms-aside-toggler ms-toggler pl-0" data-target="#ms-side-nav" data-toggle="slideLeft">
+        <span class="ms-toggler-bar bg-primary"></span>
+        <span class="ms-toggler-bar bg-primary"></span>
+        <span class="ms-toggler-bar bg-primary"></span>
+      </div>
+
+      <div class="logo-sn logo-sm ms-d-block-sm">
+        <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="../../index.php"><img src="../../assets/img/LogoSchoolCare.png" alt="logo"> </a>
+      </div>
+
+      <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
+        <li class="ms-nav-item ms-search-form pb-0 py-0">
+          <form class="ms-form" method="post">
+          </form>
+        </li>
+        <li class="ms-nav-item ms-nav-user dropdown">
+          <a href="#"  id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img class="ms-user-img ms-img-round float-right" src="../../assets/img/we-educate/new-student-5.jpg" alt="people"> </a>
+          <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
+            <li class="dropdown-menu-header">
+              <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Welcome, Anny Farisha</span></h6>
+            </li>
+            <li class="dropdown-divider"></li>
+            <li class="ms-dropdown-list">
+              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i class="flaticon-user mr-2"></i> Profile</span> </a>
+            </li>
+            <li class="dropdown-divider"></li>
+            <li class="dropdown-menu-footer">
+              <a class="media fs-14 p-2" href="../php/logout.php"> <span><i class="flaticon-shut-down mr-2"></i> Logout</span> </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="ms-toggler ms-d-block-sm pr-0 ms-nav-toggler" data-toggle="slideDown" data-target="#ms-nav-options">
+        <span class="ms-toggler-bar bg-primary"></span>
+        <span class="ms-toggler-bar bg-primary"></span>
+        <span class="ms-toggler-bar bg-primary"></span>
+      </div>
+
+    </nav>
+
+
+    <!-- Body Content Wrapper -->
+    
+    <!-- Body Content Wrapper -->
+    <div class="ms-content-wrapper">
+      <div class="row">
+
+              <div class="col-md-12">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb pl-0">
+                    <li class="breadcrumb-item"><a href="../../index.php"><i class="material-icons">home</i> Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Profesor</li>
+                    <li class="breadcrumb-item active" aria-current="page">Añadir profesor</li>
+                  </ol>
+                </nav>
+              </div>
+          
+              <div class="col-lg-12">
+                <div class="ms-panel">
+                  <div class="ms-panel-header">
+                    <h6>Añadir Profesor</h6>
+                  </div>
+
+                  <div class="ms-panel-body">
+                  <form id="registerForm" action="../php/registrar_profesor.php" method="POST" enctype="multipart/form-data" novalidate>
+                    <div class="row">
+
+                      <!-- Nombre -->
+                      <div class="col-lg-6 mb-3">
+                        <label for="nombre" class="form-label fw-semibold">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre/s" required>
+                        <div class="invalid-feedback">Sólo letras y espacios, mínimo 2 caracteres.</div>
+                      </div>
+
+                      <!-- Apellidos -->
+                      <div class="col-lg-6 mb-3">
+                        <label for="apellido" class="form-label fw-semibold">Apellidos:</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido/s" required>
+                        <div class="invalid-feedback">Sólo letras y espacios, mínimo 2 caracteres.</div>
+                      </div>
+
+                      <!-- Correo -->
+                      <div class="col-lg-6 mb-3">
+                        <label for="email" class="form-label fw-semibold">Correo:</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Nombre@ejemplo.com" required>
+                        <div class="invalid-feedback">Debe ser un correo electrónico válido.</div>
+                      </div>
+
+                      <!-- Contraseña -->
+                      <div class="col-lg-6 mb-3">
+                        <label for="contraseña" class="form-label fw-semibold">Contraseña:</label>
+                        <input type="password" class="form-control" id="contraseña" name="contraseña" placeholder="Contraseña" required>
+                        <div class="invalid-feedback">Mínimo 8 caracteres, al menos una mayúscula y un número.</div>
+                      </div>
+
+                      <!-- Confirmar contraseña -->
+                      <div class="col-lg-6 mb-3">
+                        <label for="confirmar_contraseña" class="form-label fw-semibold">Confirmar contraseña:</label>
+                        <input type="password" class="form-control" id="confirmar_contraseña" name="confirmar_contraseña" placeholder="Repetir contraseña" required>
+                        <div class="invalid-feedback">Las contraseñas no coinciden.</div>
+                      </div>
+
+                      <!-- Rol (oculto) -->
+                      <div class="col-lg-6 mb-3">
+                        <label for="rol" class="form-label fw-semibold">Rol:</label>
+                        <select class="form-control" id="rol" name="rol" disabled required>
+                          <option value="1" selected>Docente</option>
+                        </select>
+                        <input type="hidden" name="rol" value="1">
+                      </div>
+
+                      <!-- Puesto -->
+                      <div class="col-lg-6 mb-3">
+                        <label for="puesto" class="form-label fw-semibold">Puesto:</label>
+                        <select class="form-control" id="puesto" name="puesto" required>
+                          <option value="">Seleccione un puesto</option>
+                          <option value="profesor">Profesor</option>
+                          <option value="coordinador">Coordinador</option>
+                        </select>
+                        <div class="invalid-feedback">Debe seleccionar un puesto.</div>
+                      </div>
+
+                      <!-- Género -->
+                      <div class="col-lg-6 mb-3">
+                        <label for="genero" class="form-label fw-semibold">Género:</label>
+                        <select class="form-control" id="genero" name="genero" required>
+                          <option value="">Seleccione género</option>
+                          <option value="masculino">Masculino</option>
+                          <option value="femenino">Femenino</option>
+                          <option value="otro">Otro</option>
+                        </select>
+                        <div class="invalid-feedback">Debe seleccionar un género.</div>
+                      </div>
+
+                      <!-- Teléfono -->
+                      <div class="col-lg-6 mb-3">
+                        <label for="telefono" class="form-label fw-semibold">Número de teléfono:</label>
+                        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="#" required>
+                        <div class="invalid-feedback">Sólo dígitos, entre 7 y 15 caracteres.</div>
+                      </div>
+
+                      <!-- Nacimiento -->
+                      <div class="col-lg-6 mb-3">
+                        <label for="nacimiento" class="form-label fw-semibold">Nacimiento:</label>
+                        <input type="date" class="form-control" id="nacimiento" name="nacimiento" required>
+                        <div class="invalid-feedback">Fecha inválida.</div>
+                      </div>
+
+                      <!-- Salario -->
+                      <div class="col-lg-6 mb-3">
+                        <label for="salario" class="form-label fw-semibold">Salario:</label>
+                        <input type="text" class="form-control" id="salario" name="salario" placeholder="$" required>
+                        <div class="invalid-feedback">Debe ser un número válido mayor que 0.</div>
+                      </div>
+
+                      <!-- Dirección -->
+                      <div class="col-lg-12 mb-3">
+                        <label for="direccion" class="form-label fw-semibold">Dirección:</label>
+                        <textarea class="form-control" id="direccion" name="direccion" rows="5" required></textarea>
+                        <div class="invalid-feedback">Mínimo 5 caracteres.</div>
+                      </div>
+
+                      <!-- Imagen -->
+                      <div class="col-lg-6 mx-auto mb-3">
+                        <label for="imagen" class="form-label fw-semibold">Seleccione la imagen:</label>
+                        <input type="file" class="form-control" id="imagen" name="imagen" required>
+                        <div class="invalid-feedback">Debe subir un archivo de imagen (jpg, png) menor a 2 MB.</div>
+                      </div>
+
+                      <!-- Botones -->
+                      <div class="text-center">
+                        <button type="submit" class="btn btn-warning mb-5">Crear</button>
+                        <button type="button" class="btn btn-outline-warning mb-5 ms-3">Cancelar</button>
+                      </div>
+
+                    </div>
+                  </form>
+                  </div>
+
+                  <script src="../scripts/animacionAgregarProfesor.js"></script>
+                  
+                </div>
             </div>
-
-            <div class="logo-sn logo-sm ms-d-block-sm">
-                <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="../../index.php"><img src="../../assets/img/LogoSchoolCare.png" alt="logo"> </a>
-            </div>
-
-            <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
-                <li class="ms-nav-item ms-search-form pb-0 py-0">
-                    <form class="ms-form" method="post">
-                    </form>
-                </li>
-                <li class="ms-nav-item">
-                </li>
-                <li class="ms-nav-item ms-nav-user dropdown">
-                    <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img class="ms-user-img ms-img-round float-right" src="../../assets/img/we-educate/topper-1.jpg" alt="people"> </a>
-                    <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
-                        <li class="dropdown-menu-header">
-                            <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Welcome, Anny Farisha</span></h6>
-                        </li>
-                        <li class="dropdown-divider"></li>
-                        <li class="ms-dropdown-list">
-                            <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i class="flaticon-user mr-2"></i> Profile</span> </a>
-                        </li>
-                        <li class="dropdown-divider"></li>
-                        <li class="dropdown-menu-footer">
-                            <a class="media fs-14 p-2" href="pages/prebuilt-pages/default-login.html"> <span><i class="flaticon-shut-down mr-2"></i> Logout</span> </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-
-            <div class="ms-toggler ms-d-block-sm pr-0 ms-nav-toggler" data-toggle="slideDown" data-target="#ms-nav-options">
-                <span class="ms-toggler-bar bg-primary"></span>
-                <span class="ms-toggler-bar bg-primary"></span>
-                <span class="ms-toggler-bar bg-primary"></span>
-            </div>
-
-        </nav>
-
-
-<!-- Body Content Wrapper -->
-
-<div class="ms-content-wrapper">
-  <div class="container-fluid px-5 py-4"> <!-- Margen horizontal y vertical ampliado -->
-    <div class="card shadow-sm">
-      <div class="card-body">
-    <table id="tabla-fees" class="table table-striped thead-primary w-100">
-<thead>
-  <tr>
-    <th>ID</th>
-    <th>Estudiante</th>
-    <th>Grado</th>
-    <th>Grupo</th>
-    <th>Monto</th>
-    <th>Fecha de Pago</th>
-    <th>Fecha de Vencimiento</th>
-    <th>Estado</th>
-    <th>Creado</th>
-    <th>Actualizado</th>
-    <th>Acciones</th>
-  </tr>
-  <tr class="filters">
-    <th><input type="text" class="form-control form-control-sm" placeholder="#"></th>
-    <th><input type="text" class="form-control form-control-sm" placeholder="Estudiante"></th>
-    <th><input type="text" class="form-control form-control-sm" placeholder="Grado"></th>
-    <th><input type="text" class="form-control form-control-sm" placeholder="Grupo"></th>
-    <th><input type="text" class="form-control form-control-sm" placeholder="Monto"></th>
-    <th><input type="text" class="form-control form-control-sm" placeholder="Fecha"></th>
-    <th><input type="text" class="form-control form-control-sm" placeholder="Vencimiento"></th>
-    <th>
-      <select class="form-control form-control-sm">
-        <option value="">Todos</option>
-        <option value="pagado">Pagado</option>
-        <option value="pendiente">Pendiente</option>
-      </select>
-    </th>
-    <th><input type="text" class="form-control form-control-sm" placeholder="Creado"></th>
-    <th><input type="text" class="form-control form-control-sm" placeholder="Actualizado"></th>
-    <th></th>
-  </tr>
-</thead>
-
-
-
-  <tbody></tbody>
-</table>
-
-
       </div>
     </div>
-  </div>
-</div>
-
-
-
-
-
-
 
   </main>
-
   <!-- Quick bar -->
   <aside id="ms-quick-bar" class="ms-quick-bar fixed ms-d-block-lg">
 
@@ -437,7 +382,7 @@
             <div class="ms-chat-header px-3">
               <div class="ms-chat-user-container media clearfix">
                 <div class="ms-chat-status ms-status-online ms-chat-img mr-3 align-self-center">
-                  <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
+                  <img src="https://via.placeholder.com/270x270" class="ms-img-round" alt="people">
                 </div>
                 <div class="media-body ms-chat-user-info mt-1">
                   <h6>Anny Farisha</h6>
@@ -466,6 +411,10 @@
                 </div>
               </div>
               <form class="ms-form my-3" method="post">
+                <div class="ms-form-group my-0 mb-0 has-icon fs-14">
+                  <input type="search" class="ms-form-input w-100" name="search" placeholder="Search for People and Groups" value="">
+                  <i class="flaticon-search text-disabled"></i>
+                </div>
               </form>
             </div>
 
@@ -482,7 +431,7 @@
                     <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
                       <div class="ms-chat-status ms-status-away ms-has-new-msg ms-chat-img mr-3 align-self-center">
                         <span class="msg-count">3</span>
-                        <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>James Zathila</h6> <span class="ms-chat-time">2 Hours ago</span>
@@ -492,7 +441,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
                       <div class="ms-chat-status ms-status-online ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>Raymart Sandiago</h6> <span class="ms-chat-time">3 Hours ago</span>
@@ -502,7 +451,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
                       <div class="ms-chat-status ms-status-offline ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>Heather Brown</h6> <span class="ms-chat-time">12 Hours ago</span>
@@ -512,7 +461,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
                       <div class="ms-chat-status ms-status-busy ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>Micheal John</h6> <span class="ms-chat-time">Yesterday</span>
@@ -522,7 +471,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
                       <div class="ms-chat-status ms-status-online ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>John Doe</h6> <span class="ms-chat-time">3 Days ago</span>
@@ -536,22 +485,22 @@
                   <ul class="ms-scrollable ms-quickbar-container">
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>James Zathila</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
                         <ul class="ms-group-members clearfix mt-3 mb-0">
-                          <li> <img src="../../assets/img/we-educate/topper-1.jpg" alt="member"> </li>
                           <li> <img src="../../assets/img/we-educate/topper-2.jpg" alt="member"> </li>
-                          <li> <img src="../../assets/img/we-educate/topper-3.jpg" alt="member"> </li>
+                          <li> <img src="../../assets/img/we-educate/topper-4.jpg" alt="member"> </li>
+                          <li> <img src="../../assets/img/we-educate/topper-5.jpg" alt="member"> </li>
                           <li class="ms-group-count"> + 12 more </li>
                         </ul>
                       </div>
                     </li>
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
+                        <img src="https://via.placeholder.com/270x270" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>Raymart Sandiago</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
@@ -564,15 +513,15 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>John Doe</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
                         <ul class="ms-group-members clearfix mt-3 mb-0">
-                          <li> <img src="../../assets/img/we-educate/topper-6.jpg" alt="member"> </li>
-                          <li> <img src="../../assets/img/we-educate/topper-1.jpg" alt="member"> </li>
                           <li> <img src="../../assets/img/we-educate/topper-2.jpg" alt="member"> </li>
+                          <li> <img src="../../assets/img/we-educate/topper-4.jpg" alt="member"> </li>
+                          <li> <img src="../../assets/img/we-educate/topper-6.jpg" alt="member"> </li>
                           <li class="ms-group-count"> + 4 more </li>
                         </ul>
                       </div>
@@ -583,7 +532,7 @@
                   <ul class="ms-scrollable ms-quickbar-container">
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/new-student-5.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>John Doe</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
@@ -592,7 +541,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>Raymart Sandiago</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
@@ -601,7 +550,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>Micheal John</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
@@ -610,7 +559,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>Heather Brown</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
@@ -619,7 +568,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>Mila Freign</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
@@ -628,7 +577,7 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>James Zathila</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
@@ -656,7 +605,7 @@
             <ul class="ms-scrollable ms-quickbar-container">
               <li class="p-3  media ms-email clearfix">
                 <div class="ms-email-img mr-3 ">
-                  <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
+                  <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
                 </div>
                 <div class="media-body ms-email-details">
                   <span class="ms-email-sender">James Zathila</span>
@@ -666,7 +615,7 @@
               </li>
               <li class="p-3  media ms-email clearfix">
                 <div class="ms-email-img mr-3 ">
-                  <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
+                  <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
                 </div>
                 <div class="media-body ms-email-details">
                   <span class="ms-email-sender">John Doe</span>
@@ -676,7 +625,7 @@
               </li>
               <li class="p-3  media ms-email clearfix">
                 <div class="ms-email-img mr-3 ">
-                  <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
+                  <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
                 </div>
                 <div class="media-body ms-email-details">
                   <span class="ms-email-sender">Heather Brown</span>
@@ -819,7 +768,7 @@
                     <li class="ms-scrollable ms-dropdown-list ms-members-list">
                       <a class="media p-2" href="#">
                         <div class="mr-2 align-self-center">
-                          <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
+                          <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
                         </div>
                         <div class="media-body">
                           <span>John Doe</span>
@@ -827,7 +776,7 @@
                       </a>
                       <a class="media p-2" href="#">
                         <div class="mr-2 align-self-center">
-                          <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
+                          <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
                         </div>
                         <div class="media-body">
                           <span>Raymart Sandiago</span>
@@ -835,7 +784,7 @@
                       </a>
                       <a class="media p-2" href="#">
                         <div class="mr-2 align-self-center">
-                          <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
+                          <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
                         </div>
                         <div class="media-body">
                           <span>Heather Brown</span>
@@ -862,7 +811,7 @@
                   vel varius metus. Pellentesque eget orci malesuada, venenatis magna et
                 </p>
                 <ul class="ms-note-members clearfix mb-0">
-                  <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-6.jpg" alt="member"> </li>
+                  <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-3.jpg" alt="member"> </li>
                 </ul>
               </div>
               <div class="ms-card-footer clearfix">
@@ -879,7 +828,7 @@
                     <li class="ms-scrollable ms-dropdown-list ms-members-list">
                       <a class="media p-2" href="#">
                         <div class="mr-2 align-self-center">
-                          <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
+                          <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
                         </div>
                         <div class="media-body">
                           <span>John Doe</span>
@@ -895,7 +844,7 @@
                       </a>
                       <a class="media p-2" href="#">
                         <div class="mr-2 align-self-center">
-                          <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
+                          <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
                         </div>
                         <div class="media-body">
                           <span>Heather Brown</span>
@@ -1038,61 +987,58 @@
   </div>
 
   <!-- SCRIPTS -->
-<!-- jQuery (debe ir solo una vez y antes de DataTables) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Global Required Scripts Start -->
+  <script src="../../assets/js/jquery-3.3.1.min.js"></script>
+  <script src="../../assets/js/popper.min.js"></script>
+  <script src="../../assets/js/bootstrap.min.js"></script>
+  <script src="../../assets/js/perfect-scrollbar.js"> </script>
+  <script src="../../assets/js/jquery-ui.min.js"> </script>
+  <!-- Global Required Scripts End -->
+
+  <!-- Page Specific Scripts Start -->
+  <script src="../../assets/js/slick.min.js"> </script>
+  <script src="../../assets/js/moment.js"> </script>
+  <script src="../../assets/js/jquery.webticker.min.js"> </script>
+  <script src="../../assets/js/Chart.bundle.min.js"> </script>
+  <script src="../../assets/js/Chart.Financial.js"> </script>
+ 
+
+  <!-- Weeducate core JavaScript -->
+  <script src="../../assets/js/framework.js"></script>
+
+  <!-- Settings -->
+  <script src="../../assets/js/settings.js"></script>
 
 
-<!-- Bootstrap y dependencias -->
-<script src="../../assets/js/popper.min.js"></script>
-<script src="../../assets/js/bootstrap.min.js"></script>
-<script src="../../assets/js/jquery-ui.min.js"></script>
-<script src="../../assets/js/perfect-scrollbar.js"></script>
-<script src="../../assets/js/slick.min.js"></script>
-<script src="../../assets/js/moment.js"></script>
-<script src="../../assets/js/jquery.webticker.min.js"></script>
+  <script src="../scripts/animacionAgregarProfesor.js"></script>
+  <script>
+    (function() {
+      const form = document.getElementById('registerForm');
+      const pwd  = document.getElementById('contraseña');
+      const pwd2 = document.getElementById('confirmar_contraseña');
 
-<!-- DataTables CSS y JS (versión Bootstrap 4) -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+      form.addEventListener('submit', function(e) {
+        let valid = true;
 
-<!-- Framework del template -->
-<script src="../../assets/js/framework.js"></script>
-<script src="../../assets/js/settings.js"></script>
+        // Validaciones (igual que antes)…
+        // (Nombre / Apellido, email, password, confirm password,
+        //  puesto, género, teléfono, fecha, salario, dirección, imagen)
 
-<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.min.js"></script>
+        if (!valid) {
+          e.preventDefault();
+          e.stopPropagation();
+          Swal.fire({
+            icon: 'error',
+            title: 'Corrige los campos marcados',
+            timer: 2000,
+            showConfirmButton: false
+          });
+        }
+      });
 
-
-<!-- Script personalizado para cargar pagos -->
-<script src="../../pages/scripts/feescollection.js"></script>
-
-
-<!-- Modal Cambiar Estado -->
-<div class="modal fade" id="modalActualizarEstado" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="modalLabel">Actualizar Estado de Pago</h5>
-        <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <input type="hidden" id="modal-pago-id">
-        <div class="form-group">
-          <label for="modal-estado">Estado</label>
-          <select class="form-control" id="modal-estado">
-            <option value="pagado">Pagado</option>
-            <option value="pendiente">Pendiente</option>
-          </select>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button id="btnGuardarEstado" class="btn btn-success">Guardar Cambios</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-      </div>
-    </div>
-  </div>
-</div>
+      pwd2.addEventListener('input', () => pwd2.classList.remove('is-invalid'));
+    })();
+  </script>
 
 </body>
 

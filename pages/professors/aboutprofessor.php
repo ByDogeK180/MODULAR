@@ -1,3 +1,5 @@
+<?php include '../php/auth.php';?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,17 +13,18 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../../vendors/iconic-fonts/font-awesome/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../../vendors/iconic-fonts/flat-icons/flaticon.css">
-  
+  <link rel="stylesheet" href="../../Documentation/assets/css/profesores.css">
+ 
   <!-- Bootstrap core CSS -->
   <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
   <!-- jQuery UI -->
   <link href="../../assets/css/jquery-ui.min.css" rel="stylesheet">
   <!-- Page Specific CSS (Slick Slider.css) -->
   <link href="../../assets/css/slick.css" rel="stylesheet">
-  <!-- Weeducate styles -->
+  <!-- weeducate styles -->
   <link href="../../assets/css/style.css" rel="stylesheet">
   <!-- Favicon -->
- <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/LogoSchoolCare.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/LogoSchoolCare.png">
 
 </head>
 
@@ -77,9 +80,9 @@
                <span><i class="fa fa-user fs-16"></i>Profesores</span>
              </a>
             <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-              <li> <a href="../professors/allprofessor.html">Todos los Profesores</a> </li>
-               <li> <a href="../professors/addprofessor.html">Añadir Profesores</a> </li>
-                 <li> <a href="../professors/aboutprofessor.html">Acerca de Profesores</a> </li>
+              <li> <a href="../professors/allprofessor.php">Todos los Profesores</a> </li>
+               <li> <a href="../professors/addprofessor.php">Añadir Profesores</a> </li>
+                 <li> <a href="../professors/aboutprofessor.php">Acerca de Profesores</a> </li>
             </ul>
         </li>
         <!-- /Proessors End--->
@@ -90,12 +93,12 @@
                <span><i class="fa fa-graduation-cap fs-16"></i>Materias</span>
              </a>
             <ul id="courses" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-              <li> <a href="../courses/allcourses.html">Todas las Materias</a> </li>
-               <li> <a href="../courses/addcourses.html">Añadir Materias</a> </li>
-                 <li> <a href="../courses/aboutcourses.html">Acerca de Materias</a> </li>
-                  <li> <a href="../courses/ciclos.html">Ciclos</a> </li>
-                   <li> <a href="../courses/clases.html">Clases</a> </li>
-                    <li> <a href="../courses/inscripciones.html">Inscripciones</a> </li>
+              <li> <a href="../courses/allcourses.php">Todas las Materias</a> </li>
+               <li> <a href="../courses/addcourses.php">Añadir Materias</a> </li>
+                 <li> <a href="../courses/aboutcourses.php">Acerca de Materias</a> </li>
+                  <li> <a href="../courses/ciclos.php">Ciclos</a> </li>
+                   <li> <a href="../courses/clases.php">Clases</a> </li>
+                    <li> <a href="../courses/inscripciones.php">Inscripciones</a> </li>
             </ul>
         </li>
         <!-- /Courses End--->
@@ -106,8 +109,8 @@
                <span><i class="fa fa-users fs-16"></i>Estudiantes</span>
              </a>
             <ul id="student" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-              <li> <a href="../student/studentadd.html">Añadir Estudiante</a> </li>
-               <li> <a href="../student/studenttable.html">Tabla de Estudiantes</a> </li>
+              <li> <a href="../student/studentadd.php">Añadir Estudiante</a> </li>
+               <li> <a href="../student/studenttable.php">Tabla de Estudiantes</a> </li>
                   </ul>
         </li>
         <!-- /Student End--->
@@ -119,13 +122,12 @@
                <span><i class="fa fa-user-circle fs-16"></i>Tutores</span>
              </a>
             <ul id="staff" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-              <li> <a href="../tutor/addtutor.html">Añadir Tutor</a> </li>
-              <li> <a href="../tutor/tutorprofile.html">Tabla de Tutores</a> </li>
+              <li> <a href="../tutor/addtutor.php">Añadir Tutor</a> </li>
+              <li> <a href="../tutor/tutorprofile.php">Tabla de Tutores</a> </li>
                  
             </ul>
         </li>
         <!-- /tutor End--->
-        
         
         
         <!--Fees Start-->
@@ -134,24 +136,23 @@
                 <span><i class="fas fa-dollar-sign"></i>Orden de Pago</span>
              </a>
             <ul id="fees" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-              <li> <a href="../fees/feescollection.html">Colección de Pagos</a> </li>
-              <li> <a href="../fees/addfees.html">Añadir Pago</a> </li>
-              <li> <a href="../fees/feesrecepit.html">Recibo de Pago</a> </li>
+              <li> <a href="../fees/feescollection.php">Colección de Pagos</a> </li>
+              <li> <a href="../fees/addfees.php">Añadir Pago</a> </li>
+              <li> <a href="../fees/feesrecepit.php">Recibo de Pago</a> </li>
                
                  
             </ul>
         </li>
         <!-- /Fees End--->
         
-        
         <!--Holiday Start-->
         <li class="menu-item">
-          <a href="../holidays/holiday.html">
+          <a href="../holidays/holiday.php ">
             <span><i class="fa fa-calendar fs-16"></i>Calendario Escolar</span>
           </a>
         </li>
         <!-- /Holiday End--->
-       
+
     </ul>
 
 
@@ -322,6 +323,8 @@
       <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
         <li class="ms-nav-item ms-search-form pb-0 py-0">
           <form class="ms-form" method="post">
+            <div class="ms-form-group my-0 mb-0 has-icon fs-14">
+            </div>
           </form>
         </li>
         <li class="ms-nav-item ms-nav-user dropdown">
@@ -336,7 +339,7 @@
             </li>
             <li class="dropdown-divider"></li>
             <li class="dropdown-menu-footer">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/default-login.html"> <span><i class="flaticon-shut-down mr-2"></i> Logout</span> </a>
+              <a class="media fs-14 p-2" href="../php/logout.php"> <span><i class="flaticon-shut-down mr-2"></i> Logout</span> </a>
             </li>
           </ul>
         </li>
@@ -354,67 +357,38 @@
     <!-- Body Content Wrapper -->
     
     <!-- Body Content Wrapper -->
-    <div class="ms-content-wrapper">
-      <div class="row">
-        <div class="col-md-12">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb pl-0">
-              <li class="breadcrumb-item">
-                <a href="../../index.php"><i class="material-icons">home</i> Home</a>
-              </li>
-              <li class="breadcrumb-item">Clases</li>
-              <li class="breadcrumb-item active" aria-current="page">Todas las clases</li>
-            </ol>
-          </nav>
-          <h2 class="section-title">Clases</h2>
+
+  <div class="ms-content-wrapper">
+    <div class="row">
+
+      <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb pl-0">
+            <li class="breadcrumb-item"><a href="../../index.php"><i class="material-icons">home</i> Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Profesores</li>
+          </ol>
+        </nav>
+      </div>
+
+      <!-- Contenedor donde se van a renderizar los profesores -->
+      <div class="col-md-12">
+        <div class="ms-panel">
+          <div class="ms-panel-header">
+            <h6>Lista de Profesores</h6>
+          </div>
+          <div class="ms-panel-body">
+            <div class="row" id="contenedor-profesores">
+              <!-- Aquí se insertarán las tarjetas de profesores dinámicamente -->
+            </div>
+          </div>
         </div>
       </div>
-    
-      <!-- Aquí empieza la sección para mostrar las materias -->
-      <div class="row">
-        <div class="col-md-12">
-          <!-- Lista de Materias -->
-          <ul class="list-group" id="materias-lista">
-            <!-- Las materias se cargarán aquí dinámicamente con JS -->
-          </ul>
-        </div>
-      </div>
-    
-      
 
-      <!-- Incluir el archivo JS que carga las materias -->
-      <script src="../scripts/cargarMaterias.js"></script>
     </div>
-
-
-      <!-- Modal de Edición -->
-  <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Editar Materia</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="editForm">
-                    <div class="form-group">
-                        <label for="materiaNombre">Nombre de la Materia</label>
-                        <input type="text" class="form-control" id="materiaNombre" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="materiaNivel">Nivel de la Materia</label>
-                        <input type="text" class="form-control" id="materiaNivel" required>
-                    </div>
-                    <input type="hidden" id="materiaId">
-                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-  </main>
+  </div>
+            
+                  
+</main>
 
   <!-- Quick bar -->
   <aside id="ms-quick-bar" class="ms-quick-bar fixed ms-d-block-lg">
@@ -538,22 +512,22 @@
                   <ul class="ms-scrollable ms-quickbar-container">
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>James Zathila</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
                         <ul class="ms-group-members clearfix mt-3 mb-0">
-                          <li> <img src="../../assets/img/we-educate/topper-2.jpg" alt="member"> </li>
                           <li> <img src="../../assets/img/we-educate/topper-3.jpg" alt="member"> </li>
                           <li> <img src="../../assets/img/we-educate/topper-4.jpg" alt="member"> </li>
+                          <li> <img src="../../assets/img/we-educate/topper-5.jpg" alt="member"> </li>
                           <li class="ms-group-count"> + 12 more </li>
                         </ul>
                       </div>
                     </li>
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>Raymart Sandiago</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
@@ -566,15 +540,15 @@
                     </li>
                     <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
                       <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
+                        <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
                       </div>
                       <div class="media-body ms-chat-user-info mt-1">
                         <h6>John Doe</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
                         <ul class="ms-group-members clearfix mt-3 mb-0">
-                          <li> <img src="../../assets/img/we-educate/topper-4.jpg" alt="member"> </li>
                           <li> <img src="../../assets/img/we-educate/topper-5.jpg" alt="member"> </li>
                           <li> <img src="../../assets/img/we-educate/topper-6.jpg" alt="member"> </li>
+                          <li> <img src="../../assets/img/we-educate/topper-1.jpg" alt="member"> </li>
                           <li class="ms-group-count"> + 4 more </li>
                         </ul>
                       </div>
@@ -803,67 +777,7 @@
                   vel varius metus. Pellentesque eget orci malesuada, venenatis magna et
                 </p>
                 <ul class="ms-note-members clearfix mb-0">
-                  <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-4.jpg" alt="member"> </li>
-                  <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-5.jpg" alt="member"> </li>
-                </ul>
-              </div>
-              <div class="ms-card-footer clearfix">
-
-                <div class="dropdown float-left">
-                  <a href="#" class="text-disabled" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="flaticon-share-1"></i> Share
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li class="dropdown-menu-header">
-                      <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Share With</span></h6>
-                    </li>
-                    <li class="dropdown-divider"></li>
-                    <li class="ms-scrollable ms-dropdown-list ms-members-list">
-                      <a class="media p-2" href="#">
-                        <div class="mr-2 align-self-center">
-                          <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
-                        </div>
-                        <div class="media-body">
-                          <span>John Doe</span>
-                        </div>
-                      </a>
-                      <a class="media p-2" href="#">
-                        <div class="mr-2 align-self-center">
-                          <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
-                        </div>
-                        <div class="media-body">
-                          <span>Raymart Sandiago</span>
-                        </div>
-                      </a>
-                      <a class="media p-2" href="#">
-                        <div class="mr-2 align-self-center">
-                          <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
-                        </div>
-                        <div class="media-body">
-                          <span>Heather Brown</span>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="ms-note-editor float-right">
-                  <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#notes-modal"> <i class="flaticon-pencil"> </i> Edit </a>
-                  <a href="#" class="text-disabled  ms-delete-trigger"> <i class="flaticon-trash"> </i> Delete </a>
-                </div>
-
-              </div>
-            </div>
-
-            <div class="ms-card ms-qa-card ms-deletable">
-              <div class="ms-card-header">
-                <h6 class="ms-card-title">Perform the required unit tests</h6>
-              </div>
-              <div class="ms-card-body">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vulputate urna in faucibus venenatis. Etiam at dapibus neque,
-                  vel varius metus. Pellentesque eget orci malesuada, venenatis magna et
-                </p>
-                <ul class="ms-note-members clearfix mb-0">
+                  <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-1.jpg" alt="member"> </li>
                   <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-3.jpg" alt="member"> </li>
                 </ul>
               </div>
@@ -898,6 +812,66 @@
                       <a class="media p-2" href="#">
                         <div class="mr-2 align-self-center">
                           <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
+                        </div>
+                        <div class="media-body">
+                          <span>Heather Brown</span>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="ms-note-editor float-right">
+                  <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#notes-modal"> <i class="flaticon-pencil"> </i> Edit </a>
+                  <a href="#" class="text-disabled  ms-delete-trigger"> <i class="flaticon-trash"> </i> Delete </a>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="ms-card ms-qa-card ms-deletable">
+              <div class="ms-card-header">
+                <h6 class="ms-card-title">Perform the required unit tests</h6>
+              </div>
+              <div class="ms-card-body">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vulputate urna in faucibus venenatis. Etiam at dapibus neque,
+                  vel varius metus. Pellentesque eget orci malesuada, venenatis magna et
+                </p>
+                <ul class="ms-note-members clearfix mb-0">
+                  <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-1.jpg" alt="member"> </li>
+                </ul>
+              </div>
+              <div class="ms-card-footer clearfix">
+
+                <div class="dropdown float-left">
+                  <a href="#" class="text-disabled" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="flaticon-share-1"></i> Share
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li class="dropdown-menu-header">
+                      <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Share With</span></h6>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li class="ms-scrollable ms-dropdown-list ms-members-list">
+                      <a class="media p-2" href="#">
+                        <div class="mr-2 align-self-center">
+                          <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
+                        </div>
+                        <div class="media-body">
+                          <span>John Doe</span>
+                        </div>
+                      </a>
+                      <a class="media p-2" href="#">
+                        <div class="mr-2 align-self-center">
+                          <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
+                        </div>
+                        <div class="media-body">
+                          <span>Raymart Sandiago</span>
+                        </div>
+                      </a>
+                      <a class="media p-2" href="#">
+                        <div class="mr-2 align-self-center">
+                          <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
                         </div>
                         <div class="media-body">
                           <span>Heather Brown</span>
@@ -1052,20 +1026,20 @@
   <script src="../../assets/js/slick.min.js"> </script>
   <script src="../../assets/js/moment.js"> </script>
   <script src="../../assets/js/jquery.webticker.min.js"> </script>
-  <script src="../../pages/scripts/cargarMateriasTabla.js"></script>
-   <script src="../../pages/scripts/estudiantes.js"></script>
-   
-
- 
- 
+  <script src="../../assets/js/Chart.bundle.min.js"> </script>
+  <script src="../../assets/js/Chart.Financial.js"> </script>
+  
   <!-- Page Specific Scripts Finish -->
 
-  <!-- Weeducate core JavaScript -->
+  <!-- weeducate core JavaScript -->
   <script src="../../assets/js/framework.js"></script>
 
   <!-- Settings -->
   <script src="../../assets/js/settings.js"></script>
 
+
+  <!-- Llamado al script para cargar las tarjetas de los docentes -->
+<script src="../scripts/cargarProfesores.js"></script>
 </body>
 
 </html>
