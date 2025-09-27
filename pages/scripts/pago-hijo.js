@@ -1,95 +1,149 @@
+// pages/scripts/pago-hijo.js
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("../../pages/php/obtener_pagos_hijo.php")
-    .then(res => res.json())
+  const $table = $("#tabla-pagos-hijo");
+  const currencyMXN = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' });
+  const pagarBtnSelector = '.pagar-btn';
+  let dt; // DataTable instance
+
+  // 1) Cargar datos
+  fetch("../php/obtener_pagos_hijo.php", { credentials: 'same-origin' })
+    .then(res => {
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.json();
+    })
     .then(data => {
-      const tabla = $("#tabla-pagos-hijo").DataTable({
+      // 2) Inicializar DataTable
+      dt = $table.DataTable({
         data,
+        autoWidth: false, // respeta los anchos definidos
         columns: [
-          { data: "pago_id" },
+          { data: "pago_id", width: "60px" },
           { data: "nombre_estudiante" },
-          { data: "grado" },
-          { data: "grupo" },
+          { data: "grado", width: "80px" },
+          { data: "grupo", width: "80px" },
           {
             data: "monto",
-            render: monto => `$${parseFloat(monto).toFixed(2)}`
+            render: monto => currencyMXN.format(parseFloat(monto || 0)),
+            className: "text-right",
+            width: "110px"
           },
-          { data: "fecha_pago" },
-          { data: "fecha_vencimiento" },
+          { data: "fecha_pago", defaultContent: "", width: "120px" },
+          { data: "fecha_vencimiento", width: "130px" },
           {
             data: "estado",
             render: estado => {
-              const clase = estado === "pagado" ? "badge-success" : "badge-warning";
-              return `<span class="badge ${clase} text-uppercase">${estado}</span>`;
-            }
+              const st = (estado || '').toLowerCase();
+              const clase = st === "pagado" ? "badge-success" : (st === "pendiente" ? "badge-warning" : "badge-secondary");
+              const texto = st || '—';
+              return `<span class="badge ${clase} text-uppercase">${texto}</span>`;
+            },
+            width: "170px",           // <-- más ancho para que "Pendiente" no se corte
+            className: "text-nowrap", // <-- evita salto de línea
+            orderDataType: "dom-text",
           },
-          { data: "creado_en" },
-          { data: "actualizado_en" },
+          { data: "creado_en", visible: false },
+          { data: "actualizado_en", visible: false },
           {
             data: null,
-            render: row => `
-              ${row.estado === 'pendiente' ? `
-              <button class="btn btn-outline-primary btn-sm pagar-btn" data-id="${row.pago_id}">
-                <i class="fas fa-credit-card"></i> Pagar
-              </button>` : `<span class="text-muted">-</span>`}
-            `
+            orderable: false,
+            searchable: false,
+            width: "120px",
+            render: row => {
+              const pendiente = String(row.estado || '').toLowerCase() === 'pendiente';
+              return pendiente
+                ? `<button class="btn btn-outline-primary btn-sm pagar-btn" data-id="${row.pago_id}">
+                     <i class="fas fa-credit-card"></i> Pagar
+                   </button>`
+                : `<span class="text-muted">—</span>`;
+            }
           }
         ],
-        responsive: true,
-        language: {
-          url: '../../assets/i18n/es-ES.json'
-        }
+        responsive: {
+          details: { type: 'inline', target: 'tr' }
+        },
+        orderCellsTop: true,
+        stateSave: true,
+        pageLength: 10,
+        language: { url: '../../assets/i18n/es-ES.json' }
       });
 
-      // Evento para botón "Pagar"
-      $('#tabla-pagos-hijo tbody').on('click', '.pagar-btn', function () {
+      // Ajuste visual del select del filtro en la cabecera (columna 8 = Estado)
+      $table.find('thead tr.filters th:nth-child(8) select').css('min-width', '170px');
+
+      // 3) Filtros por columna (usa la segunda fila del thead)
+      const thead = $table.find('thead');
+      thead.on('keyup change', '.filters input, .filters select', function () {
+        const $input = $(this);
+        const colIndex = $input.closest('th')[0].cellIndex; // índice de columna
+        const val = $input.val();
+        dt.column(colIndex).search(val || '', true, false).draw();
+      });
+
+      // 4) Abrir modal de confirmación
+      $table.on('click', pagarBtnSelector, function () {
         const id = this.getAttribute('data-id');
         $('#pago-id-confirmar').val(id);
         $('#modalConfirmarPago').modal('show');
       });
 
-      // Confirmar pago
-      document.getElementById('btnConfirmarPago').addEventListener('click', () => {
+      // 5) Confirmar pago (evita doble clic)
+      const $btnConfirmar = $('#btnConfirmarPago');
+      $btnConfirmar.on('click', async () => {
         const id = $('#pago-id-confirmar').val();
+        if (!id) return;
 
-        fetch('../../pages/php/procesar_pago.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ pago_id: id })
-        })
-          .then(res => res.text())
-          .then(texto => {
-            console.log("Respuesta cruda del servidor:", texto);
-            try {
-              const resp = JSON.parse(texto);
-              if (resp.status === 'success') {
-                $('#modalConfirmarPago').modal('hide');
-
-                // Abrir recibo PDF
-                window.open(`../../pages/php/generar_recibo.php?pago_id=${id}`, '_blank');
-
-                // Actualizar la tabla con nuevo estado
-                tabla.clear().rows.add(data.map(p => {
-                  if (p.pago_id == id) {
-                    p.estado = 'pagado';
-                    p.fecha_pago = new Date().toISOString().split('T')[0];
-                  }
-                  return p;
-                })).draw();
-              } else {
-                alert('Error: no se pudo completar el pago');
-              }
-            } catch (e) {
-              console.error("Error al parsear JSON:", e);
-              alert("Respuesta inválida del servidor:\n" + texto);
-            }
-          })
-          .catch(err => {
-            console.error('Error en la solicitud de pago:', err);
-            alert('Error de conexión con el servidor');
+        $btnConfirmar.prop('disabled', true).text('Procesando...');
+        try {
+          const res = await fetch('../php/procesar_pago.php', {   // <-- ruta corregida
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({ pago_id: Number(id) })
           });
+
+          const rawText = await res.text();
+          console.log("Respuesta cruda del servidor:", rawText);
+
+          let resp;
+          try { resp = JSON.parse(rawText); } catch (e) {
+            throw new Error(`Respuesta inválida del servidor: ${rawText}`);
+          }
+
+          if (resp.status === 'success') {
+            // Cierra modal
+            $('#modalConfirmarPago').modal('hide');
+
+            // Abre recibo PDF (si tu endpoint lo genera)
+            window.open(`../php/generar_recibo.php?pago_id=${id}`, '_blank'); // <-- ruta corregida
+
+            // Actualiza SOLO la fila afectada en la DataTable
+            const rowIdx = dt.rows().eq(0).filter((idx) => dt.cell(idx, 0).data() == id);
+            if (rowIdx.length) {
+              const current = dt.row(rowIdx[0]).data();
+              const hoy = new Date().toISOString().split('T')[0];
+              dt.row(rowIdx[0]).data({
+                ...current,
+                estado: 'pagado',
+                fecha_pago: hoy,
+                actualizado_en: hoy
+              }).draw(false);
+            } else {
+              // fallback: recarga ligera
+              dt.ajax?.reload?.(null, false);
+            }
+          } else {
+            alert(resp.message || 'Error: no se pudo completar el pago');
+          }
+        } catch (err) {
+          console.error(err);
+          alert(err.message || 'Error de conexión con el servidor');
+        } finally {
+          $btnConfirmar.prop('disabled', false).text('Confirmar');
+        }
       });
     })
     .catch(err => {
       console.error("Error cargando pagos del tutor:", err);
+      alert('No se pudieron cargar los pagos. Intenta de nuevo.');
     });
 });
