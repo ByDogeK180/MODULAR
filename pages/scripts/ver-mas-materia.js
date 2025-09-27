@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let materiasOriginales = [];
 
-  // ------------------------- Helpers UI -------------------------
+  // ------------------------- Utils -------------------------
   function ensureModal() {
     if (document.getElementById('modalMateria')) return;
 
@@ -15,67 +15,51 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="modal fade" id="modalMateria" tabindex="-1" role="dialog" aria-labelledby="modalMateriaLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
-          <div class="modal-header bg-warning text-dark">
+          <div class="modal-header bg-primary text-white">
             <h5 class="modal-title" id="modalMateriaLabel">Resumen de la materia</h5>
-            <button type="button" class="close text-dark" data-dismiss="modal" aria-label="Cerrar">
+            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Cerrar">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
 
           <div class="modal-body">
             <div id="mm-loading" class="py-3">Cargando…</div>
-
             <div id="mm-content" class="d-none">
-              <!-- Encabezado -->
-              <div>
-                <h4 id="mm-materia-nombre" class="mb-1 font-weight-bold"></h4>
-                <div id="mm-chips" class="chips"></div>
-              </div>
-
-              <div class="row mt-3">
-                <!-- Docente -->
-                <div class="col-md-4 mb-3">
-                  <div class="metric-card h-100">
-                    <div class="metric-title">Docente</div>
-                    <div class="teacher mt-2">
-                      <img id="mm-docente-foto" src="" alt="Docente" style="display:none;">
-                      <div>
-                        <div id="mm-docente-nombre" class="font-weight-bold">—</div>
-                        <div id="mm-docente-correo" class="metric-sub"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Promedio -->
-                <div class="col-md-4 mb-3">
-                  <div class="metric-card h-100 text-center">
-                    <div class="metric-title">Avance (promedio)</div>
-                    <div id="mm-promedio" class="metric-value">—</div>
-                    <div class="metric-sub">Escala 0–10</div>
-                  </div>
-                </div>
-
-                <!-- Asistencia -->
-                <div class="col-md-4 mb-3">
-                  <div class="metric-card h-100">
-                    <div class="metric-title">Asistencia</div>
-                    <div class="d-flex align-items-baseline justify-content-between">
-                      <div id="mm-asistencia" class="metric-value mb-2">—%</div>
-                      <div id="mm-asistencia-det" class="metric-sub text-right">Sin registros</div>
-                    </div>
-                    <div class="progress">
-                      <div id="mm-asistencia-bar" class="progress-bar" role="progressbar" style="width:0%"></div>
-                    </div>
-                  </div>
+              <div class="d-flex align-items-center mb-3">
+                <img id="mm-docente-foto" src="" alt="Docente" class="rounded mr-3" style="width:56px;height:56px;object-fit:cover;display:none;">
+                <div>
+                  <h4 id="mm-materia-nombre" class="mb-1"></h4>
+                  <div class="text-muted" id="mm-materia-sub"></div>
                 </div>
               </div>
 
-              <!-- Descripción -->
-              <div id="mm-descripcion-wrap" class="desc hidden">
-                <hr>
-                <div id="mm-descripcion"></div>
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <div class="card h-100"><div class="card-body">
+                    <h6 class="text-uppercase text-muted">Docente</h6>
+                    <div id="mm-docente-nombre" class="font-weight-bold"></div>
+                    <div id="mm-docente-correo" class="small text-muted"></div>
+                  </div></div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <div class="card h-100"><div class="card-body">
+                    <h6 class="text-uppercase text-muted">Avance (promedio)</h6>
+                    <div id="mm-promedio" class="display-4 mb-0">—</div>
+                    <div class="small text-muted">Últimos periodos</div>
+                  </div></div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <div class="card h-100"><div class="card-body">
+                    <h6 class="text-uppercase text-muted">Asistencia</h6>
+                    <div id="mm-asistencia" class="display-4 mb-0">—%</div>
+                    <div class="small text-muted" id="mm-asistencia-det">—</div>
+                  </div></div>
+                </div>
               </div>
+
+              <div id="mm-descripcion" class="mt-2"></div>
             </div>
           </div>
 
@@ -88,23 +72,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(modal.firstElementChild);
   }
 
-  function chip(iconHtml, text) {
-    return `<span class="chip">${iconHtml}<span>${text}</span></span>`;
-  }
-
-  function colorDeAsistencia(p) {
-    if (p >= 90) return 'bg-success';
-    if (p >= 70) return 'bg-warning';
-    return 'bg-danger';
-  }
-
-  // ------------------------- Modal logic -------------------------
-  async function abrirModalMateria({ materiaId, estudianteId, grado, grupo }) {
+  async function abrirModalMateria(materiaId, estudianteId) {
     ensureModal();
-    const loading = document.getElementById('mm-loading');
-    const content = document.getElementById('mm-content');
-    if (loading) loading.classList.remove('d-none');
-    if (content) content.classList.add('d-none');
+    $('#mm-loading').removeClass('d-none');
+    $('#mm-content').addClass('d-none');
     $('#modalMateria').modal('show');
 
     try {
@@ -119,79 +90,29 @@ document.addEventListener('DOMContentLoaded', () => {
       const s = data.stats || {};
       const a = s.asistencia || {};
 
-      // Título y chips
-      const t = document.getElementById('mm-materia-nombre');
-      if (t) t.textContent = m.nombre || 'Materia';
+      document.getElementById('mm-materia-nombre').textContent = m.nombre || 'Materia';
+      document.getElementById('mm-materia-sub').textContent = `Nivel: ${m.nivel || '-'} · Ciclo: ${m.ciclo || '-'}`;
 
-      const chipsEl = document.getElementById('mm-chips');
-      if (chipsEl) {
-        const chips = [];
-        if (m.nivel) chips.push(chip('<i class="fas fa-layer-group"></i>', `Nivel: ${m.nivel}`));
-        if (m.ciclo) chips.push(chip('<i class="far fa-calendar-alt"></i>', `Ciclo: ${m.ciclo}`));
-        if (grado || grupo) chips.push(chip('<i class="fas fa-chalkboard"></i>', `Clase: ${grado || '-'}° ${grupo || '-'}`));
-        chipsEl.innerHTML = chips.join('');
-      }
+      document.getElementById('mm-docente-nombre').textContent = (m.docente && m.docente.nombre) || '—';
+      document.getElementById('mm-docente-correo').textContent = (m.docente && m.docente.correo) || '';
 
-      // Docente
       const foto = document.getElementById('mm-docente-foto');
-      const dn   = document.getElementById('mm-docente-nombre');
-      const dc   = document.getElementById('mm-docente-correo');
-      if (dn) dn.textContent = (m.docente && m.docente.nombre) || '—';
-      if (dc) dc.textContent = (m.docente && m.docente.correo) || '';
-      if (foto) {
-        if (m.docente && m.docente.foto_url) { foto.src = m.docente.foto_url; foto.style.display = 'block'; }
-        else { foto.style.display = 'none'; }
-      }
+      if (m.docente && m.docente.foto_url) { foto.src = m.docente.foto_url; foto.style.display = 'block'; }
+      else { foto.style.display = 'none'; }
 
-      // Promedio
-      const prom = document.getElementById('mm-promedio');
-      if (prom) prom.textContent = (s.promedio != null ? s.promedio : '—');
+      document.getElementById('mm-promedio').textContent = s.promedio != null ? s.promedio : '—';
+      document.getElementById('mm-asistencia').textContent = a.porcentaje != null ? `${a.porcentaje}%` : '—%';
+      document.getElementById('mm-asistencia-det').textContent =
+        a.total ? `${a.presentes}/${a.total} presentes` : 'Sin registros';
 
-      // Asistencia
-      const asp = document.getElementById('mm-asistencia');
-      const asd = document.getElementById('mm-asistencia-det');
-      const bar = document.getElementById('mm-asistencia-bar');
-      const porcentaje = (a.porcentaje != null) ? a.porcentaje : null;
+      document.getElementById('mm-descripcion').textContent = m.descripcion || '';
 
-      if (asp) asp.textContent = (porcentaje != null ? `${porcentaje}%` : '—%');
-      if (asd) asd.textContent = a.total ? `${a.presentes}/${a.total} presentes` : 'Sin registros';
-      if (bar) {
-        bar.style.width = (porcentaje != null ? `${porcentaje}%` : '0%');
-        bar.className = `progress-bar ${porcentaje != null ? colorDeAsistencia(porcentaje) : ''}`;
-      }
-
-      // Descripción
-     // Descripción (oculta si no hay o si es placeholder)
-      const wrapDesc = document.getElementById('mm-descripcion-wrap');
-      const descEl   = document.getElementById('mm-descripcion');
-      let desc = (m.descripcion || '').trim();
-
-      // reglas para ocultar placeholders
-      const normalized = desc.toLowerCase().replace(/\s|\./g,'');
-      const esPlaceholder = !desc || normalized === 'etc' || normalized === 'na' || normalized === 'n/a' || desc.length < 5;
-
-      if (wrapDesc && descEl) {
-        if (esPlaceholder) {
-          wrapDesc.classList.add('hidden');
-        } else {
-          descEl.textContent = desc;
-          wrapDesc.classList.remove('hidden');
-        }
-      }
-
-      if (loading) loading.classList.add('d-none');
-      if (content) content.classList.remove('d-none');
-
+      $('#mm-loading').addClass('d-none');
+      $('#mm-content').removeClass('d-none');
     } catch (err) {
       console.error(err);
-      if (loading) loading.classList.add('d-none');
-      if (content) {
-        content.classList.remove('d-none');
-        // Mensaje de error en un alert bonito
-        content.innerHTML = `<div class="alert alert-danger mb-0">${err.message}</div>`;
-      } else {
-        alert(err.message);
-      }
+      $('#mm-loading').addClass('d-none');
+      $('#mm-content').removeClass('d-none').innerHTML = `<div class="alert alert-danger">${err.message}</div>`;
     }
   }
 
@@ -264,9 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
               <button class="btn btn-outline-primary btn-sm btn-ver-mas"
                       data-materia-id="${materiaId}"
-                      data-estudiante-id="${estudianteId}"
-                      data-grado="${m.grado || ''}"
-                      data-grupo="${m.grupo || ''}">
+                      data-estudiante-id="${estudianteId}">
                 <i class="fa fa-eye"></i> Ver más
               </button>
             </div>
@@ -314,15 +233,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!btn) return;
     ev.preventDefault();
 
-    const materiaId   = Number(btn.dataset.materiaId || 0);
-    const estudianteId= Number(btn.dataset.estudianteId || 0);
-    const grado       = btn.dataset.grado || '';
-    const grupo       = btn.dataset.grupo || '';
+    const materiaId = Number(btn.dataset.materiaId || 0);
+    const estudianteId = Number(btn.dataset.estudianteId || 0);
     if (!materiaId || !estudianteId) {
       alert('Faltan datos de la materia o del estudiante.');
       return;
     }
-    abrirModalMateria({ materiaId, estudianteId, grado, grupo });
+    abrirModalMateria(materiaId, estudianteId);
   });
 
 });

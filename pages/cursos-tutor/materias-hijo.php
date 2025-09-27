@@ -457,13 +457,6 @@ require_once '../php/auth.php';
                 </li>
             </ul>
 
-            <div class="ms-toggler ms-d-block-sm pr-0 ms-nav-toggler" data-toggle="slideDown"
-                data-target="#ms-nav-options">
-                <span class="ms-toggler-bar bg-primary"></span>
-                <span class="ms-toggler-bar bg-primary"></span>
-                <span class="ms-toggler-bar bg-primary"></span>
-            </div>
-
         </nav>
 
 
@@ -534,5 +527,7 @@ require_once '../php/auth.php';
     <script src="../../assets/js/settings.js"></script>
 
 </body>
+
+
 
 </html>
