@@ -4,15 +4,10 @@ require 'conecta.php';
 session_start();
 
 $rol = $_SESSION['rol'] ?? null;
+$docente_id = $_SESSION['docente_id'] ?? null;
 
-$usuario_id = ($rol == 1 && isset($_SESSION['docente_id']))
-    ? $_SESSION['docente_id']
-    : ($_SESSION['usuario_id'] ?? null);
-
-
-
-if (!$usuario_id) {
-    echo json_encode(['error' => 'No hay sesión activa']);
+if (!$docente_id) {
+    echo json_encode(['error' => 'No hay sesión activa de docente']);
     exit;
 }
 
@@ -23,30 +18,31 @@ if (!$con) {
     exit;
 }
 
-$grado = isset($_GET['grado']) ? trim($_GET['grado']) : null;
-$grupo = isset($_GET['grupo']) ? trim($_GET['grupo']) : null;
-
 $tutores = [];
 
 if ($rol == 1) {
-    // DOCENTE: solo ve tutores de sus materias
+    // DOCENTE: solo ve tutores de sus clases/materias
     $query = "
-        SELECT DISTINCT t.tutor_id, t.nombre, t.apellido, t.telefono, t.correo, t.direccion, t.activo
+        SELECT DISTINCT 
+            t.tutor_id,
+            t.nombre,
+            t.apellido,
+            t.telefono,
+            t.correo,
+            t.direccion,
+            t.activo
         FROM tutores t
-        INNER JOIN estudiantes e ON t.tutor_id = e.tutor_id
-        INNER JOIN asignacion_materias am ON e.estudiante_id = am.estudiante_id
-        INNER JOIN materias m ON am.materia_id = m.materia_id
-        WHERE m.docente_id = ?
+        INNER JOIN estudiantes e ON e.tutor_id = t.tutor_id
+        INNER JOIN inscripciones i ON i.estudiante_id = e.estudiante_id
+        INNER JOIN clase_asignacion ca ON ca.clase_id = i.clase_id
+        INNER JOIN clases c ON c.clase_id = ca.clase_id
+        WHERE ca.docente_id = ?
+        ORDER BY t.apellido, t.nombre
     ";
 
-    if (!empty($grado) && !empty($grupo)) {
-        $query .= " AND e.grado = ? AND e.grupo = ?";
-        $stmt = $con->prepare($query);
-        $stmt->bind_param("iss", $usuario_id, $grado, $grupo);
-    } else {
-        $stmt = $con->prepare($query);
-        $stmt->bind_param("i", $usuario_id);
-    }
+    $stmt = $con->prepare($query);
+    $stmt->bind_param("i", $docente_id);
+
 } else {
     // ADMIN: ve todos los tutores
     $query = "SELECT tutor_id, nombre, apellido, telefono, correo, direccion, activo FROM tutores";
@@ -62,15 +58,11 @@ if ($stmt) {
         $tutores[] = $row;
     }
 
-    echo json_encode($tutores);
+    echo json_encode($tutores, JSON_UNESCAPED_UNICODE);
     $stmt->close();
 } else {
     http_response_code(500);
-    echo json_encode([
-        'error' => 'Error al preparar consulta',
-        'usuario_id' => $usuario_id,
-        'rol' => $rol
-    ]);
+    echo json_encode(['error' => 'Error al preparar consulta']);
 }
 
 $con->close();

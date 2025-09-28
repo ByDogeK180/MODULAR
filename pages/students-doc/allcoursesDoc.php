@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php require_once __DIR__ . '/../php/auth.php'; ?>
+
 <script>
   const userRol = <?php echo $_SESSION['rol'] ?? 'null'; ?>;
 </script>
@@ -120,7 +121,7 @@
         
         <!--Holiday Start-->
         <li class="menu-item">
-          <a href="../holidays/holiday.html">
+          <a href="../holidays/holiday_docente.php">
             <span><i class="fa fa-calendar fs-16"></i>Holidays</span>
           </a>
         </li>
@@ -174,7 +175,7 @@
             <li class="dropdown-menu-footer">
             </li>
             <li class="dropdown-menu-footer">
-              <a class="media fs-14 p-2" href="../../Docentes.php?logout=true">
+              <a class="media fs-14 p-2" href="../php/logout.php">
                 <span><i class="flaticon-shut-down mr-2"></i> Logout</span>
               </a>
             </li>
@@ -190,24 +191,32 @@
 
     </nav>
 
+  <!--body content-->
+  <div class="ms-content-wrapper">
+  <div class="row">
+    <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb pl-0">
+          <li class="breadcrumb-item">
+            <a href="#"><i class="material-icons">home</i> Lobby</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Materias</li>
+          <li class="breadcrumb-item active" aria-current="page">Todas las materias</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
 
-    <!-- Body Content Wrapper -->
-    
-    <div class="ms-content-wrapper">
-      <div class="row">
-        <div class="col-md-12">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb pl-0">
-              <li class="breadcrumb-item"><a href="#"><i class="material-icons">home</i> Lobby</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Materias</li>
-              <li class="breadcrumb-item active" aria-current="page">Todas las materias</li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-
-      <div class="row mb-4">
-        <div class="col-md-6">
+<!-- Card filtros -->
+<div class="card shadow-sm border-0 mb-4">
+  <div class="card-body">
+    <div class="row g-3">
+      <!-- Buscar materia -->
+      <div class="col-md-8">
+        <div class="input-group">
+          <span class="input-group-text bg-white text-secondary">
+            <i class="material-icons">search</i>
+          </span>
           <input
             type="text"
             id="buscar-materia"
@@ -215,21 +224,35 @@
             placeholder="Buscar materia…"
           >
         </div>
-        <div class="col-md-6">
-          <select id="filtrar-nivel" class="form-control">
+      </div>
+
+      <!-- Filtrar nivel -->
+      <div class="col-md-4">
+        <div class="input-group">
+          <span class="input-group-text bg-white text-secondary">
+            <i class="material-icons">school</i>
+          </span>
+          <select id="filtrar-nivel" class="form-select">
             <option value="">Todos los niveles</option>
             <option value="primaria">Primaria</option>
             <option value="secundaria">Secundaria</option>
           </select>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 
-    
-      <div
-        id="materias-container"
-        class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4 justify-content-center"
-        style="--bs-gutter-y: 3rem;"
-      ></div>
+
+  <!-- Contenedor de tarjetas -->
+  <div
+    id="materias-container"
+    class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4"
+  >
+    <!-- Materias renderizadas dinámicamente -->
+  </div>
+</div>
+
  
     
     <!-- Script al final del body -->

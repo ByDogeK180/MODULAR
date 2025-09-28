@@ -1,3 +1,5 @@
+<?php include '../php/auth.php';?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +8,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>ShoolCare</title>
+  <title>SchoolCare</title>
   <!-- Iconic Fonts -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../../vendors/iconic-fonts/font-awesome/css/all.min.css" rel="stylesheet">
@@ -14,8 +16,6 @@
   
   <!-- Bootstrap core CSS -->
   <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
-  <!-- DataTables -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
   <!-- jQuery UI -->
   <link href="../../assets/css/jquery-ui.min.css" rel="stylesheet">
   <!-- Page Specific CSS (Slick Slider.css) -->
@@ -28,6 +28,8 @@
 </head>
 
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
+
+
 
   <!-- Preloader -->
   <div id="preloader-wrap">
@@ -56,7 +58,7 @@
 
     <!-- Logo -->
     <div class="logo-sn ms-d-block-lg">
-      <a class="pl-0 ml-0 text-center" href="../../index.php"> <img src="../../assets/img/LogoSchoolCare.png" alt="logo">  </a>
+      <a class="pl-0 ml-0 text-center" href="../../index.php"> <img src="../../assets/img/LogoSchoolCare.png" alt="logo"> </a>
     </div>
 
     <!-- Navigation -->
@@ -67,7 +69,7 @@
                <span><i class="material-icons fs-16">dashboard</i>Dashboard </span>
              </a>
             <ul id="dashboard" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-              <li> <a href="../../index.php">ShoolCare</a> </li>
+              <li> <a href="../../index.php">SchoolCare</a> </li>
               
             </ul>
         </li>
@@ -76,12 +78,12 @@
         <!--Proessors Start-->
         <li class="menu-item">
             <a href="#" class="has-chevron" data-toggle="collapse" data-target="#professor" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-user fs-16"></i>Professors</span>
+               <span><i class="fa fa-user fs-16"></i>Profesores</span>
              </a>
             <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-              <li> <a href="../professors/allprofessor.html">All Professors</a> </li>
-               <li> <a href="../professors/addprofessor.html">Add Professors</a> </li>
-                 <li> <a href="../professors/aboutprofessor.html">About Professors</a> </li>
+              <li> <a href="../professors/allprofessor.php">Todos los Profesores</a> </li>
+               <li> <a href="../professors/addprofessor.php">Añadir Profesores</a> </li>
+                 <li> <a href="../professors/aboutprofessor.php">Acerca de Profesores</a> </li>
             </ul>
         </li>
         <!-- /Proessors End--->
@@ -89,15 +91,15 @@
          <!--Courses Start-->
         <li class="menu-item">
             <a href="#" class="has-chevron" data-toggle="collapse" data-target="#courses" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-graduation-cap fs-16"></i>Courses</span>
+               <span><i class="fa fa-graduation-cap fs-16"></i>Materias</span>
              </a>
             <ul id="courses" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-              <li> <a href="../courses/allcourses.html">All Courses</a> </li>
-               <li> <a href="../courses/addcourses.html">Add Courses</a> </li>
-                 <li> <a href="../courses/aboutcourses.html">About Courses</a> </li>
-                  <li> <a href="../courses/ciclos.html">Ciclos</a> </li>
-                   <li> <a href="../courses/clases.html">Clases</a> </li>
-                    <li> <a href="../courses/inscripciones.html">Inscripciones</a> </li>
+              <li> <a href="../courses/allcourses.php">Todas las Materias</a> </li>
+               <li> <a href="../courses/addcourses.php">Añadir Materias</a> </li>
+                 <li> <a href="../courses/aboutcourses.php">Acerca de Materias</a> </li>
+                  <li> <a href="../courses/ciclos.php">Ciclos</a> </li>
+                    <li> <a href="../courses/clases.php">Clases</a> </li>
+                     <li> <a href="../courses/inscripciones.php">Inscripciones</a> </li>
             </ul>
         </li>
         <!-- /Courses End--->
@@ -105,11 +107,11 @@
         <!--Student Start-->
         <li class="menu-item">
             <a href="#" class="has-chevron" data-toggle="collapse" data-target="#student" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-users fs-16"></i>Student</span>
+               <span><i class="fa fa-users fs-16"></i>Estudiantes</span>
              </a>
             <ul id="student" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-              <li> <a href="../student/studentadd.html">Student Add</a> </li>
-               <li> <a href="../student/studenttable.html">Student Table</a> </li>
+              <li> <a href="../student/studentadd.php">Añadir Estudiante</a> </li>
+               <li> <a href="../student/studenttable.php">Tabla de Estudiantes</a> </li>
                   </ul>
         </li>
         <!-- /Student End--->
@@ -121,8 +123,8 @@
                <span><i class="fa fa-user-circle fs-16"></i>Tutores</span>
              </a>
             <ul id="staff" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-              <li> <a href="../tutor/addtutor.html">Añadir Tutor</a> </li>
-              <li> <a href="../tutor/tutorprofile.html">Tabla de Tutores</a> </li>
+              <li> <a href="../tutor/addtutor.php">Añadir Tutor</a> </li>
+              <li> <a href="../tutor/tutorprofile.php">Tabla de Tutores</a> </li>
                  
             </ul>
         </li>
@@ -133,12 +135,12 @@
         <!--Fees Start-->
         <li class="menu-item">
             <a href="#" class="has-chevron" data-toggle="collapse" data-target="#fees" aria-expanded="false" aria-controls="dashboard">
-                <span><i class="fas fa-dollar-sign"></i>Fees</span>
+                <span><i class="fas fa-dollar-sign"></i>Orden de Pago</span>
              </a>
             <ul id="fees" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-              <li> <a href="../fees/feescollection.html">Fees Collection</a> </li>
-              <li> <a href="../fees/addfees.html">Add Fees</a> </li>
-              <li> <a href="../fees/feesrecepit.html">Fees Recepit</a> </li>
+              <li> <a href="../fees/feescollection.php">Colección de Pagos</a> </li>
+              <li> <a href="../fees/addfees.php">Añadir Pago</a> </li>
+              <li> <a href="../fees/feesrecepit.php">Recibo de Pago</a> </li>
                
                  
             </ul>
@@ -148,22 +150,12 @@
         
         <!--Holiday Start-->
         <li class="menu-item">
-          <a href="../holidays/holiday.html">
-            <span><i class="fa fa-calendar fs-16"></i>Holidays</span>
+          <a href="../holidays/holiday.php">
+            <span><i class="fa fa-calendar fs-16"></i>Calendario Escolar</span>
           </a>
         </li>
         <!-- /Holiday End--->
-        <!-- Charts -->
-        <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#charts" aria-expanded="false" aria-controls="charts">
-              <span><i class="material-icons fs-16">equalizer</i>Charts</span>
-            </a>
-            <ul id="charts" class="collapse" aria-labelledby="charts" data-parent="#side-nav-accordion">
-              <li> <a href="../charts/chartjs.html">Chart JS</a> </li>
-              <li> <a href="../charts/morris-charts.html">Morris Chart</a> </li>
-            </ul>
-        </li>
-        <!-- /Charts -->
+      
 
     </ul>
 
@@ -335,6 +327,8 @@
       <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
         <li class="ms-nav-item ms-search-form pb-0 py-0">
           <form class="ms-form" method="post">
+            <div class="ms-form-group my-0 mb-0 has-icon fs-14">
+            </div>
           </form>
         </li>
         <li class="ms-nav-item ms-nav-user dropdown">
@@ -349,7 +343,7 @@
             </li>
             <li class="dropdown-divider"></li>
             <li class="dropdown-menu-footer">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/default-login.html"> <span><i class="flaticon-shut-down mr-2"></i> Logout</span> </a>
+              <a class="media fs-14 p-2" href="../php/logout.php"> <span><i class="flaticon-shut-down mr-2"></i> Logout</span> </a>
             </li>
           </ul>
         </li>
@@ -368,108 +362,62 @@
     
     <!-- Body Content Wrapper -->
     <div class="ms-content-wrapper">
-        <!-- BOTÓN NUEVO CICLO -->
-        <div class="row mb-3">
-        <div class="col-md-12 text-right">
-            <button id="newCicloBtn" class="btn btn-primary">
-            <i class="fa fa-plus"></i> Nuevo Ciclo Escolar
-            </button>
-        </div>
-        </div>
+        <!-- Dentro de tu <body>, en el lugar donde quieras que aparezca la sección -->
+        <div class="ms-panel">
+            <form id="formInscripciones">
+                    <div class="form-group">
+                        <label for="selectClase">Clase</label>
+                        <select id="selectClase" class="form-control">
+                        <option value="">Seleccione clase</option>
+                        <!-- JS inyecta aquí las opciones -->
+                        </select>
+                    </div>
 
-        <!-- TABLA DE CICLOS -->
-        <table id="tabla-ciclos" class="table table-striped">
-        <thead>
-            <tr>
-            <th>Nombre</th>
-            <th>Inicio</th>
-            <th>Fin</th>
-            <th>Estado</th>
-            <th>Observaciones</th>
-            <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-        </table>
+                    <div class="row mt-3">
+                        <!-- Alumnos inscritos -->
+                        <div class="col-md-5">
+                        <h6>Inscritos a <span id="tituloClase"></span></h6>
+                        <table class="table table-sm table-hover" id="tablaInscritos">
+                            <thead>
+                            <tr><th>Nombre</th></tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        </div>
 
-        <!-- MODAL CREAR/EDITAR CICLO -->
-        <div class="modal fade" id="cicloModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog">
-            <form id="cicloForm">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="cicloModalLabel">Nuevo Ciclo</h5>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                <!-- DATOS DEL CICLO -->
-                <div class="form-group">
-                    <label>Nombre</label>
-                    <input type="text" id="nombreCiclo" class="form-control" required>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                    <label>Fecha Inicio</label>
-                    <input type="date" id="fechaInicioCiclo" class="form-control" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                    <label>Fecha Fin</label>
-                    <input type="date" id="fechaFinCiclo" class="form-control" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Estado</label>
-                    <select id="estadoCiclo" class="form-control">
-                    <option value="activo">Activo</option>
-                    <option value="cerrado">Cerrado</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Observaciones</label>
-                    <textarea id="observacionesCiclo" class="form-control"></textarea>
-                </div>
-                <hr>
-                <!-- Repeater dinámico de periodos -->
-                <button type="button"
-                        id="addPeriodoBtn"
-                        class="btn btn-sm btn-outline-primary mb-2">
-                  + Agregar periodo
-                </button>
+                        <!-- Añade esta regla CSS en el <head> -->
+                        <style>
+                        .flip { display:inline-block; transform: scaleX(-1); }
+                        </style>
 
-                <!-- Resumen de periodos antes de guardar -->
-                <ul id="periodosSummary" class="list-group mb-3"></ul>
+                        <!-- Y en el cuerpo: -->
+                        <div class="col-md-2 d-flex flex-column justify-content-center align-items-center">
+                        <!-- giramos el símbolo '>' -->
+                        <button type="button" id="btnPasarADerecha" class="btn btn-outline-primary mb-2">
+                            <span class="flip">&gt;</span>
+                        </button>
+                        <!-- giramos el símbolo '<' -->
+                        <button type="button" id="btnPasarAIzquierda" class="btn btn-outline-secondary">
+                            <span class="flip">&lt;</span>
+                        </button>
+                        </div>
 
-                <div id="periodosContainer"></div>
+                        <!-- Alumnos no inscritos -->
+                        <div class="col-md-5">
+                        <h6>No inscritos</h6>
+                        <table class="table table-sm table-hover" id="tablaNoInscritos">
+                            <thead>
+                            <th><!-- checkbox --></th>
+                            <tr><th>Nombre</th></tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                        </div>
+                    </div>
 
-                <!-- Plantilla para cada periodo -->
-                <template id="periodoTemplate">
-                  <div class="form-row mb-2 periodo-row">
-                    <input type="hidden" class="periodo-id">
-                    <div class="form-group col-md-4">
-                      <label>Nombre Periodo</label>
-                      <input type="text" class="form-control periodo-nombre" required>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label>Inicio</label>
-                      <input type="date" class="form-control periodo-inicio" required>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label>Fin</label>
-                      <input type="date" class="form-control periodo-fin" required>
-                    </div>
-                    <div class="form-group col-md-2 d-flex align-items-end">
-                      <button type="button" class="btn btn-sm btn-danger btn-remove-periodo">×</button>
-                    </div>
-                  </div>
-                </template>
-                </div>
-                <div class="modal-footer">
-                <button type="submit" class="btn btn-success">Guardar</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                </div>
-            </div>
+            <button type="submit" id="btnGuardar" class="btn btn-success mt-3">Guardar cambios</button>
             </form>
-        </div>
+
         </div>
 
     </div>
@@ -552,6 +500,10 @@
                 </div>
               </div>
               <form class="ms-form my-3" method="post">
+                <div class="ms-form-group my-0 mb-0 has-icon fs-14">
+                  <input type="search" class="ms-form-input w-100" name="search" placeholder="Search for People and Groups" value="">
+                  <i class="flaticon-search text-disabled"></i>
+                </div>
               </form>
             </div>
 
@@ -1124,36 +1076,31 @@
   </div>
 
   <!-- SCRIPTS -->
-   <!-- 1) jQuery -->
-    <script src="../../assets/js/jquery-3.3.1.min.js"></script>
+  <!-- Global Required Scripts Start -->
+  <script src="../../assets/js/jquery-3.3.1.min.js"></script>
+  <script src="../../assets/js/popper.min.js"></script>
+  <script src="../../assets/js/bootstrap.min.js"></script>
+  <script src="../../assets/js/perfect-scrollbar.js"> </script>
+  <script src="../../assets/js/jquery-ui.min.js"> </script>
+  <!-- Global Required Scripts End -->
 
-    <!-- 2) jQuery UI (para .sortable) -->
-    <script src="../../assets/js/jquery-ui.min.js"></script>
+  <!-- Page Specific Scripts Start -->
+  <script src="../../assets/js/slick.min.js"> </script>
+  <script src="../../assets/js/moment.js"> </script>
+  <script src="../../assets/js/jquery.webticker.min.js"> </script>
+  <!-- JS específico para inscripciones -->
+  <script src="../../pages/scripts/inscripciones.js"></script>
+   
 
-    <!-- 3) Popper + Bootstrap (para .modal, tooltips, etc.) -->
-    <script src="../../assets/js/popper.min.js"></script>
-    <script src="../../assets/js/bootstrap.min.js"></script>
+ 
+ 
+  <!-- Page Specific Scripts Finish -->
 
-    <!-- 4) DataTables CSS (en el <head>) -->
-    <link rel="stylesheet"
-          href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
+  <!-- Weeducate core JavaScript -->
+  <script src="../../assets/js/framework.js"></script>
 
-    <!-- 5) DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
-
-    <!-- 6) Otros plugins de tu plantilla -->
-    <script src="../../assets/js/perfect-scrollbar.js"></script>
-    <script src="../../assets/js/slick.min.js"></script>
-    <script src="../../assets/js/moment.js"></script>
-    <script src="../../assets/js/jquery.webticker.min.js"></script>
-
-    <!-- 7) Framework de tu tema y settings -->
-    <script src="../../assets/js/framework.js"></script>
-    <script src="../../assets/js/settings.js"></script>
-
-    <!-- 8) Tu lógica: cargarCiclos.js -->
-    <script src="../scripts/cargarCiclos.js"></script>
+  <!-- Settings -->
+  <script src="../../assets/js/settings.js"></script>
 
 </body>
 

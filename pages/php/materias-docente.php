@@ -12,11 +12,18 @@ if (!$usuario_id) {
 }
 
 $query = "
-  SELECT DISTINCT m.materia_id, m.nombre, m.nivel_grado, m.ciclo
-  FROM docentes d
-  INNER JOIN clase_asignacion ca ON d.docente_id = ca.docente_id
-  INNER JOIN materias m ON ca.materia_id = m.materia_id
-  WHERE d.usuario_id = ?
+  SELECT DISTINCT 
+  m.materia_id, 
+  m.nombre AS materia, 
+  ce.nombre AS ciclo, 
+  CONCAT(cl.grado, cl.grupo) AS grupo
+FROM docentes d
+INNER JOIN clase_asignacion ca ON d.docente_id = ca.docente_id
+INNER JOIN materias m ON ca.materia_id = m.materia_id
+INNER JOIN clases cl ON ca.clase_id = cl.clase_id
+INNER JOIN ciclos_escolares ce ON cl.ciclo_id = ce.ciclo_id
+WHERE d.usuario_id = ?
+
 ";
 
 $stmt = $con->prepare($query);

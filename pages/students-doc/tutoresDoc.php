@@ -1,4 +1,5 @@
-<?php include '../php/auth.php'; ?>
+<?php require_once __DIR__ . '/../php/auth.php'; ?>
+
 <script>
   const userRol = <?php echo $_SESSION['rol'] ?? 'null'; ?>;
 </script>
@@ -122,7 +123,7 @@
         
         <!--Holiday Start-->
         <li class="menu-item">
-          <a href="../holidays/holiday.html">
+          <a href="../holidays/holiday_docente.php">
             <span><i class="fa fa-calendar fs-16"></i>Holidays</span>
           </a>
         </li>
@@ -173,7 +174,7 @@
             <li class="dropdown-menu-footer">
             </li>
             <li class="dropdown-menu-footer">
-                    <a class="media fs-14 p-2" href="../../pages/prebuilt-pages/default-login.html"> <span><i
+                    <a class="media fs-14 p-2" href="../php/logout.php"> <span><i
                     class="flaticon-shut-down mr-2"></i> Logout</span> </a>
             </li>
           </ul>
@@ -193,47 +194,94 @@
 <!-- Body Content Wrapper -->
 <div class="ms-content-wrapper">
   <div class="row">
-
     <div class="col-md-12">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb pl-0">
           <li class="breadcrumb-item"><a href="../../Docentes.php"><i class="material-icons">home</i> Home</a></li>
           <li class="breadcrumb-item active" aria-current="page">Tutores</li>
-          <li class="breadcrumb-item active" aria-current="page">Tabla Tutores</li>
+          <li class="breadcrumb-item active" aria-current="page">Tabla de Tutores</li>
         </ol>
       </nav>
     </div>
+  </div>
 
-<select id="filtroGrupo" class="form-control mb-3" style="width: auto;">
-  <option value="">Todos los grupos</option>
-</select>
-
-
-
-<div class="col-lg-12">
-  <div class="ms-panel">
-    <!-- Header -->
-    <div class="ms-panel-header d-flex justify-content-between align-items-center">
-      <h6>Perfiles de Tutores</h6>
-
-      
+  <!-- Card principal -->
+  <div class="card shadow-sm border-0">
+    <!-- Header con contraste -->
+    <div class="card-header bg-warning text-white fw-bold d-flex justify-content-between align-items-center">
+      <span>
+        <i class="material-icons me-2">groups</i> Perfiles de Tutores
+      </span>
+      <select id="filtroGrupo" class="form-select w-auto">
+        <option value="">Todos los grupos</option>
+      </select>
     </div>
 
-    <!-- Tabla -->
-    <div class="ms-panel-body">
+    <!-- Body -->
+    <div class="card-body">
       <div class="table-responsive">
-        <table id="tablaTutores" class="table">
-          <thead>
+        <table id="tablaTutores" class="table table-bordered align-middle text-center">
+          <thead class="table-light">
             <tr>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Teléfono</th>
-              <th>Correo</th>
-              <th>Dirección</th>
+              <th><i class="material-icons fs-6 me-1">badge</i> Nombre</th>
+              <th><i class="material-icons fs-6 me-1">person</i> Apellido</th>
+              <th><i class="material-icons fs-6 me-1">call</i> Teléfono</th>
+              <th><i class="material-icons fs-6 me-1">email</i> Correo</th>
+              <th><i class="material-icons fs-6 me-1">home</i> Dirección</th>
+              <th><i class="material-icons fs-6 me-1">visibility</i> Acciones</th>
             </tr>
           </thead>
           <tbody id="tutores-lista">
-            <!-- Los tutores se insertan dinámicamente aquí -->
+            <!-- Ejemplo de fila con botón -->
+            <tr>
+              <td>Luis</td>
+              <td>Madera</td>
+              <td>3322114455</td>
+              <td>luis@prueba.com</td>
+              <td>#12333</td>
+              <td>
+                <button class="btn btn-warning btn-sm text-white d-flex align-items-center mx-auto" data-bs-toggle="modal" data-bs-target="#modalHijos">
+                  <i class="material-icons fs-6 me-1">family_restroom</i> Ver Hijos
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="6" class="text-muted py-4">
+                <i class="material-icons text-warning fs-1 d-block">groups</i>
+                No hay más tutores disponibles.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Hijos -->
+<div class="modal fade" id="modalHijos" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content shadow-lg border-0 rounded-3">
+      <div class="card-header bg-warning text-white fw-bold d-flex align-items-center">
+        <i class="material-icons me-2">family_restroom</i> Hijos del Tutor
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered align-middle text-center">
+          <thead class="table-light">
+            <tr>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Grado</th>
+              <th>Grupo</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-hijos">
+            <tr>
+              <td colspan="4" class="text-muted py-4">
+                <i class="material-icons text-warning fs-1 d-block">person_off</i>
+                No hay hijos registrados.
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

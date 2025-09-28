@@ -116,7 +116,7 @@
         
         <!--Holiday Start-->
         <li class="menu-item">
-          <a href="../holidays/holiday.html">
+          <a href="../holidays/holiday_docente.php">
             <span><i class="fa fa-calendar fs-16"></i>Holidays</span>
           </a>
         </li>
@@ -171,7 +171,7 @@
                     class="flaticon-user mr-2"></i> Profile</span> </a>
 
             <li class="dropdown-menu-footer">
-              <a class="media fs-14 p-2" href="../../pages/prebuilt-pages/default-login.html"> <span><i
+             <a class="media fs-14 p-2" href="../php/logout.php"> <span><i
                     class="flaticon-shut-down mr-2"></i> Logout</span> </a> 
             </li>
           </ul>
@@ -186,59 +186,87 @@
 
     </nav>
 
+<!-- Body Content Wrapper -->
+<div class="ms-content-wrapper">
+  <div class="row">
+    <div class="col-md-12">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb pl-0">
+          <li class="breadcrumb-item">
+            <a href="../../index.php"><i class="material-icons">home</i> Home</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Materias</li>
+          <li class="breadcrumb-item active" aria-current="page">Añadir Asistencias</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
 
-    <!-- Body Content Wrapper -->
+  <div class="card shadow-sm border-0">
+    <div class="card-header bg-warning text-white d-flex align-items-center">
+      <i class="material-icons mr-2">fact_check</i>
+      <h6 class="mb-0 font-weight-bold">Registro de Asistencias</h6>
+    </div>
 
-    <!-- Body Content Wrapper -->
-    <div class="ms-content-wrapper">
-      <div class="row">
+    <div class="card-body">
+      <form id="form-asistencias">
 
-        <div class="col-md-12">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb pl-0">
-              <li class="breadcrumb-item"><a href="../../index.php"><i class="material-icons">home</i> Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Materias</li>
-              <li class="breadcrumb-item active" aria-current="page">Añadir Asistencias</li>
-            </ol>
-          </nav>
+        <!-- Selección de materia -->
+        <div class="form-group">
+          <label for="materia-select" class="font-weight-bold">Selecciona una materia:</label>
+          <select id="materia-select" class="form-control">
+            <option value="">-- Selecciona una materia --</option>
+          </select>
         </div>
-      </div>
 
-      <div class="form-group">
-        <label for="materia-select">Selecciona una materia:</label>
-        <select id="materia-select" class="form-control">
-          <option value="">-- Selecciona una materia --</option>
-        </select>
-      </div>
+        <!-- Selección de fecha -->
+        <div class="form-group">
+          <label for="fecha-select" class="font-weight-bold">Selecciona una fecha:</label>
+          <select id="fecha-select" class="form-control">
+            <option value="">-- Selecciona una fecha --</option>
+          </select>
+        </div>
 
-      <!-- Asistencias Table -->
-      <div class="ms-panel-body">
-        <form id="form-asistencias">
-          <div class="table-responsive">
-            <table class="table" id="tablaAsistencias">
-              <thead>
-                <tr>
-                  <th>Nombres</th>
-                  <th>Apellido</th>
-                  <th>Asistencia</th>
-                </tr>
-              </thead>
-              <tbody id="asistencias-body">
-                <!-- Se llena con JS -->
-              </tbody>
-            </table>
+        <!-- Nueva fecha -->
+        <div class="form-group" id="nueva-fecha-container" style="display:none;">
+          <label for="nueva-fecha" class="font-weight-bold">Nueva fecha:</label>
+          <input type="date" id="nueva-fecha" class="form-control">
+        </div>
 
+        <!-- Tabla -->
+        <div class="table-responsive mt-4">
+          <table class="table table-bordered table-hover text-center" id="tablaAsistencias">
+            <thead class="thead-light">
+              <tr>
+                <th>Nombres</th>
+                <th>Apellido</th>
+                <th>Asistencia</th>
+              </tr>
+            </thead>
+            <tbody id="asistencias-body">
+              <tr>
+                <td colspan="3" class="text-muted py-4">
+                  <i class="fa fa-users fa-lg d-block mb-2 text-warning"></i>
+                  Selecciona una materia y fecha para ver estudiantes.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
+        <!-- Botón Guardar -->
+        <div class="text-center mt-4">
+          <button id="guardarAsistencias" type="submit" class="btn btn-warning btn-lg px-5 shadow-sm">
+            <i class="material-icons mr-1">save</i> Guardar Asistencias
+          </button>
+        </div>
 
-          </div>
-          <button id="guardarAsistencias" type="submit" class="btn btn-primary mt-3">Guardar Asistencias</button>
+      </form>
+    </div>
+  </div>
 
-        </form>
-      </div>
-
-
-      <script src="../scripts/asistencias.js"></script>
-
+  <script src="../scripts/asistencias.js?v=4"></script>
+</div>
 
 
 
