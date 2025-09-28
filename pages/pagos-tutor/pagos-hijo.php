@@ -1,11 +1,4 @@
 <?php
-
-// session_start();
-// echo '<pre>';
-// print_r($_SESSION);
-// echo '</pre>'; 
-
-
 session_start();
 //echo '<pre>'; print_r($_SESSION); echo '</pre>';
 ?>
@@ -18,7 +11,7 @@ session_start();
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Weeducate</title>
+  <title>SchoolCare</title>
 
   <!-- Iconos -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -41,42 +34,6 @@ session_start();
 
 
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
-
-  <!-- Setting Panel -->
-  <div class="ms-toggler ms-settings-toggle ms-d-block-lg">
-    <i class="flaticon-paint"></i>
-  </div>
-  <div class="ms-settings-panel ms-d-block-lg">
-    <div class="row">
-
-      <div class="col-xl-4 col-md-4">
-        <h4 class="section-title">Customize</h4>
-        <div>
-          <label class="ms-switch">
-            <input type="checkbox" id="dark-mode">
-            <span class="ms-switch-slider round"></span>
-          </label>
-          <span> Dark Mode </span>
-        </div>
-        <div>
-          <label class="ms-switch">
-            <input type="checkbox" id="remove-quickbar">
-            <span class="ms-switch-slider round"></span>
-          </label>
-          <span> Remove Quickbar </span>
-        </div>
-      </div>
-      <div class="col-xl-4 col-md-4">
-        <h4 class="section-title">Keyboard Shortcuts</h4>
-        <p class="ms-directions mb-0"><code>Esc</code> Close Quick Bar</p>
-        <p class="ms-directions mb-0"><code>Alt + (1 -> 6)</code> Open Quick Bar Tab</p>
-        <p class="ms-directions mb-0"><code>Alt + Q</code> Enable Quick Bar Configure Mode</p>
-
-      </div>
-
-
-    </div>
-  </div>
 
   <!-- Preloader -->
   <div id="preloader-wrap">
@@ -183,164 +140,8 @@ session_start();
       <!-- /Feess End--->
 
     </ul>
-
-
   </aside>
 
-  <!-- Sidebar Right -->
-  <aside id="ms-recent-activity" class="side-nav fixed ms-aside-right ms-scrollable">
-
-    <div class="ms-aside-header">
-      <ul class="nav nav-tabs tabs-bordered d-flex nav-justified mb-3" role="tablist">
-        <li role="presentation" class="fs-12"><a href="#activityLog" aria-controls="activityLog" class="active"
-            role="tab" data-toggle="tab"> Activity Log</a></li>
-        <li role="presentation" class="fs-12"><a href="#recentPosts" aria-controls="recentPosts" role="tab"
-            data-toggle="tab"> Settings </a></li>
-        <li><button type="button" class="close ms-toggler text-center" data-target="#ms-recent-activity"
-            data-toggle="slideRight"><span aria-hidden="true">&times;</span></button></li>
-      </ul>
-    </div>
-
-    <div class="ms-aside-body">
-
-      <div class="tab-content">
-
-        <div role="tabpanel" class="tab-pane active fade show" id="activityLog">
-          <ul class="ms-activity-log">
-            <li>
-              <div class="ms-btn-icon btn-pill icon btn-light">
-                <i class="flaticon-gear"></i>
-              </div>
-              <h6>Update 1.0.0 Pushed</h6>
-              <span> <i class="material-icons">event</i>1 January, 2021</span>
-              <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non
-                nisi semper, ula in sodales vehicula....</p>
-            </li>
-            <li>
-              <div class="ms-btn-icon btn-pill icon btn-success">
-                <i class="flaticon-tick-inside-circle"></i>
-              </div>
-              <h6>Profile Updated</h6>
-              <span> <i class="material-icons">event</i>4 March, 2018</span>
-              <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque
-                felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-            </li>
-            <li>
-              <div class="ms-btn-icon btn-pill icon btn-warning">
-                <i class="flaticon-alert-1"></i>
-              </div>
-              <h6>Your payment is due</h6>
-              <span> <i class="material-icons">event</i>1 January, 2021</span>
-              <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non
-                nisi semper, ula in sodales vehicula....</p>
-            </li>
-            <li>
-              <div class="ms-btn-icon btn-pill icon btn-danger">
-                <i class="flaticon-alert"></i>
-              </div>
-              <h6>Database Error</h6>
-              <span> <i class="material-icons">event</i>4 March, 2018</span>
-              <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque
-                felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-            </li>
-            <li>
-              <div class="ms-btn-icon btn-pill icon btn-info">
-                <i class="flaticon-information"></i>
-              </div>
-              <h6>Checkout what's Trending</h6>
-              <span> <i class="material-icons">event</i>1 January, 2021</span>
-              <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non
-                nisi semper, ula in sodales vehicula....</p>
-            </li>
-            <li>
-              <div class="ms-btn-icon btn-pill icon btn-secondary">
-                <i class="flaticon-diamond"></i>
-              </div>
-              <h6>Your Dashboard is ready</h6>
-              <span> <i class="material-icons">event</i>4 March, 2018</span>
-              <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque
-                felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-            </li>
-          </ul>
-          <a href="#" class="btn btn-primary d-block"> View All </a>
-        </div>
-
-        <div role="tabpanel" class="tab-pane fade" id="recentPosts">
-
-          <h6>General Settings</h6>
-          <div class="ms-form-group">
-            <span class="ms-option-name fs-14">Location Tracking</span>
-            <label class="ms-switch float-right">
-              <input type="checkbox">
-              <span class="ms-switch-slider round"></span>
-            </label>
-          </div>
-          <div class="ms-form-group">
-            <span class="ms-option-name fs-14">Allow Notifications</span>
-            <label class="ms-switch float-right">
-              <input type="checkbox">
-              <span class="ms-switch-slider round"></span>
-            </label>
-          </div>
-          <div class="ms-form-group">
-            <span class="ms-option-name fs-14">Allow Popups</span>
-            <label class="ms-switch float-right">
-              <input type="checkbox" checked>
-              <span class="ms-switch-slider round"></span>
-            </label>
-          </div>
-          <h6>Log Settings</h6>
-          <div class="ms-form-group">
-            <span class="ms-option-name fs-14">Enable Logging</span>
-            <label class="ms-switch float-right">
-              <input type="checkbox" checked>
-              <span class="ms-switch-slider round"></span>
-            </label>
-          </div>
-          <div class="ms-form-group">
-            <span class="ms-option-name fs-14">Audit Logs</span>
-            <label class="ms-switch float-right">
-              <input type="checkbox">
-              <span class="ms-switch-slider round"></span>
-            </label>
-          </div>
-          <div class="ms-form-group">
-            <span class="ms-option-name fs-14">Error Logs</span>
-            <label class="ms-switch float-right">
-              <input type="checkbox" checked>
-              <span class="ms-switch-slider round"></span>
-            </label>
-          </div>
-          <h6>Advanced Settings</h6>
-          <div class="ms-form-group">
-            <span class="ms-option-name fs-14">Enable Logging</span>
-            <label class="ms-switch float-right">
-              <input type="checkbox" checked>
-              <span class="ms-switch-slider round"></span>
-            </label>
-          </div>
-          <div class="ms-form-group">
-            <span class="ms-option-name fs-14">Audit Logs</span>
-            <label class="ms-switch float-right">
-              <input type="checkbox">
-              <span class="ms-switch-slider round"></span>
-            </label>
-          </div>
-          <div class="ms-form-group">
-            <span class="ms-option-name fs-14">Error Logs</span>
-            <label class="ms-switch float-right">
-              <input type="checkbox" checked>
-              <span class="ms-switch-slider round"></span>
-            </label>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </aside>
 
   <!-- Main Content -->
   <main class="body-content">
@@ -360,94 +161,6 @@ session_start();
       </div>
 
       <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
-        <li class="ms-nav-item ms-search-form pb-0 py-0">
-          <form class="ms-form" method="post">
-            <div class="ms-form-group my-0 mb-0 has-icon fs-14">
-              <input type="search" class="ms-form-input" name="search" placeholder="Search here..." value="">
-              <i class="flaticon-search text-disabled"></i>
-            </div>
-          </form>
-        </li>
-
-        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="mailDropdown">
-          <li class="dropdown-menu-header">
-            <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Mail</span></h6><span
-              class="badge badge-pill badge-success">3 New</span>
-          </li>
-          <li class="dropdown-divider"></li>
-          <li class="ms-scrollable ms-dropdown-list">
-            <a class="media p-2" href="#">
-              <div class="ms-chat-status ms-status-offline ms-chat-img mr-2 align-self-center">
-                <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
-              </div>
-              <div class="media-body">
-                <span>Hey man, looking forward to your new project.</span>
-                <p class="fs-10 my-1 text-disabled"><i class="material-icons">access_time</i> 30 seconds ago</p>
-              </div>
-            </a>
-            <a class="media p-2" href="#">
-              <div class="ms-chat-status ms-status-online ms-chat-img mr-2 align-self-center">
-                <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
-              </div>
-              <div class="media-body">
-                <span>Dear John, I was told you bought Weeducate! Send me your feedback</span>
-                <p class="fs-10 my-1 text-disabled"><i class="material-icons">access_time</i> 28 minutes ago</p>
-              </div>
-            </a>
-            <a class="media p-2" href="#">
-              <div class="ms-chat-status ms-status-offline ms-chat-img mr-2 align-self-center">
-                <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
-              </div>
-              <div class="media-body">
-                <span>How many people are we inviting to the dashboard?</span>
-                <p class="fs-10 my-1 text-disabled"><i class="material-icons">access_time</i> 6 hours ago</p>
-              </div>
-            </a>
-          </li>
-          <li class="dropdown-divider"></li>
-          <li class="dropdown-menu-footer text-center">
-            <a href="apps/email.html">Go to Inbox</a>
-          </li>
-        </ul>
-        </li>
-        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationDropdown">
-          <li class="dropdown-menu-header">
-            <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Notifications</span></h6><span
-              class="badge badge-pill badge-info">4 New</span>
-          </li>
-          <li class="dropdown-divider"></li>
-          <li class="ms-scrollable ms-dropdown-list">
-            <a class="media p-2" href="#">
-              <div class="media-body">
-                <span>12 ways to improve your crypto dashboard</span>
-                <p class="fs-10 my-1 text-disabled"><i class="material-icons">access_time</i> 30 seconds ago</p>
-              </div>
-            </a>
-            <a class="media p-2" href="#">
-              <div class="media-body">
-                <span>You have newly registered users</span>
-                <p class="fs-10 my-1 text-disabled"><i class="material-icons">access_time</i> 45 minutes ago</p>
-              </div>
-            </a>
-            <a class="media p-2" href="#">
-              <div class="media-body">
-                <span>Your account was logged in from an unauthorized IP</span>
-                <p class="fs-10 my-1 text-disabled"><i class="material-icons">access_time</i> 2 hours ago</p>
-              </div>
-            </a>
-            <a class="media p-2" href="#">
-              <div class="media-body">
-                <span>An application form has been submitted</span>
-                <p class="fs-10 my-1 text-disabled"><i class="material-icons">access_time</i> 1 day ago</p>
-              </div>
-            </a>
-          </li>
-          <li class="dropdown-divider"></li>
-          <li class="dropdown-menu-footer text-center">
-            <a href="#">View all Notifications</a>
-          </li>
-        </ul>
-        </li>
 
         <li class="ms-nav-item ms-nav-user dropdown">
           <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img
@@ -486,7 +199,6 @@ session_start();
       </div>
 
     </nav>
-
 
     <!-- Body Content Wrapper -->
 
@@ -531,12 +243,8 @@ session_start();
                 </tr>
               </thead>
 
-
-
               <tbody></tbody>
             </table>
-
-
           </div>
         </div>
       </div>
