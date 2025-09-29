@@ -106,12 +106,12 @@
         <!--Proessors Start-->
         <li class="menu-item">
             <a href="#" class="has-chevron" data-toggle="collapse" data-target="#professor" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-user fs-16"></i>Professors</span>
+               <span><i class="fa fa-user fs-16"></i>Profesores</span>
              </a>
             <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-              <li> <a href="../professors/allprofessor.php">All Professors</a> </li>
-               <li> <a href="../professors/addprofessor.php">Add Professors</a> </li>
-                 <li> <a href="../professors/aboutprofessor.php">About Professors</a> </li>
+              <li> <a href="../professors/allprofessor.php">Todos los Profesores</a> </li>
+               <li> <a href="../professors/addprofessor.php">Añadir Profesores</a> </li>
+                 <li> <a href="../professors/aboutprofessor.php">Acerca de Profesores</a> </li>
             </ul>
         </li>
         <!-- /Proessors End--->
@@ -119,12 +119,12 @@
          <!--Courses Start-->
         <li class="menu-item">
             <a href="#" class="has-chevron" data-toggle="collapse" data-target="#courses" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-graduation-cap fs-16"></i>Courses</span>
+               <span><i class="fa fa-graduation-cap fs-16"></i>Materias</span>
              </a>
             <ul id="courses" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-              <li> <a href="../courses/allcourses.php">All Courses</a> </li>
-               <li> <a href="../courses/addcourses.php">Add Courses</a> </li>
-                 <li> <a href="../courses/aboutcourses.php">About Courses</a> </li>
+              <li> <a href="../courses/allcourses.php">Todas las Materias</a> </li>
+               <li> <a href="../courses/addcourses.php">Añadir Materias</a> </li>
+                 <li> <a href="../courses/aboutcourses.php">Acerca de Materias</a> </li>
                   <li> <a href="../courses/ciclos.php">Ciclos</a> </li>
                     <li> <a href="../courses/clases.php">Clases</a> </li>
                     <li> <a href="../courses/inscripciones.php">Inscripciones</a> </li>
@@ -135,11 +135,11 @@
         <!--Student Start-->
         <li class="menu-item">
             <a href="#" class="has-chevron" data-toggle="collapse" data-target="#student" aria-expanded="false" aria-controls="dashboard">
-               <span><i class="fa fa-users fs-16"></i>Student</span>
+               <span><i class="fa fa-users fs-16"></i>Estudiantes</span>
              </a>
             <ul id="student" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-              <li> <a href="../student/studentadd.php">Student Add</a> </li>
-               <li> <a href="../student/studenttable.php">Student Table</a> </li>
+              <li> <a href="../student/studentadd.php">Añadir Estudiante</a> </li>
+               <li> <a href="../student/studenttable.php">Tabla de Estudiantes</a> </li>
                   </ul>
         </li>
         <!-- /Student End--->
@@ -166,9 +166,9 @@
                 <span><i class="fas fa-dollar-sign"></i>Fees</span>
              </a>
             <ul id="fees" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-              <li> <a href="../fees/feescollection.php">Fees Collection</a> </li>
-              <li> <a href="../fees/addfees.php">Add Fees</a> </li>
-              <li> <a href="../fees/feesrecepit.php">Fees Recepit</a> </li>
+              <li> <a href="../fees/feescollection.php">Orden de Pago</a> </li>
+              <li> <a href="../fees/addfees.php">Añadir Pago</a> </li>
+              <li> <a href="../fees/feesrecepit.php">Recibo de Pago</a> </li>
                
                  
             </ul>
@@ -183,18 +183,6 @@
           </a>
         </li>
         <!-- /Holiday End--->
-
-        <!-- Charts -->
-        <li class="menu-item">
-            <a href="#" class="has-chevron" data-toggle="collapse" data-target="#charts" aria-expanded="false" aria-controls="charts">
-              <span><i class="material-icons fs-16">equalizer</i>Charts</span>
-            </a>
-            <ul id="charts" class="collapse" aria-labelledby="charts" data-parent="#side-nav-accordion">
-              <li> <a href="../charts/chartjs.html">Chart JS</a> </li>
-              <li> <a href="../charts/morris-charts.html">Morris Chart</a> </li>
-            </ul>
-        </li>
-        <!-- /Charts -->
 
     </ul>
 
