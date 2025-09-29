@@ -1,0 +1,100 @@
+/* Tipografía y fondo */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('../img/escuela-activa.jpg') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+
+/* Capa oscura con blur */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+}
+
+/* Card del login */
+.login-container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.form-control {
+  border-radius: 8px;
+  height: 45px;
+  border: 1px solid #d1d1d1;
+}
+
+.btn-primary {
+  background-color: #4A90E2;
+  border: none;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #357ABD;
+  transform: scale(1.03);
+}
+
+.forgot-link,
+.register-link {
+  color: #4A90E2;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.forgot-link:hover,
+.register-link:hover {
+  text-decoration: underline;
+}
+
+.modal-content {
+  border-radius: 12px;
+}
+
+.logo {
+  width: 60px;
+  height: auto;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* assets/css/login.css */
+.toast-container { z-index: 2000; }
+
+/* Grupo de contraseña con "ojito" */
+.password-group .form-control {
+  border-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.password-group .btn {
+  border-color: #d1d1d1;
+  border-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.password-group .btn:focus {
+  box-shadow: none;
+}
+.password-group .btn:hover {
+  background: #f5f5f5;
+}
