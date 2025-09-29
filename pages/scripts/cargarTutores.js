@@ -1,3 +1,4 @@
+// File: cargarTutores.js
 document.addEventListener('DOMContentLoaded', () => {
   let tabla; 
 
@@ -22,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <td>${t.telefono}</td>
             <td>${t.correo}</td>
             <td>${t.direccion}</td>
-            <td>${t.activo==1? 'Sí':'No'}</td>
+            <td>${t.activo==1 || t.activo===true ? 'Sí':'No'}</td>
             <td>
               <button class="btn btn-sm btn-outline-warning btn-editar" data-id="${t.tutor_id}">
                 <i class="fa fa-edit"></i>
@@ -61,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
           tabla.clear().rows.add($('#tablaTutores tbody tr')).draw();
         }
 
-        // Aquí podrías volver a enganchar eventos editar/eliminar
+        // Eventos editar / eliminar
         document.querySelectorAll('.btn-editar').forEach(btn =>
           btn.addEventListener('click', () => editarTutor(btn.dataset.id))
         );
@@ -72,7 +73,103 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(console.error);
   }
 
-  // Botón Exportar genérico (en caso de necesitar lógica extra)
+  // Función para editar tutor
+  function editarTutor(id) {
+    console.log("Editar tutor con id:", id);
+
+    fetch(`../php/obtener_tutor.php?tutor_id=${id}`)
+      .then(res => res.json())
+      .then(data => {
+        const t = data.tutor || data; // acepta { tutor: {...} } o { ... }
+
+        if (!t) {
+          alert("No se pudo cargar la información del tutor");
+          return;
+        }
+
+        // Rellena tu formulario del modal (asegúrate de tener estos IDs en tu HTML)
+        document.getElementById('tutorNombre').value    = t.nombre   || '';
+        document.getElementById('tutorApellido').value  = t.apellido || '';
+        document.getElementById('tutorTelefono').value  = t.telefono || '';
+        document.getElementById('tutorCorreo').value    = t.correo   || '';
+        document.getElementById('tutorDireccion').value = t.direccion|| '';
+
+        // Guardar el id en el form
+        document.getElementById('tutorForm').dataset.id = id;
+
+        // Mostrar modal
+        $('#tutorModal').modal('show');
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Error al obtener datos del tutor");
+      });
+  }
+
+  // Función para eliminar tutor
+  function eliminarTutor(id) {
+    if (!confirm("¿Seguro que quieres eliminar este tutor?")) return;
+
+    fetch("../php/eliminar_tutor.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ tutor_id: id })
+    })
+      .then(res => res.json())
+      .then(json => {
+        if (json.success) {
+          alert("Tutor eliminado correctamente");
+          cargarTutores(); // recargar la tabla
+        } else {
+          alert(json.message || "Error al eliminar tutor");
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert("No se pudo eliminar el tutor");
+      });
+  }
+
+
+    // Guardar cambios de tutor
+  document.getElementById('tutorForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const id = this.dataset.id;
+
+    const payload = {
+      tutor_id: id,
+      nombre: document.getElementById('tutorNombre').value,
+      apellido: document.getElementById('tutorApellido').value,
+      telefono: document.getElementById('tutorTelefono').value,
+      correo: document.getElementById('tutorCorreo').value,
+      direccion: document.getElementById('tutorDireccion').value,
+      activo: document.getElementById('tutorActivo').value
+    };
+
+    fetch('../php/actualizar_tutor.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(res => res.json())
+      .then(json => {
+        if (json.success) {
+          alert("Tutor actualizado correctamente");
+          $('#tutorModal').modal('hide');
+          cargarTutores(); // refrescar tabla
+        } else {
+          alert(json.message || "Error al actualizar tutor");
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Error en la petición");
+      });
+  });
+
+
+  // Botón Exportar genérico
   document.getElementById('btnExportarTutores').addEventListener('click', () => {
     tabla.button('.buttons-excel').trigger();
   });
@@ -80,3 +177,4 @@ document.addEventListener('DOMContentLoaded', () => {
   // Carga inicial
   cargarTutores();
 });
+
