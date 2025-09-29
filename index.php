@@ -210,62 +210,109 @@
 
     </nav>
 
-    <!-- Filtros -->
+    <!-- ======== Estadísticas + Filtros dentro del mismo card ======== -->
     <style>
-      .ml-filters{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0 16px;}
-      .ml-filters .form-group{min-width:220px}
-      .ml-filters label{font-size:.9rem;color:#6b7280;margin-bottom:4px}
-    </style>
-    <div class="ml-filters">
-      <div class="form-group">
-        <label for="cicloSelect">Ciclo</label>
-        <select id="cicloSelect" class="form-select form-select-sm"></select>
-      </div>
-      <div class="form-group">
-        <label for="periodoSelect">Periodo</label>
-        <select id="periodoSelect" class="form-select form-select-sm"></select>
-      </div>
-      <div class="form-group">
-      <label for="claseSelect">Clase</label>
-      <select id="claseSelect" class="form-select form-select-sm"></select>
-    </div>
-
-      <div class="form-group" style="display:flex;align-items:flex-end">
-        <button id="btnReset" class="btn btn-sm btn-outline-secondary">Ver todos</button>
-      </div>
-    </div>
-
-    <!-- ======= Predicción automática (admin) ======= -->
-    <style>
-      .ml-card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin-top:20px;box-shadow:0 1px 2px rgba(0,0,0,.04);}
+      /* Card base (se mantiene tu estética) */
+      .ml-card{
+        background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+        padding:16px;margin-top:20px;box-shadow:0 1px 2px rgba(0,0,0,.04);
+      }
+      .ml-muted{color:#6b7280}
+      .ml-h6{margin:0 0 8px}
       .ml-grid{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
       .ml-mini{flex:1;min-width:220px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px}
       .ml-panels{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
       .ml-panel{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px}
       .ml-tablewrap{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px;margin-bottom:16px}
-      .ml-muted{color:#6b7280}
-      .ml-h6{margin:0 0 8px}
       .ml-table thead th{background:#f8fafc}
       @media (max-width: 992px){ .ml-panels{grid-template-columns:1fr} }
-      /* Badges neutros para fondo blanco */
+
+      /* Badges */
       .badge-soft-danger{background:#fee2e2;color:#991b1b;border-radius:20px;padding:.25rem .5rem;font-weight:600}
       .badge-soft-success{background:#dcfce7;color:#166534;border-radius:20px;padding:.25rem .5rem;font-weight:600}
       .badge-soft-info{background:#e0f2fe;color:#075985;border-radius:20px;padding:.25rem .5rem;font-weight:600}
       .badge-soft-warning{background:#fef3c7;color:#92400e;border-radius:20px;padding:.25rem .5rem;font-weight:600}
+
+      /* ===== Toolbar de filtros (centrada y “pegada” al card) ===== */
+      .ml-toolbar{
+        display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:end;
+        margin:-4px -4px 16px;          /* expande a borde del card */
+        padding:12px;                   /* espacio interno */
+        background:#f8fafc;             /* leve contraste */
+        border:1px solid #e5e7eb;       /* mismo borde del card */
+        border-radius:10px;             /* suaviza esquinas internas */
+      }
+      .ml-toolbar .form-group{min-width:220px}
+      .ml-toolbar label{font-size:.9rem;color:#6b7280;margin-bottom:4px}
+
+      /* ====== SOLO LOS FILTROS (select) MEJORADOS ====== */
+      .ml-toolbar .form-group .form-select.form-select-sm{
+        appearance:none; -webkit-appearance:none; -moz-appearance:none;
+        background:#fff;
+        border:1px solid #e5e7eb;
+        border-radius:9999px;
+        padding:.42rem 2rem .42rem .75rem;   /* espacio + caret */
+        height:34px;                          /* alto consistente */
+        font-size:.92rem; color:#111827;
+        box-shadow:0 1px 2px rgba(16,24,40,.06), inset 0 1px 0 rgba(255,255,255,.65);
+        transition:border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+        background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 20 20'%3E%3Cpath d='M6 8l4 4 4-4' fill='none' stroke='%236b7280' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        background-repeat:no-repeat;
+        background-position:right .55rem center;
+        background-size:16px 16px;
+      }
+      .ml-toolbar .form-group .form-select.form-select-sm:hover{
+        border-color:#d1d5db;
+      }
+      .ml-toolbar .form-group .form-select.form-select-sm:focus{
+        outline:0;
+        border-color:#93c5fd;
+        box-shadow:0 0 0 3px rgba(59,130,246,.25), 0 1px 2px rgba(16,24,40,.06);
+      }
+
+      /* Botón “fantasma” a juego con tarjetas (SIN CAMBIOS) */
+      .btn-ghost{
+        background:#fff;border:1px solid #e5e7eb;border-radius:10px;
+        padding:.45rem .8rem;line-height:1.1;box-shadow:0 1px 2px rgba(0,0,0,.04);
+        color:#374151;transition:all .15s ease;display:inline-flex;align-items:center;gap:.4rem;
+      }
+      .btn-ghost:hover{ border-color:#d1d5db; box-shadow:0 2px 6px rgba(0,0,0,.06); }
+      .btn-ghost:focus{ outline:3px solid rgba(59,130,246,.25); outline-offset:2px; }
+      .btn-ghost:disabled{ opacity:.6; cursor:not-allowed; }
+      .btn-ghost-sm{ padding:.35rem .65rem; font-size:.9rem; border-radius:10px; }
     </style>
 
     <div class="ml-card">
+      <!-- === Filtros centrados dentro del card === -->
+      <div class="ml-toolbar">
+        <div class="form-group">
+          <label for="cicloSelect">Ciclo</label>
+          <select id="cicloSelect" class="form-select form-select-sm"></select>
+        </div>
+        <div class="form-group">
+          <label for="periodoSelect">Periodo</label>
+          <select id="periodoSelect" class="form-select form-select-sm"></select>
+        </div>
+        <div class="form-group">
+          <label for="claseSelect">Clase</label>
+          <select id="claseSelect" class="form-select form-select-sm"></select>
+        </div>
+        <div class="form-group" style="display:flex;align-items:flex-end">
+          <button id="btnReset" type="button" class="btn-ghost btn-ghost-sm">🔄 Reiniciar filtros</button>
+        </div>
+      </div>
+
       <h5 style="margin-bottom:10px;">Estadísticas de reprobación (automático)</h5>
       <div id="status" class="ml-muted" style="margin-bottom:10px;">—</div>
 
       <!-- Tarjetas resumen -->
       <div class="ml-grid">
         <div class="ml-mini">
-          <div class="ml-muted">Alumnos totales</div>
+          <div class="ml-muted">Alumnos (únicos)</div>
           <div id="statTotal" style="font-size:22px;font-weight:700;">—</div>
         </div>
         <div class="ml-mini">
-          <div class="ml-muted">Predichos en riesgo (≥0.5)</div>
+          <div class="ml-muted">En riesgo (≥0.5 o asistencia &lt; 60%)</div>
           <div id="statRiesgo" style="font-size:22px;font-weight:700;">—</div>
         </div>
         <div class="ml-mini">
@@ -277,28 +324,41 @@
       <!-- Gráficas -->
       <div class="ml-panels">
         <div class="ml-panel">
-          <div class="ml-muted" style="margin-bottom:6px;">Matriz de confusión (Ensamble)</div>
+          <div class="ml-muted" style="margin-bottom:6px;">Matriz de evaluación (aciertos y errores)</div>
           <canvas id="cmChart" height="200"></canvas>
+          <div class="ml-muted small" style="margin-top:6px;">
+            Aciertos (Reprobados/Aprobados) y Errores (Falsos Reprobados/Aprobados)
+          </div>
         </div>
         <div class="ml-panel">
-          <div class="ml-muted" style="margin-bottom:6px;">Distribución de etiquetas (0 No repr. / 1 Repr.)</div>
+          <div class="ml-muted" style="margin-bottom:6px;">Distribución de etiquetas reales</div>
           <canvas id="distChart" height="200"></canvas>
+          <div class="ml-muted small" style="margin-top:6px;">
+            0 = Aprobados · 1 = Reprobados
+          </div>
         </div>
       </div>
 
       <!-- Tabla: alumnos en mayor riesgo -->
       <div class="ml-tablewrap">
-        <h6 class="ml-h6">Top alumnos en riesgo (ordenado por probabilidad)</h6>
+        <div class="d-flex justify-content-between align-items-center">
+          <h6 class="ml-h6">Top alumnos en riesgo (ordenado por probabilidad)</h6>
+          <span class="small ml-muted">Regla: asistencia &lt; 60% ⇒ Reprobado</span>
+        </div>
         <div class="table-responsive">
           <table class="table table-striped ml-table align-middle">
             <thead>
               <tr>
-                <th>Alumno</th><th>Materia</th><th>Periodo</th><th>Clase</th>
-                <th>Asistencia</th><!-- Incidentes opcional, puedes quitar esta columna visual -->
-                <th>Incidentes</th>
-                <th>Parciales</th>
-                <th>Prob. CART</th><th>Prob. RF</th><th>Prob. Final</th><th>Pred.</th>
-                <th>Req. promedio resto</th><th>Estado ciclo</th>
+                <th>Alumno</th>
+                <th>Materia con menor Ren.</th>
+                <th>Periodo</th>
+                <th>Clase</th>
+                <th>Asistencia</th>
+                <th>Promedio del periodo</th>
+                <th>Prob. Final</th>
+                <th>Riesgo</th>
+                <th>Req. promedio resto</th>
+                <th>Estado ciclo</th>
               </tr>
             </thead>
             <tbody id="tbRiesgo"></tbody>
@@ -306,24 +366,26 @@
         </div>
       </div>
 
-      <!-- Tabla: resumen por clase / periodo / materia -->
+      <!-- Tabla: resumen por clase / periodo -->
       <div class="ml-tablewrap">
-        <h6 class="ml-h6">Resumen por Clase / Periodo / Materia</h6>
+        <h6 class="ml-h6">Resumen por Clase / Periodo</h6>
         <div class="table-responsive">
           <table class="table table-striped ml-table align-middle">
             <thead>
               <tr>
-                <th>Periodo</th><th>Clase</th><th>Materia</th>
-                <th>#Alumnos</th><th>#Riesgo</th><th>Tasa Riesgo</th>
+                <th>Periodo</th>
+                <th>Clase</th>
+                <th>#Alumnos</th>
+                <th>#Riesgo</th>
+                <th>Tasa Riesgo</th>
               </tr>
             </thead>
             <tbody id="tbResumen"></tbody>
           </table>
         </div>
       </div>
-    </div>
-    <!-- ============================================ -->
 
+    <!-- ====================== /FIN BLOQUE ====================== -->
 
 
 </main>
