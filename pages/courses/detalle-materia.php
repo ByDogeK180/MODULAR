@@ -5,7 +5,7 @@ session_start(); // 🔸 Necesario para acceder a $_SESSION
 
 $volverA = (isset($_SESSION['rol']) && $_SESSION['rol'] == 1)
   ? '../students-doc/allcoursesDoc.php'
-  : 'allcourses.html';
+  : 'allcourses.php';
 
 
 
@@ -14,7 +14,7 @@ $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 $query = "SELECT * FROM materias WHERE materia_id = $id";
 $res   = mysqli_query($db, $query);
 if (!$res || mysqli_num_rows($res) === 0) {
-  header('Location: allcourses.html');
+  header('Location: allcourses.php');
   exit;
 }
 $m = mysqli_fetch_assoc($res);
@@ -24,7 +24,7 @@ $m = mysqli_fetch_assoc($res);
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title><?= htmlspecialchars($m['nombre']) ?> — Weeducate</title>
+  <title><?= htmlspecialchars($m['nombre']) ?> — Schoolcare</title>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../assets/css/style.css" rel="stylesheet">

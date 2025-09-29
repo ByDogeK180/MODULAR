@@ -165,146 +165,7 @@
   <!-- Sidebar Right -->
   <aside id="ms-recent-activity" class="side-nav fixed ms-aside-right ms-scrollable">
 
-    <div class="ms-aside-header">
-      <ul class="nav nav-tabs tabs-bordered d-flex nav-justified mb-3" role="tablist">
-        <li role="presentation" class="fs-12"><a href="#activityLog" aria-controls="activityLog" class="active" role="tab" data-toggle="tab"> Activity Log</a></li>
-        <li role="presentation" class="fs-12"><a href="#recentPosts" aria-controls="recentPosts" role="tab" data-toggle="tab"> Settings </a></li>
-        <li><button type="button" class="close ms-toggler text-center" data-target="#ms-recent-activity" data-toggle="slideRight"><span aria-hidden="true">&times;</span></button></li>
-      </ul>
-    </div>
-
-    <div class="ms-aside-body">
-
-       <div class="tab-content">
-
-         <div role="tabpanel" class="tab-pane active fade show" id="activityLog">
-           <ul class="ms-activity-log">
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-light">
-                 <i class="flaticon-gear"></i>
-               </div>
-               <h6>Update 1.0.0 Pushed</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-success">
-                 <i class="flaticon-tick-inside-circle"></i>
-               </div>
-               <h6>Profile Updated</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-warning">
-                 <i class="flaticon-alert-1"></i>
-               </div>
-               <h6>Your payment is due</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-danger">
-                 <i class="flaticon-alert"></i>
-               </div>
-               <h6>Database Error</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-info">
-                 <i class="flaticon-information"></i>
-               </div>
-               <h6>Checkout what's Trending</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-secondary">
-                 <i class="flaticon-diamond"></i>
-               </div>
-               <h6>Your Dashboard is ready</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-           </ul>
-           <a href="#" class="btn btn-primary d-block"> View All </a>
-         </div>
-
-         <div role="tabpanel" class="tab-pane fade" id="recentPosts">
-
-           <h6>General Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Location Tracking</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Allow Notifications</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Allow Popups</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <h6>Log Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Enable Logging</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Audit Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Error Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <h6>Advanced Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Enable Logging</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Audit Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Error Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-
-         </div>
-
-       </div>
-
-    </div>
+    
 
   </aside>
 
@@ -428,32 +289,43 @@
                   + Agregar periodo
                 </button>
 
-                <!-- Resumen de periodos antes de guardar -->
-                <ul id="periodosSummary" class="list-group mb-3"></ul>
+
+
 
                 <div id="periodosContainer"></div>
 
                 <!-- Plantilla para cada periodo -->
-                <template id="periodoTemplate">
-                  <div class="form-row mb-2 periodo-row">
-                    <input type="hidden" class="periodo-id">
-                    <div class="form-group col-md-4">
-                      <label>Nombre Periodo</label>
-                      <input type="text" class="form-control periodo-nombre" required>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label>Inicio</label>
-                      <input type="date" class="form-control periodo-inicio" required>
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label>Fin</label>
-                      <input type="date" class="form-control periodo-fin" required>
-                    </div>
-                    <div class="form-group col-md-2 d-flex align-items-end">
-                      <button type="button" class="btn btn-sm btn-danger btn-remove-periodo">×</button>
-                    </div>
-                  </div>
-                </template>
+<template id="periodoTemplate">
+  <div class="row periodo-row mb-2 align-items-end">
+    <input type="hidden" class="periodo-id">
+
+    <!-- Nombre -->
+    <div class="col-12 col-md-4">
+      <label class="form-label">Nombre Periodo</label>
+      <input type="text" class="form-control periodo-nombre" required>
+    </div>
+
+    <!-- Inicio -->
+    <div class="col-6 col-md-3">
+      <label class="form-label">Inicio</label>
+      <input type="date" class="form-control periodo-inicio" required>
+    </div>
+
+    <!-- Fin -->
+    <div class="col-6 col-md-4">
+      <label class="form-label">Fin</label>
+      <input type="date" class="form-control periodo-fin" required>
+    </div>
+
+<div class="col-auto d-flex align-items-end">
+  <button type="button"
+          class="btn btn-danger btn-sm px-2 py-1 btn-remove-periodo">
+    ×
+  </button>
+</div>
+
+</template>
+
                 </div>
                 <div class="modal-footer">
                 <button type="submit" class="btn btn-success">Guardar</button>
@@ -469,7 +341,7 @@
 
       <!-- Modal de Edición -->
   <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-x1" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editModalLabel">Editar Materia</h5>

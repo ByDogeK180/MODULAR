@@ -1,6 +1,6 @@
 // assets/api/predicciones_auto.js
 (function () {
-  const DATASET_URL = "assets/api/dataset_admin.php";
+  const DATASET_URL = "assets/api/dataset_profesor.php";
 
   // ===== Colores para charts =====
   const COLORS = {
@@ -99,105 +99,126 @@
     return arr;
   }
 
-  function buildFilters() {
-    const $ciclo = $('cicloSelect');
-    const $per   = $('periodoSelect');
-    const $clase = $('claseSelect');
-    if (!$ciclo || !$per || !$clase) return;
+function buildFilters(skipDefaults = false) {
+  const $ciclo = $('cicloSelect');
+  const $per   = $('periodoSelect');
+  const $clase = $('claseSelect');
+  if (!$ciclo || !$per || !$clase) return;
 
-    // --- CICLOS ---
-    const ciclosMap = new Map(); // key -> label
-    RAW.forEach(r => {
-      const key = getCicloKey(r);
-      if (!key) return;
-      const label = getCicloNombre(r) ?? (getCicloId(r)!=null ? `Ciclo ${getCicloId(r)}` : "Ciclo");
-      ciclosMap.set(String(key), String(label));
-    });
+  // --- CICLOS ---
+  const ciclosMap = new Map();
+  RAW.forEach(r => {
+    const key = getCicloKey(r);
+    if (!key) return;
+    const label = getCicloNombre(r) ?? (getCicloId(r)!=null ? `Ciclo ${getCicloId(r)}` : "Ciclo");
+    ciclosMap.set(String(key), String(label));
+  });
 
-    $ciclo.innerHTML = `<option value="all">Todos los ciclos</option>`;
-    Array.from(ciclosMap.entries())
-      .sort((a,b)=> String(a[1]).localeCompare(String(b[1]), undefined, {numeric:true, sensitivity:'base'}))
-      .forEach(([key, label]) => $ciclo.innerHTML += `<option value="${key}">${label}</option>`);
-    if (!ciclosMap.has(FILTERS.ciclo_key)) FILTERS.ciclo_key = 'all';
-    $ciclo.value = FILTERS.ciclo_key;
+  $ciclo.innerHTML = `
+    <option value="" disabled selected>Seleccione un ciclo</option>`;
+  Array.from(ciclosMap.entries())
+    .sort((a,b)=> String(a[1]).localeCompare(String(b[1]), undefined, {numeric:true, sensitivity:'base'}))
+    .forEach(([key, label]) => $ciclo.innerHTML += `<option value="${key}">${label}</option>`);
 
-    // --- Periodos dependientes ---
-    function refreshPeriodos(run=true){
-      let base = RAW;
-      if (FILTERS.ciclo_key !== 'all') {
-        base = RAW.filter(r => String(getCicloKey(r)) === String(FILTERS.ciclo_key));
-      }
-      const perMap = new Map(); // id -> nombre
-      base.forEach(r => {
-        const pid = r.periodo_id ?? r.periodoId ?? r.id_periodo ?? r.periodo ?? null;
-        if (pid != null) perMap.set(String(pid), r.periodo_nombre ?? r.periodoNombre ?? r.nombre_periodo ?? String(pid));
-      });
-
-      const sorted = Array.from(perMap.entries())
-        .sort((a,b)=> String(a[0]).localeCompare(String(b[0]), undefined, {numeric:true, sensitivity:'base'}));
-
-      $per.innerHTML = `<option value="all">Todos los periodos</option>`;
-      for (const [id, name] of sorted) $per.innerHTML += `<option value="${id}">${name}</option>`;
-
-      // por defecto: último periodo disponible del ciclo seleccionado
-      if (sorted.length) {
-        const latest = String(sorted[sorted.length-1][0]);
-        FILTERS.periodo_id = latest;
-        $per.value = latest;
-      } else {
-        FILTERS.periodo_id = 'all';
-        $per.value = 'all';
-      }
-      refreshClases(run);
-    }
-
-    function refreshClases(run=true){
-      let base = RAW;
-      if (FILTERS.ciclo_key !== 'all') {
-        base = base.filter(r => String(getCicloKey(r)) === String(FILTERS.ciclo_key));
-      }
-      if (FILTERS.periodo_id !== 'all') {
-        const getPer = (r)=> r.periodo_id ?? r.periodoId ?? r.id_periodo ?? r.periodo ?? null;
-        base = base.filter(r => String(getPer(r)) === String(FILTERS.periodo_id));
-      }
-
-      const clsMap = new Map(); // key -> label
-      base.forEach(r => {
-        const key = getClaseKey(r);
-        const label = getClaseLabel(r);
-        if (key) clsMap.set(key, label);
-      });
-
-      const sorted = Array.from(clsMap.entries())
-        .sort((a,b)=> String(a[1]).localeCompare(String(b[1]), undefined, {numeric:true, sensitivity:'base'}));
-
-      $clase.innerHTML = `<option value="all">Todas las clases</option>`;
-      for (const [k, label] of sorted) $clase.innerHTML += `<option value="${k}">${label}</option>`;
-
-      FILTERS.clase_key = 'all';
-      $clase.value = 'all';
-
-      if (run) runPipeline();
-    }
-
-    // eventos
-    $ciclo.onchange = () => { FILTERS.ciclo_key = $ciclo.value; refreshPeriodos(true); };
-    $per.onchange   = () => { FILTERS.periodo_id = $per.value; refreshClases(true); };
-    $clase.onchange = () => { FILTERS.clase_key = $clase.value; runPipeline(); };
-
-    const $btn = $('btnReset');
-    if ($btn) $btn.onclick = () => {
-      FILTERS.ciclo_key  = 'all';
-      FILTERS.periodo_id = 'all';
-      FILTERS.clase_key  = 'all';
-      $ciclo.value = 'all';
-      refreshPeriodos(true);
-    };
-
-    // arranque inicial
-    refreshPeriodos(false);
-    refreshClases(false);
+  // --- Periodos dependientes ---
+function refreshPeriodos(run = true, skipDefaults = false) {
+  let base = RAW;
+  if (FILTERS.ciclo_key !== 'all') {
+    base = RAW.filter(r => String(getCicloKey(r)) === String(FILTERS.ciclo_key));
   }
+  const perMap = new Map();
+  base.forEach(r => {
+    const pid = r.periodo_id ?? r.periodoId ?? r.id_periodo ?? r.periodo ?? null;
+    if (pid != null) perMap.set(String(pid), r.periodo_nombre ?? r.periodoNombre ?? r.nombre_periodo ?? String(pid));
+  });
+
+  const sorted = Array.from(perMap.entries())
+    .sort((a,b)=> String(a[0]).localeCompare(String(b[0]), undefined, {numeric:true, sensitivity:'base'}));
+
+  $per.innerHTML = `
+    <option value="" disabled selected>Seleccione un periodo</option>`;
+  for (const [id, name] of sorted) {
+    $per.innerHTML += `<option value="${id}">${name}</option>`;
+  }
+
+  if (skipDefaults) {
+    FILTERS.periodo_id = '';
+    $per.value = '';
+  }
+}
+
+
+function refreshClases(run = true, skipDefaults = false) {
+  let base = RAW;
+  if (FILTERS.ciclo_key !== 'all') {
+    base = base.filter(r => String(getCicloKey(r)) === String(FILTERS.ciclo_key));
+  }
+  if (FILTERS.periodo_id !== 'all') {
+    const getPer = (r)=> r.periodo_id ?? r.periodoId ?? r.id_periodo ?? r.periodo ?? null;
+    base = base.filter(r => String(getPer(r)) === String(FILTERS.periodo_id));
+  }
+
+  const clsMap = new Map();
+  base.forEach(r => {
+    const key = getClaseKey(r);
+    const label = getClaseLabel(r);
+    if (key) clsMap.set(key, label);
+  });
+
+  const sorted = Array.from(clsMap.entries())
+    .sort((a,b)=> String(a[1]).localeCompare(String(b[1]), undefined, {numeric:true, sensitivity:'base'}));
+
+  $clase.innerHTML = `
+    <option value="" disabled selected>Seleccione una clase</option>`;
+  for (const [k, label] of sorted) {
+    $clase.innerHTML += `<option value="${k}">${label}</option>`;
+  }
+
+  if (skipDefaults) {
+    FILTERS.clase_key = '';
+    $clase.value = '';
+  }
+}
+
+
+  // eventos
+$ciclo.onchange = () => { 
+  FILTERS.ciclo_key = $ciclo.value; 
+  refreshPeriodos(true, false); //  run=true, skipDefaults=false
+};
+
+$per.onchange = () => { 
+  FILTERS.periodo_id = $per.value;
+  refreshClases(true, false);   //  run=true, skipDefaults=false
+};
+
+$clase.onchange = () => { 
+  FILTERS.clase_key = $clase.value; 
+  runPipeline(); 
+};
+
+
+  const $btn = $('btnReset');
+  if ($btn) $btn.onclick = () => {
+    FILTERS.ciclo_key  = '';
+    FILTERS.periodo_id = '';
+    FILTERS.clase_key  = '';
+    buildFilters(true); //  aquí usamos skipDefaults
+
+    $ciclo.value = '';
+    $per.value   = '';
+    $clase.value = '';
+
+    clearUI();
+    setStatus("Seleccione un ciclo/período/clase para ver datos");
+  };
+
+  // limpiar UI al inicio
+  clearUI();
+  setStatus("Seleccione un ciclo/período/clase para ver datos");
+}
+
+
 
   // ===== Detección de #periodos por ciclo =====
   function detectTotalPeriodsByKey(cicloKey, raw){
@@ -614,6 +635,19 @@
     return raw.filter(getY);
   }
 
+// ===== Limpiar UI =====
+function clearUI(){
+  ['statTotal','statRiesgo','statRate'].forEach(id => { 
+    const el=$(id); 
+    if(el) el.textContent='—'; 
+  });
+  const tb1=$('tbRiesgo'); if(tb1) tb1.innerHTML='';
+  const tb2=$('tbResumen'); if(tb2) tb2.innerHTML='';
+  if (cmChart){ cmChart.destroy(); cmChart=null; }
+  if (distChart){ distChart.destroy(); distChart=null; }
+}
+
+
   // ===== Pipeline =====
   function runPipeline(){
     DATA = filterData(RAW);
@@ -646,28 +680,32 @@
 
     updateChartsForFilter();
 
-    setStatus("Listo ✅");
+    setStatus("");
   }
 
-  // ===== Init =====
-  async function init() {
-    try {
-      setStatus("Cargando datos…");
-      const res = await fetch(DATASET_URL);
-      const js = await res.json();
-      if (!js.ok) throw new Error(js.error || "Error de API");
+ // ===== Init =====
+async function init() {
+  try {
+    setStatus("Cargando datos…");
+    const res = await fetch(DATASET_URL, { credentials: "include" });
+    const js = await res.json();
+    if (!js.ok) throw new Error(js.error || "Error de API");
 
-      RAW = js.data || [];
-      if (!RAW.length) { setStatus("Dataset vacío", true); return; }
-
-      applyChartDefaults();
-      buildFilters();
-      runPipeline();
-    } catch (e) {
-      console.error(e);
-      setStatus("Error: " + e.message, true);
+    RAW = js.data || [];
+    if (!RAW.length) {
+      setStatus("Dataset vacío", true);
+      return;
     }
-  }
 
-  document.addEventListener("DOMContentLoaded", init);
+    applyChartDefaults();
+    buildFilters(); // 👈 ya no ejecuta runPipeline al inicio
+  } catch (e) {
+    console.error(e);
+    setStatus("Error: " + e.message, true);
+  }
+}
+
+
+
+document.addEventListener("DOMContentLoaded", init);
 })();
