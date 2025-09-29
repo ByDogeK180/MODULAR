@@ -86,7 +86,7 @@
 
     <!-- Logo -->
     <div class="logo-sn ms-d-block-lg">
-      <a class="pl-0 ml-0 text-center" href="Docentes.php"><img src="../../assets/img/LogoSchoolCare.png" alt="logo">  </a>
+      <a class="pl-0 ml-0 text-center" href="../../Docentes.php"><img src="../../assets/img/LogoSchoolCare.png" alt="logo">  </a>
     </div>
 
     <!-- Navigation -->
@@ -312,7 +312,7 @@
       </div>
 
       <div class="logo-sn logo-sm ms-d-block-sm">
-        <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="../../index.php"><img src="../../assets/img/LogoSchoolCare.png" alt="logo"> </a>
+        <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="../../Docentes.php"><img src="../../assets/img/LogoSchoolCare.png" alt="logo"> </a>
       </div>
 
       <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
@@ -328,16 +328,13 @@
             <li class="dropdown-menu-header">
               <span class="text-disabled">Welcome, <?php echo $_SESSION['correo']; ?></span>
             </li>
-            <li class="dropdown-divider"></li>
-            <li class="ms-dropdown-list">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i class="flaticon-user mr-2"></i> Profile</span> </a>
-            </li>
+
             <li class="dropdown-divider"></li>
 
  </li>
             <li class="dropdown-menu-footer">
                     <a class="media fs-14 p-2" href="../../pages/prebuilt-pages/default-login.html"> <span><i
-                    class="flaticon-shut-down mr-2"></i> Logout</span> </a>
+                    class="flaticon-shut-down mr-2"></i> Cerrar sesión</span> </a>
             </li>
           </ul>
         </li>

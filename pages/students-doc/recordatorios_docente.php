@@ -172,17 +172,14 @@
             <li class="dropdown-menu-header">
               <span class="text-disabled">Welcome, <?php echo $_SESSION['correo']; ?></span>
             </li>
-            <li class="dropdown-divider"></li>
-            <li class="ms-dropdown-list">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i class="flaticon-user mr-2"></i> Profile</span> </a>
-            </li>
+           
             <li class="dropdown-divider"></li>
             <li class="dropdown-menu-footer">
 
             </li>
             <li class="dropdown-menu-footer">
                     <a class="media fs-14 p-2" href="../php/logout.php"> <span><i
-                    class="flaticon-shut-down mr-2"></i> Logout</span> </a>
+                    class="flaticon-shut-down mr-2"></i> Cerrar sesión</span> </a>
             </li>
           </ul>
         </li>
