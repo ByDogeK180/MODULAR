@@ -1,5 +1,6 @@
 <?php require_once 'pages/php/auth.php'; ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -185,331 +186,181 @@
       
     <!-- Body Content Wrapper -->
     <div class="ms-content-wrapper">
-     
-        
-        <!-- Icon cards Widget -->
-<div class="row">
-        <div class="col-xl-3 col-md-6">
-          <div class="ms-card card-gradient-success ms-widget ms-infographics-widget">
-            <div class="ms-card-body media">
-              <div class="media-body">
-                <h6>Total Students</h6>
-                <p class="ms-card-change"> <i class="material-icons">arrow_upward</i> 450</p>
-                <p class="fs-12">48% increase</p>
-              </div>
-            </div>
-            <i class="fa fa-user"></i>
-          </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-          <div class="ms-card card-gradient-secondary ms-widget ms-infographics-widget">
-            <div class="ms-card-body media">
-              <div class="media-body">
-                <h6>Total Fees</h6>
-                <p class="ms-card-change"> $30,950</p>
-                <p class="fs-12">22% increase</p>
-              </div>
-            </div>
-            <i class="fas fa-dollar-sign"></i>
-          </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-          <div class="ms-card card-gradient-warning ms-widget ms-infographics-widget">
-            <div class="ms-card-body media">
-              <div class="media-body">
-                <h6>Total Student</h6>
-                <p class="ms-card-change"> <i class="material-icons">arrow_upward</i> 4567</p>
-                <p class="fs-12">78% increase</p>
-              </div>
-            </div>
-            <i class="fa fa-users "></i>
-          </div>
-        </div>
-        <div class="col-xl-3 col-md-6">
-          <div class="ms-card card-gradient-info ms-widget ms-infographics-widget">
-            <div class="ms-card-body media">
-              <div class="media-body">
-                <h6>Total Courses</h6>
-                <p class="ms-card-change"> 50</p>
-                <p class="fs-12">62% increase</p>
-              </div>
-            </div>
-            <i class="fa fa-graduation-cap "></i>
-          </div>
-        </div>
-        </div>
-        
-          <div class="row">
-          <div class="col-xl-6 col-md-12 ">
-          <div class="ms-panel ">
-            <div class="ms-panel-header">
-              <h6> Universties Toppers</h6>
-                 <a class=" fa fa-chevron-down float-right"data-toggle="collapse" data-target="#topper" aria-expanded="false" aria-controls="popups"> </a>
-            </div>
-            <div class="ms-panel-body" id="topper">
-              <div class="table-responsive">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th scope="col">Name</th>
-                      <th scope="col">Rank</th>
-                      <th scope="col">Persentage</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-1.jpg" alt="people"> Chihoo Hwang </td>
-                      <td>1</td>
-                      <td>99.9%</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-2.jpg" alt="people"> Ajay Suryavanash </td>
-                      <td>2</td>
-                      <td>98%</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-3.jpg" alt="people"> Johnson </td>
-                      <td>3</td>
-                      <td>97%</td>
-                      </tr>
-                      <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-5.jpg" alt="people"> John Doe </td>
-                      <td>5</td>
-                      <td>93%</td>
-                      </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-6.jpg" alt="people"> John Doe </td>
-                      <td>6</td>
-                      <td>92%</td>
-                      </tr>
-                       <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-2.jpg" alt="people"> John Doe<br> </td>
-                      <td>7</td>
-                      <td>91%</td>
-                      </tr>
-                     </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-                <div class="col-xl-6 col-md-12">
-          <div class="ms-panel pb-8">
-            <div class="ms-panel-header">
-              <h6>Course Table</h6>
-               <a class=" fa fa-chevron-down float-right"data-toggle="collapse" data-target="#course" aria-expanded="false" aria-controls="popups"> </a>
-            </div>
-            <div class="ms-panel-body" id="course">
-              <div class="table-responsive">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      
-                      <th scope="col">#</th>
-                      <th scope="col">Courses</th>
-                      <th scope="col">Professors</th>
-                         <th scope="col">Fees</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Java</td>
-                      <td>John Kery</td>
-                        <td>130$</td>
-                      
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Php</td>
-                      <td>Johnson</td>
-                        <td>140$</td>
-                      
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Anguler</td>
-                      <td>Kevin Owens</td>
-                        <td>120$</td>
-                      
-                   </tr>
-                    <tr>
-                      <th scope="row">4</th>
-                      <td>React JS</td>
-                      <td>Kety Perey</td>
-                        <td>170$</td>
-                      
-                      </tr>
-                    <tr>
-                      <th scope="row">5</th>
-                      <td>.Net</td>
-                      <td>Kevin shai</td>
-                        <td>110$</td>
-                      
-                   </tr>
-                      <tr>
-                      <th scope="row">6</th>
-                      <td>Javascript</td>
-                      <td>John Kesy</td>
-                        <td>90$</td>
-                      
-                    </tr>
-                       <tr>
-                      <th scope="row">7</th>
-                      <td>Kotline</td>
-                      <td>Alura</td>
-                        <td>180$</td>
-                      
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        </div>
-        
-        
-       <div class="row">
-       <div class="col-xl-6 col-md-12 ">
-               
-          <div class="ms-panel">
-              
-            <div class="ms-panel-header ">
-              <h6>University Results</h6>
-                <a class=" fa fa-chevron-down float-right"data-toggle="collapse" data-target="#graph" aria-expanded="false" aria-controls="popups"> </a>
-            </div>
-              
-            <div class="ms-panel-body " id="graph">
-              <canvas id="bar-chart"></canvas>
-            </div>
-              
-              
-          </div>
-              
-        </div>
-            <div class="col-xl-6 col-md-12">
-          <div class="ms-panel  height-84 ">
-            <div class="ms-panel-header">
-              <h6>Excellent Toppers</h6>
-                  </div>
-            <div class="ms-panel-body" >
-              <div class="table-responsive">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th scope="col">Name</th>
-                      <th scope="col">Rank</th>
-                      <th scope="col">Persentage</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="ms-table-f-w">  Chihoo Hwang </td>
-                      <td>1</td>
-                      <td>99.9%</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w">  Ajay Suryavanash </td>
-                      <td>2</td>
-                      <td>98%</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> Johnson </td>
-                      <td>3</td>
-                      <td>97%</td>
-                      </tr>
-                     
-                        <tr>
-                      <td class="ms-table-f-w">  Kalvish </td>
-                      <td>4</td>
-                      <td>96%</td>
-                      </tr>
-                      
-                     
-                     </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-            
-            
-            
-            
-          </div> 
+    <style>
+      /* Card base (se mantiene tu estética) */
+      .ml-card{
+        background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+        padding:16px;margin-top:20px;box-shadow:0 1px 2px rgba(0,0,0,.04);
+      }
+      .ml-muted{color:#6b7280}
+      .ml-h6{margin:0 0 8px}
+      .ml-grid{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
+      .ml-mini{flex:1;min-width:220px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px}
+      .ml-panels{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+      .ml-panel{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px}
+      .ml-tablewrap{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px;margin-bottom:16px}
+      .ml-table thead th{background:#f8fafc}
+      @media (max-width: 992px){ .ml-panels{grid-template-columns:1fr} }
 
-        <div class="row">
-        <div class="col-xl-12 col-md-12 ">
-          <div class="ms-panel ">
-            <div class="ms-panel-header">
-              <h6>New Student List</h6>
-                 <a class=" fa fa-chevron-down float-right"data-toggle="collapse" data-target="#list" aria-expanded="false" aria-controls="popups"> </a>
-            </div>
-            <div class="ms-panel-body" id="list">
-              <div class="table-responsive">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th scope="col">Name</th>
-                      <th scope="col">Head Of Departements</th>
-                      <th scope="col">Date of Admit</th>
-                    <th scope="col">fees</th>
-                      <th scope="col">Branch</th>
-                
-                      </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-1.jpg" alt="people"> Chihoo Hwang </td>
-                      <td>Joan</td>
-                      <td>27/5/2021</td>
-                        <td>paid</td>
-                      <td>Meachnical</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-3.jpg" alt="people"> Ajay Suryavanash </td>
-                      <td>Moxely</td>
-                      <td>11/6/2021</td>
-                        <td>Unpaid</td>
-                      <td>Electrical</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-5.jpg" alt="people"> Johny martin </td>
-                      <td>Rich Flair</td>
-                      <td>26/5/2021</td>
-                        <td>paid</td>
-                      <td>Computer</td>
-                      </tr>
-                      <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-6.jpg" alt="people"> Noxin Lee </td>
-                      <td>Tony</td>
-                      <td>20/7/2021</td>
-                          <td>unpaid</td>
-                      <td>Civil</td>
-                      </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-2.jpg" alt="people">Jackey</td>
-                      <td>Bilgates</td>
-                      <td>11/4/2021</td>
-                        <td>paid</td>
-                      <td>Computer</td>
-                      </tr>
-                       <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-5.jpg" alt="people">Rocky </td>
-                      <td>Stephan</td>
-                      <td>24/6/2021</td>
-                           <td>unpaid</td>
-                      <td>Electronics</td>
-                      </tr>
-                      
-                     </tbody>
-                </table>
-              </div>
-            </div>
+      /* Badges */
+      .badge-soft-danger{background:#fee2e2;color:#991b1b;border-radius:20px;padding:.25rem .5rem;font-weight:600}
+      .badge-soft-success{background:#dcfce7;color:#166534;border-radius:20px;padding:.25rem .5rem;font-weight:600}
+      .badge-soft-info{background:#e0f2fe;color:#075985;border-radius:20px;padding:.25rem .5rem;font-weight:600}
+      .badge-soft-warning{background:#fef3c7;color:#92400e;border-radius:20px;padding:.25rem .5rem;font-weight:600}
+
+      /* ===== Toolbar de filtros (centrada y “pegada” al card) ===== */
+      .ml-toolbar{
+        display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:end;
+        margin:-4px -4px 16px;          /* expande a borde del card */
+        padding:12px;                   /* espacio interno */
+        background:#f8fafc;             /* leve contraste */
+        border:1px solid #e5e7eb;       /* mismo borde del card */
+        border-radius:10px;             /* suaviza esquinas internas */
+      }
+      .ml-toolbar .form-group{min-width:220px}
+      .ml-toolbar label{font-size:.9rem;color:#6b7280;margin-bottom:4px}
+
+      /* ====== SOLO LOS FILTROS (select) MEJORADOS ====== */
+      .ml-toolbar .form-group .form-select.form-select-sm{
+        appearance:none; -webkit-appearance:none; -moz-appearance:none;
+        background:#fff;
+        border:1px solid #e5e7eb;
+        border-radius:9999px;
+        padding:.42rem 2rem .42rem .75rem;   /* espacio + caret */
+        height:34px;                          /* alto consistente */
+        font-size:.92rem; color:#111827;
+        box-shadow:0 1px 2px rgba(16,24,40,.06), inset 0 1px 0 rgba(255,255,255,.65);
+        transition:border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+        background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 20 20'%3E%3Cpath d='M6 8l4 4 4-4' fill='none' stroke='%236b7280' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        background-repeat:no-repeat;
+        background-position:right .55rem center;
+        background-size:16px 16px;
+      }
+      .ml-toolbar .form-group .form-select.form-select-sm:hover{
+        border-color:#d1d5db;
+      }
+      .ml-toolbar .form-group .form-select.form-select-sm:focus{
+        outline:0;
+        border-color:#93c5fd;
+        box-shadow:0 0 0 3px rgba(59,130,246,.25), 0 1px 2px rgba(16,24,40,.06);
+      }
+
+      /* Botón “fantasma” a juego con tarjetas (SIN CAMBIOS) */
+      .btn-ghost{
+        background:#fff;border:1px solid #e5e7eb;border-radius:10px;
+        padding:.45rem .8rem;line-height:1.1;box-shadow:0 1px 2px rgba(0,0,0,.04);
+        color:#374151;transition:all .15s ease;display:inline-flex;align-items:center;gap:.4rem;
+      }
+      .btn-ghost:hover{ border-color:#d1d5db; box-shadow:0 2px 6px rgba(0,0,0,.06); }
+      .btn-ghost:focus{ outline:3px solid rgba(59,130,246,.25); outline-offset:2px; }
+      .btn-ghost:disabled{ opacity:.6; cursor:not-allowed; }
+      .btn-ghost-sm{ padding:.35rem .65rem; font-size:.9rem; border-radius:10px; }
+    </style>
+
+    <div class="ml-card">
+      <!-- === Filtros centrados dentro del card === -->
+      <div class="ml-toolbar">
+        <div class="form-group">
+          <label for="cicloSelect">Ciclo</label>
+          <select id="cicloSelect" class="form-select form-select-sm"></select>
+        </div>
+        <div class="form-group">
+          <label for="periodoSelect">Periodo</label>
+          <select id="periodoSelect" class="form-select form-select-sm"></select>
+        </div>
+        <div class="form-group">
+          <label for="claseSelect">Clase</label>
+          <select id="claseSelect" class="form-select form-select-sm"></select>
+        </div>
+        <div class="form-group" style="display:flex;align-items:flex-end">
+          <button id="btnReset" type="button" class="btn-ghost btn-ghost-sm">🔄 Reiniciar filtros</button>
+        </div>
+      </div>
+
+      <h5 style="margin-bottom:10px;">Estadísticas de reprobación</h5>
+      
+
+      <!-- Tarjetas resumen -->
+      <div class="ml-grid">
+        <div class="ml-mini">
+          <div class="ml-muted">Alumnos (únicos)</div>
+          <div id="statTotal" style="font-size:22px;font-weight:700;">—</div>
+        </div>
+        <div class="ml-mini">
+          <div class="ml-muted">En riesgo (≥0.5 o asistencia &lt; 60%)</div>
+          <div id="statRiesgo" style="font-size:22px;font-weight:700;">—</div>
+        </div>
+        <div class="ml-mini">
+          <div class="ml-muted">Tasa de riesgo</div>
+          <div id="statRate" style="font-size:22px;font-weight:700;">—</div>
+        </div>
+      </div>
+
+      <!-- Gráficas -->
+      <div class="ml-panels">
+        <div class="ml-panel">
+          <div class="ml-muted" style="margin-bottom:6px;">Matriz de evaluación (aciertos y errores)</div>
+          <canvas id="cmChart" height="200"></canvas>
+          <div class="ml-muted small" style="margin-top:6px;">
+            Aciertos (Reprobados/Aprobados) y Errores (Falsos Reprobados/Aprobados)
           </div>
-        </div>  
+        </div>
+        <div class="ml-panel">
+          <div class="ml-muted" style="margin-bottom:6px;">Distribución de etiquetas reales</div>
+          <canvas id="distChart" height="200"></canvas>
+          <div class="ml-muted small" style="margin-top:6px;">
+            0 = Aprobados · 1 = Reprobados
           </div>
+        </div>
+      </div>
+
+      <!-- Tabla: alumnos en mayor riesgo -->
+      <div class="ml-tablewrap">
+        <div class="d-flex justify-content-between align-items-center">
+          <h6 class="ml-h6">Top alumnos en riesgo (ordenado por probabilidad)</h6>
+          <span class="small ml-muted">Regla: asistencia &lt; 60% ⇒ Reprobado</span>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped ml-table align-middle">
+            <thead>
+              <tr>
+                <th>Alumno</th>
+                <th>Materia con menor Ren.</th>
+                <th>Periodo</th>
+                <th>Clase</th>
+                <th>Asistencia</th>
+                <th>Promedio del periodo</th>
+                <th>Prob. Final</th>
+                <th>Riesgo</th>
+                <th>Req. promedio resto</th>
+                <th>Estado ciclo</th>
+              </tr>
+            </thead>
+            <tbody id="tbRiesgo"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tabla: resumen por clase / periodo -->
+      <div class="ml-tablewrap">
+        <h6 class="ml-h6">Resumen por Clase / Periodo</h6>
+        <div class="table-responsive">
+          <table class="table table-striped ml-table align-middle">
+            <thead>
+              <tr>
+                <th>Periodo</th>
+                <th>Clase</th>
+                <th>#Alumnos</th>
+                <th>#Riesgo</th>
+                <th>Tasa Riesgo</th>
+              </tr>
+            </thead>
+            <tbody id="tbResumen"></tbody>
+          </table>
+        </div>
+      </div>
+
+    <!-- ====================== /FIN BLOQUE ====================== -->
         </div>
       
 </main>
@@ -546,6 +397,12 @@
  <!-- Page Specific Scripts Start -->
   <script src="assets/js/datatables.min.js"> </script>
   <script src="assets/js/data-tables.js"> </script>
+
+  <!-- ML.js (tus librerías locales) -->
+  <script src="assets/api/ml-cart.min.js"></script>
+  <script src="assets/api/random-forest.min.js"></script>
+  <script src="assets/api/predicciones_auto_profesores.js"></script>
+
 
 </body>
 
