@@ -3,7 +3,7 @@
 //echo '<pre>';
 //print_r($_SESSION);
 //echo '</pre>';    
-require_once '../php/auth.php';
+require_once __DIR__ . '/../php/auth.php';;
 ?>
 
 <!DOCTYPE html>
@@ -162,7 +162,7 @@ require_once '../php/auth.php';
             </div>
 
             <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
-    
+
                 <li class="ms-nav-item ms-nav-user dropdown">
                     <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="ms-user-img ms-img-round float-right"
@@ -170,24 +170,18 @@ require_once '../php/auth.php';
                     <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
                         <li class="dropdown-menu-header">
                             <h6 class="dropdown-header ms-inline m-0">
-                                <span class="text-disabled">Bienvenido, <?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellido']; ?></span>
+                                <span class="text-disabled">Bienvenido,
+                                    <?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellido']; ?></span>
                             </h6>
                         </li>
                         <li class="dropdown-divider"></li>
-                        <li class="ms-dropdown-list">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i
-                    class="flaticon-user mr-2"></i> Perfil</span> </a>
-
-            </li>
-            <li class="dropdown-divider"></li>
-            <li class="dropdown-menu-footer">
-
-            </li>
-            <li class="dropdown-menu-footer">
-              <a class="media fs-14 p-2 logout-link" href="pages/php/auth.php?logout=true">
-                <span><i class="flaticon-shut-down mr-2"></i> Cerrar Sesión</span>
-              </a>
-            </li>
+                        <li class="dropdown-menu-footer">
+                        </li>
+                        <li class="dropdown-menu-footer">
+                            <a class="media fs-14 p-2 logout-link" href="../php/logout.php">
+                                <span><i class="flaticon-shut-down mr-2"></i> Cerrar Sesión</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>
@@ -206,15 +200,16 @@ require_once '../php/auth.php';
         <div class="ms-panel">
             <div class="ms-panel-header d-flex justify-content-between align-items-center">
                 <h6><i class="fa fa-user"></i> Profesores por hijo</h6>
-                <input type="search" id="busquedaProfesor" class="form-control w-50" placeholder="Buscar por profesor, materia, grado o ID...">
+                <input type="search" id="busquedaProfesor" class="form-control w-50"
+                    placeholder="Buscar por profesor, materia, grado o ID...">
             </div>
             <div class="ms-panel-body">
                 <div id="accordionProfesores"></div>
             </div>
         </div>
 
-            <!-- Script al final del body -->
-            <script src="../scripts/cargarProfesoresHijos.js"></script>
+        <!-- Script al final del body -->
+        <script src="../scripts/cargarProfesoresHijos.js"></script>
 
     </main>
 

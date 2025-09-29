@@ -1,6 +1,5 @@
 <?php
 // pages/perfil-hijo/perfil.php
-
 require_once __DIR__ . '/../php/perfil_hijo_bootstrap.php';
 ?>
 <!DOCTYPE html>
@@ -142,16 +141,10 @@ require_once __DIR__ . '/../php/perfil_hijo_bootstrap.php';
               </h6>
             </li>
             <li class="dropdown-divider"></li>
-            <li class="ms-dropdown-list">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html">
-                <span><i class="flaticon-user mr-2"></i> Perfil</span>
-              </a>
-            </li>
-            <li class="dropdown-divider"></li>
             <li class="dropdown-menu-footer"></li>
             <li class="dropdown-menu-footer">
               <!-- OJO: ruta nueva al logout según tu estructura -->
-              <a class="media fs-14 p-2 logout-link" href="../php/auth.php?logout=true">
+              <a class="media fs-14 p-2 logout-link" href="../php/logout.php">
                 <span><i class="flaticon-shut-down mr-2"></i> Cerrar Sesión</span>
               </a>
             </li>

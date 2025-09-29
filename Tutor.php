@@ -1,4 +1,4 @@
-<?php require_once './pages/php/auth.php';?>
+<?php require_once __DIR__ . '/pages/php/auth.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -166,17 +166,11 @@
             </li>
 
             <li class="dropdown-divider"></li>
-            <li class="ms-dropdown-list">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i
-                    class="flaticon-user mr-2"></i> Perfil</span> </a>
-
-            </li>
-            <li class="dropdown-divider"></li>
             <li class="dropdown-menu-footer">
 
             </li>
             <li class="dropdown-menu-footer">
-              <a class="media fs-14 p-2 logout-link" href="pages/php/auth.php?logout=true">
+              <a class="media fs-14 p-2 logout-link" href="pages/php/logout.php">
                 <span><i class="flaticon-shut-down mr-2"></i> Cerrar Sesión</span>
               </a>
             </li>

@@ -175,13 +175,8 @@ require_once '../php/auth.php';
               <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Bienvenido, <?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellido']; ?></span></h6>
             </li>
             <li class="dropdown-divider"></li>
-            <li class="ms-dropdown-list">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i
-                    class="flaticon-user mr-2"></i> Perfil</span> </a>
-            </li>
-            <li class="dropdown-divider"></li>
             <li class="dropdown-menu-footer">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/default-login.html"> <span><i
+              <a class="media fs-14 p-2" href="../php/logout.php"> <span><i
                     class="flaticon-shut-down mr-2"></i> Cerrar Sesión</span> </a>
             </li>
           </ul>

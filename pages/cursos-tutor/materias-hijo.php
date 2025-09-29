@@ -3,7 +3,7 @@
 //echo '<pre>';
 //print_r($_SESSION);
 //echo '</pre>';    
-require_once '../php/auth.php';
+require_once __DIR__ . '/../php/auth.php';;
 ?>
 
 <!DOCTYPE html>
@@ -177,17 +177,10 @@ require_once '../php/auth.php';
               </h6>
             </li>
             <li class="dropdown-divider"></li>
-            <li class="ms-dropdown-list">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i
-                    class="flaticon-user mr-2"></i> Perfil</span> </a>
-
-            </li>
-            <li class="dropdown-divider"></li>
             <li class="dropdown-menu-footer">
-
             </li>
             <li class="dropdown-menu-footer">
-              <a class="media fs-14 p-2 logout-link" href="pages/php/auth.php?logout=true">
+              <a class="media fs-14 p-2 logout-link" href="../php/logout.php">
                 <span><i class="flaticon-shut-down mr-2"></i> Cerrar Sesión</span>
               </a>
             </li>

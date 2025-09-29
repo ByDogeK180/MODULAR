@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once __DIR__ . '/../php/auth.php';
 //echo '<pre>'; print_r($_SESSION); echo '</pre>';
 ?>
 
@@ -184,7 +184,7 @@ session_start();
 
             </li>
             <li class="dropdown-menu-footer">
-              <a class="media fs-14 p-2 logout-link" href="pages/php/auth.php?logout=true">
+              <a class="media fs-14 p-2 logout-link" href="../php/logout.php">
                 <span><i class="flaticon-shut-down mr-2"></i> Cerrar Sesión</span>
               </a>
             </li>
@@ -201,7 +201,6 @@ session_start();
     </nav>
 
     <!-- Body Content Wrapper -->
-
     <div class="ms-content-wrapper">
       <div class="container-fluid px-5 py-4">
         <!-- Margen horizontal y vertical ampliado -->
@@ -242,7 +241,6 @@ session_start();
                   <th></th>
                 </tr>
               </thead>
-
               <tbody></tbody>
             </table>
           </div>
@@ -277,7 +275,6 @@ session_start();
     </div>
   </div>
 
-
 </body>
 
 <!-- jQuery (antes que DataTables) -->
@@ -291,17 +288,14 @@ session_start();
 <script src="../../assets/js/slick.min.js"></script>
 <script src="../../assets/js/moment.js"></script>
 <script src="../../assets/js/jquery.webticker.min.js"></script>
-
 <!-- DataTables JS (Bootstrap 4 + Responsive) -->
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.min.js"></script>
-
 <!-- Framework del template -->
 <script src="../../assets/js/framework.js"></script>
 <script src="../../assets/js/settings.js"></script>
-
 <!-- Script personalizado (asegúrate que el nombre y ruta coincidan con el archivo) -->
 <script src="../../pages/scripts/pago-hijo.js"></script>
 

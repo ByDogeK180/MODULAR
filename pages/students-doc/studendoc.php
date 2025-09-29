@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . '/../php/auth.php'; ?>
+<?php require_once __DIR__ . '/../php/auth.php';?>
 
 <script>
   const userRol = <?php echo $_SESSION['rol'] ?? 'null'; ?>;
