@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       data.forEach(fee => {
+        const estadoPlano = (fee.estado || "").toString().trim().toLowerCase(); // "pagado" | "pendiente"
+
         const fila = document.createElement("tr");
         fila.innerHTML = `
           <td>${fee.pago_id}</td>
@@ -24,43 +26,54 @@ document.addEventListener("DOMContentLoaded", function () {
           <td>$${parseFloat(fee.monto).toFixed(2)}</td>
           <td>${fee.fecha_pago}</td>
           <td>${fee.fecha_vencimiento}</td>
-          <td><span class="badge badge-${fee.estado === "pagado" ? "success" : "warning"}">${fee.estado}</span></td>
+
+          <!-- 🔑 Aquí forzamos el texto para buscar/ordenar -->
+          <td data-search="${estadoPlano}" data-order="${estadoPlano}">
+            <span class="badge badge-${estadoPlano === "pagado" ? "success" : "warning"}">
+              ${estadoPlano}
+            </span>
+          </td>
+
           <td>${fee.creado_en}</td>
           <td>${fee.actualizado_en}</td>
           <td>
-            <button class="btn btn-sm btn-outline-primary actualizar-btn" data-id="${fee.pago_id}" data-estado="${fee.estado}">Cambiar</button>
+            <button class="btn btn-sm btn-outline-primary actualizar-btn" data-id="${fee.pago_id}" data-estado="${estadoPlano}">Cambiar</button>
           </td>
         `;
         tbody.appendChild(fila);
       });
 
-      // 💡 Configuración avanzada para soporte responsivo con filtros
+      // Inicializa DataTables
       const tabla = $("#tabla-fees").DataTable({
         pageLength: 50,
         orderCellsTop: true,
         fixedHeader: true,
-        responsive: {
-          details: {
-            type: 'column',
-            target: 'tr'
-          }
-        },
-        language: {
-          url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
-        },
-        initComplete: function () {
-          const api = this.api();
+        responsive: { details: { type: "column", target: "tr" } },
+        language: { url: "https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json" },
+        // ❗ Ya no necesitamos columnDefs/render hack: DataTables usará data-search/order automáticamente
+      });
 
-          // Agrega eventos a los filtros en la fila .filters
-          api.columns().eq(0).each(function (colIdx) {
-            const cell = $('.filters th').eq(colIdx);
-            const input = cell.find('input, select');
+      // Filtros en la fila .filters
+      const api = tabla; // por comodidad
+      $("#tabla-fees thead tr.filters th").each(function (colIdx) {
+        const $inp = $(this).find("input, select");
+        if (!$inp.length) return;
 
-            if (input.length) {
-              input.on('keyup change', function () {
-                api.column(colIdx).search(this.value).draw();
-              });
+        // Columna ESTADO (índice 7) → regex exacta sobre el texto (gracias a data-search)
+        if (colIdx === 7 && $inp.is("select")) {
+          $inp.on("change", function () {
+            const val = (this.value || "").trim().toLowerCase();
+            if (!val) {
+              api.column(colIdx).search("", false, false).draw(); // Todos
+            } else {
+              const rx = "^" + $.fn.dataTable.util.escapeRegex(val) + "$";
+              api.column(colIdx).search(rx, true, false).draw();
             }
+          });
+        } else {
+          // Resto de columnas: búsqueda normal
+          $inp.on("keyup change", function () {
+            api.column(colIdx).search(this.value).draw();
           });
         }
       });
@@ -103,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
             alerta.textContent = "✔️ Estado actualizado exitosamente.";
             const wrapper = document.querySelector(".ms-content-wrapper .card-body") || document.body;
             wrapper.prepend(alerta);
-            setTimeout(() => location.reload(), 1500);
+            setTimeout(() => location.reload(), 1200);
           } else {
             Swal.fire("Error", data.message || "No se pudo actualizar.", "error");
           }
