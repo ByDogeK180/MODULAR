@@ -1,0 +1,25 @@
+/* Selects bonitos en Bootstrap 4 */
+.select-row .input-group-text {
+  background: #fff;
+  border-right: 0;
+  border-radius: .6rem 0 0 .6rem;
+}
+
+.select-row .custom-select {
+  border-left: 0;
+  border-radius: 0 .6rem .6rem 0;
+  height: calc(2.4rem + 2px);
+  padding-left: .75rem;
+}
+
+.select-row .custom-select:focus,
+.select-row .input-group-text:focus {
+  box-shadow: 0 0 0 .2rem rgba(255, 193, 7, .25); /* acorde al tema amarillo */
+  border-color: #ffc107;
+}
+
+/* Asegura buen ancho en cabecera estrecha */
+.select-row .input-group,
+.select-row .custom-select {
+  width: 100%;
+}

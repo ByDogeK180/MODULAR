@@ -144,8 +144,6 @@ if (!function_exists('h')) {
         </li>
         <!-- /tutor End--->
         
-        
-        
         <!--Fees Start-->
         <li class="menu-item">
             <a href="#" class="has-chevron" data-toggle="collapse" data-target="#fees" aria-expanded="false" aria-controls="dashboard">
@@ -171,93 +169,7 @@ if (!function_exists('h')) {
 
         </ul>
       </li>
-      <!-- /Dashboard -->
-
-      <!--Proessors Start-->
-      <li class="menu-item">
-        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#professor" aria-expanded="false"
-          aria-controls="dashboard">
-          <span><i class="fa fa-user fs-16"></i>Profesores</span>
-        </a>
-        <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
-          <li> <a href="../professors/allprofessor.php">Todos los Profesores</a> </li>
-          <li> <a href="../professors/addprofessor.php">Añadir Profesores</a> </li>
-          <li> <a href="../professors/aboutprofessor.php">Acerca de Profesores</a> </li>
-        </ul>
-      </li>
-      <!-- /Proessors End--->
-
-      <!--Courses Start-->
-      <li class="menu-item">
-        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#courses" aria-expanded="false"
-          aria-controls="dashboard">
-          <span><i class="fa fa-graduation-cap fs-16"></i>Materias</span>
-        </a>
-        <ul id="courses" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-          <li> <a href="../courses/allcourses.php">Todas las Materias</a> </li>
-          <li> <a href="../courses/addcourses.php">Añadir Materias</a> </li>
-          <li> <a href="../courses/aboutcourses.php">Acerca de Materias</a> </li>
-          <li> <a href="../courses/ciclos.php">Ciclos</a> </li>
-          <li> <a href="../courses/clases.php">Clases</a> </li>
-          <li> <a href="../courses/inscripciones.php">Inscripciones</a> </li>
-        </ul>
-      </li>
-      <!-- /Courses End--->
-
-      <!--Student Start-->
-      <li class="menu-item">
-        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#student" aria-expanded="false"
-          aria-controls="dashboard">
-          <span><i class="fa fa-users fs-16"></i>Estudiantes</span>
-        </a>
-        <ul id="student" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
-          <li> <a href="../student/studentadd.php">Añadir Estudiante</a> </li>
-          <li> <a href="../student/studenttable.php">Tabla de Estudiantes</a> </li>
-        </ul>
-      </li>
-      <!-- /Student End--->
-
-
-      <!--tutor Start-->
-      <li class="menu-item">
-        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#staff" aria-expanded="false"
-          aria-controls="dashboard">
-          <span><i class="fa fa-user-circle fs-16"></i>Tutores</span>
-        </a>
-        <ul id="staff" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-          <li> <a href="../tutor/addtutor.php">Añadir Tutor</a> </li>
-          <li> <a href="../tutor/tutorprofile.php">Tabla de Tutores</a> </li>
-
-        </ul>
-      </li>
-      <!-- /tutor End--->
-
-
-
-      <!--Fees Start-->
-      <li class="menu-item">
-        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#fees" aria-expanded="false"
-          aria-controls="dashboard">
-          <span><i class="fas fa-dollar-sign"></i>Orden de Pago</span>
-        </a>
-        <ul id="fees" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
-          <li> <a href="../fees/feescollection.php">Colección de Pagos</a> </li>
-          <li> <a href="../fees/addfees.php">Añadir Pago</a> </li>
-          <li> <a href="../fees/feesrecepit.php">Recibo de Pago</a> </li>
-
-
-        </ul>
-      </li>
-      <!-- /Fees End--->
-
-      <!--Holiday Start-->
-      <li class="menu-item">
-        <a href="../holidays/holiday.php">
-          <span><i class="fa fa-calendar fs-16"></i>Calendario Escolar</span>
-        </a>
-      </li>
-      <!-- /Holiday End--->
-
+      
     </ul>
 
 
