@@ -20,12 +20,12 @@ require_once __DIR__ . '/../php/auth.php';
 
   <!-- Bootstrap / Site CSS -->
   <link rel="stylesheet" href="../../assets/css/datatables.min.css">
-  <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">     <!-- (local, Bootstrap 4) -->
+  <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../assets/css/jquery-ui.min.css" rel="stylesheet">
   <link href="../../assets/css/slick.css" rel="stylesheet">
   <link href="../../assets/css/style.css" rel="stylesheet">
 
-  <!-- FullCalendar v6 (solo 1 vez, CSS correcto) -->
+  <!-- FullCalendar v6 -->
   <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
 
   <!-- Tu CSS -->

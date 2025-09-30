@@ -1038,10 +1038,6 @@
 <script src="assets/api/random-forest.min.js"></script>
 <script src="assets/api/predicciones_auto.js"></script>
 
-
-
-
-
 </body>
 
 </html>

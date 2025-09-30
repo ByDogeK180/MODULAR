@@ -6,12 +6,18 @@ header('Content-Type: application/json');
 
 $con = conecta();
 if (!$con) {
-    echo json_encode([]);
+    echo json_encode(['error' => 'No hay conexión a la BD']);
     exit;
 }
 
-// Incluye ciclo_id en el SELECT
-$sql = "
+$clase_id = intval($_GET['clase_id'] ?? 0);
+if ($clase_id <= 0) {
+    echo json_encode(['error' => 'clase_id requerido']);
+    exit;
+}
+
+// 1) Obtener info de la clase
+$sqlClase = "
   SELECT 
     cl.clase_id,
     cl.ciclo_id,
@@ -20,23 +26,39 @@ $sql = "
     cl.grupo
   FROM clases cl
   JOIN ciclos_escolares ce ON ce.ciclo_id = cl.ciclo_id
-  WHERE ce.estado = 'activo'
-  ORDER BY ce.fecha_inicio DESC, cl.grado, cl.grupo
+  WHERE cl.clase_id = ?
+  LIMIT 1
 ";
 
-$res = $con->query($sql);
-$clases = [];
+$stmt = $con->prepare($sqlClase);
+$stmt->bind_param("i", $clase_id);
+$stmt->execute();
+$res = $stmt->get_result();
 
-if ($res) {
-    while ($row = $res->fetch_assoc()) {
-        $clases[] = [
-            'clase_id'  => $row['clase_id'],
-            'ciclo_id'  => $row['ciclo_id'], // necesario para filtros por ciclo
-            'ciclo'     => $row['ciclo'],
-            'grado'     => $row['grado'],
-            'grupo'     => $row['grupo']
-        ];
-    }
+$clase = $res->fetch_assoc();
+
+// 2) Obtener asignaciones de la clase
+$sqlAsig = "
+  SELECT 
+    ca.materia_id,
+    ca.docente_id
+  FROM clase_asignacion ca
+  WHERE ca.clase_id = ?
+";
+
+
+$stmt2 = $con->prepare($sqlAsig);
+$stmt2->bind_param("i", $clase_id);
+$stmt2->execute();
+$res2 = $stmt2->get_result();
+
+$asignaciones = [];
+while ($row = $res2->fetch_assoc()) {
+    $asignaciones[] = $row;
 }
 
-echo json_encode($clases);
+// 3) Respuesta unificada
+echo json_encode([
+    'clase' => $clase,
+    'asignaciones' => $asignaciones
+]);
