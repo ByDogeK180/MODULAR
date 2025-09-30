@@ -113,6 +113,7 @@
             <ul id="student" class="collapse" aria-labelledby="courses" data-parent="#side-nav-accordion">
               <li> <a href="../student/studentadd.php">Añadir Estudiante</a> </li>
                <li> <a href="../student/studenttable.php">Tabla de Estudiantes</a> </li>
+                <li> <a href="../student/scoretable.php">Tabla de Calificaciones</a> </li>
                   </ul>
         </li>
         <!-- /Student End--->
