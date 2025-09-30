@@ -1,0 +1,166 @@
+      /* Card base (se mantiene tu estética) */
+      .ml-card{
+        background:#fff;border:1px solid #e5e7eb;border-radius:12px;
+        padding:16px;margin-top:20px;box-shadow:0 1px 2px rgba(0,0,0,.04);
+      }
+      .ml-muted{color:#6b7280}
+      .ml-h6{margin:0 0 8px}
+      .ml-grid{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
+      .ml-mini{flex:1;min-width:220px;background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px}
+      .ml-panels{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+      .ml-panel{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px}
+      .ml-tablewrap{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px;margin-bottom:16px}
+      .ml-table thead th{background:#f8fafc}
+      @media (max-width: 992px){ .ml-panels{grid-template-columns:1fr} }
+
+      /* Badges */
+      .badge-soft-danger{background:#fee2e2;color:#991b1b;border-radius:20px;padding:.25rem .5rem;font-weight:600}
+      .badge-soft-success{background:#dcfce7;color:#166534;border-radius:20px;padding:.25rem .5rem;font-weight:600}
+      .badge-soft-info{background:#e0f2fe;color:#075985;border-radius:20px;padding:.25rem .5rem;font-weight:600}
+      .badge-soft-warning{background:#fef3c7;color:#92400e;border-radius:20px;padding:.25rem .5rem;font-weight:600}
+
+      /* ===== Toolbar de filtros (centrada y “pegada” al card) ===== */
+      .ml-toolbar{
+        display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:end;
+        margin:-4px -4px 16px;          /* expande a borde del card */
+        padding:12px;                   /* espacio interno */
+        background:#f8fafc;             /* leve contraste */
+        border:1px solid #e5e7eb;       /* mismo borde del card */
+        border-radius:10px;             /* suaviza esquinas internas */
+      }
+      .ml-toolbar .form-group{min-width:220px}
+      .ml-toolbar label{font-size:.9rem;color:#6b7280;margin-bottom:4px}
+
+      /* ====== SOLO LOS FILTROS (select) MEJORADOS ====== */
+      .ml-toolbar .form-group .form-select.form-select-sm{
+        appearance:none; -webkit-appearance:none; -moz-appearance:none;
+        background:#fff;
+        border:1px solid #e5e7eb;
+        border-radius:9999px;
+        padding:.42rem 2rem .42rem .75rem;   /* espacio + caret */
+        height:34px;                          /* alto consistente */
+        font-size:.92rem; color:#111827;
+        box-shadow:0 1px 2px rgba(16,24,40,.06), inset 0 1px 0 rgba(255,255,255,.65);
+        transition:border-color .15s ease, box-shadow .15s ease, background-color .15s ease;
+        background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 20 20'%3E%3Cpath d='M6 8l4 4 4-4' fill='none' stroke='%236b7280' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        background-repeat:no-repeat;
+        background-position:right .55rem center;
+        background-size:16px 16px;
+      }
+      .ml-toolbar .form-group .form-select.form-select-sm:hover{
+        border-color:#d1d5db;
+      }
+      .ml-toolbar .form-group .form-select.form-select-sm:focus{
+        outline:0;
+        border-color:#93c5fd;
+        box-shadow:0 0 0 3px rgba(59,130,246,.25), 0 1px 2px rgba(16,24,40,.06);
+      }
+
+      /* Botón “fantasma” a juego con tarjetas (SIN CAMBIOS) */
+      .btn-ghost{
+        background:#fff;border:1px solid #e5e7eb;border-radius:10px;
+        padding:.45rem .8rem;line-height:1.1;box-shadow:0 1px 2px rgba(0,0,0,.04);
+        color:#374151;transition:all .15s ease;display:inline-flex;align-items:center;gap:.4rem;
+      }
+      .btn-ghost:hover{ border-color:#d1d5db; box-shadow:0 2px 6px rgba(0,0,0,.06); }
+      .btn-ghost:focus{ outline:3px solid rgba(59,130,246,.25); outline-offset:2px; }
+      .btn-ghost:disabled{ opacity:.6; cursor:not-allowed; }
+      .btn-ghost-sm{ padding:.35rem .65rem; font-size:.9rem; border-radius:10px; }
+
+      .chart-sm{
+        position: relative;
+        height: 260px;      /* ajusta 220–280px a gusto */
+        max-height: 280px;
+      }
+      @media (max-width: 768px){
+        .chart-sm{ height: 220px; }
+      }
+
+      /* Píldora de filtro – misma estética que los chips superiores */
+.filter-pill{
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  border-radius:9999px;
+  overflow:hidden;         /* redondeado limpio */
+}
+.filter-pill .input-group-text{
+  background:transparent;
+  border:0;
+  color:#6b7280;           /* gris suave tipo label */
+  font-weight:500;
+  padding-left:12px;
+}
+.filter-pill .form-select{
+  background:transparent;
+  border:0;
+  box-shadow:none !important;
+  padding-right:2rem;      /* espacio para el caret */
+  min-width:200px;         /* ajusta si quieres más corto/largo */
+}
+.filter-pill:focus-within{
+  border-color:#60a5fa;    /* azul suave al enfoque */
+  box-shadow:0 0 0 3px rgba(96,165,250,.2);
+}
+
+/* Caret discreto para el select (compatible Bootstrap) */
+.filter-pill .form-select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%236b7280'%3E%3Cpath d='M3.2 5.5l4.8 4.9 4.8-4.9-.9-.9L8 8.6 4.1 4.6l-.9.9z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right .8rem center;
+  background-size:12px;
+}
+
+/* === Pill del filtro "Ver detalle de" sin doble flecha === */
+.filter-pill{ position: relative; }
+
+.filter-pill .form-select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;               /* oculta caret nativo */
+  background-image: none !important; /* quita caret de Bootstrap */
+  padding-right: 2rem;            /* espacio para el caret custom */
+}
+.filter-pill .form-select::-ms-expand{ display:none; } /* IE/Edge legado */
+
+/* Caret único dibujado por CSS */
+.filter-pill::after{
+  content: "";
+  position: absolute;
+  right: 12px;                    /* ajusta si hace falta */
+  top: 50%;
+  width: 10px; height: 6px;
+  margin-top: -3px;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: 10px 6px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 16 10' fill='%236b7280'%3E%3Cpath d='M2 3l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Que no se expanda a 100% */
+.filter-pill.input-group{
+  width: auto;
+  display: inline-flex;     /* se alinea como los otros chips */
+  vertical-align: middle;
+}
+
+/* El select no debe crecer: ancho “contenido” con mínimos sanos */
+.filter-pill .form-select{
+  flex: 0 0 auto;           /* evita flex-grow */
+  width: auto;
+  min-width: 180px;         /* ajusta a gusto: 160–220px */
+  max-width: 260px;
+}
+
+/* Mantén el texto como etiqueta corta */
+.filter-pill .input-group-text{ white-space: nowrap; }
+
+/* En móvil sí queremos que use todo el ancho */
+@media (max-width: 768px){
+  .filter-pill.input-group{ width: 100%; }
+  .filter-pill .form-select{
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: none;
+  }
+}
+  

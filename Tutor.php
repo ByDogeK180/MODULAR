@@ -21,6 +21,8 @@
   <link href="assets/css/slick.css" rel="stylesheet">
   <!-- Weeducate styles -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <!-- css de la pagina -->
+  <link href="assets/css/tutor_schoolcare.css" rel="stylesheet">
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/weicon/weicon.ico">
 
@@ -178,353 +180,179 @@
         </li>
       </ul>
 
-      <div class="ms-toggler ms-d-block-sm pr-0 ms-nav-toggler" data-toggle="slideDown" data-target="#ms-nav-options">
-        <span class="ms-toggler-bar bg-primary"></span>
-        <span class="ms-toggler-bar bg-primary"></span>
-        <span class="ms-toggler-bar bg-primary"></span>
-      </div>
+
 
     </nav>
 
     <!-- Body Content Wrapper -->
-    <div class="ms-content-wrapper">
-
-
-      <!-- Icon cards Widget -->
-      <div class="row">
-        <div class="col-xl-3 col-md-6">
-          <div class="ms-card card-gradient-success ms-widget ms-infographics-widget">
-            <div class="ms-card-body media">
-              <div class="media-body">
-                <h6>Total Students</h6>
-                <p class="ms-card-change"> <i class="material-icons">arrow_upward</i> 450</p>
-                <p class="fs-12">48% increase</p>
-              </div>
-            </div>
-            <i class="fa fa-user"></i>
-          </div>
+    <div class="ml-card">
+      <!-- === Filtros centrados dentro del card === -->
+      <div class="ml-toolbar">
+        <div class="form-group">
+          <label for="cicloSelect">Ciclo</label>
+          <select id="cicloSelect" class="form-select form-select-sm"></select>
         </div>
-        <div class="col-xl-3 col-md-6">
-          <div class="ms-card card-gradient-secondary ms-widget ms-infographics-widget">
-            <div class="ms-card-body media">
-              <div class="media-body">
-                <h6>Total Fees</h6>
-                <p class="ms-card-change"> $30,950</p>
-                <p class="fs-12">22% increase</p>
-              </div>
-            </div>
-            <i class="fas fa-dollar-sign"></i>
-          </div>
+        <div class="form-group">
+          <label for="periodoSelect">Periodo</label>
+          <select id="periodoSelect" class="form-select form-select-sm"></select>
         </div>
-        <div class="col-xl-3 col-md-6">
-          <div class="ms-card card-gradient-warning ms-widget ms-infographics-widget">
-            <div class="ms-card-body media">
-              <div class="media-body">
-                <h6>Total Student</h6>
-                <p class="ms-card-change"> <i class="material-icons">arrow_upward</i> 4567</p>
-                <p class="fs-12">78% increase</p>
-              </div>
-            </div>
-            <i class="fa fa-users "></i>
-          </div>
+        <div class="form-group">
+          <label for="claseSelect">Clase</label>
+          <select id="claseSelect" class="form-select form-select-sm"></select>
         </div>
-        <div class="col-xl-3 col-md-6">
-          <div class="ms-card card-gradient-info ms-widget ms-infographics-widget">
-            <div class="ms-card-body media">
-              <div class="media-body">
-                <h6>Total Courses</h6>
-                <p class="ms-card-change"> 50</p>
-                <p class="fs-12">62% increase</p>
-              </div>
-            </div>
-            <i class="fa fa-graduation-cap "></i>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xl-6 col-md-12 ">
-          <div class="ms-panel ">
-            <div class="ms-panel-header">
-              <h6> Universties Toppers</h6>
-              <a class=" fa fa-chevron-down float-right" data-toggle="collapse" data-target="#topper"
-                aria-expanded="false" aria-controls="popups"> </a>
-            </div>
-            <div class="ms-panel-body" id="topper">
-              <div class="table-responsive">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th scope="col">Name</th>
-                      <th scope="col">Rank</th>
-                      <th scope="col">Persentage</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-1.jpg" alt="people"> Chihoo Hwang
-                      </td>
-                      <td>1</td>
-                      <td>99.9%</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-2.jpg" alt="people"> Ajay
-                        Suryavanash </td>
-                      <td>2</td>
-                      <td>98%</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-3.jpg" alt="people"> Johnson
-                      </td>
-                      <td>3</td>
-                      <td>97%</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-5.jpg" alt="people"> John Doe
-                      </td>
-                      <td>5</td>
-                      <td>93%</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-6.jpg" alt="people"> John Doe
-                      </td>
-                      <td>6</td>
-                      <td>92%</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-2.jpg" alt="people"> John Doe<br>
-                      </td>
-                      <td>7</td>
-                      <td>91%</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-6 col-md-12">
-          <div class="ms-panel pb-8">
-            <div class="ms-panel-header">
-              <h6>Course Table</h6>
-              <a class=" fa fa-chevron-down float-right" data-toggle="collapse" data-target="#course"
-                aria-expanded="false" aria-controls="popups"> </a>
-            </div>
-            <div class="ms-panel-body" id="course">
-              <div class="table-responsive">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-
-                      <th scope="col">#</th>
-                      <th scope="col">Courses</th>
-                      <th scope="col">Professors</th>
-                      <th scope="col">Fees</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Java</td>
-                      <td>John Kery</td>
-                      <td>130$</td>
-
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Php</td>
-                      <td>Johnson</td>
-                      <td>140$</td>
-
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Anguler</td>
-                      <td>Kevin Owens</td>
-                      <td>120$</td>
-
-                    </tr>
-                    <tr>
-                      <th scope="row">4</th>
-                      <td>React JS</td>
-                      <td>Kety Perey</td>
-                      <td>170$</td>
-
-                    </tr>
-                    <tr>
-                      <th scope="row">5</th>
-                      <td>.Net</td>
-                      <td>Kevin shai</td>
-                      <td>110$</td>
-
-                    </tr>
-                    <tr>
-                      <th scope="row">6</th>
-                      <td>Javascript</td>
-                      <td>John Kesy</td>
-                      <td>90$</td>
-
-                    </tr>
-                    <tr>
-                      <th scope="row">7</th>
-                      <td>Kotline</td>
-                      <td>Alura</td>
-                      <td>180$</td>
-
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+        <div class="form-group" style="display:flex;align-items:flex-end">
+          <button id="btnReset" type="button" class="btn-ghost btn-ghost-sm">🔄 Reiniciar filtros</button>
         </div>
       </div>
 
 
-      <div class="row">
-        <div class="col-xl-6 col-md-12 ">
+      <!-- Selector de hijo -->
+<!-- Filtro: Ver detalle de (estilo píldora como los de arriba) -->
+<div class="input-group input-group-sm w-auto filter-pill me-2 mb-2">
+  <span class="input-group-text">Ver detalle de</span>
+  <select id="selectHijo" class="form-select">
+    <option value="">Todos los hijos</option>
+    <!-- opciones se llenan por JS -->
+  </select>
+</div>
 
-          <div class="ms-panel">
-
-            <div class="ms-panel-header ">
-              <h6>University Results</h6>
-              <a class=" fa fa-chevron-down float-right" data-toggle="collapse" data-target="#graph"
-                aria-expanded="false" aria-controls="popups"> </a>
-            </div>
-
-            <div class="ms-panel-body " id="graph">
-              <canvas id="bar-chart"></canvas>
-            </div>
+      <h5 style="margin-bottom:10px;">Estadísticas de reprobación</h5>
 
 
-          </div>
-
+      <!-- Tarjetas resumen -->
+      <div class="ml-grid">
+        <div class="ml-mini">
+          <div class="ml-muted">Alumnos (únicos)</div>
+          <div id="statTotal" style="font-size:22px;font-weight:700;">—</div>
         </div>
-        <div class="col-xl-6 col-md-12">
-          <div class="ms-panel  height-84 ">
-            <div class="ms-panel-header">
-              <h6>Excellent Toppers</h6>
-            </div>
-            <div class="ms-panel-body">
-              <div class="table-responsive">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th scope="col">Name</th>
-                      <th scope="col">Rank</th>
-                      <th scope="col">Persentage</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="ms-table-f-w"> Chihoo Hwang </td>
-                      <td>1</td>
-                      <td>99.9%</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> Ajay Suryavanash </td>
-                      <td>2</td>
-                      <td>98%</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> Johnson </td>
-                      <td>3</td>
-                      <td>97%</td>
-                    </tr>
+        <div class="ml-mini">
+          <div class="ml-muted">En riesgo (≥0.5 o asistencia &lt; 60%)</div>
+          <div id="statRiesgo" style="font-size:22px;font-weight:700;">—</div>
+        </div>
+        <div class="ml-mini">
+          <div class="ml-muted">Tasa de riesgo</div>
+          <div id="statRate" style="font-size:22px;font-weight:700;">—</div>
+        </div>
+      </div>
 
-                    <tr>
-                      <td class="ms-table-f-w"> Kalvish </td>
-                      <td>4</td>
-                      <td>96%</td>
-                    </tr>
+      <!-- ===== Recomendaciones por Hijo ===== -->
+<div class="card shadow-sm mb-4">
+  <div class="card-body">
+    <h6 class="mb-3">Recomendaciones personalizadas: </h6>
+    <div id="recomendacionesContainer" class="row g-3">
+      <!-- Tarjetas se llenan dinámicamente -->
+    </div>
+  </div>
+</div>
 
-
-                  </tbody>
-                </table>
-              </div>
-            </div>
+      <!-- Gráficas -->
+      <div class="ml-panels">
+        <div class="ml-panel">
+          <div class="ml-muted" style="margin-bottom:6px;">Matriz de evaluación (aciertos y errores)</div>
+          <canvas id="cmChart" height="200"></canvas>
+          <div class="ml-muted small" style="margin-top:6px;">
+            Aciertos (Reprobados/Aprobados) y Errores (Falsos Reprobados/Aprobados)
+          </div>
+        </div>
+        <div class="ml-panel">
+          <div class="ml-muted" style="margin-bottom:6px;">Distribución de etiquetas reales</div>
+          <canvas id="distChart" height="200"></canvas>
+          <div class="ml-muted small" style="margin-top:6px;">
+            0 = Aprobados · 1 = Reprobados
           </div>
         </div>
       </div>
 
-
-      <div class="row">
-        <div class="col-xl-12 col-md-12 ">
-          <div class="ms-panel ">
-            <div class="ms-panel-header">
-              <h6>New Student List</h6>
-              <a class=" fa fa-chevron-down float-right" data-toggle="collapse" data-target="#list"
-                aria-expanded="false" aria-controls="popups"> </a>
-            </div>
-            <div class="ms-panel-body" id="list">
-              <div class="table-responsive">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th scope="col">Name</th>
-                      <th scope="col">Head Of Departements</th>
-                      <th scope="col">Date of Admit</th>
-                      <th scope="col">fees</th>
-                      <th scope="col">Branch</th>
-
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-1.jpg" alt="people"> Chihoo Hwang
-                      </td>
-                      <td>Joan</td>
-                      <td>27/5/2021</td>
-                      <td>paid</td>
-                      <td>Meachnical</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-3.jpg" alt="people"> Ajay
-                        Suryavanash </td>
-                      <td>Moxely</td>
-                      <td>11/6/2021</td>
-                      <td>Unpaid</td>
-                      <td>Electrical</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-5.jpg" alt="people"> Johny martin
-                      </td>
-                      <td>Rich Flair</td>
-                      <td>26/5/2021</td>
-                      <td>paid</td>
-                      <td>Computer</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-6.jpg" alt="people"> Noxin Lee
-                      </td>
-                      <td>Tony</td>
-                      <td>20/7/2021</td>
-                      <td>unpaid</td>
-                      <td>Civil</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-2.jpg" alt="people">Jackey</td>
-                      <td>Bilgates</td>
-                      <td>11/4/2021</td>
-                      <td>paid</td>
-                      <td>Computer</td>
-                    </tr>
-                    <tr>
-                      <td class="ms-table-f-w"> <img src="assets/img/we-educate/topper-5.jpg" alt="people">Rocky </td>
-                      <td>Stephan</td>
-                      <td>24/6/2021</td>
-                      <td>unpaid</td>
-                      <td>Electronics</td>
-                    </tr>
-
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+      <!-- Tabla: alumnos en mayor riesgo -->
+      <div class="ml-tablewrap">
+        <div class="d-flex justify-content-between align-items-center">
+          <h6 class="ml-h6">Top alumnos en riesgo (ordenado por probabilidad)</h6>
+          <span class="small ml-muted">Regla: asistencia &lt; 60% ⇒ Reprobado</span>
         </div>
+        <div class="table-responsive">
+          <table class="table table-striped ml-table align-middle">
+            <thead>
+              <tr>
+                <th>Alumno</th>
+                <th>Materia con menor Ren.</th>
+                <th>Periodo</th>
+                <th>Clase</th>
+                <th>Asistencia</th>
+                <th>Promedio del periodo</th>
+                <th>Prob. Final</th>
+                <th>Riesgo</th>
+                <th>Req. promedio resto</th>
+                <th>Estado ciclo</th>
+              </tr>
+            </thead>
+            <tbody id="tbRiesgo"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tabla: resumen por clase / periodo -->
+      <div class="ml-tablewrap">
+        <h6 class="ml-h6">Resumen por Clase / Periodo</h6>
+        <div class="table-responsive">
+          <table class="table table-striped ml-table align-middle">
+            <thead>
+              <tr>
+                <th>Periodo</th>
+                <th>Clase</th>
+                <th>#Alumnos</th>
+                <th>#Riesgo</th>
+                <th>Tasa Riesgo</th>
+              </tr>
+            </thead>
+            <tbody id="tbResumen"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ====================== /FIN BLOQUE ====================== -->
+
+
+
+
+
+<!-- ===== Resumen Global de Hijos ===== -->
+<div class="row mb-4">
+  <div class="col-md-4">
+    <div class="card shadow-sm">
+      <div class="card-body text-center">
+        <h6>Total de Hijos</h6>
+        <h3 id="statHijosTotal">—</h3>
       </div>
     </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card shadow-sm">
+      <div class="card-body text-center">
+        <h6>Hijos en Riesgo</h6>
+        <h3 id="statHijosRiesgo">—</h3>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card shadow-sm">
+      <div class="card-body text-center">
+        <h6>Tasa de Riesgo Global</h6>
+        <h3 id="statHijosRate">—</h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Gráfico comparativo por hijo -->
+<div class="card shadow-sm mb-4">
+  <div class="card-body">
+    <h6 class="mb-3">Comparación de Riesgo por Hijo</h6>
+    <div class="chart-sm">
+      <canvas id="chartHijos"></canvas>
+    </div>
+  </div>
+</div>
+
 
   </main>
 
@@ -554,6 +382,11 @@
   <!-- Page Specific Scripts Start -->
   <script src="assets/js/datatables.min.js"> </script>
   <script src="assets/js/data-tables.js"> </script>
+
+  <!-- ML.js (tus librerías locales) -->
+  <script src="assets/api/ml-cart.min.js"></script>
+  <script src="assets/api/random-forest.min.js"></script>
+  <script src="assets/api/predicciones_auto_tutores.js"></script>
 
 </body>
 
