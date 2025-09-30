@@ -139,15 +139,10 @@
       $per.innerHTML = `<option value="all">Todos los periodos</option>`;
       for (const [id, name] of sorted) $per.innerHTML += `<option value="${id}">${name}</option>`;
 
-      // por defecto: último periodo disponible del ciclo seleccionado
-      if (sorted.length) {
-        const latest = String(sorted[sorted.length-1][0]);
-        FILTERS.periodo_id = latest;
-        $per.value = latest;
-      } else {
-        FILTERS.periodo_id = 'all';
-        $per.value = 'all';
-      }
+      // ✅ NO auto-seleccionar: obligamos al usuario a elegir el periodo
+      FILTERS.periodo_id = 'all';
+      $per.value = 'all';
+
       refreshClases(run);
     }
 
@@ -177,13 +172,35 @@
       FILTERS.clase_key = 'all';
       $clase.value = 'all';
 
-      if (run) runPipeline();
+      // ✅ Solo correr si ya hay ciclo y periodo definidos
+      if (run && FILTERS.ciclo_key !== 'all' && FILTERS.periodo_id !== 'all') {
+        runPipeline();
+      } else {
+        setStatus("Selecciona CICLO y PERIODO para ver resultados");
+        // limpiar tablas/plots
+        const tb1=$('tbRiesgo'); if(tb1) tb1.innerHTML='';
+        const tb2=$('tbResumen'); if(tb2) tb2.innerHTML='';
+        ['statTotal','statRiesgo','statRate'].forEach(id => { const el=$(id); if(el) el.textContent='—'; });
+        if (cmChart){ cmChart.destroy(); cmChart=null; }
+        if (distChart){ distChart.destroy(); distChart=null; }
+      }
     }
 
     // eventos
-    $ciclo.onchange = () => { FILTERS.ciclo_key = $ciclo.value; refreshPeriodos(true); };
-    $per.onchange   = () => { FILTERS.periodo_id = $per.value; refreshClases(true); };
-    $clase.onchange = () => { FILTERS.clase_key = $clase.value; runPipeline(); };
+    $ciclo.onchange = () => { 
+      FILTERS.ciclo_key = $ciclo.value; 
+      refreshPeriodos(true); 
+    };
+    $per.onchange   = () => { 
+      FILTERS.periodo_id = $per.value; 
+      refreshClases(true); 
+    };
+    $clase.onchange = () => { 
+      FILTERS.clase_key = $clase.value; 
+      if (FILTERS.ciclo_key !== 'all' && FILTERS.periodo_id !== 'all') {
+        runPipeline();
+      }
+    };
 
     const $btn = $('btnReset');
     if ($btn) $btn.onclick = () => {
@@ -194,7 +211,7 @@
       refreshPeriodos(true);
     };
 
-    // arranque inicial
+    // arranque inicial: NO mostramos datos
     refreshPeriodos(false);
     refreshClases(false);
   }
@@ -616,6 +633,12 @@
 
   // ===== Pipeline =====
   function runPipeline(){
+    // ✅ Guardia: no ejecutar si faltan filtros clave
+    if (FILTERS.ciclo_key === 'all' || FILTERS.periodo_id === 'all') {
+      setStatus("Selecciona CICLO y PERIODO para ver resultados");
+      return;
+    }
+
     DATA = filterData(RAW);
 
     if (!DATA.length) {
@@ -646,7 +669,7 @@
 
     updateChartsForFilter();
 
-    setStatus("Listo ✅");
+    setStatus("");
   }
 
   // ===== Init =====
@@ -662,7 +685,8 @@
 
       applyChartDefaults();
       buildFilters();
-      runPipeline();
+      // ❌ NO ejecutar runPipeline aquí
+      setStatus("Selecciona CICLO y PERIODO para ver resultados");
     } catch (e) {
       console.error(e);
       setStatus("Error: " + e.message, true);
