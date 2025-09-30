@@ -1,0 +1,139 @@
+/* File input bonito (BS4) */
+.custom-file-button .input-group-text {
+  background: #fff;
+  border-right: 0;
+  border-radius: .5rem 0 0 .5rem;
+}
+
+.custom-file-button .custom-file {
+  border-left: 0;
+}
+
+.custom-file-label {
+  border-radius: 0 .5rem .5rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Cambia el texto del botón "Browse" a español */
+.custom-file-input:lang(es) ~ .custom-file-label::after {
+  content: "Buscar";
+}
+
+/* Enfasis al enfocar */
+.custom-file-input:focus ~ .custom-file-label,
+.custom-file-button .input-group-text:focus {
+  box-shadow: 0 0 0 .2rem rgba(255,193,7,.25);
+  border-color: #ffc107;
+}
+
+/* File input bonito (Bootstrap 4) */
+.custom-file { width: 100%; }
+
+.custom-file-lg .custom-file-label {
+  height: calc(2.8rem + 2px);
+  padding: .6rem 4.5rem .6rem .9rem;     /* espacio para el botón ::after */
+  border-radius: .6rem;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.custom-file-lg .custom-file-label i {
+  font-size: 1rem;
+  margin-right: .5rem;
+  color: #6c757d;
+}
+
+.custom-file-lg .custom-file-input:focus ~ .custom-file-label {
+  border-color: #ffc107;
+  box-shadow: 0 0 0 .2rem rgba(255,193,7,.25);
+}
+
+/* Botón de la derecha (“Buscar”) */
+.custom-file-lg .custom-file-label::after {
+  content: "Buscar";                /* en español siempre */
+  height: 100%;
+  border-left: 0;
+  border-radius: 0 .6rem .6rem 0;
+  background: #ffc107;              /* amarillo del tema */
+  color: #212529;
+  font-weight: 600;
+}
+
+/* Opcional: hover */
+.custom-file-lg .custom-file-label:hover::after {
+  filter: brightness(0.95);
+}
+
+/* ===== File input elegante (Bootstrap 4) ===== */
+.custom-file.clean { width: 100%; }
+
+.custom-file.clean .custom-file-label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: auto;
+  min-height: 44px;
+  padding: .75rem 7.5rem .75rem 1rem;    /* espacio a la derecha para el botón */
+  border: 1px solid #e5e7eb;             /* gris suave */
+  background: #fff;
+  color: #374151;
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(16,24,40,.04);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: box-shadow .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.custom-file.clean .custom-file-label i {
+  font-size: 1rem;
+  margin-right: .5rem;
+  color: #6b7280;
+}
+
+/* Botón “Buscar” como pastilla a la derecha */
+.custom-file.clean .custom-file-label::after {
+  content: "Buscar";
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  border: none;
+  border-radius: 10px;
+  background: #2630b1;           /* amarillo del tema */
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,.06);
+}
+
+/* Focus / Hover */
+.custom-file.clean .custom-file-input:focus ~ .custom-file-label {
+  border-color: #ffc107;
+  box-shadow: 0 0 0 .25rem rgba(255,193,7,.2);
+  background: #fffdf6;
+}
+
+.custom-file.clean .custom-file-label:hover::after,
+.custom-file.clean .custom-file-input:hover ~ .custom-file-label::after {
+  filter: brightness(.96);
+}
+
+/* Ajuste del texto auxiliar para que no se pegue al control */
+.modal .form-group > .form-text {
+  margin-top: .4rem;
+}
+
+/* Botones del modal en la misma línea visual */
+.modal-footer .btn {
+  border-radius: 10px;
+  padding: .6rem 1.1rem;
+}

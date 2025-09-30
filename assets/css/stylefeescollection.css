@@ -1,0 +1,7 @@
+/* Evita recortes en filtros del thead */
+#tabla-fees thead .filters th select,
+#tabla-fees thead .filters th input {
+  min-width: 120px;
+  width: 100%;
+  white-space: nowrap;
+}

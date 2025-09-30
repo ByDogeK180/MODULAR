@@ -1,4 +1,13 @@
-<?php include '../php/auth.php';?>
+<?php 
+include '../php/auth.php';
+// session_start();
+// echo '<pre>';
+// print_r($_SESSION);
+// echo '</pre>';
+if (!function_exists('h')) {
+  function h($s){ return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,12 +22,11 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="../../vendors/iconic-fonts/font-awesome/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../../vendors/iconic-fonts/flat-icons/flaticon.css">
-  
+
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="../../assets/css/datatables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap4.min.css">
 
-          
   <link href="../../assets/css/bootstrap.min.css" rel="stylesheet">
   <!-- jQuery UI -->
   <link href="../../assets/css/jquery-ui.min.css" rel="stylesheet">
@@ -26,6 +34,7 @@
   <link href="../../assets/css/slick.css" rel="stylesheet">
   <!-- Weeducate styles -->
   <link href="../../assets/css/style.css" rel="stylesheet">
+  <link href="../../assets/css/stylefeescollection.css" rel="stylesheet">
   <!-- Favicon -->
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/LogoSchoolCare.png">
 
@@ -53,14 +62,16 @@
 
   <!-- Overlays -->
   <div class="ms-aside-overlay ms-overlay-left ms-toggler" data-target="#ms-side-nav" data-toggle="slideLeft"></div>
-  <div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight"></div>
+  <div class="ms-aside-overlay ms-overlay-right ms-toggler" data-target="#ms-recent-activity" data-toggle="slideRight">
+  </div>
 
   <!-- Sidebar Navigation Left -->
   <aside id="ms-side-nav" class="side-nav fixed ms-aside-scrollable ms-aside-left">
 
     <!-- Logo -->
     <div class="logo-sn ms-d-block-lg">
-      <a class="pl-0 ml-0 text-center" href="../../index.php"> <img src="../../assets/img/LogoSchoolCare.png" alt="logo">  </a>
+      <a class="pl-0 ml-0 text-center" href="../../index.php"> <img src="../../assets/img/LogoSchoolCare.png"
+          alt="logo"> </a>
     </div>
 
     <!-- Navigation -->
@@ -133,8 +144,6 @@
         </li>
         <!-- /tutor End--->
         
-        
-        
         <!--Fees Start-->
         <li class="menu-item">
             <a href="#" class="has-chevron" data-toggle="collapse" data-target="#fees" aria-expanded="false" aria-controls="dashboard">
@@ -158,7 +167,9 @@
         </li>
         <!-- /Holiday End--->
 
-
+        </ul>
+      </li>
+      
     </ul>
 
 
@@ -166,936 +177,175 @@
 
   <!-- Sidebar Right -->
   <aside id="ms-recent-activity" class="side-nav fixed ms-aside-right ms-scrollable">
-
-    <div class="ms-aside-header">
-      <ul class="nav nav-tabs tabs-bordered d-flex nav-justified mb-3" role="tablist">
-        <li role="presentation" class="fs-12"><a href="#activityLog" aria-controls="activityLog" class="active" role="tab" data-toggle="tab"> Activity Log</a></li>
-        <li role="presentation" class="fs-12"><a href="#recentPosts" aria-controls="recentPosts" role="tab" data-toggle="tab"> Settings </a></li>
-        <li><button type="button" class="close ms-toggler text-center" data-target="#ms-recent-activity" data-toggle="slideRight"><span aria-hidden="true">&times;</span></button></li>
-      </ul>
-    </div>
-
-    <div class="ms-aside-body">
-
-       <div class="tab-content">
-
-         <div role="tabpanel" class="tab-pane active fade show" id="activityLog">
-           <ul class="ms-activity-log">
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-light">
-                 <i class="flaticon-gear"></i>
-               </div>
-               <h6>Update 1.0.0 Pushed</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-success">
-                 <i class="flaticon-tick-inside-circle"></i>
-               </div>
-               <h6>Profile Updated</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-warning">
-                 <i class="flaticon-alert-1"></i>
-               </div>
-               <h6>Your payment is due</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-danger">
-                 <i class="flaticon-alert"></i>
-               </div>
-               <h6>Database Error</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-info">
-                 <i class="flaticon-information"></i>
-               </div>
-               <h6>Checkout what's Trending</h6>
-               <span> <i class="material-icons">event</i>1 January, 2021</span>
-               <p class="fs-14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, ula in sodales vehicula....</p>
-             </li>
-             <li>
-               <div class="ms-btn-icon btn-pill icon btn-secondary">
-                 <i class="flaticon-diamond"></i>
-               </div>
-               <h6>Your Dashboard is ready</h6>
-               <span> <i class="material-icons">event</i>4 March, 2018</span>
-               <p class="fs-14">Curabitur purus sem, malesuada eu luctus eget, suscipit sed turpis. Nam pellentesque felis vitae justo accumsan, sed semper nisi sollicitudin...</p>
-             </li>
-           </ul>
-           <a href="#" class="btn btn-primary d-block"> View All </a>
-         </div>
-
-         <div role="tabpanel" class="tab-pane fade" id="recentPosts">
-
-           <h6>General Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Location Tracking</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Allow Notifications</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Allow Popups</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <h6>Log Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Enable Logging</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Audit Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Error Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <h6>Advanced Settings</h6>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Enable Logging</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Audit Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox">
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-           <div class="ms-form-group">
-             <span class="ms-option-name fs-14">Error Logs</span>
-             <label class="ms-switch float-right">
-               <input type="checkbox" checked>
-               <span class="ms-switch-slider round"></span>
-             </label>
-           </div>
-
-         </div>
-
-       </div>
-
-    </div>
-
   </aside>
 
   <!-- Main Content -->
   <main class="body-content">
 
-     <!-- Navigation Bar -->
-        <nav class="navbar ms-navbar">
+    <!-- Navigation Bar -->
+    <nav class="navbar ms-navbar">
 
-            <div class="ms-aside-toggler ms-toggler pl-0" data-target="#ms-side-nav" data-toggle="slideLeft">
-                <span class="ms-toggler-bar bg-primary"></span>
-                <span class="ms-toggler-bar bg-primary"></span>
-                <span class="ms-toggler-bar bg-primary"></span>
-            </div>
+      <div class="ms-aside-toggler ms-toggler pl-0" data-target="#ms-side-nav" data-toggle="slideLeft">
+        <span class="ms-toggler-bar bg-primary"></span>
+        <span class="ms-toggler-bar bg-primary"></span>
+        <span class="ms-toggler-bar bg-primary"></span>
+      </div>
 
-            <div class="logo-sn logo-sm ms-d-block-sm">
-                <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="../../index.php"><img src="../../assets/img/LogoSchoolCare.png" alt="logo"> </a>
-            </div>
+      <div class="logo-sn logo-sm ms-d-block-sm">
+        <a class="pl-0 ml-0 text-center navbar-brand mr-0" href="../../index.php"><img
+            src="../../assets/img/LogoSchoolCare.png" alt="logo"> </a>
+      </div>
 
-            <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
-                <li class="ms-nav-item ms-search-form pb-0 py-0">
-                    <form class="ms-form" method="post">
-                    </form>
-                </li>
-                <li class="ms-nav-item">
-                </li>
-                <li class="ms-nav-item ms-nav-user dropdown">
-                    <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img class="ms-user-img ms-img-round float-right" src="../../assets/img/we-educate/topper-1.jpg" alt="people"> </a>
-                    <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
-                        <li class="dropdown-menu-header">
-                            <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Welcome, Anny Farisha</span></h6>
-                        </li>
-                        <li class="dropdown-divider"></li>
-                        <li class="ms-dropdown-list">
-                            <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i class="flaticon-user mr-2"></i> Profile</span> </a>
-                        </li>
-                        <li class="dropdown-divider"></li>
-                        <li class="dropdown-menu-footer">
-                            <a class="media fs-14 p-2" href="../php/logout.php"> <span><i class="flaticon-shut-down mr-2"></i> Logout</span> </a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+      <ul class="ms-nav-list ms-inline mb-0" id="ms-nav-options">
+        <li class="ms-nav-item ms-search-form pb-0 py-0">
+          <form class="ms-form" method="post">
+          </form>
+        </li>
+        <li class="ms-nav-item">
+        </li>
+        <li class="ms-nav-item ms-nav-user dropdown">
+          <a href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img
+              class="ms-user-img ms-img-round float-right" src="../../assets/img/we-educate/topper-1.jpg" alt="people">
+          </a>
+          <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
+            <li class="dropdown-menu-header">
+              <h6 class="dropdown-header ms-inline m-0">
+                <span class="text-disabled">
+                  Bienvenido, <?= h( (($_SESSION['nombre'] ?? '') . ' ' . ($_SESSION['apellido'] ?? '')) ) ?>
+                </span>
+              </h6>
+            </li>
+            <li class="dropdown-divider"></li>
+            <li class="dropdown-menu-footer">
+              <a class="media fs-14 p-2" href="../php/logout.php"> <span><i class="flaticon-shut-down mr-2"></i> Cerrar
+                  Sesión</span> </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
 
-            <div class="ms-toggler ms-d-block-sm pr-0 ms-nav-toggler" data-toggle="slideDown" data-target="#ms-nav-options">
-                <span class="ms-toggler-bar bg-primary"></span>
-                <span class="ms-toggler-bar bg-primary"></span>
-                <span class="ms-toggler-bar bg-primary"></span>
-            </div>
+      <div class="ms-toggler ms-d-block-sm pr-0 ms-nav-toggler" data-toggle="slideDown" data-target="#ms-nav-options">
+        <span class="ms-toggler-bar bg-primary"></span>
+        <span class="ms-toggler-bar bg-primary"></span>
+        <span class="ms-toggler-bar bg-primary"></span>
+      </div>
 
-        </nav>
-
-
-<!-- Body Content Wrapper -->
-
-<div class="ms-content-wrapper">
-  <div class="container-fluid px-5 py-4"> <!-- Margen horizontal y vertical ampliado -->
-    <div class="card shadow-sm">
-      <div class="card-body">
-    <table id="tabla-fees" class="table table-striped thead-primary w-100">
-<thead>
-  <tr>
-    <th>ID</th>
-    <th>Estudiante</th>
-    <th>Grado</th>
-    <th>Grupo</th>
-    <th>Monto</th>
-    <th>Fecha de Pago</th>
-    <th>Fecha de Vencimiento</th>
-    <th>Estado</th>
-    <th>Creado</th>
-    <th>Actualizado</th>
-    <th>Acciones</th>
-  </tr>
-  <tr class="filters">
-    <th><input type="text" class="form-control form-control-sm" placeholder="#"></th>
-    <th><input type="text" class="form-control form-control-sm" placeholder="Estudiante"></th>
-    <th><input type="text" class="form-control form-control-sm" placeholder="Grado"></th>
-    <th><input type="text" class="form-control form-control-sm" placeholder="Grupo"></th>
-    <th><input type="text" class="form-control form-control-sm" placeholder="Monto"></th>
-    <th><input type="text" class="form-control form-control-sm" placeholder="Fecha"></th>
-    <th><input type="text" class="form-control form-control-sm" placeholder="Vencimiento"></th>
-    <th>
-      <select class="form-control form-control-sm">
-        <option value="">Todos</option>
-        <option value="pagado">Pagado</option>
-        <option value="pendiente">Pendiente</option>
-      </select>
-    </th>
-    <th><input type="text" class="form-control form-control-sm" placeholder="Creado"></th>
-    <th><input type="text" class="form-control form-control-sm" placeholder="Actualizado"></th>
-    <th></th>
-  </tr>
-</thead>
+    </nav>
 
 
+    <!-- Body Content Wrapper -->
 
-  <tbody></tbody>
-</table>
+    <div class="ms-content-wrapper">
+      <div class="container-fluid px-5 py-4">
+        <!-- Margen horizontal y vertical ampliado -->
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <table id="tabla-fees" class="table table-striped thead-primary w-100">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Estudiante</th>
+                  <th>Grado</th>
+                  <th>Grupo</th>
+                  <th>Monto</th>
+                  <th>Fecha de Pago</th>
+                  <th>Fecha de Vencimiento</th>
+                  <th>Estado</th>
+                  <th>Creado</th>
+                  <th>Actualizado</th>
+                  <th>Acciones</th>
+                </tr>
+                <tr class="filters">
+                  <th><input type="text" class="form-control form-control-sm" placeholder="#"></th>
+                  <th><input type="text" class="form-control form-control-sm" placeholder="Estudiante"></th>
+                  <th><input type="text" class="form-control form-control-sm" placeholder="Grado"></th>
+                  <th><input type="text" class="form-control form-control-sm" placeholder="Grupo"></th>
+                  <th><input type="text" class="form-control form-control-sm" placeholder="Monto"></th>
+                  <th><input type="text" class="form-control form-control-sm" placeholder="Fecha"></th>
+                  <th><input type="text" class="form-control form-control-sm" placeholder="Vencimiento"></th>
+                  <th>
+                    <select class="form-control form-control-sm">
+                      <option value="">Todos</option>
+                      <option value="pagado">Pagado</option>
+                      <option value="pendiente">Pendiente</option>
+                    </select>
+                  </th>
+                  <th><input type="text" class="form-control form-control-sm" placeholder="Creado"></th>
+                  <th><input type="text" class="form-control form-control-sm" placeholder="Actualizado"></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
 
-
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
-
-
-
-
-
 
   </main>
 
   <!-- Quick bar -->
   <aside id="ms-quick-bar" class="ms-quick-bar fixed ms-d-block-lg">
-
-    <!-- Quick bar Content -->
-    <div class="ms-quick-bar-content">
-
-      <div class="ms-quick-bar-header clearfix">
-        <h5 class="ms-quick-bar-title float-left">Title</h5>
-        <button type="button" class="close ms-toggler" data-target="#ms-quick-bar" data-toggle="hideQuickBar" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      </div>
-
-      <div class="ms-quick-bar-body tab-content">
-        <div role="tabpanel" class="tab-pane" id="qa-chat">
-
-          <div class="ms-chat-container">
-
-            <div class="ms-chat-header px-3">
-              <div class="ms-chat-user-container media clearfix">
-                <div class="ms-chat-status ms-status-online ms-chat-img mr-3 align-self-center">
-                  <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
-                </div>
-                <div class="media-body ms-chat-user-info mt-1">
-                  <h6>Anny Farisha</h6>
-                  <a href="#" class="text-disabled has-chevron fs-12" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Available
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li class="ms-dropdown-list">
-                      <a class="media p-2" href="#">
-                        <div class="media-body">
-                          <span>Busy</span>
-                        </div>
-                      </a>
-                      <a class="media p-2" href="#">
-                        <div class="media-body">
-                          <span>Away</span>
-                        </div>
-                      </a>
-                      <a class="media p-2" href="#">
-                        <div class="media-body">
-                          <span>Offline</span>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <form class="ms-form my-3" method="post">
-              </form>
-            </div>
-
-            <div class="ms-chat-body">
-              <ul class="nav nav-tabs tabs-bordered d-flex nav-justified px-3" role="tablist">
-                <li role="presentation" class="fs-12"><a href="#chats" aria-controls="chats" class="active show" role="tab" data-toggle="tab"> Chats </a></li>
-                <li role="presentation" class="fs-12"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab"> Groups </a></li>
-                <li role="presentation" class="fs-12"><a href="#contacts" aria-controls="contacts" role="tab" data-toggle="tab"> Contacts </a></li>
-              </ul>
-
-              <div class="tab-content">
-                <div role="tabpanel" class="tab-pane active show fade in" id="chats">
-                  <ul class="ms-scrollable ms-quickbar-container">
-                    <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
-                      <div class="ms-chat-status ms-status-away ms-has-new-msg ms-chat-img mr-3 align-self-center">
-                        <span class="msg-count">3</span>
-                        <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
-                      </div>
-                      <div class="media-body ms-chat-user-info mt-1">
-                        <h6>James Zathila</h6> <span class="ms-chat-time">2 Hours ago</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
-                        <i class="flaticon-trash ms-delete-trigger"> </i>
-                      </div>
-                    </li>
-                    <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
-                      <div class="ms-chat-status ms-status-online ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
-                      </div>
-                      <div class="media-body ms-chat-user-info mt-1">
-                        <h6>Raymart Sandiago</h6> <span class="ms-chat-time">3 Hours ago</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
-                        <i class="flaticon-trash ms-delete-trigger"> </i>
-                      </div>
-                    </li>
-                    <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
-                      <div class="ms-chat-status ms-status-offline ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
-                      </div>
-                      <div class="media-body ms-chat-user-info mt-1">
-                        <h6>Heather Brown</h6> <span class="ms-chat-time">12 Hours ago</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
-                        <i class="flaticon-trash ms-delete-trigger"> </i>
-                      </div>
-                    </li>
-                    <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
-                      <div class="ms-chat-status ms-status-busy ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
-                      </div>
-                      <div class="media-body ms-chat-user-info mt-1">
-                        <h6>Micheal John</h6> <span class="ms-chat-time">Yesterday</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
-                        <i class="flaticon-trash ms-delete-trigger"> </i>
-                      </div>
-                    </li>
-                    <li class="ms-chat-user-container ms-open-chat ms-deletable p-3 media clearfix">
-                      <div class="ms-chat-status ms-status-online ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
-                      </div>
-                      <div class="media-body ms-chat-user-info mt-1">
-                        <h6>John Doe</h6> <span class="ms-chat-time">3 Days ago</span>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
-                        <i class="flaticon-trash ms-delete-trigger"> </i>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="groups">
-                  <ul class="ms-scrollable ms-quickbar-container">
-                    <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
-                      <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
-                      </div>
-                      <div class="media-body ms-chat-user-info mt-1">
-                        <h6>James Zathila</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
-                        <ul class="ms-group-members clearfix mt-3 mb-0">
-                          <li> <img src="../../assets/img/we-educate/topper-1.jpg" alt="member"> </li>
-                          <li> <img src="../../assets/img/we-educate/topper-2.jpg" alt="member"> </li>
-                          <li> <img src="../../assets/img/we-educate/topper-3.jpg" alt="member"> </li>
-                          <li class="ms-group-count"> + 12 more </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
-                      <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
-                      </div>
-                      <div class="media-body ms-chat-user-info mt-1">
-                        <h6>Raymart Sandiago</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
-                        <ul class="ms-group-members clearfix mt-3 mb-0">
-                          <li> <img src="../../assets/img/we-educate/topper-2.jpg" alt="member"> </li>
-                          <li> <img src="../../assets/img/we-educate/topper-3.jpg" alt="member"> </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
-                      <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
-                      </div>
-                      <div class="media-body ms-chat-user-info mt-1">
-                        <h6>John Doe</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
-                        <ul class="ms-group-members clearfix mt-3 mb-0">
-                          <li> <img src="../../assets/img/we-educate/topper-6.jpg" alt="member"> </li>
-                          <li> <img src="../../assets/img/we-educate/topper-1.jpg" alt="member"> </li>
-                          <li> <img src="../../assets/img/we-educate/topper-2.jpg" alt="member"> </li>
-                          <li class="ms-group-count"> + 4 more </li>
-                        </ul>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="contacts">
-                  <ul class="ms-scrollable ms-quickbar-container">
-                    <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
-                      <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
-                      </div>
-                      <div class="media-body ms-chat-user-info mt-1">
-                        <h6>John Doe</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
-                      </div>
-                    </li>
-                    <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
-                      <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
-                      </div>
-                      <div class="media-body ms-chat-user-info mt-1">
-                        <h6>Raymart Sandiago</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
-                      </div>
-                    </li>
-                    <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
-                      <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
-                      </div>
-                      <div class="media-body ms-chat-user-info mt-1">
-                        <h6>Micheal John</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
-                      </div>
-                    </li>
-                    <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
-                      <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
-                      </div>
-                      <div class="media-body ms-chat-user-info mt-1">
-                        <h6>Heather Brown</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
-                      </div>
-                    </li>
-                    <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
-                      <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
-                      </div>
-                      <div class="media-body ms-chat-user-info mt-1">
-                        <h6>Mila Freign</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
-                      </div>
-                    </li>
-                    <li class="ms-chat-user-container ms-open-chat p-3 media clearfix">
-                      <div class="ms-chat-img mr-3 align-self-center">
-                        <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
-                      </div>
-                      <div class="media-body ms-chat-user-info mt-1">
-                        <h6>James Zathila</h6> <a href="#" class="ms-chat-time"> <i class="flaticon-chat"></i> </a>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        <div role="tabpanel" class="tab-pane" id="qa-email">
-
-          <div class="ms-email-container">
-
-            <div class="ms-qa-options">
-              <a href="#" class="btn btn-primary w-100 mt-0 has-icon"> <i class="flaticon-pencil"></i> Compose Email </a>
-            </div>
-
-            <ul class="ms-scrollable ms-quickbar-container">
-              <li class="p-3  media ms-email clearfix">
-                <div class="ms-email-img mr-3 ">
-                  <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
-                </div>
-                <div class="media-body ms-email-details">
-                  <span class="ms-email-sender">James Zathila</span>
-                  <h6 class="ms-email-subject">[WordPress] New Comment</h6> <span class="ms-email-time">2 Hours ago</span>
-                  <p class="ms-email-msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
-                </div>
-              </li>
-              <li class="p-3  media ms-email clearfix">
-                <div class="ms-email-img mr-3 ">
-                  <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
-                </div>
-                <div class="media-body ms-email-details">
-                  <span class="ms-email-sender">John Doe</span>
-                  <h6 class="ms-email-subject">[WordPress] New Comment</h6> <span class="ms-email-time">8 Hours ago</span>
-                  <p class="ms-email-msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
-                </div>
-              </li>
-              <li class="p-3  media ms-email clearfix">
-                <div class="ms-email-img mr-3 ">
-                  <img src="../../assets/img/we-educate/topper-6.jpg" class="ms-img-round" alt="people">
-                </div>
-                <div class="media-body ms-email-details">
-                  <span class="ms-email-sender">Heather Brown</span>
-                  <h6 class="ms-email-subject">[WordPress] New Comment</h6> <span class="ms-email-time">1 Day ago</span>
-                  <p class="ms-email-msg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in arcu turpis. Nunc</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-        </div>
-
-        <div role="tabpanel" class="tab-pane" id="qa-toDo">
-          <div class="ms-quickbar-container ms-todo-list-container ms-scrollable">
-
-            <form class="ms-add-task-block">
-              <div class="form-group mx-3 mt-0  fs-14 clearfix">
-                <input type="text" class="form-control fs-14 float-left" id="task-block" name="todo-block" placeholder="Add Task Block" value="">
-                <button type="submit" class="ms-btn-icon bg-primary float-right"><i class="material-icons text-disabled">add</i></button>
-              </div>
-            </form>
-
-            <ul class="ms-todo-list">
-              <li class="ms-card ms-qa-card ms-deletable">
-
-                <div class="ms-card-header clearfix">
-                  <h6 class="ms-card-title">Task Block Title</h6>
-                  <button data-toggle="tooltip" data-placement="left" title="Add a Task to this block" class="ms-add-task-to-block ms-btn-icon float-right"> <i class="material-icons text-disabled">add</i> </button>
-                </div>
-
-                <div class="ms-card-body">
-                  <ul class="ms-list ms-task-block">
-                    <li class="ms-list-item ms-to-do-task ms-deletable">
-                      <label class="ms-checkbox-wrap ms-todo-complete">
-                        <input type="checkbox" value="">
-                        <i class="ms-checkbox-check"></i>
-                      </label>
-                      <span> Task to do </span>
-                      <button type="submit" class="close"><i class="flaticon-trash ms-delete-trigger"> </i></button>
-                    </li>
-                    <li class="ms-list-item ms-to-do-task ms-deletable">
-                      <label class="ms-checkbox-wrap ms-todo-complete">
-                        <input type="checkbox" value="">
-                        <i class="ms-checkbox-check"></i>
-                      </label>
-                      <span>Task to do</span>
-                      <button type="submit" class="close"><i class="flaticon-trash ms-delete-trigger"> </i></button>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="ms-card-footer clearfix">
-                  <a href="#" class="text-disabled mr-2"> <i class="flaticon-archive"> </i> Archive </a>
-                  <a href="#" class="text-disabled  ms-delete-trigger float-right"> <i class="flaticon-trash"> </i> Delete </a>
-                </div>
-
-              </li>
-            </ul>
-
-          </div>
-        </div>
-
-        <div role="tabpanel" class="tab-pane" id="qa-reminder">
-          <div class="ms-quickbar-container ms-reminders">
-
-            <ul class="ms-qa-options">
-              <li> <a href="#" data-toggle="modal" data-target="#reminder-modal"> <i class="flaticon-bell"></i> New Reminder </a> </li>
-            </ul>
-
-            <div class="ms-quickbar-container ms-scrollable">
-
-              <div class="ms-card ms-qa-card ms-deletable">
-                <div class="ms-card-body">
-                  <p> Developer Meeting in Block B </p>
-                  <span class="text-disabled fs-12"><i class="material-icons fs-14">access_time</i> Today - 3:45 pm</span>
-                </div>
-                <div class="ms-card-footer clearfix">
-
-                  <div class="ms-note-editor float-right">
-                    <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#reminder-modal"> <i class="flaticon-pencil"> </i> Edit </a>
-                    <a href="#" class="text-disabled  ms-delete-trigger"> <i class="flaticon-trash"> </i> Delete </a>
-                  </div>
-
-                </div>
-              </div>
-              <div class="ms-card ms-qa-card ms-deletable">
-                <div class="ms-card-body">
-                  <p> Start adding change log to version 2 </p>
-                  <span class="text-disabled fs-12"><i class="material-icons fs-14">access_time</i> Tomorrow - 12:00 pm</span>
-                </div>
-                <div class="ms-card-footer clearfix">
-
-                  <div class="ms-note-editor float-right">
-                    <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#reminder-modal"> <i class="flaticon-pencil"> </i> Edit </a>
-                    <a href="#" class="text-disabled  ms-delete-trigger"> <i class="flaticon-trash"> </i> Delete </a>
-                  </div>
-
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-        </div>
-
-        <div role="tabpanel" class="tab-pane" id="qa-notes">
-
-          <ul class="ms-qa-options">
-            <li> <a href="#" data-toggle="modal" data-target="#notes-modal"> <i class="flaticon-sticky-note"></i> New Note </a> </li>
-            <li> <a href="#"> <i class="flaticon-excel"></i> Export to Excel </a> </li>
-          </ul>
-
-          <div class="ms-quickbar-container ms-scrollable">
-
-            <div class="ms-card ms-qa-card ms-deletable">
-              <div class="ms-card-header">
-                <h6 class="ms-card-title">Don't forget to check with the designer</h6>
-              </div>
-              <div class="ms-card-body">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vulputate urna in faucibus venenatis. Etiam at dapibus neque,
-                  vel varius metus. Pellentesque eget orci malesuada, venenatis magna et
-                </p>
-                <ul class="ms-note-members clearfix mb-0">
-                  <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-1.jpg" alt="member"> </li>
-                  <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-2.jpg" alt="member"> </li>
-                </ul>
-              </div>
-              <div class="ms-card-footer clearfix">
-
-                <div class="dropdown float-left">
-                  <a href="#" class="text-disabled" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="flaticon-share-1"></i> Share
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li class="dropdown-menu-header">
-                      <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Share With</span></h6>
-                    </li>
-                    <li class="dropdown-divider"></li>
-                    <li class="ms-scrollable ms-dropdown-list ms-members-list">
-                      <a class="media p-2" href="#">
-                        <div class="mr-2 align-self-center">
-                          <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
-                        </div>
-                        <div class="media-body">
-                          <span>John Doe</span>
-                        </div>
-                      </a>
-                      <a class="media p-2" href="#">
-                        <div class="mr-2 align-self-center">
-                          <img src="../../assets/img/we-educate/topper-4.jpg" class="ms-img-round" alt="people">
-                        </div>
-                        <div class="media-body">
-                          <span>Raymart Sandiago</span>
-                        </div>
-                      </a>
-                      <a class="media p-2" href="#">
-                        <div class="mr-2 align-self-center">
-                          <img src="../../assets/img/we-educate/topper-5.jpg" class="ms-img-round" alt="people">
-                        </div>
-                        <div class="media-body">
-                          <span>Heather Brown</span>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="ms-note-editor float-right">
-                  <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#notes-modal"> <i class="flaticon-pencil"> </i> Edit </a>
-                  <a href="#" class="text-disabled  ms-delete-trigger"> <i class="flaticon-trash"> </i> Delete </a>
-                </div>
-
-              </div>
-            </div>
-
-            <div class="ms-card ms-qa-card ms-deletable">
-              <div class="ms-card-header">
-                <h6 class="ms-card-title">Perform the required unit tests</h6>
-              </div>
-              <div class="ms-card-body">
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vulputate urna in faucibus venenatis. Etiam at dapibus neque,
-                  vel varius metus. Pellentesque eget orci malesuada, venenatis magna et
-                </p>
-                <ul class="ms-note-members clearfix mb-0">
-                  <li class="ms-deletable"> <img src="../../assets/img/we-educate/topper-6.jpg" alt="member"> </li>
-                </ul>
-              </div>
-              <div class="ms-card-footer clearfix">
-
-                <div class="dropdown float-left">
-                  <a href="#" class="text-disabled" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="flaticon-share-1"></i> Share
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li class="dropdown-menu-header">
-                      <h6 class="dropdown-header ms-inline m-0"><span class="text-disabled">Share With</span></h6>
-                    </li>
-                    <li class="dropdown-divider"></li>
-                    <li class="ms-scrollable ms-dropdown-list ms-members-list">
-                      <a class="media p-2" href="#">
-                        <div class="mr-2 align-self-center">
-                          <img src="../../assets/img/we-educate/topper-1.jpg" class="ms-img-round" alt="people">
-                        </div>
-                        <div class="media-body">
-                          <span>John Doe</span>
-                        </div>
-                      </a>
-                      <a class="media p-2" href="#">
-                        <div class="mr-2 align-self-center">
-                          <img src="../../assets/img/we-educate/topper-2.jpg" class="ms-img-round" alt="people">
-                        </div>
-                        <div class="media-body">
-                          <span>Raymart Sandiago</span>
-                        </div>
-                      </a>
-                      <a class="media p-2" href="#">
-                        <div class="mr-2 align-self-center">
-                          <img src="../../assets/img/we-educate/topper-3.jpg" class="ms-img-round" alt="people">
-                        </div>
-                        <div class="media-body">
-                          <span>Heather Brown</span>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="ms-note-editor float-right">
-                  <a href="#" class="text-disabled mr-2" data-toggle="modal" data-target="#notes-modal"> <i class="flaticon-pencil"> </i> Edit </a>
-                  <a href="#" class="text-disabled  ms-delete-trigger"> <i class="flaticon-trash"> </i> Delete </a>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-        <div role="tabpanel" class="tab-pane" id="qa-invite">
-
-          <div class="ms-quickbar-container text-center ms-invite-member">
-            <i class="flaticon-network"></i>
-            <p>Invite Team Members</p>
-            <form>
-              <div class="ms-form-group">
-                <input type="text" placeholder="Member Email" class="form-control" name="invite-email" value="">
-              </div>
-              <div class="ms-form-group">
-                <button type="submit" name="invite-member" class="btn btn-primary w-100">Invite</button>
-              </div>
-            </form>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
   </aside>
 
   <!-- MODALS -->
-
-  <!-- Reminder Modal -->
-  <div class="modal fade" id="reminder-modal" tabindex="-1" role="dialog" aria-labelledby="reminder-modal">
+  <!-- Modal Cambiar Estado -->
+  <div class="modal fade" id="modalActualizarEstado" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
-
-        <div class="modal-header bg-secondary">
-          <h5 class="modal-title has-icon text-white"> New Reminder</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="modalLabel">Actualizar Estado de Pago</h5>
+          <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
         </div>
-
-        <form>
-
         <div class="modal-body">
-
-          <div class="ms-form-group">
-            <label>Remind me about</label>
-            <textarea class="form-control" name="reminder"></textarea>
+          <input type="hidden" id="modal-pago-id">
+          <div class="form-group">
+            <label for="modal-estado">Estado</label>
+            <select class="form-control" id="modal-estado">
+              <option value="pagado">Pagado</option>
+              <option value="pendiente">Pendiente</option>
+            </select>
           </div>
-
-          <div class="ms-form-group">
-            <span class="ms-option-name fs-14">Repeat Daily</span>
-            <label class="ms-switch float-right">
-              <input type="checkbox">
-              <span class="ms-switch-slider round"></span>
-            </label>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <div class="ms-form-group">
-                <input type="text" class="form-control datepicker" name="reminder-date" value="" />
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="ms-form-group">
-                <select class="form-control" name="reminder-time">
-                  <option value="">12:00 pm</option>
-                  <option value="">1:00 pm</option>
-                  <option value="">2:00 pm</option>
-                  <option value="">3:00 pm</option>
-                  <option value="">4:00 pm</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
         </div>
-
         <div class="modal-footer">
-          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-secondary shadow-none" data-dismiss="modal">Add Reminder</button>
+          <button id="btnGuardarEstado" class="btn btn-success">Guardar Cambios</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
         </div>
-
-        </form>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- Notes Modal -->
-  <div class="modal fade" id="notes-modal" tabindex="-1" role="dialog" aria-labelledby="notes-modal">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-
-        <div class="modal-header bg-secondary">
-          <h5 class="modal-title has-icon text-white" id="NoteModal">New Note</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        </div>
-
-        <form>
-
-        <div class="modal-body">
-
-          <div class="ms-form-group">
-            <label>Note Title</label>
-            <input type="text" class="form-control" name="note-title" value="">
-          </div>
-
-          <div class="ms-form-group">
-            <label>Note Description</label>
-            <textarea class="form-control" name="note-description"></textarea>
-          </div>
-
-        </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-secondary shadow-none" data-dismiss="modal">Add Note</button>
-        </div>
-
-        </form>
-
       </div>
     </div>
   </div>
 
   <!-- SCRIPTS -->
-<!-- jQuery (debe ir solo una vez y antes de DataTables) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- jQuery (debe ir solo una vez y antes de DataTables) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-<!-- Bootstrap y dependencias -->
-<script src="../../assets/js/popper.min.js"></script>
-<script src="../../assets/js/bootstrap.min.js"></script>
-<script src="../../assets/js/jquery-ui.min.js"></script>
-<script src="../../assets/js/perfect-scrollbar.js"></script>
-<script src="../../assets/js/slick.min.js"></script>
-<script src="../../assets/js/moment.js"></script>
-<script src="../../assets/js/jquery.webticker.min.js"></script>
+  <!-- Bootstrap y dependencias -->
+  <script src="../../assets/js/popper.min.js"></script>
+  <script src="../../assets/js/bootstrap.min.js"></script>
+  <script src="../../assets/js/jquery-ui.min.js"></script>
+  <script src="../../assets/js/perfect-scrollbar.js"></script>
+  <script src="../../assets/js/slick.min.js"></script>
+  <script src="../../assets/js/moment.js"></script>
+  <script src="../../assets/js/jquery.webticker.min.js"></script>
 
-<!-- DataTables CSS y JS (versión Bootstrap 4) -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+  <!-- DataTables CSS y JS (versión Bootstrap 4) -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
 
-<!-- Framework del template -->
-<script src="../../assets/js/framework.js"></script>
-<script src="../../assets/js/settings.js"></script>
+  <!-- Framework del template -->
+  <script src="../../assets/js/framework.js"></script>
+  <script src="../../assets/js/settings.js"></script>
 
-<script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.min.js"></script>
-
-
-<!-- Script personalizado para cargar pagos -->
-<script src="../../pages/scripts/feescollection.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap4.min.js"></script>
 
 
-<!-- Modal Cambiar Estado -->
-<div class="modal fade" id="modalActualizarEstado" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="modalLabel">Actualizar Estado de Pago</h5>
-        <button type="button" class="close text-white" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <input type="hidden" id="modal-pago-id">
-        <div class="form-group">
-          <label for="modal-estado">Estado</label>
-          <select class="form-control" id="modal-estado">
-            <option value="pagado">Pagado</option>
-            <option value="pendiente">Pendiente</option>
-          </select>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button id="btnGuardarEstado" class="btn btn-success">Guardar Cambios</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-      </div>
-    </div>
-  </div>
-</div>
+  <!-- Script personalizado para cargar pagos -->
+  <script src="../../pages/scripts/feescollection.js"></script>
 
 </body>
 
