@@ -157,7 +157,7 @@ if (!function_exists('h')) {
       <li class="menu-item">
         <a href="#" class="has-chevron" data-toggle="collapse" data-target="#fees" aria-expanded="false"
           aria-controls="dashboard">
-          <span><i class="fas fa-dollar-sign"></i>Fees</span>
+          <span><i class="fas fa-dollar-sign"></i>Orden de Pago</span>
         </a>
         <ul id="fees" class="collapse" aria-labelledby="staff" data-parent="#side-nav-accordion">
           <li> <a href="../fees/feescollection.php">Orden de Pago</a> </li>

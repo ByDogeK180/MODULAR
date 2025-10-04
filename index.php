@@ -19,6 +19,7 @@ if (!function_exists('h')) {
 
   <!-- Bootstrap core CSS -->
   <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
   <!-- jQuery UI -->
   <link href="assets/css/jquery-ui.min.css" rel="stylesheet">
   <!-- Page Specific CSS (Slick Slider.css) -->
@@ -187,7 +188,7 @@ if (!function_exists('h')) {
             </li>
             <li class="dropdown-menu-footer">
              <a class="media fs-14 p-2" href="pages/php/logout.php">
-             <span><i class="flaticon-shut-down mr-2"></i> Logout</span>
+             <span><i class="flaticon-shut-down mr-2"></i> Cerrar Sesión</span>
     </a>
 </li>
 
@@ -305,6 +306,71 @@ if (!function_exists('h')) {
           </table>
         </div>
     </div>
+
+<!-- ======= Panel: Auditoría de inicios de sesión ======= -->
+<div class="ms-panel">
+  <div class="ms-panel-header d-flex align-items-center justify-content-between">
+    <h6 class="mb-0"><i class="material-icons mr-2">timeline</i> Auditoría de inicios de sesión</h6>
+    <div class="d-flex align-items-center">
+      <label class="mb-0 mr-2">Mes:</label>
+      <input type="month" id="loginMonth" class="form-control form-control-sm mr-2"
+             value="<?= date('Y-m'); ?>">
+      <select id="loginRol" class="form-control form-control-sm">
+        <option value="">Todos</option>
+        <option value="docente">Docentes</option>
+        <option value="tutor">Tutores</option>
+        <option value="admin">Admins</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="ms-panel-body">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="card-box p-3">
+          <h6 class="mb-2">Top usuarios del mes</h6>
+          <table id="tablaLoginSummary" class="table table-sm table-hover">
+            <thead>
+              <tr>
+                <th>Usuario</th>
+                <th>Rol</th>
+                <th class="text-right">Inicios</th>
+                <th>Ver</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card-box p-3">
+          <div class="d-flex align-items-center justify-content-between">
+            <h6 class="mb-2">
+              Detalle de <span id="loginUserName">—</span>
+              <small class="text-muted">(<span id="loginUserRol">—</span>)</small>
+            </h6>
+            <span class="badge badge-pill badge-info" id="loginUserTotal">0</span>
+          </div>
+          <canvas id="loginChart" height="140"></canvas>
+          <hr>
+          <table id="tablaLoginDetalle" class="table table-sm">
+            <thead>
+              <tr>
+                <th>Fecha/Hora</th><th>IP</th><th>Agente</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ======= /Panel ======= -->
+
+
+
 </main>
 
 <!--   Quick bar -->
@@ -319,8 +385,10 @@ if (!function_exists('h')) {
 <script src="assets/js/perfect-scrollbar.js"></script>
 <script src="assets/js/jquery-ui.min.js"></script>
 
-<!-- Chart -->
-<script src="assets/js/Chart.bundle.min.js"></script>
+
+<!-- Chart.js v4 -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+
 
 <!-- Framework, settings, etc -->
 <script src="assets/js/framework.js"></script>
@@ -332,6 +400,9 @@ if (!function_exists('h')) {
 <script src="assets/api/ml-cart.min.js"></script>
 <script src="assets/api/random-forest.min.js"></script>
 <script src="assets/api/predicciones_auto.js"></script>
+<script src="pages/scripts/admin_logins.js"></script>
+
+
 
 </body>
 
