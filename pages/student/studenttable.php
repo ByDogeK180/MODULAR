@@ -299,76 +299,87 @@ if (!function_exists('h')) {
     </div>
 
 
-    <!-- Modal Editar Estudiante -->
-    <div class="modal fade" id="modalEditarEstudiante" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
-      aria-hidden="true">
-<div class="modal-dialog">
-  <form id="formImportarEstudiantes" action="../php/importar_estudiantes.php" method="post"
-        enctype="multipart/form-data" class="modal-content">
-
-    <div class="modal-header">
-      <h5 class="modal-title" id="importModalEstudiantesLabel">Importar Estudiantes</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-
-    <!-- ✅ agrega modal-body -->
-<div class="form-group mb-3">
-  <div class="custom-file clean w-100 mt-1">
-    <input type="file" class="custom-file-input" id="csvEstudiantes"
-           name="archivo_csv" accept=".csv" required aria-label="Archivo CSV">
-    <label class="custom-file-label d-flex align-items-center" for="csvEstudiantes">
-      <i class="fa fa-file-csv mr-2 text-secondary"></i>
-      <span id="csvEstudiantesText">Ningún archivo seleccionado</span>
-    </label>
-  </div>
-  
-</div>
-
-    <div class="modal-footer">
-      <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
-      <button type="submit" class="btn btn-primary">Importar</button>
-    </div>
-  </form>
-</div>
-    </div>
-
-  </main>
-
-  <!-- Importar CSV Estudiantes -->
-  <div class="modal fade" id="importModalEstudiantes" tabindex="-1" aria-labelledby="importModalEstudiantesLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <form id="formImportarEstudiantes" action="../php/importar_estudiantes.php" method="post"
-        enctype="multipart/form-data" class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="importModalEstudiantesLabel">Importar Estudiantes</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+<!-- Modal: Editar Estudiante -->
+<div class="modal fade" id="modalEditarEstudiante" tabindex="-1" role="dialog" aria-labelledby="modalEditarEstudianteLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form id="formEditarEstudiante" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEditarEstudianteLabel">Editar estudiante</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
           <span aria-hidden="true">&times;</span>
         </button>
+      </div>
+
+      <div class="modal-body">
+        <input type="hidden" name="estudiante_id" id="ed_id">
+
+        <div class="form-group">
+          <label for="ed_tutor_id">Tutor</label>
+          <select class="form-control" name="tutor_id" id="ed_tutor_id"></select>
         </div>
 
-<div class="form-group mb-3">
-  <div class="custom-file clean w-100">
-    <input type="file" class="custom-file-input" id="csvEstudiantes"
-           name="archivo_csv" accept=".csv" required>
-    <label class="custom-file-label d-flex align-items-center" for="csvEstudiantes">
-      <i class="fa fa-file-csv mr-2 text-secondary"></i>
-      <span id="csvEstudiantesText">Ningún archivo seleccionado</span>
-    </label>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="ed_nombre">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="ed_nombre" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="ed_apellido">Apellido</label>
+            <input type="text" class="form-control" name="apellido" id="ed_apellido" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="ed_fecha_nac">Fecha de nacimiento</label>
+            <input type="date" class="form-control" name="fecha_nacimiento" id="ed_fecha_nac" required>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="ed_grado">Grado</label>
+            <input type="number" class="form-control" name="grado" id="ed_grado" min="1" required>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="ed_grupo">Grupo</label>
+            <input type="text" class="form-control" name="grupo" id="ed_grupo" maxlength="2" required>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      </div>
+    </form>
   </div>
 </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
-          <button type="submit" class="btn btn-primary">Importar</button>
+
+<!-- Importar CSV Estudiantes -->
+<div class="modal fade" id="importModalEstudiantes" tabindex="-1" aria-labelledby="importModalEstudiantesLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form id="formImportarEstudiantes" action="../php/importar_estudiantes.php" method="post" enctype="multipart/form-data" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="importModalEstudiantesLabel">Importar Estudiantes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="custom-file">
+          <input type="file" class="custom-file-input" id="csvEstudiantes" name="archivo_csv" accept=".csv" required>
+          <label class="custom-file-label" for="csvEstudiantes">Ningún archivo seleccionado</label>
         </div>
+      </div>
 
-
-      </form>
-    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Importar</button>
+      </div>
+    </form>
   </div>
+</div>
+
 
   <!-- Quick bar -->
   <aside id="ms-quick-bar" class="ms-quick-bar fixed ms-d-block-lg">
@@ -403,6 +414,7 @@ if (!function_exists('h')) {
   <!-- Nombre del Archico CV -->
   <script src="../scripts/ImportarEstudiantes.js" defer></script>
   <script src="../scripts/alertaImportacionAlumnos.js" defer></script>
+  <script src="../scripts/editarEstudianteModal.js"></script>
 
 </body>
 

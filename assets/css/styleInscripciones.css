@@ -1,0 +1,210 @@
+.flip {
+      display: inline-block;
+      transform: scaleX(-1);
+    }
+
+    /* ====== Inscripciones: estilo renovado ====== */
+.panel-insc{
+  background: #fff;
+  border: 1px solid #e9eef5;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(31,41,55,.08);
+  overflow: hidden;
+}
+
+.panel-insc .panel-header{
+  display:flex;align-items:center;gap:12px;
+  padding:16px 18px;
+  background: linear-gradient(135deg,#2563eb 0%, #4f46e5 60%, #7c3aed 100%);
+  color:#fff;
+}
+
+.panel-insc .panel-header .icon{
+  width:36px;height:36px;display:grid;place-items:center;
+  border-radius:10px;background:rgba(255,255,255,.15);
+  backdrop-filter: blur(2px);
+  font-size:18px;
+}
+
+.panel-insc .panel-body{ padding:18px; }
+
+/* Selector de clase más vistoso */
+#selectClase{
+  border-radius:10px;
+  border:1px solid #dbe3ef;
+  padding:.55rem .85rem;
+  box-shadow: 0 1px 0 rgba(17,24,39,.03) inset;
+}
+
+/* Tarjetas de tabla */
+.card-box{
+  background:#f9fafb;
+  border:1px solid #eef2f7;
+  border-radius:12px;
+  padding:14px;
+  height: 460px;               /* altura pareja */
+  display:flex;flex-direction:column;
+}
+
+.card-box h6{
+  font-weight:700;
+  font-size: .95rem;
+  color:#111827;
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.badge-soft{
+  font-size:.75rem; font-weight:600;
+  padding:.25rem .5rem; border-radius:999px;
+  background:#e5edff; color:#1f49ff; border:1px solid #cfe0ff;
+}
+
+/* Mesas */
+.table-slim{
+  background:#fff;
+  border:1px solid #e9eef5;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.table-slim table{
+  margin:0;
+}
+
+.table-slim thead th{
+  background:#f5f7fb;
+  border-bottom:1px solid #e6ebf2;
+  font-size:.8rem;color:#4b5563;
+  text-transform:uppercase; letter-spacing:.02em;
+}
+
+.table-slim tbody tr{
+  cursor: pointer;
+  transition: background .15s ease, transform .05s ease;
+}
+
+.table-slim tbody tr:hover{
+  background:#f8fafc;
+}
+
+.table-slim tbody td{
+  vertical-align: middle;
+  font-size:.95rem;
+}
+
+/* scroll interno de las tablas */
+.scroll-area{
+  overflow:auto;
+  border-top:1px solid #eef2f7;
+  max-height: 360px;
+}
+
+/* Botones transfer con look “pill” */
+.transfer-col{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;
+}
+
+.btn-transfer{
+  width:52px;height:52px;border-radius:999px;
+  display:grid;place-items:center;
+  border:1px solid #dbe3ef;
+  background:#fff;
+  box-shadow: 0 6px 16px rgba(0,0,0,.06);
+  transition: transform .07s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.btn-transfer:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0,0,0,.08);
+}
+
+.btn-transfer.primary{ color:#1d4ed8; }
+.btn-transfer.secondary{ color:#374151; }
+
+/* Botón guardar sticky */
+#btnGuardar{
+  border-radius:10px;
+  padding:.65rem 1.1rem;
+  box-shadow: 0 8px 20px rgba(34,197,94,.25);
+}
+
+/* Pequeñas utilidades */
+.text-muted-2{ color:#6b7280; }
+
+/* ====== Tema naranja para Inscripciones ====== */
+
+/* Header degradado naranja */
+.panel-insc .panel-header{
+  background: linear-gradient(135deg,#f97316 0%, #f59e0b 55%, #fb923c 100%);
+}
+.panel-insc .panel-header .icon{
+  background: rgba(255,255,255,.18);
+}
+
+/* Select de clase (borde y foco naranjas) */
+#selectClase{
+  border-color:#f2d3b3;
+}
+#selectClase:focus{
+  border-color:#fb923c;
+  box-shadow: 0 0 0 .2rem rgba(249,115,22,.15);
+}
+
+/* Tarjetas y encabezados de tabla con un tinte suave */
+.table-slim thead th{
+  background:#fff7ed;      /* orange-50 */
+  border-bottom:1px solid #ffe4cc;
+  color:#8a4b10;
+}
+
+/* Chips de conteo */
+.badge-soft{
+  background:#fff7ed;      /* orange-50 */
+  border:1px solid #fed7aa;/* orange-200 */
+  color:#c2410c;           /* orange-700 */
+}
+
+/* Botones transfer (principal en naranja) */
+.btn-transfer{
+  border-color:#fde1c7;
+}
+.btn-transfer.primary{
+  color:#ea580c;           /* orange-600 */
+}
+.btn-transfer.primary:hover{
+  background:#fff2e6;
+  border-color:#fbbf24;    /* amber-400 */
+}
+.btn-transfer.secondary{
+  color:#6b7280;
+}
+.btn-transfer.secondary:hover{
+  background:#f3f4f6;
+}
+
+/* Botón Guardar en naranja (override a .btn-success) */
+#btnGuardar{
+  background:#f99045 !important;   /* orange-500 */
+  border-color:#f97316 !important;
+  box-shadow: 0 8px 20px rgba(249,115,22,.25);
+}
+#btnGuardar:hover{
+  background:#ea580c !important;   /* orange-600 */
+  border-color:#ea580c !important;
+  box-shadow: 0 10px 22px rgba(234,88,12,.3);
+}
+
+/* Bordes generales más cálidos */
+.panel-insc{ border-color:#f2f2f2; }
+.card-box{   border-color:#f3ece6; }
+.table-slim{ border-color:#f3ece6; }
+
+/* Checkboxes al pasar el mouse (fila resaltada con tinte) */
+.table-slim tbody tr:hover{
+  background:#fff6ee;
+}
+
+/* Textos secundarios un poco más cálidos */
+.text-muted-2{ color:#f4f3f3; }  /* amber-700 con opacidad por herencia */

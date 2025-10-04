@@ -11,7 +11,6 @@ $(document).ready(() => {
   window.materiasAll = [];
   window.docentesAll = [];
 
-
   // ───── 1️⃣ Carga inicial de ciclos, materias y docentes ─────
   function cargarSelects() {
     const pCiclos = fetch('../php/obtener_ciclos.php')
@@ -39,70 +38,70 @@ $(document).ready(() => {
   }
 
   // ───── 2️⃣ Render dinámico de asignaciones según grado ─────
-function renderAsignaciones() {
-  const grado = +$selectGrado.val();
-  $asigCont.empty();
-  if (!grado) return;
+  function renderAsignaciones() {
+    const grado = +$selectGrado.val();
+    $asigCont.empty();
+    if (!grado) return;
 
-  const nivel = grado <= 6 ? 'primaria' : 'secundaria';
-  const mats = (Array.isArray(materiasAll) ? materiasAll : []).filter(m =>
-    (m.nivel_grado || '').toLowerCase() === nivel
-  );
+    const nivel = grado <= 6 ? 'primaria' : 'secundaria';
+    const mats = (Array.isArray(materiasAll) ? materiasAll : []).filter(m =>
+      (m.nivel_grado || '').toLowerCase() === nivel
+    );
 
-  if (grado <= 6) {
-    // ✅ PRIMARIA: checkbox por materia + único docente
-    if (mats.length === 0) {
-      $asigCont.append('<p class="text-danger">No hay materias disponibles para primaria.</p>');
-      return;
-    }
+    if (grado <= 6) {
+      // ✅ PRIMARIA: checkbox por materia + único docente
+      if (mats.length === 0) {
+        $asigCont.append('<p class="text-danger">No hay materias disponibles para primaria.</p>');
+        return;
+      }
 
-    $asigCont.append(`
-      <div class="form-group">
-        <label>Materias (seleccione al menos una)</label>
-        <div id="checkboxMaterias">
-          ${mats.map(m => `
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="mat-${m.materia_id}" value="${m.materia_id}">
-              <label class="form-check-label" for="mat-${m.materia_id}">${m.nombre}</label>
-            </div>
-          `).join('')}
+      $asigCont.append(`
+        <div class="form-group">
+          <label>Materias (seleccione al menos una)</label>
+          <div id="checkboxMaterias">
+            ${mats.map(m => `
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="mat-${m.materia_id}" value="${m.materia_id}">
+                <label class="form-check-label" for="mat-${m.materia_id}">${m.nombre}</label>
+              </div>
+            `).join('')}
+          </div>
         </div>
-      </div>
-      <div class="form-group">
-        <label for="selectDocenteAll">Docente que dará todas las materias seleccionadas</label>
-        <select id="selectDocenteAll" class="form-control">
-          <option value="">Seleccione docente</option>
-          ${docentesAll.map(d =>
-            `<option value="${d.docente_id}">${d.nombre} ${d.apellido}</option>`
-          ).join('')}
-        </select>
-      </div>
-    `);
-  } else {
-    // ✅ SECUNDARIA: checkbox + docente por materia
-    $asigCont.append(`
-      <table class="table">
-        <thead><tr><th>Incluir</th><th>Materia</th><th>Docente</th></tr></thead>
-        <tbody>
-          ${mats.map(m => `
-            <tr>
-              <td><input class="form-check-input checkMateriaSec" type="checkbox" data-m="${m.materia_id}"></td>
-              <td>${m.nombre}</td>
-              <td>
-                <select class="form-control selectDocentePorMateria" data-m="${m.materia_id}">
-                  <option value="">Seleccione docente</option>
-                  ${docentesAll.map(d =>
-                    `<option value="${d.docente_id}">${d.nombre} ${d.apellido}</option>`
-                  ).join('')}
-                </select>
-              </td>
-            </tr>
-          `).join('')}
-        </tbody>
-      </table>
-    `);
+        <div class="form-group">
+          <label for="selectDocenteAll">Docente que dará todas las materias seleccionadas</label>
+          <select id="selectDocenteAll" class="form-control">
+            <option value="">Seleccione docente</option>
+            ${docentesAll.map(d =>
+              `<option value="${d.docente_id}">${d.nombre} ${d.apellido}</option>`
+            ).join('')}
+          </select>
+        </div>
+      `);
+    } else {
+      // ✅ SECUNDARIA: checkbox + docente por materia
+      $asigCont.append(`
+        <table class="table">
+          <thead><tr><th>Incluir</th><th>Materia</th><th>Docente</th></tr></thead>
+          <tbody>
+            ${mats.map(m => `
+              <tr>
+                <td><input class="form-check-input checkMateriaSec" type="checkbox" data-m="${m.materia_id}"></td>
+                <td>${m.nombre}</td>
+                <td>
+                  <select class="form-control selectDocentePorMateria" data-m="${m.materia_id}">
+                    <option value="">Seleccione docente</option>
+                    ${docentesAll.map(d =>
+                      `<option value="${d.docente_id}">${d.nombre} ${d.apellido}</option>`
+                    ).join('')}
+                  </select>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `);
+    }
   }
-}
 
   // ───── 4️⃣ Al cambiar el grado ─────
   $selectGrado.on('change', renderAsignaciones);
@@ -247,7 +246,17 @@ function renderAsignaciones() {
             </tr>
           `);
         });
-        $('#tabla-clases').DataTable({ pageLength: 10, autoWidth: false });
+
+        // ✅ Aquí va el idioma en español
+        $('#tabla-clases').DataTable({
+          pageLength: 10,
+          autoWidth: false,
+          language: {
+            url: 'https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json'
+          },
+          // (opcional) menú de longitudes personalizado
+          lengthMenu: [[10, 25, 50, -1], [10, 25, 50, 'Todos']]
+        });
       })
       .catch(console.error);
   }

@@ -80,6 +80,8 @@ require_once __DIR__ . '/../php/auth.php';
         </ul>
       </li>
 
+      
+
       <li class="menu-item">
         <a href="#" class="has-chevron" data-toggle="collapse" data-target="#courses" aria-expanded="false" aria-controls="dashboard">
           <span><i class="fa fa-graduation-cap fs-16"></i>Materias</span>
@@ -88,6 +90,20 @@ require_once __DIR__ . '/../php/auth.php';
           <li><a href="../cursos-tutor/materias-hijo.php">Todas mis materias</a></li>
         </ul>
       </li>
+
+      <!--Proessors Start-->
+      <li class="menu-item">
+        <a href="#" class="has-chevron" data-toggle="collapse" data-target="#professor" aria-expanded="false"
+          aria-controls="dashboard">
+          <span><i class="fa fa-user fs-16"></i>Docentes</span>
+        </a>
+        <ul id="professor" class="collapse" aria-labelledby="dashboard" data-parent="#side-nav-accordion">
+          <li> <a href="../professors/allprofessor.php">Todos los Profesores</a> </li>
+          <li> <a href="../professors/addprofessor.php">Añadir Profesores</a> </li>
+          <li> <a href="../professors/aboutprofessor.php">Acerca de Profesores</a> </li>
+        </ul>
+      </li>
+      <!-- /Proessors End--->
 
       <li class="menu-item">
         <a href="./calendario-escolar.php">

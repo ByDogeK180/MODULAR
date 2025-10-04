@@ -5,29 +5,31 @@ $con = conecta();
 header('Content-Type: application/json');
 
 if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-
-    $stmt = $con->prepare("
-        SELECT estudiante_id, nombre, apellido, fecha_nacimiento, grado, grupo, tutor_id 
-        FROM estudiantes 
-        WHERE estudiante_id = ? AND activo = 1
-    ");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
-
-    echo json_encode($resultado->fetch_assoc() ?: ['error' => 'Estudiante no encontrado']);
-    $stmt->close();
+  $id = (int)$_GET['id'];
+  $sql = "
+    SELECT e.estudiante_id, e.nombre, e.apellido, e.fecha_nacimiento, e.grado, e.grupo,
+           COALESCE(te.tutor_id, e.tutor_id) AS tutor_id
+    FROM estudiantes e
+    LEFT JOIN tutor_estudiante te ON te.estudiante_id = e.estudiante_id
+    WHERE e.estudiante_id = ? AND e.activo = 1
+  ";
+  $st = $con->prepare($sql);
+  $st->bind_param("i", $id);
+  $st->execute();
+  $res = $st->get_result();
+  echo json_encode($res->fetch_assoc() ?: ['error'=>'Estudiante no encontrado']);
+  $st->close();
 } else {
-    $query = "SELECT estudiante_id, nombre, apellido, fecha_nacimiento, grado, grupo FROM estudiantes WHERE activo = 1";
-    $resultado = $con->query($query);
-
-    $estudiantes = [];
-    while ($row = $resultado->fetch_assoc()) {
-        $estudiantes[] = $row;
-    }
-    echo json_encode($estudiantes);
+  $sql = "
+    SELECT e.estudiante_id, e.nombre, e.apellido, e.fecha_nacimiento, e.grado, e.grupo,
+           COALESCE(te.tutor_id, e.tutor_id) AS tutor_id
+    FROM estudiantes e
+    LEFT JOIN tutor_estudiante te ON te.estudiante_id = e.estudiante_id
+    WHERE e.activo = 1
+  ";
+  $res = $con->query($sql);
+  $rows = [];
+  while ($r = $res->fetch_assoc()) $rows[] = $r;
+  echo json_encode($rows);
 }
-
 $con->close();
-?>

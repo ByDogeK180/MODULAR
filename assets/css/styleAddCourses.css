@@ -1,0 +1,6 @@
+ .custom-file-input:focus ~ .custom-file-label {
+      box-shadow: 0 0 0 .2rem rgba(255,193,7,.25);
+      border-color: #ffc107;
+    }
+    /* Contenedor centrado y con ancho máximo para el uploader */
+    .file-center { max-width: 720px; width: 100%; }
