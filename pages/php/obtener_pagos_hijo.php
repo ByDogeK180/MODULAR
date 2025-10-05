@@ -29,19 +29,8 @@ try {
     $tutor_id = (int)$_SESSION['tutor_id'];
   }
 
-  // 2) Contadores rápidos para diagnosticar
-  if ($DEBUG) {
-    $totPagos = (int)$con->query("SELECT COUNT(*) c FROM pagos")->fetch_assoc()['c'];
-    $totEst = (int)$con->query("SELECT COUNT(*) c FROM estudiantes")->fetch_assoc()['c'];
-    $totJoin = (int)$con->query("SELECT COUNT(*) c FROM pagos p INNER JOIN estudiantes e ON e.estudiante_id=p.estudiante_id")->fetch_assoc()['c'];
-    $ses = [
-      'tutor_id' => $_SESSION['tutor_id'] ?? null,
-      'session_id' => session_id(),
-      'cookie_params' => session_get_cookie_params(),
-    ];
-  }
-
-  // 3) Consulta principal (alineada a tu DataTable)
+  // 2) Consulta principal (alineada a tu DataTable)
+  //    Prioriza el vínculo en tutor_estudiante; acepta también estudiantes.tutor_id (fallback).
   $sqlBase = "
     SELECT
       p.pago_id,
@@ -55,32 +44,53 @@ try {
       COALESCE(DATE(p.creado_en),'')         AS creado_en,
       COALESCE(DATE(p.actualizado_en),'')    AS actualizado_en
     FROM pagos p
-    INNER JOIN estudiantes e ON e.estudiante_id = p.estudiante_id
+    INNER JOIN estudiantes e
+      ON e.estudiante_id = p.estudiante_id
+    LEFT JOIN tutor_estudiante te
+      ON te.estudiante_id = e.estudiante_id
   ";
 
-  $where = $filtroPorTutor ? " WHERE e.tutor_id = ? " : "";
+  // Filtro: por relación en tutor_estudiante O por la columna legacy e.tutor_id
+  $where = "";
   $order = "
     ORDER BY
       CASE WHEN p.estado='pendiente' THEN 0 ELSE 1 END,
-      p.fecha_vencimiento DESC, p.creado_en DESC
+      COALESCE(p.fecha_vencimiento, p.fecha_pago) ASC,
+      p.pago_id DESC
   ";
 
-  $sql = $sqlBase . $where . $order;
-  $stmt = $con->prepare($sql);
-  if (!$stmt) { throw new Exception('Prepare falló: ' . $con->error); }
-  if ($filtroPorTutor) { $stmt->bind_param('i', $tutor_id); }
-  if (!$stmt->execute()) { throw new Exception('Execute falló: ' . $stmt->error); }
-  $res = $stmt->get_result();
+  if ($filtroPorTutor) {
+    $where = " WHERE (te.tutor_id = ? OR e.tutor_id = ?) ";
+  }
+
+  // Importante: evitar duplicados si hay match por ambas vías.
+  $group = " GROUP BY p.pago_id ";
+
+  if ($filtroPorTutor) {
+    $stmt = $con->prepare($sqlBase . $where . $group . $order);
+    $stmt->bind_param("ii", $tutor_id, $tutor_id);
+  } else {
+    $stmt = $con->prepare($sqlBase . $group . $order);
+  }
+
+  $stmt->execute();
+  $res  = $stmt->get_result();
 
   $rows = [];
-  while ($r = $res->fetch_assoc()) { $r['monto'] = (float)$r['monto']; $rows[] = $r; }
+  while ($r = $res->fetch_assoc()) {
+    $rows[] = $r;
+  }
 
+  // 3) Modo debug con metadatos
   if ($DEBUG) {
+    $totPagos = (int)$con->query("SELECT COUNT(*) c FROM pagos")->fetch_assoc()['c'];
+    $totEst   = (int)$con->query("SELECT COUNT(*) c FROM estudiantes")->fetch_assoc()['c'];
+    $totTE    = (int)$con->query("SELECT COUNT(*) c FROM tutor_estudiante")->fetch_assoc()['c'];
     echo json_encode([
       'debug' => [
-        'session' => $ses ?? null,
-        'counts'  => ['pagos'=>$totPagos, 'estudiantes'=>$totEst, 'join'=>$totJoin],
-        'filter'  => $filtroPorTutor ? "WHERE e.tutor_id = $tutor_id" : '(sin filtro por tutor)',
+        'session_tutor_id' => $_SESSION['tutor_id'] ?? null,
+        'counts'  => ['pagos'=>$totPagos, 'estudiantes'=>$totEst, 'tutor_estudiante'=>$totTE],
+        'filter'  => $filtroPorTutor ? "(te.tutor_id = {$tutor_id} OR e.tutor_id = {$tutor_id})" : '(sin filtro por tutor)',
         'rows_found' => count($rows),
       ],
       'data' => $rows

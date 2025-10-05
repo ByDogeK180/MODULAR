@@ -15,7 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
       // 2) Inicializar DataTable
       dt = $table.DataTable({
         data,
-        autoWidth: false, // respeta los anchos definidos
+        autoWidth: false,
+        // ⬇️ Oculta el buscador global (quita la "f")
+        // l = length, r = processing, t = table, i = info, p = pagination
+        dom: 'lrtip',
+
         columns: [
           { data: "pago_id", width: "60px" },
           { data: "nombre_estudiante" },
@@ -37,8 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
               const texto = st || '—';
               return `<span class="badge ${clase} text-uppercase">${texto}</span>`;
             },
-            width: "170px",           // <-- más ancho para que "Pendiente" no se corte
-            className: "text-nowrap", // <-- evita salto de línea
+            width: "170px",
+            className: "text-nowrap",
             orderDataType: "dom-text",
           },
           { data: "creado_en", visible: false },
@@ -70,11 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
       // Ajuste visual del select del filtro en la cabecera (columna 8 = Estado)
       $table.find('thead tr.filters th:nth-child(8) select').css('min-width', '170px');
 
-      // 3) Filtros por columna (usa la segunda fila del thead)
+      // 3) Filtros por columna (segunda fila del thead)
       const thead = $table.find('thead');
       thead.on('keyup change', '.filters input, .filters select', function () {
         const $input = $(this);
-        const colIndex = $input.closest('th')[0].cellIndex; // índice de columna
+        const colIndex = $input.closest('th')[0].cellIndex;
         const val = $input.val();
         dt.column(colIndex).search(val || '', true, false).draw();
       });
@@ -86,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         $('#modalConfirmarPago').modal('show');
       });
 
-      // 5) Confirmar pago (evita doble clic)
+      // 5) Confirmar pago
       const $btnConfirmar = $('#btnConfirmarPago');
       $btnConfirmar.on('click', async () => {
         const id = $('#pago-id-confirmar').val();
@@ -94,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         $btnConfirmar.prop('disabled', true).text('Procesando...');
         try {
-          const res = await fetch('../php/procesar_pago.php', {   // <-- ruta corregida
+          const res = await fetch('../php/procesar_pago.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'same-origin',
@@ -110,13 +114,9 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
           if (resp.status === 'success') {
-            // Cierra modal
             $('#modalConfirmarPago').modal('hide');
+            window.open(`../php/generar_recibo.php?pago_id=${id}`, '_blank');
 
-            // Abre recibo PDF (si tu endpoint lo genera)
-            window.open(`../php/generar_recibo.php?pago_id=${id}`, '_blank'); // <-- ruta corregida
-
-            // Actualiza SOLO la fila afectada en la DataTable
             const rowIdx = dt.rows().eq(0).filter((idx) => dt.cell(idx, 0).data() == id);
             if (rowIdx.length) {
               const current = dt.row(rowIdx[0]).data();
@@ -128,7 +128,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 actualizado_en: hoy
               }).draw(false);
             } else {
-              // fallback: recarga ligera
               dt.ajax?.reload?.(null, false);
             }
           } else {

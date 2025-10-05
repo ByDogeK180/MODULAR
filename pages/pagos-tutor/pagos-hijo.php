@@ -1,4 +1,8 @@
 <?php
+// session_start();
+// echo '<pre>';
+// print_r($_SESSION);
+// echo '</pre>';
 require_once __DIR__ . '/../php/auth.php';
 //echo '<pre>'; print_r($_SESSION); echo '</pre>';
 ?>
@@ -174,12 +178,6 @@ require_once __DIR__ . '/../php/auth.php';
               </h6>
             </li>
             <li class="dropdown-divider"></li>
-            <li class="ms-dropdown-list">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i
-                    class="flaticon-user mr-2"></i> Perfil</span> </a>
-
-            </li>
-            <li class="dropdown-divider"></li>
             <li class="dropdown-menu-footer">
 
             </li>
@@ -209,7 +207,7 @@ require_once __DIR__ . '/../php/auth.php';
             <table id="tabla-pagos-hijo" class="table table-striped thead-primary w-100">
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>Pago ID</th>
                   <th>Estudiante</th>
                   <th>Grado</th>
                   <th>Grupo</th>
@@ -296,7 +294,6 @@ require_once __DIR__ . '/../php/auth.php';
 <!-- Framework del template -->
 <script src="../../assets/js/framework.js"></script>
 <script src="../../assets/js/settings.js"></script>
-<!-- Script personalizado (asegúrate que el nombre y ruta coincidan con el archivo) -->
 <script src="../../pages/scripts/pago-hijo.js"></script>
 
 </html>

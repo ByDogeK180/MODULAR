@@ -105,6 +105,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt_tutor->close();
             }
 
+            // >>>>>>>>>>>>>>> AÑADIDO: registrar auditoría del login <<<<<<<<<<<<<<<
+            require_once __DIR__ . '/audit_helpers.php';
+            audit_login_from_session();   // registra el inicio de sesión según la sesión actual
+            // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
             // Redirección por rol
             switch ((int)$db_rol) {
                 case 0: $redirect = '../../index.php';    break; // Admin
