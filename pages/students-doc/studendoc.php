@@ -163,7 +163,8 @@
           <a href="#"  id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img class="ms-user-img ms-img-round float-right" src="../../assets/img/we-educate/new-student-5.jpg" alt="people"> </a>
           <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
             <li class="dropdown-menu-header">
-              <span class="text-disabled">Welcome, <?php echo $_SESSION['correo']; ?></span>
+             <span class="text-disabled">Bienvenido,
+                  <?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellido']; ?></span>
             </li>
            
             <li class="dropdown-divider"></li>
@@ -260,7 +261,6 @@
                   <th>Activo</th>
                   <th>Creado en</th>
                   <th>Actualizado en</th>
-                  <th>Acciones</th>
                 </tr>
               </thead>
               <tbody id="student-body">
@@ -297,7 +297,7 @@
   <script src="../../assets/js/bootstrap.min.js"></script>
   <script src="../../assets/js/perfect-scrollbar.js"> </script>
   <script src="../../assets/js/jquery-ui.min.js"> </script>
-  <script src="../scripts/cargarAlumnos.js"></script>
+  <script src="../scripts/cargarAlumnosSeparado.js"></script>
   
 
   <!-- Global Required Scripts End -->

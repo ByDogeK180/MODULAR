@@ -1,9 +1,8 @@
-<?php require_once __DIR__ . '/../php/auth.php'; ?>
+<?php require_once __DIR__ . '/../php/auth.php';?>
 
 <script>
   const userRol = <?php echo $_SESSION['rol'] ?? 'null'; ?>;
 </script>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -165,18 +164,16 @@
           <a href="#"  id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img class="ms-user-img ms-img-round float-right" src="../../assets/img/we-educate/new-student-5.jpg" alt="people"> </a>
           <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
             <li class="dropdown-menu-header">
-              <span class="text-disabled">Welcome, <?php echo $_SESSION['correo']; ?></span>
+               <span class="text-disabled">Bienvenido,
+                  <?php echo $_SESSION['nombre'] . ' ' . $_SESSION['apellido']; ?></span>
             </li>
             <li class="dropdown-divider"></li>
-            <li class="ms-dropdown-list">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i class="flaticon-user mr-2"></i> Profile</span> </a>
-            </li>
-            <li class="dropdown-divider"></li>
+            
             <li class="dropdown-menu-footer">
             </li>
             <li class="dropdown-menu-footer">
               <a class="media fs-14 p-2" href="../php/logout.php">
-                <span><i class="flaticon-shut-down mr-2"></i> Logout</span>
+                <span><i class="flaticon-shut-down mr-2"></i> Cerrar sesión</span>
               </a>
             </li>
           </ul>
