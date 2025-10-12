@@ -1,7 +1,7 @@
 <?php
 require '../php/conecta.php'; 
 require __DIR__ . '/../../vendor/autoload.php';
-require __DIR__ . '/../../config/config.php';
+require __DIR__ . '/../../config/config/config.php';
 
 header('Content-Type: application/json; charset=utf-8');
 

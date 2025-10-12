@@ -1,4 +1,11 @@
-<?php require_once 'pages/php/auth.php'; ?>
+<?php 
+include 'pages/php/auth.php';
+// session_start();
+// echo '<pre>'; print_r($_SESSION); echo '</pre>';
+if (!function_exists('h')) {
+  function h($s){ return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
+}
+?>
 
 
 <!DOCTYPE html>
@@ -114,7 +121,7 @@
        <!--Holiday Start-->
         <li class="menu-item">
           <a href="pages/holidays/holiday_docente.php">
-            <span><i class="fa fa-calendar fs-16"></i>Holidays</span>
+            <span><i class="fa fa-calendar fs-16"></i>Calendario</span>
           </a>
         </li>
         <!-- /Holiday End--->
@@ -150,29 +157,20 @@
         </li>
         <li class="ms-nav-item ms-nav-user dropdown">
           <a href="#"  id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <img class="ms-user-img ms-img-round float-right" src="assets/img/we-educate/new-student-5.jpg" alt="people"> </a>
-          <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
-         
-          <li class="dropdown-menu-header">
-        <h6 class="dropdown-header ms-inline m-0">
-        <span class="text-disabled">Welcome, <?php echo $_SESSION['correo']; ?></span>
-        </h6>
-            </li>
-
-            <li class="dropdown-divider"></li>
-            <li class="ms-dropdown-list">
-              <a class="media fs-14 p-2" href="pages/prebuilt-pages/user-profile.html"> <span><i class="flaticon-user mr-2"></i> Profile</span> </a>
-              
+           <ul class="dropdown-menu dropdown-menu-right user-dropdown" aria-labelledby="userDropdown">
+            <li class="dropdown-menu-header">
+              <h6 class="dropdown-header ms-inline m-0">
+                <span class="text-disabled">
+                  Bienvenido, <?= h((($_SESSION['nombre'] ?? '') . ' ' . ($_SESSION['apellido'] ?? ''))) ?>
+                </span>
+              </h6>
             </li>
             <li class="dropdown-divider"></li>
             <li class="dropdown-menu-footer">
-              
+              <a class="media fs-14 p-2" href="../php/logout.php">
+                <span><i class="flaticon-shut-down mr-2"></i> Logout</span>
+              </a>
             </li>
-                  <li class="dropdown-menu-footer">
-            <a class="media fs-14 p-2" href="pages/php/logout.php">
-              <span><i class="flaticon-shut-down mr-2"></i> Logout</span>
-            </a>
-          </li>
-
           </ul>
         </li>
       </ul>
