@@ -25,7 +25,7 @@ require_once __DIR__ . '/../php/perfil_hijo_bootstrap.php';
   <link href="../../assets/css/style.css" rel="stylesheet">
   <link href="../../assets/css/perfil-hijo.css" rel="stylesheet">
 
-  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/weicon/weicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/LogoSchoolCare.png">
 </head>
 <body class="ms-body ms-aside-left-open ms-primary-theme ms-has-quickbar">
 
@@ -55,7 +55,7 @@ require_once __DIR__ . '/../php/perfil_hijo_bootstrap.php';
   <aside id="ms-side-nav" class="side-nav fixed ms-aside-scrollable ms-aside-left">
     <div class="logo-sn ms-d-block-lg">
       <a class="pl-0 ml-0 text-center" href="../../Tutor.php">
-        <img src="../../assets/img/logo/weeducate-4.png" alt="logo">
+        <img src="../../assets/img/LogoSchoolCare.png" alt="logo">
       </a>
     </div>
 

@@ -74,7 +74,7 @@ if (!function_exists('h')) {
   <!-- Sidebar -->
   <aside id="ms-side-nav" class="side-nav fixed ms-aside-scrollable ms-aside-left">
     <div class="logo-sn ms-d-block-lg">
-      <a class="pl-0 ml-0 text-center" href="../../Tutor.php"><img src="../../assets/img/logo/weeducate-4.png" alt="logo"></a>
+      <a class="pl-0 ml-0 text-center" href="../../Tutor.php"><img src="../../assets/img/LogoSchoolCare.png" alt="logo"></a>
     </div>
 
     <ul class="accordion ms-main-aside fs-14" id="side-nav-accordion">
