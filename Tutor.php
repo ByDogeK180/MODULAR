@@ -24,7 +24,7 @@
   <!-- css de la pagina -->
   <link href="assets/css/tutor_schoolcare.css" rel="stylesheet">
   <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/weicon/weicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/LogoSchoolCare.png">
 
 </head>
 
@@ -57,7 +57,7 @@
 
     <!-- Logo -->
     <div class="logo-sn ms-d-block-lg">
-      <a class="pl-0 ml-0 text-center" href="./Tutor.php "><img src="assets/img/logo/weeducate-4.png" alt="logo"> </a>
+      <a class="pl-0 ml-0 text-center" href="./Tutor.php "><img src="assets/img/LogoSchoolCare.png" alt="logo"> </a>
     </div>
 
     <!-- Navigation -->

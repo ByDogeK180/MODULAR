@@ -33,7 +33,7 @@ require_once __DIR__ . '/../php/auth.php';
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap4.min.css">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/weicon/weicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/LogoSchoolCare.png">
 </head>
 
 
@@ -67,7 +67,7 @@ require_once __DIR__ . '/../php/auth.php';
 
     <!-- Logo -->
     <div class="logo-sn ms-d-block-lg">
-      <a class="pl-0 ml-0 text-center" href="../../Tutor.php"> <img src="../../assets/img/logo/weeducate-4.png"
+      <a class="pl-0 ml-0 text-center" href="../../Tutor.php"> <img src="../../assets/img/LogoSchoolCare.png"
           alt="logo"> </a>
     </div>
 
